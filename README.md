@@ -8,8 +8,8 @@
 
 ## recources
 
-Design: https://www.figma.com/file/NMcTzccp6H9rkTHc3kcx6c/Weather-App-Design-(Community)?type=design&node-id=0-1&mode=design&t=XNvtbLCEg6Vgr0g7-0
-API: https://openweathermap.org/
+  - Design: https://www.figma.com/file/NMcTzccp6H9rkTHc3kcx6c/Weather-App-Design-(Community)?type=design&node-id=0-1&mode=design&t=XNvtbLCEg6Vgr0g7-0
+  - API: https://openweathermap.org/
 
 ## task list
   - установка города согласно геопозиции устройства, при наличии разрешения пользователя;
