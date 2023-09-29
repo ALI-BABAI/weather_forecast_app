@@ -1,16 +1,21 @@
+@ -1,21 +1,21 @@
 # weather_forecast_app
 
-A new Flutter project.
+Программа прогноза погоды
 
-## Getting Started
+## project description
 
-This project is a starting point for a Flutter application.
+Отображение детального прогноза погоды в выбранном городе
 
-A few resources to get you started if this is your first Flutter project:
+## recources
 
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
+  - Design: https://www.figma.com/file/NMcTzccp6H9rkTHc3kcx6c/Weather-App-Design-(Community)?type=design&node-id=0-1&mode=design&t=XNvtbLCEg6Vgr0g7-0
+  - API: https://openweathermap.org/
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+## task list
+  - установка города согласно геопозиции устройства, при наличии разрешения пользователя;
+  - ручной выбор города, с возможностью сохранения городов в боковой панели быстрого доступа;
+  - переключение языка и темы приложения;
+  - изменение порядка отображения элементов на главном экране
+  - возможность вывода отдельных виджетов приложения на главный экран устройства
+  - 
