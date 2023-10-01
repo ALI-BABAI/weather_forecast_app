@@ -28,7 +28,7 @@ class FirstOpenningScreens extends StatelessWidget {
             ),
           ),
           const Expanded(
-            child: Image(
+            child:  Image(
                 image: AssetImage('assets/images/firsOpennigScreen1.png')),
           ),
           const SizedBox(height: 50),
