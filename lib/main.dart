@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'theme/colors.dart';
-import 'screens/home_screen.dart';
+import 'screens/home_screen/home_screen.dart';
 
 void main() {
   runApp(const MaterialApp(
@@ -17,11 +17,14 @@ class InitializationScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // Задержка в 2-3 секунды перед переходом
-    Future.delayed(const Duration(seconds: 2), () {
-      Navigator.of(context).pushReplacement(
-        MaterialPageRoute(builder: (context) => const HomeScreen()),
-      );
-    });
+    Future.delayed(
+      const Duration(seconds: 2),
+      () {
+        Navigator.of(context).pushReplacement(
+          MaterialPageRoute(builder: (context) => const HomeScreen()),
+        );
+      },
+    );
 
     return Scaffold(
       body: Container(
