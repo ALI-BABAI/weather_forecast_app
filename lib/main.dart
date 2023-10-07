@@ -34,14 +34,19 @@ class InitializationScreen extends StatelessWidget {
             colors: [Color(0xFFBCC8D6), Color(0xFFF2F4F7)],
             begin: Alignment.bottomCenter,
             end: Alignment.center,
-            // tileMode: TileMode.repeated,
           ),
         ),
         child: Center(
           child: Column(
             mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
             children: [
-              const Image(image: AssetImage('assets/images/mainScreen.png')),
+              const Image(
+                image: AssetImage(
+                    'assets/images/final/sun clouds - main screen.png'),
+                height: 275,
+                width: 275,
+              ),
               const SizedBox(height: 5),
               Text(
                 'Weather',

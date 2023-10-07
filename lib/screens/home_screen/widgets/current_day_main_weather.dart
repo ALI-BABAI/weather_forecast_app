@@ -27,72 +27,74 @@ class CurrentDayWeatherWidget extends StatelessWidget {
             ),
           ],
         ),
+        const SizedBox(height: 10),
         Row(
           crossAxisAlignment: CrossAxisAlignment.center,
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Image(
-              image: AssetImage('assets/images/homeScreenMainWeather.png'),
-            ),
-            Container(
-              margin: const EdgeInsets.only(right: 30), // ГОВНОКОД
-              child: Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                children: [
-                  Row(
-                    children: [
-                      GradientText('33',
-                          style: const TextStyle(
-                              fontSize: 72, fontWeight: FontWeight.w700),
-                          colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
-                      const Text('°',
-                          style: TextStyle(
-                              fontSize: 64,
-                              fontWeight: FontWeight.w200,
-                              color: Color(0xFF757784))),
-                    ],
-                  ),
-                  Text(
-                    'Partly cloudy',
-                    style:
-                        poppinsRegularExtended(14, whiteColor, FontWeight.w500),
-                  )
-                ],
-              ),
+                fit: BoxFit.fill,
+                image: AssetImage('assets/images/final/3x/rain.png')),
+            Column(
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: [
+                Row(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: [
+                    GradientText('14°',
+                        style: const TextStyle(
+                            fontSize: 100, fontWeight: FontWeight.w700),
+                        colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
+                  ],
+                ),
+                Text(
+                  'Sunny',
+                  style:
+                      poppinsRegularExtended(18, whiteColor, FontWeight.w500),
+                )
+              ],
             )
           ],
         ),
+        const SizedBox(height: 30),
         Row(
           mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: [
-            // в зависимости от устройства будет требоваться большее кол-во пробелов
-            // ГОВНОКОД - симметрию нужно добиваться иными реализациями
             RichText(
-                text: TextSpan(
-                    style:
-                        poppinsRegularExtended(12, grayColor, FontWeight.w300),
-                    children: <TextSpan>[
+              text: TextSpan(
+                style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                children: <TextSpan>[
                   const TextSpan(text: '29°/27° | Feels like '),
                   TextSpan(
                     text: '39°C',
                     style:
                         poppinsRegularExtended(12, whiteColor, FontWeight.w300),
-                  ),
-                  const TextSpan(text: '          |          Wind '),
+                  )
+                ],
+              ),
+            ),
+            Text('|',
+                style: poppinsRegularExtended(12, grayColor, FontWeight.w300)),
+            RichText(
+              text: TextSpan(
+                style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                children: <TextSpan>[
+                  const TextSpan(text: 'Wind '),
                   TextSpan(
                     text: '9 KM',
                     style:
                         poppinsRegularExtended(12, whiteColor, FontWeight.w300),
                   ),
                   const TextSpan(text: '/H WSW'),
-                ])),
+                ],
+              ),
+            ),
           ],
         ),
       ],
     );
   }
 }
-
 
 // Элементы идетничны, можно создать список - но...
 // Отступы MainAxisAlignment и CrossAxisAlignment всё равно требуют
