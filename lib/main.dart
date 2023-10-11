@@ -1,12 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
+import 'package:weather_forecast_app/screens/settings_screen.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'theme/colors.dart';
-import 'screens/home_screen/home_screen.dart';
 
 void main() {
   runApp(const MaterialApp(
     title: 'Weather forecast',
     home: InitializationScreen(),
+    // routes: {
+    //   '/': (BuildContext context) => const InitializationScreen(),
+    //   '/home': (BuildContext context) => const HomeScreen(),
+    //   '/settings': (BuildContext context) => const SettingsScreen()
+    // },
   ));
 }
 
@@ -21,6 +27,7 @@ class InitializationScreen extends StatelessWidget {
       const Duration(seconds: 2),
       () {
         Navigator.of(context).pushReplacement(
+          //MaterialPageRoute(builder: (context) => const SettingsScreen()),
           MaterialPageRoute(builder: (context) => const HomeScreen()),
         );
       },

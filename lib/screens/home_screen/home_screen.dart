@@ -6,7 +6,7 @@ import 'package:weather_forecast_app/screens/home_screen/widgets/forecast_per_ne
 import 'package:weather_forecast_app/screens/home_screen/widgets/selected_city_and_settings.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 
-// Странная работа градиентной заливки бэкграунда
+// градиентная заливка имеет грубые переходные слои
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 

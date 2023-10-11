@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/screens/settings_screen.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 
@@ -9,6 +10,12 @@ class SelectedCityAndSettingsMenu extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    //   Navigator.push(
+    //     context,
+    //     MaterialPageRoute(builder: (context) => const SettingsScreen()),
+    //   );
+    // }
+
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       crossAxisAlignment: CrossAxisAlignment.center,
@@ -21,7 +28,13 @@ class SelectedCityAndSettingsMenu extends StatelessWidget {
           ),
         ),
         ElevatedButton(
-            onPressed: settingButtonPressed,
+            onPressed: () {
+              //  Navigator.pushNamed(context, '/second');
+              Navigator.push(
+                context,
+                MaterialPageRoute(builder: (context) => const SettingsScreen()),
+              );
+            },
             style: ButtonStyle(
                 minimumSize: const MaterialStatePropertyAll(Size(24, 24)),
                 padding: const MaterialStatePropertyAll(

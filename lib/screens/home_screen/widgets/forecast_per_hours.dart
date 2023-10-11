@@ -71,7 +71,7 @@ class PerHourForecastWidget extends StatelessWidget {
         itemCount: 24, // Количество элементов
         itemBuilder: (BuildContext context, int index) {
           return Container(
-            // #ГОВНОКОД
+            // #ГОВНОКОД (при большом экране отступы должны быть адаптивными)
             margin: const EdgeInsets.symmetric(
                 horizontal: 10), // отступ между элементами
             child: const HourlyWidget(
