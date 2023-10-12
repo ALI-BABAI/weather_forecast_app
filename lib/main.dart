@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
-import 'package:weather_forecast_app/screens/settings_screen.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'theme/colors.dart';
 

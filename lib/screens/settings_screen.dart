@@ -1,3 +1,6 @@
+// можно сделать через DRAWER компонент
+// https://api.flutter.dev/flutter/material/Drawer-class.html
+
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
@@ -5,163 +8,56 @@ import 'package:weather_forecast_app/theme/text.dart';
 
 void exitScreen() {}
 
-// Адаптивное изменение отступов в поле 'TOOLS'
-// Создать список кнопок и добавить оптимизацию кода
-// Виджет IconButton теряет свои визуальные эффекты при нажатии
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        elevation: 4, // тень
+        titleSpacing: 30,
+        title: Text(
+          'Settings',
+          style: poppinsRegularExtended(36, whiteColor, FontWeight.w600),
+        ),
+        backgroundColor: const Color(0xFF484B5B),
+        automaticallyImplyLeading:
+            false, // убираем автоматически созданную кнопку "назад"
+        actions: <Widget>[
+          Container(
+            margin: const EdgeInsets.only(right: 30),
+            child: IconButton(
+              padding: const EdgeInsets.only(right: 1),
+              splashRadius: 20,
+              icon: const Icon(Icons.close, size: 40),
+              onPressed: () {
+                Navigator.push(
+                    context,
+                    MaterialPageRoute(
+                        builder: (context) => const HomeScreen()));
+              },
+            ),
+          ),
+        ],
+      ),
       body: Container(
         decoration: const BoxDecoration(
           color: Color(0xFF484B5B),
         ),
-        alignment: Alignment.center,
-        child: ListView(children: [
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.center,
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                Padding(
-                  padding:
-                      const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-                  child: Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        Text(
-                          'Settings',
-                          style: poppinsRegularExtended(
-                              36, whiteColor, FontWeight.w900),
-                        ),
-                        IconButton(
-                          onPressed: () {
-                            // Navigator.pop(context);
-                            Navigator.push(
-                                context,
-                                MaterialPageRoute(
-                                    builder: (context) => const HomeScreen()));
-                          },
-                          icon: const Icon(
-                            //Icons.cancel_rounded,
-                            Icons.menu_open,
-                            color: whiteColor,
-                            size: 36,
-                          ),
-                        )
-                      ]),
-                ),
-                const Divider(color: grayColor, thickness: 0.1),
-                const LocationWidget(),
-                const Divider(color: grayColor, thickness: 0.1),
-                Column(children: [
-                  Container(
-                    padding: const EdgeInsets.symmetric(
-                        horizontal: 30, vertical: 10),
-                    alignment: Alignment.centerLeft,
-                    child: Text(
-                      'Tools',
-                      style: poppinsRegularExtended(
-                          28, const Color(0xFFFFC100), FontWeight.w600),
-                    ),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            const Icon(Icons.notifications,
-                                color: whiteColor, size: 30),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Notifications',
-                                style: poppinsRegularExtended(
-                                    20, whiteColor, FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            const Icon(Icons.language,
-                                color: whiteColor, size: 30),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Language',
-                                style: poppinsRegularExtended(
-                                    20, whiteColor, FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            const Icon(Icons.sms_outlined,
-                                color: whiteColor, size: 30),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Seed fedback',
-                                style: poppinsRegularExtended(
-                                    20, whiteColor, FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            const Icon(Icons.star, color: whiteColor, size: 30),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Rate this app',
-                                style: poppinsRegularExtended(
-                                    20, whiteColor, FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                  Padding(
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    child: TextButton(
-                        onPressed: () {},
-                        child: Row(
-                          children: [
-                            const Icon(Icons.share,
-                                color: whiteColor, size: 30),
-                            const SizedBox(width: 10),
-                            Expanded(
-                              child: Text(
-                                'Share your weather',
-                                style: poppinsRegularExtended(
-                                    20, whiteColor, FontWeight.w500),
-                              ),
-                            ),
-                          ],
-                        )),
-                  ),
-                ])
-              ]),
+        // alignment: Alignment.center,
+        child: Column(children: [
+          const LocationWidget(),
+          Container(
+            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+            alignment: Alignment.centerLeft,
+            child: Text(
+              'Tools',
+              style: poppinsRegularExtended(
+                  28, const Color(0xFFFFC100), FontWeight.w600),
+            ),
+          ),
+          const Expanded(child: ToolsWidget()),
         ]),
       ),
     );
@@ -248,6 +144,58 @@ class InfoPerCity extends StatelessWidget {
           ],
         ),
       ],
+    );
+  }
+}
+
+class ToolsWidget extends StatelessWidget {
+  const ToolsWidget({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return const Column(
+      children: [
+        Column(children: [
+          ToolsElementWidget(
+              buttonName: 'Notifications', iconType: Icons.notifications),
+          ToolsElementWidget(buttonName: 'Language', iconType: Icons.language),
+          ToolsElementWidget(
+              buttonName: 'Seed fedback', iconType: Icons.sms_outlined),
+          ToolsElementWidget(buttonName: 'Rate this app', iconType: Icons.star),
+          ToolsElementWidget(
+              buttonName: 'Share your weather', iconType: Icons.share),
+        ])
+      ],
+    );
+  }
+}
+
+class ToolsElementWidget extends StatelessWidget {
+  final String buttonName;
+  final IconData iconType;
+
+  const ToolsElementWidget(
+      {super.key, required this.buttonName, required this.iconType});
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 20),
+      child: TextButton(
+          onPressed: () {},
+          child: Row(
+            children: [
+              Icon(iconType, color: whiteColor, size: 30),
+              const SizedBox(width: 10),
+              Expanded(
+                child: Text(
+                  buttonName,
+                  style:
+                      poppinsRegularExtended(20, whiteColor, FontWeight.w500),
+                ),
+              ),
+            ],
+          )),
     );
   }
 }
