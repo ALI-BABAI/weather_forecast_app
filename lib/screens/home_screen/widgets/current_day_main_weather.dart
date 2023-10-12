@@ -5,10 +5,43 @@ import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
 
 class CurrentDayWeatherWidget extends StatelessWidget {
-  const CurrentDayWeatherWidget({super.key});
+  final int currentDay;
+  final int currentWeekDay;
+  final int currentMonth;
+
+  const CurrentDayWeatherWidget(
+      {super.key,
+      required this.currentDay,
+      required this.currentWeekDay,
+      required this.currentMonth});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
+    final List<String> dayNames = [
+      'Monday',
+      'Tuesday',
+      'Wednesday',
+      'Thursday',
+      'Friday',
+      'Saturday',
+      'Sunday',
+    ];
+    final String month = monthNames[currentMonth - 1];
+    final String dayOfWeek = dayNames[currentWeekDay - 1];
     return Column(
       children: [
         Row(
@@ -21,7 +54,7 @@ class CurrentDayWeatherWidget extends StatelessWidget {
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Text(
-                'Saturday, 1 Oct',
+                '$dayOfWeek, $currentDay $month',
                 style: poppinsRegularExtended(12, grayColor, FontWeight.w200),
               ),
             ),

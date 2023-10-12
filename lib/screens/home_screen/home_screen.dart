@@ -30,16 +30,22 @@ class HomeScreen extends StatelessWidget {
                 //используя AppBar можно сделать было
                 const SelectedCityAndSettingsMenu(),
                 const Divider(color: grayColor, thickness: 3),
-                const CurrentDayWeatherWidget(),
+                CurrentDayWeatherWidget(
+                  currentWeekDay: currentTime.weekday,
+                  currentDay: currentTime.day,
+                  currentMonth: currentTime.month,
+                ),
                 const SizedBox(height: 20),
                 const DottedDivederWidget(), // ? пунктирный разделитель
                 const SizedBox(height: 20),
                 const CurrentDayAllParametersWidget(),
                 const SizedBox(height: 20),
-                // передаём в виджет текущее время
                 PerHourForecastWidget(currentHour: currentTime.hour),
                 const Divider(color: grayColor, thickness: 1),
-                const PerSevenDaysForecastWidget(),
+                PerSevenDaysForecastWidget(
+                  currentDay: currentTime.day,
+                  currentMonth: currentTime.month,
+                ),
                 const Divider(color: grayColor, thickness: 1),
                 const SizedBox(height: 20),
                 const Placeholder(fallbackHeight: 400, fallbackWidth: 400)

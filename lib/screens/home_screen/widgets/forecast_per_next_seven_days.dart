@@ -4,10 +4,28 @@ import 'package:weather_forecast_app/theme/text.dart';
 
 // #ГОВНОКОД: -ручное задание высоты строк...
 class PerSevenDaysForecastWidget extends StatelessWidget {
-  const PerSevenDaysForecastWidget({super.key});
+  final int currentDay;
+  final int currentMonth; // в цифрах почему то...
+
+  const PerSevenDaysForecastWidget(
+      {super.key, required this.currentDay, required this.currentMonth});
 
   @override
   Widget build(BuildContext context) {
+    final List<String> monthNames = [
+      'January',
+      'February',
+      'March',
+      'April',
+      'May',
+      'June',
+      'July',
+      'August',
+      'September',
+      'October',
+      'November',
+      'December'
+    ];
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
@@ -24,9 +42,10 @@ class PerSevenDaysForecastWidget extends StatelessWidget {
                 Container(
                   height: 38,
                 ),
-                for (int i = 1; i < 8; i++)
+                for (int i = 0; i < 7; i++)
                   InfoPerDay(
-                    day: '$i October',
+                    day: currentDay + i,
+                    month: monthNames[currentMonth - 1],
                     weatherImage: 'assets/images/final/1x/sun.png',
                   ),
               ],
@@ -83,10 +102,15 @@ class PerSevenDaysForecastWidget extends StatelessWidget {
 }
 
 class InfoPerDay extends StatelessWidget {
-  final String day;
+  final int day;
+  final String month;
   final String weatherImage;
 
-  const InfoPerDay({super.key, required this.day, required this.weatherImage});
+  const InfoPerDay(
+      {super.key,
+      required this.day,
+      required this.weatherImage,
+      required this.month});
 
   @override
   Widget build(BuildContext context) {
@@ -96,7 +120,7 @@ class InfoPerDay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text(day,
+            Text('$day $month',
                 style: poppinsRegularExtended(15, whiteColor, FontWeight.w300)),
             Image(
               image: AssetImage(weatherImage),
