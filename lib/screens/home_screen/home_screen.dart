@@ -12,6 +12,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // получаем текущее время с устройства  (! правильнее ловить его из сети)
+    final currentTime = DateTime.now();
     return Scaffold(
         body: Container(
             decoration: const BoxDecoration(
@@ -24,21 +26,23 @@ class HomeScreen extends StatelessWidget {
             ),
             alignment: Alignment.center,
             child: ListView(
-              children: const [
-                SelectedCityAndSettingsMenu(), //используя AppBar можно сделать было
-                Divider(color: grayColor, thickness: 3),
-                CurrentDayWeatherWidget(),
-                SizedBox(height: 20),
-                DottedDivederWidget(), // ? пунктирный разделитель
-                SizedBox(height: 20),
-                CurrentDayAllParametersWidget(),
-                SizedBox(height: 20),
-                PerHourForecastWidget(),
-                Divider(color: grayColor, thickness: 1),
-                PerSevenDaysForecastWidget(),
-                Divider(color: grayColor, thickness: 1),
-                SizedBox(height: 20),
-                Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+              children: [
+                //используя AppBar можно сделать было
+                const SelectedCityAndSettingsMenu(),
+                const Divider(color: grayColor, thickness: 3),
+                const CurrentDayWeatherWidget(),
+                const SizedBox(height: 20),
+                const DottedDivederWidget(), // ? пунктирный разделитель
+                const SizedBox(height: 20),
+                const CurrentDayAllParametersWidget(),
+                const SizedBox(height: 20),
+                // передаём в виджет текущее время
+                PerHourForecastWidget(currentHour: currentTime.hour),
+                const Divider(color: grayColor, thickness: 1),
+                const PerSevenDaysForecastWidget(),
+                const Divider(color: grayColor, thickness: 1),
+                const SizedBox(height: 20),
+                const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
               ],
             )));
   }

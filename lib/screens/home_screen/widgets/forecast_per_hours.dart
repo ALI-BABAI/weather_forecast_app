@@ -60,7 +60,8 @@ import 'package:weather_forecast_app/theme/text.dart';
 } */
 
 class PerHourForecastWidget extends StatelessWidget {
-  const PerHourForecastWidget({super.key});
+  final int currentHour;
+  const PerHourForecastWidget({super.key, required this.currentHour});
 
   @override
   Widget build(BuildContext context) {
@@ -70,12 +71,14 @@ class PerHourForecastWidget extends StatelessWidget {
         scrollDirection: Axis.horizontal,
         itemCount: 24, // Количество элементов
         itemBuilder: (BuildContext context, int index) {
+          // Выводим для каждого следующего часа информацию по погоде
+          final hour = (currentHour + index) % 24;
           return Container(
             // #ГОВНОКОД (при большом экране отступы должны быть адаптивными)
             margin: const EdgeInsets.symmetric(
                 horizontal: 10), // отступ между элементами
-            child: const HourlyWidget(
-              hour: '6:00',
+            child: HourlyWidget(
+              hour: hour.toString(),
               image: 'assets/images/final/1x/sun + rain1.png',
               weather: '26°',
             ),
@@ -100,6 +103,7 @@ class HourlyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final formattedHour = '$hour:00'; // сцепляем текущий час с ":00" для вывода времени
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       decoration: const BoxDecoration(
@@ -112,7 +116,7 @@ class HourlyWidget extends StatelessWidget {
           children: [
             const SizedBox(height: 5),
             Text(
-              hour,
+              formattedHour,
               style: poppinsRegularExtended(10, grayColor, FontWeight.w300),
             ),
             const SizedBox(height: 5),
