@@ -45,16 +45,15 @@ class SettingsScreen extends StatelessWidget {
         decoration: const BoxDecoration(
           color: Color(0xFF484B5B),
         ),
-        // alignment: Alignment.center,
-        child: Column(children: [
+        child: ListView(children: [
+          // Добавить вывод textField-а  при нажатии на кнопку.
           const LocationWidget(),
           Container(
             padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
             alignment: Alignment.centerLeft,
             child: Text(
               'Tools',
-              style: poppinsRegularExtended(
-                  28, const Color(0xFFFFC100), FontWeight.w600),
+              style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
             ),
           ),
           const Expanded(child: ToolsWidget()),
@@ -64,6 +63,7 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+// Добавить вывод textField-а  при нажатии на кнопку.
 class LocationWidget extends StatelessWidget {
   const LocationWidget({super.key});
 
@@ -72,32 +72,86 @@ class LocationWidget extends StatelessWidget {
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
       child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Row(
-            children: [
-              Expanded(
-                  child: Text(
-                'Location',
-                style: poppinsRegularExtended(
-                    28, const Color(0xFFFFC100), FontWeight.w600),
-              )),
-              Text(
-                '|',
-                style: poppinsRegularExtended(16, Colors.cyan, FontWeight.w300),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            child: Text(
+              'Location',
+              style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
+            ),
+          ),
+          TextField(
+            readOnly: false,
+            autocorrect: true,
+            keyboardAppearance: Brightness.dark,
+            textCapitalization: TextCapitalization.words,
+            style: poppinsRegularExtended(20, whiteColor, FontWeight.w300),
+            cursorColor: Colors.cyan,
+            // событие при нажатии на кнопку клавиатуры == продолжить
+            onSubmitted: (String text) {
+              print('on submitted --> $text');
+            },
+            // стили
+            decoration: InputDecoration(
+              isCollapsed: true,
+              // костыль,  текст прижимается к верху
+              contentPadding: const EdgeInsets.only(left: 20, top: 16),
+              hintText: 'Enter a city name',
+              hintStyle: poppinsRegularExtended(18, grayColor, FontWeight.w300),
+              suffixIcon: Row(
+                mainAxisSize: MainAxisSize.min,
+                children: [
+                  TextButton(
+                      style: const ButtonStyle(
+                        fixedSize:
+                            MaterialStatePropertyAll(Size.fromHeight(45)),
+                      ),
+                      onPressed: () {},
+                      child: const Icon(
+                        Icons.add_location_alt_outlined,
+                        color: orangeColor,
+                        size: 30,
+                      )),
+                  TextButton(
+                    style: const ButtonStyle(
+                        // костыль, но красиво)
+                        fixedSize:
+                            MaterialStatePropertyAll(Size.fromHeight(45)),
+                        backgroundColor: MaterialStatePropertyAll(orangeColor)),
+                    onPressed: () {
+                      // поиск города, сборка данных по городу и добавление в список городов приложения
+                    },
+                    child: Text(
+                      'add',
+                      style:
+                          // poppinsRegularExtended(22, Color(0xFF484B5B), FontWeight.bold),
+                          poppinsRegularExtended(
+                              22, Colors.black, FontWeight.bold),
+                    ),
+                  ),
+                ],
               ),
-              TextButton(
-                onPressed: () {},
-                child: Text(
-                  'add',
-                  style:
-                      poppinsRegularExtended(20, Colors.cyan, FontWeight.w300),
-                ),
-              )
-            ],
+              /*  suffixIcon: TextButton(
+                  style: const ButtonStyle(
+                    fixedSize: MaterialStatePropertyAll(Size.fromHeight(45)),
+                  ),
+                  onPressed: () {},
+                  child: const Icon(
+                    Icons.add_location_alt_outlined,
+                    color: orangeColor,
+                    size: 30,
+                  )), */
+              focusedBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: orangeColor),
+              ),
+              enabledBorder: const OutlineInputBorder(
+                borderSide: BorderSide(color: orangeColor),
+              ),
+            ),
           ),
           // Добавить лист выбранных городов и распарсив его выводить виджет
           const InfoPerCity(cityName: 'Moscow, RU', cityWeather: '29° , Clear'),
-
           const InfoPerCity(
               cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
         ],
@@ -117,7 +171,7 @@ class InfoPerCity extends StatelessWidget {
   Widget build(BuildContext context) {
     return Column(
       children: [
-        const SizedBox(height: 20),
+        const SizedBox(height: 25),
         Row(
           mainAxisAlignment: MainAxisAlignment.start,
           children: [
@@ -130,6 +184,7 @@ class InfoPerCity extends StatelessWidget {
             Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
+                const SizedBox(height: 10),
                 Text(
                   cityName,
                   style:
