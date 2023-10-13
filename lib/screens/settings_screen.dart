@@ -13,57 +13,61 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        elevation: 4, // тень
-        titleSpacing: 30,
-        title: Text(
-          'Settings',
-          style: poppinsRegularExtended(36, whiteColor, FontWeight.w600),
-        ),
-        backgroundColor: const Color(0xFF484B5B),
-        automaticallyImplyLeading:
-            false, // убираем автоматически созданную кнопку "назад"
-        actions: <Widget>[
-          Container(
-            margin: const EdgeInsets.only(right: 30),
-            child: IconButton(
-              padding: const EdgeInsets.only(right: 1),
-              splashRadius: 20,
-              icon: const Icon(Icons.close, size: 40),
-              onPressed: () {
-                Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const HomeScreen()));
-              },
-            ),
+    return GestureDetector(
+      onTap: () {
+        // скрытие клавиатуры при нажатии на свободную область экрана
+        FocusScope.of(context).unfocus();
+      },
+      child: Scaffold(
+        appBar: AppBar(
+          elevation: 4, // тень
+          titleSpacing: 30,
+          title: Text(
+            'Settings',
+            style: poppinsRegularExtended(36, whiteColor, FontWeight.w600),
           ),
-        ],
-      ),
-      body: Container(
-        decoration: const BoxDecoration(
-          color: Color(0xFF484B5B),
-        ),
-        child: ListView(children: [
-          // Добавить вывод textField-а  при нажатии на кнопку.
-          const LocationWidget(),
-          Container(
-            padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-            alignment: Alignment.centerLeft,
-            child: Text(
-              'Tools',
-              style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
+          backgroundColor: const Color(0xFF484B5B),
+          automaticallyImplyLeading:
+              false, // убираем автоматически созданную кнопку "назад"
+          actions: <Widget>[
+            Container(
+              margin: const EdgeInsets.only(right: 30),
+              child: IconButton(
+                padding: const EdgeInsets.only(right: 1),
+                splashRadius: 20,
+                icon: const Icon(Icons.close, size: 40),
+                onPressed: () {
+                  Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) => const HomeScreen()));
+                },
+              ),
             ),
+          ],
+        ),
+        body: Container(
+          decoration: const BoxDecoration(
+            color: Color(0xFF484B5B),
           ),
-          const Expanded(child: ToolsWidget()),
-        ]),
+          child: ListView(children: [
+            const LocationWidget(),
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+              alignment: Alignment.centerLeft,
+              child: Text(
+                'Tools',
+                style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
+              ),
+            ),
+            const Expanded(child: ToolsWidget()),
+          ]),
+        ),
       ),
     );
   }
 }
 
-// Добавить вывод textField-а  при нажатии на кнопку.
 class LocationWidget extends StatelessWidget {
   const LocationWidget({super.key});
 
@@ -82,6 +86,8 @@ class LocationWidget extends StatelessWidget {
             ),
           ),
           TextField(
+            // можно ограничить ввод "левых" символов в текстбокс
+            // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
             readOnly: false,
             autocorrect: true,
             keyboardAppearance: Brightness.dark,
@@ -105,7 +111,7 @@ class LocationWidget extends StatelessWidget {
                   TextButton(
                       style: const ButtonStyle(
                         fixedSize:
-                            MaterialStatePropertyAll(Size.fromHeight(45)),
+                            MaterialStatePropertyAll(Size.fromHeight(46)),
                       ),
                       onPressed: () {},
                       child: const Icon(
@@ -117,7 +123,7 @@ class LocationWidget extends StatelessWidget {
                     style: const ButtonStyle(
                         // костыль, но красиво)
                         fixedSize:
-                            MaterialStatePropertyAll(Size.fromHeight(45)),
+                            MaterialStatePropertyAll(Size.fromHeight(46)),
                         backgroundColor: MaterialStatePropertyAll(orangeColor)),
                     onPressed: () {
                       // поиск города, сборка данных по городу и добавление в список городов приложения
