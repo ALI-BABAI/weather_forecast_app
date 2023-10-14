@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
@@ -79,7 +80,7 @@ class PerHourForecastWidget extends StatelessWidget {
                 horizontal: 10), // отступ между элементами
             child: HourlyWidget(
               hour: hour.toString(),
-              image: 'assets/images/final/1x/sun + rain1.png',
+              image: AppIconsMini.sunWithRain,
               weather: '26°',
             ),
           );
@@ -92,7 +93,7 @@ class PerHourForecastWidget extends StatelessWidget {
 class HourlyWidget extends StatelessWidget {
   final String hour;
   final String weather;
-  final String image;
+  final AssetImage image;
 
   const HourlyWidget({
     super.key,
@@ -103,7 +104,8 @@ class HourlyWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final formattedHour = '$hour:00'; // сцепляем текущий час с ":00" для вывода времени
+    final formattedHour =
+        '$hour:00'; // сцепляем текущий час с ":00" для вывода времени
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       decoration: const BoxDecoration(
@@ -121,7 +123,7 @@ class HourlyWidget extends StatelessWidget {
             ),
             const SizedBox(height: 5),
             Image(
-              image: AssetImage(image),
+              image: image,
             ),
             const SizedBox(height: 5),
             Text(

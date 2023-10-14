@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 
@@ -66,8 +67,9 @@ class CurrentDayWeatherWidget extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           children: [
             const Image(
-                fit: BoxFit.fill,
-                image: AssetImage('assets/images/final/3x/rain.png')),
+              fit: BoxFit.fill,
+              image: AppIconsExpanded.sunWithRain,
+            ),
             Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [

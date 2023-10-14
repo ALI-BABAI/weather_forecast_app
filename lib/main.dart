@@ -48,8 +48,7 @@ class InitializationScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Image(
-                image: AssetImage(
-                    'assets/images/final/sun clouds - main screen.png'),
+                image: AssetImage('assets/images/sun clouds - main screen.png'),
                 height: 275,
                 width: 275,
               ),

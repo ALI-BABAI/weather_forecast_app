@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
@@ -46,7 +47,7 @@ class PerSevenDaysForecastWidget extends StatelessWidget {
                   InfoPerDay(
                     day: currentDay + i,
                     month: monthNames[currentMonth - 1],
-                    weatherImage: 'assets/images/final/1x/sun.png',
+                    weatherImage: AppIconsMini.thunder,
                   ),
               ],
             ),
@@ -104,7 +105,7 @@ class PerSevenDaysForecastWidget extends StatelessWidget {
 class InfoPerDay extends StatelessWidget {
   final int day;
   final String month;
-  final String weatherImage;
+  final AssetImage weatherImage;
 
   const InfoPerDay(
       {super.key,
@@ -123,7 +124,7 @@ class InfoPerDay extends StatelessWidget {
             Text('$day $month',
                 style: poppinsRegularExtended(15, whiteColor, FontWeight.w300)),
             Image(
-              image: AssetImage(weatherImage),
+              image: weatherImage,
             ),
           ]),
     );
