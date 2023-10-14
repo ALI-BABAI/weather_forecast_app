@@ -51,6 +51,7 @@ class SettingsScreen extends StatelessWidget {
             color: Color(0xFF484B5B),
           ),
           child: ListView(children: [
+            // LocationWidget(),
             const LocationWidget(),
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
@@ -68,7 +69,56 @@ class SettingsScreen extends StatelessWidget {
   }
 }
 
+class Cities {
+  final String cityName;
+  final String cityWeather;
+
+  Cities({required this.cityName, required this.cityWeather});
+}
+
 class LocationWidget extends StatelessWidget {
+  // final _cities = [
+  //   Cities(cityName: 'Moscow, Ru', cityWeather: '29° , Clear'),
+  //   Cities(cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
+  // ];
+
+  // Widget? itemBuilder(BuildContext context, int index) {
+  //   final city = _cities[index];
+  //   // Количество элементов
+  //   return Column(
+  //     children: [
+  //       const SizedBox(height: 25),
+  //       Row(
+  //         mainAxisAlignment: MainAxisAlignment.start,
+  //         children: [
+  //           const Icon(
+  //             Icons.location_on,
+  //             size: 40,
+  //             color: whiteColor,
+  //           ),
+  //           const SizedBox(width: 10),
+  //           Column(
+  //             crossAxisAlignment: CrossAxisAlignment.start,
+  //             children: [
+  //               const SizedBox(height: 10),
+  //               Text(
+  //                 city.cityName,
+  //                 style:
+  //                     poppinsRegularExtended(18, whiteColor, FontWeight.w600),
+  //               ),
+  //               Text(
+  //                 city.cityWeather,
+  //                 style: poppinsRegularExtended(14, grayColor, FontWeight.w500),
+  //               ),
+  //             ],
+  //           )
+  //         ],
+  //       ),
+  //     ],
+  //   );
+  // }
+
+  // LocationWidget({super.key});
   const LocationWidget({super.key});
 
   @override
@@ -156,7 +206,16 @@ class LocationWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Добавить лист выбранных городов и распарсив его выводить виджет
+          // Добавить лист выбранных городов и распарсив его выводить виджет.
+          // const Divider(thickness: 1),
+          // Expanded(
+          //   child: ListView.builder(
+          //     itemCount: _cities.length, // берем количество городов в списке
+          //     scrollDirection: Axis.vertical,
+          //     itemBuilder: itemBuilder,
+          //   ),
+          // ),
+          // const Divider(thickness: 1),
           const InfoPerCity(cityName: 'Moscow, RU', cityWeather: '29° , Clear'),
           const InfoPerCity(
               cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),

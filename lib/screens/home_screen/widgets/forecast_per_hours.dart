@@ -69,6 +69,8 @@ class PerHourForecastWidget extends StatelessWidget {
     return SizedBox(
       height: 110, // Высота элементов
       child: ListView.builder(
+      // if (ListViewWidth>AllElementsWidth)
+      //  padding: EdgeInsets.symmetric(horizontal: (ListViewWidth-AllElementsWidth)/2),
         scrollDirection: Axis.horizontal,
         itemCount: 24, // Количество элементов
         itemBuilder: (BuildContext context, int index) {
