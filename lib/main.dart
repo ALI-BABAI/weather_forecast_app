@@ -33,7 +33,7 @@ class InitializationScreen extends StatelessWidget {
     );
 
     return Scaffold(
-      body: Container(
+      body: DecoratedBox(
         decoration: const BoxDecoration(
           color: Colors.white,
           gradient: LinearGradient(
@@ -48,7 +48,7 @@ class InitializationScreen extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: [
               const Image(
-                image: AssetImage('assets/images/sun clouds - main screen.png'),
+                image: AssetImage('assets/images/app_logo.png'),
                 height: 275,
                 width: 275,
               ),
