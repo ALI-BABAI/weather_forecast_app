@@ -3,6 +3,7 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
+import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
@@ -20,48 +21,49 @@ class SettingsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+          toolbarHeight: 50,
           elevation: 4, // тень
           titleSpacing: 30,
           title: Text(
             'Settings',
-            style: poppinsRegularExtended(36, whiteColor, FontWeight.w600),
+            style: poppinsRegularExtended(36, whiteColor, FontWeight.bold),
           ),
           backgroundColor: const Color(0xFF484B5B),
           automaticallyImplyLeading:
               false, // убираем автоматически созданную кнопку "назад"
           actions: <Widget>[
-            Container(
-              margin: const EdgeInsets.only(right: 30),
-              child: IconButton(
-                padding: const EdgeInsets.only(right: 1),
-                splashRadius: 20,
-                icon: const Icon(Icons.close, size: 40),
-                onPressed: () {
-                  Navigator.push(
+            Padding(
+              padding: const EdgeInsets.only(right: 30),
+              child: ElevatedButton(
+                  onPressed: () {
+                    //  Navigator.pushNamed(context, '/second');
+                    Navigator.push(
                       context,
                       MaterialPageRoute(
-                          builder: (context) => const HomeScreen()));
-                },
-              ),
+                          builder: (context) => const HomeScreen()),
+                    );
+                  },
+                  style: AppNavigattionButtonStyle.buttonStyle,
+                  child: const Expanded(
+                    child: Icon(
+                      Icons.close,
+                      size: 40,
+                    ),
+                  )),
             ),
           ],
         ),
-        body: Container(
+        body: DecoratedBox(
           decoration: const BoxDecoration(
-            color: Color(0xFF484B5B),
+            gradient: LinearGradient(
+              colors: [Color(0xFF484B5B), Color(0xFF2C2D35)],
+              begin: Alignment.topCenter,
+              end: Alignment.bottomCenter,
+            ),
           ),
           child: ListView(children: [
-            // LocationWidget(),
-            const LocationWidget(),
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-              alignment: Alignment.centerLeft,
-              child: Text(
-                'Tools',
-                style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
-              ),
-            ),
-            const Expanded(child: ToolsWidget()),
+            LocationWidget(),
+            const ToolsWidget(),
           ]),
         ),
       ),
@@ -77,49 +79,13 @@ class Cities {
 }
 
 class LocationWidget extends StatelessWidget {
-  // final _cities = [
-  //   Cities(cityName: 'Moscow, Ru', cityWeather: '29° , Clear'),
-  //   Cities(cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
-  // ];
+  final _cities = [
+    Cities(cityName: 'Moscow, Ru', cityWeather: '29° , Clear'),
+    Cities(cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
+    Cities(cityName: 'Vorkuta, Ru', cityWeather: '-40° , Warm'),
+  ];
 
-  // Widget? itemBuilder(BuildContext context, int index) {
-  //   final city = _cities[index];
-  //   // Количество элементов
-  //   return Column(
-  //     children: [
-  //       const SizedBox(height: 25),
-  //       Row(
-  //         mainAxisAlignment: MainAxisAlignment.start,
-  //         children: [
-  //           const Icon(
-  //             Icons.location_on,
-  //             size: 40,
-  //             color: whiteColor,
-  //           ),
-  //           const SizedBox(width: 10),
-  //           Column(
-  //             crossAxisAlignment: CrossAxisAlignment.start,
-  //             children: [
-  //               const SizedBox(height: 10),
-  //               Text(
-  //                 city.cityName,
-  //                 style:
-  //                     poppinsRegularExtended(18, whiteColor, FontWeight.w600),
-  //               ),
-  //               Text(
-  //                 city.cityWeather,
-  //                 style: poppinsRegularExtended(14, grayColor, FontWeight.w500),
-  //               ),
-  //             ],
-  //           )
-  //         ],
-  //       ),
-  //     ],
-  //   );
-  // }
-
-  // LocationWidget({super.key});
-  const LocationWidget({super.key});
+  LocationWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -132,7 +98,7 @@ class LocationWidget extends StatelessWidget {
             padding: const EdgeInsets.symmetric(vertical: 8.0),
             child: Text(
               'Location',
-              style: poppinsRegularExtended(28, orangeColor, FontWeight.w600),
+              style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
             ),
           ),
           TextField(
@@ -150,9 +116,7 @@ class LocationWidget extends StatelessWidget {
             },
             // стили
             decoration: InputDecoration(
-              isCollapsed: true,
-              // костыль,  текст прижимается к верху
-              contentPadding: const EdgeInsets.only(left: 20, top: 16),
+              contentPadding: const EdgeInsets.only(left: 20),
               hintText: 'Enter a city name',
               hintStyle: poppinsRegularExtended(18, grayColor, FontWeight.w300),
               suffixIcon: Row(
@@ -188,7 +152,7 @@ class LocationWidget extends StatelessWidget {
                   ),
                 ],
               ),
-              /*  suffixIcon: TextButton(
+/*               suffixIcon: TextButton(
                   style: const ButtonStyle(
                     fixedSize: MaterialStatePropertyAll(Size.fromHeight(45)),
                   ),
@@ -206,31 +170,24 @@ class LocationWidget extends StatelessWidget {
               ),
             ),
           ),
-          // Добавить лист выбранных городов и распарсив его выводить виджет.
-          // const Divider(thickness: 1),
-          // Expanded(
-          //   child: ListView.builder(
-          //     itemCount: _cities.length, // берем количество городов в списке
-          //     scrollDirection: Axis.vertical,
-          //     itemBuilder: itemBuilder,
-          //   ),
-          // ),
-          // const Divider(thickness: 1),
-          const InfoPerCity(cityName: 'Moscow, RU', cityWeather: '29° , Clear'),
-          const InfoPerCity(
-              cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
+          ListView.builder(
+            itemCount: _cities.length,
+            shrinkWrap: true,
+            itemBuilder: (context, index) {
+              final city = _cities[index];
+              return InfoPerCity(currentCity: city);
+            },
+          ),
         ],
       ),
     );
   }
 }
 
-// Добавить лист выбранных городов
 class InfoPerCity extends StatelessWidget {
-  final String cityName;
-  final String cityWeather;
-  const InfoPerCity(
-      {super.key, required this.cityName, required this.cityWeather});
+  final Cities currentCity;
+
+  const InfoPerCity({super.key, required this.currentCity});
 
   @override
   Widget build(BuildContext context) {
@@ -251,12 +208,12 @@ class InfoPerCity extends StatelessWidget {
               children: [
                 const SizedBox(height: 10),
                 Text(
-                  cityName,
+                  currentCity.cityName,
                   style:
                       poppinsRegularExtended(18, whiteColor, FontWeight.w600),
                 ),
                 Text(
-                  cityWeather,
+                  currentCity.cityWeather,
                   style: poppinsRegularExtended(14, grayColor, FontWeight.w500),
                 ),
               ],
@@ -273,18 +230,26 @@ class ToolsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Column(
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Column(children: [
-          ToolsElementWidget(
-              buttonName: 'Notifications', iconType: Icons.notifications),
-          ToolsElementWidget(buttonName: 'Language', iconType: Icons.language),
-          ToolsElementWidget(
-              buttonName: 'Seed fedback', iconType: Icons.sms_outlined),
-          ToolsElementWidget(buttonName: 'Rate this app', iconType: Icons.star),
-          ToolsElementWidget(
-              buttonName: 'Share your weather', iconType: Icons.share),
-        ])
+        Padding(
+          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+          child: Text(
+            'Tools',
+            style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
+          ),
+        ),
+        const ToolsElementWidget(
+            buttonName: 'Notifications', iconType: Icons.notifications),
+        const ToolsElementWidget(
+            buttonName: 'Language', iconType: Icons.language),
+        const ToolsElementWidget(
+            buttonName: 'Seed fedback', iconType: Icons.sms_outlined),
+        const ToolsElementWidget(
+            buttonName: 'Rate this app', iconType: Icons.star),
+        const ToolsElementWidget(
+            buttonName: 'Share your weather', iconType: Icons.share)
       ],
     );
   }
@@ -299,23 +264,26 @@ class ToolsElementWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 20),
-      child: TextButton(
-          onPressed: () {},
-          child: Row(
-            children: [
-              Icon(iconType, color: whiteColor, size: 30),
-              const SizedBox(width: 10),
-              Expanded(
-                child: Text(
-                  buttonName,
-                  style:
-                      poppinsRegularExtended(20, whiteColor, FontWeight.w500),
+    return SizedBox(
+      height: 50,
+      child: Padding(
+        padding: const EdgeInsets.symmetric(horizontal: 20),
+        child: TextButton(
+            onPressed: () {},
+            child: Row(
+              children: [
+                Icon(iconType, color: whiteColor, size: 30),
+                const SizedBox(width: 10),
+                Expanded(
+                  child: Text(
+                    buttonName,
+                    style:
+                        poppinsRegularExtended(20, whiteColor, FontWeight.w500),
+                  ),
                 ),
-              ),
-            ],
-          )),
+              ],
+            )),
+      ),
     );
   }
 }

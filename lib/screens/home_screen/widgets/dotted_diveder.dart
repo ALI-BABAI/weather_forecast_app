@@ -12,31 +12,6 @@ class DottedDivederWidget extends StatelessWidget {
   }
 }
 
-// Divider(
-//   // color: Color(
-//   //     0x10979797), // цвет 979797 с заполнением 16процентов == 0x10979797
-//   color: grayColor,
-//   thickness: 2,
-//   indent: 23,
-//   endIndent: 21,
-// ),
-
-// Мой вариант реализации пунктирного разделителя:
-// Center(
-//   child: Text(
-//     // Разделитель должен быть пунктирным...
-//     'Р                                                       м',
-//     style: TextStyle(
-//         color: Color(0xFF0A0A22), //0x10979797
-//         decoration: TextDecoration.underline,
-//         decorationColor: whiteColor,
-//         decorationThickness: 1,
-//         fontSize: 20,
-//         decorationStyle: TextDecorationStyle.dashed),
-//   ),
-// ),
-
-// GPT
 class DottedDivider extends StatelessWidget {
   final double height;
   final Color color;
@@ -66,6 +41,8 @@ class DottedLinePainter extends CustomPainter {
       ..color = color
       ..strokeWidth = size.height
       ..strokeCap = StrokeCap.round;
+
+    //paint.strokeWidth = 6;
 
     const dashWidth = 5; // Расстояние между пунктирами
 

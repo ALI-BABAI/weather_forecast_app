@@ -15,41 +15,36 @@ class HomeScreen extends StatelessWidget {
     // получаем текущее время с устройства  (! правильнее ловить его из сети)
     final currentTime = DateTime.now();
     return Scaffold(
-        body: Container(
-            decoration: const BoxDecoration(
-              color: Color(0xFF484B5B),
-              // gradient: LinearGradient(
-              //   colors: [Color(0xFF484B5B), Color(0xFF2C2D35)],
-              //   begin: Alignment.topCenter,
-              //   end: Alignment.bottomCenter,
-              // ),
-            ),
-            alignment: Alignment.center,
-            child: ListView(
-              children: [
-                //используя AppBar можно сделать было
-                const SelectedCityAndSettingsMenu(),
-                const Divider(color: grayColor, thickness: 3),
-                CurrentDayWeatherWidget(
-                  currentWeekDay: currentTime.weekday,
-                  currentDay: currentTime.day,
-                  currentMonth: currentTime.month,
-                ),
-                const SizedBox(height: 20),
-                const DottedDivederWidget(), // ? пунктирный разделитель
-                const SizedBox(height: 20),
-                const CurrentDayAllParametersWidget(),
-                const SizedBox(height: 20),
-                PerHourForecastWidget(currentHour: currentTime.hour),
-                const Divider(color: grayColor, thickness: 1),
-                PerSevenDaysForecastWidget(
-                  currentDay: currentTime.day,
-                  currentMonth: currentTime.month,
-                ),
-                const Divider(color: grayColor, thickness: 1),
-                const SizedBox(height: 20),
-                const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
-              ],
-            )));
+        body: DecoratedBox(
+      decoration: const BoxDecoration(
+        gradient: LinearGradient(
+          colors: [Color(0xFF484B5B), Color(0xFF2C2D35)],
+          begin: Alignment.topCenter,
+          end: Alignment.bottomCenter,
+        ),
+      ),
+      child: ListView(
+        children: [
+          //используя AppBar можно сделать было
+          const SelectedCityAndSettingsMenu(),
+          const Divider(color: grayColor, thickness: 2),
+          // const DottedDivederWidget(),
+          CurrentDayWeatherWidget(
+            currentWeekDay: currentTime.weekday,
+            currentDay: currentTime.day,
+            currentMonth: currentTime.month,
+          ),
+          const DottedDivederWidget(), // пунктирный разделитель
+          const CurrentDayAllParametersWidget(),
+          PerSevenDaysForecastWidget(
+            currentDay: currentTime.day,
+            currentMonth: currentTime.month,
+          ),
+          const Divider(color: grayColor, thickness: 1),
+          const SizedBox(height: 20),
+          const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+        ],
+      ),
+    ));
   }
 }

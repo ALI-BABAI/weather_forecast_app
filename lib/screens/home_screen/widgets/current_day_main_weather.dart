@@ -41,8 +41,10 @@ class CurrentDayWeatherWidget extends StatelessWidget {
       'Saturday',
       'Sunday',
     ];
+
     final String month = monthNames[currentMonth - 1];
     final String dayOfWeek = dayNames[currentWeekDay - 1];
+
     return Column(
       children: [
         Row(
@@ -91,45 +93,52 @@ class CurrentDayWeatherWidget extends StatelessWidget {
             )
           ],
         ),
-        const SizedBox(height: 30),
-        Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-          children: [
-            RichText(
-              text: TextSpan(
-                style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
-                children: <TextSpan>[
-                  const TextSpan(text: '29°/27° | Feels like '),
-                  TextSpan(
-                    text: '39°C',
-                    style:
-                        poppinsRegularExtended(12, whiteColor, FontWeight.w300),
-                  )
-                ],
+        Padding(
+          padding: const EdgeInsets.symmetric(vertical: 20),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            children: [
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                  children: <TextSpan>[
+                    const TextSpan(text: '29°/27° | Feels like '),
+                    TextSpan(
+                      text: '39°C',
+                      style: poppinsRegularExtended(
+                          12, whiteColor, FontWeight.w300),
+                    )
+                  ],
+                ),
               ),
-            ),
-            Text('|',
-                style: poppinsRegularExtended(12, grayColor, FontWeight.w300)),
-            RichText(
-              text: TextSpan(
-                style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
-                children: <TextSpan>[
-                  const TextSpan(text: 'Wind '),
-                  TextSpan(
-                    text: '9 KM',
-                    style:
-                        poppinsRegularExtended(12, whiteColor, FontWeight.w300),
-                  ),
-                  const TextSpan(text: '/H WSW'),
-                ],
+              Text('|',
+                  style:
+                      poppinsRegularExtended(12, grayColor, FontWeight.w300)),
+              RichText(
+                textAlign: TextAlign.center,
+                text: TextSpan(
+                  style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                  children: <TextSpan>[
+                    const TextSpan(text: 'Wind '),
+                    TextSpan(
+                      text: '9 KM',
+                      style: poppinsRegularExtended(
+                          12, whiteColor, FontWeight.w300),
+                    ),
+                    const TextSpan(text: '/H WSW'),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ],
     );
   }
 }
+
+// Table использовать виджет? - не?
 
 // Элементы идетничны, можно создать список - но...
 // Отступы MainAxisAlignment и CrossAxisAlignment всё равно требуют
@@ -139,78 +148,88 @@ class CurrentDayAllParametersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Column(
-      children: [
-        Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-          Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                const Icon(Icons.wb_cloudy_outlined, color: Colors.white),
-                Text(
-                  '   Precipation: ',
-                  style: poppinsRegularExtended(14, grayColor, FontWeight.w300),
-                ),
-                Text('21%',
-                    style: poppinsRegularExtended(
-                        14, whiteColor, FontWeight.w300)),
-              ],
-            ),
-            const SizedBox(
-              height: 15,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceBetween,
-              children: [
-                const Icon(Icons.wind_power_outlined, color: Colors.white),
-                Text(
-                  '   Wind: ',
-                  style: poppinsRegularExtended(14, grayColor, FontWeight.w300),
-                ),
-                Text('10 km/h',
-                    style: poppinsRegularExtended(
-                        14, whiteColor, FontWeight.w300)),
-              ],
-            ),
-          ]),
-          Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.water_drop_outlined, color: Colors.white),
-                    Text(
-                      '   Humidity: ',
-                      style: poppinsRegularExtended(
-                          14, grayColor, FontWeight.w300),
-                    ),
-                    Text('59%',
+    return Padding(
+      padding: const EdgeInsets.symmetric(vertical: 20),
+      child: Column(
+        children: [
+          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                    children: [
+                      const Icon(Icons.wb_cloudy_outlined, color: Colors.white),
+                      Text(
+                        '   Precipation: ',
                         style: poppinsRegularExtended(
-                            14, whiteColor, FontWeight.w300)),
-                  ],
-                ),
-                const SizedBox(
-                  height: 15,
-                ),
-                Row(
-                  mainAxisAlignment: MainAxisAlignment.center,
-                  children: [
-                    const Icon(Icons.sunny_snowing, color: Colors.white),
-                    Text(
-                      '   Sunset: ',
-                      style: poppinsRegularExtended(
-                          14, grayColor, FontWeight.w300),
-                    ),
-                    Text('29%',
+                            14, grayColor, FontWeight.w300),
+                      ),
+                      Text('21%',
+                          style: poppinsRegularExtended(
+                              14, whiteColor, FontWeight.w300)),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      const Icon(Icons.wind_power_outlined,
+                          color: Colors.white),
+                      Text(
+                        '   Wind: ',
                         style: poppinsRegularExtended(
-                            14, whiteColor, FontWeight.w300)),
-                  ],
-                ),
-              ]),
-        ])
-      ],
+                            14, grayColor, FontWeight.w300),
+                      ),
+                      Text('10 km/h',
+                          style: poppinsRegularExtended(
+                              14, whiteColor, FontWeight.w300)),
+                    ],
+                  ),
+                ]),
+            Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.water_drop_outlined,
+                          color: Colors.white),
+                      Text(
+                        '   Humidity: ',
+                        style: poppinsRegularExtended(
+                            14, grayColor, FontWeight.w300),
+                      ),
+                      Text('59%',
+                          style: poppinsRegularExtended(
+                              14, whiteColor, FontWeight.w300)),
+                    ],
+                  ),
+                  const SizedBox(
+                    height: 15,
+                  ),
+                  Row(
+                    mainAxisAlignment: MainAxisAlignment.center,
+                    children: [
+                      const Icon(Icons.sunny_snowing, color: Colors.white),
+                      Text(
+                        '   Sunset: ',
+                        style: poppinsRegularExtended(
+                            14, grayColor, FontWeight.w300),
+                      ),
+                      Text('29%',
+                          style: poppinsRegularExtended(
+                              14, whiteColor, FontWeight.w300)),
+                    ],
+                  ),
+                ]),
+          ])
+        ],
+      ),
     );
   }
 }
