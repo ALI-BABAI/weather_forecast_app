@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/settings_screen.dart';
+import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
 
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/text.dart';

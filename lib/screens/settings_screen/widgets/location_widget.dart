@@ -1,75 +1,7 @@
-// можно сделать через DRAWER компонент
-// https://api.flutter.dev/flutter/material/Drawer-class.html
-
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
-import 'package:weather_forecast_app/theme/button.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
-void exitScreen() {}
-
-class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return GestureDetector(
-      onTap: () {
-        // скрытие клавиатуры при нажатии на свободную область экрана
-        FocusScope.of(context).unfocus();
-      },
-      child: Scaffold(
-        appBar: AppBar(
-          toolbarHeight: 50,
-          elevation: 4, // тень
-          titleSpacing: 30,
-          title: Text(
-            'Settings',
-            style: poppinsRegularExtended(36, whiteColor, FontWeight.bold),
-          ),
-          backgroundColor: const Color(0xFF484B5B),
-          automaticallyImplyLeading:
-              false, // убираем автоматически созданную кнопку "назад"
-          actions: <Widget>[
-            Padding(
-              padding: const EdgeInsets.only(right: 30),
-              child: ElevatedButton(
-                  onPressed: () {
-                    //  Navigator.pushNamed(context, '/second');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
-                  },
-                  style: AppNavigattionButtonStyle.buttonStyle,
-                  child: const Expanded(
-                    child: Icon(
-                      Icons.close,
-                      size: 40,
-                    ),
-                  )),
-            ),
-          ],
-        ),
-        body: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: [Color(0xFF484B5B), Color(0xFF2C2D35)],
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
-          child: ListView(children: [
-            LocationWidget(),
-            const ToolsWidget(),
-          ]),
-        ),
-      ),
-    );
-  }
-}
+import '../../../theme/colors.dart';
 
 class Cities {
   final String cityName;
@@ -90,12 +22,12 @@ class LocationWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 30),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0),
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
             child: Text(
               'Location',
               style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
@@ -221,69 +153,6 @@ class InfoPerCity extends StatelessWidget {
           ],
         ),
       ],
-    );
-  }
-}
-
-class ToolsWidget extends StatelessWidget {
-  const ToolsWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          child: Text(
-            'Tools',
-            style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
-          ),
-        ),
-        const ToolsElementWidget(
-            buttonName: 'Notifications', iconType: Icons.notifications),
-        const ToolsElementWidget(
-            buttonName: 'Language', iconType: Icons.language),
-        const ToolsElementWidget(
-            buttonName: 'Seed fedback', iconType: Icons.sms_outlined),
-        const ToolsElementWidget(
-            buttonName: 'Rate this app', iconType: Icons.star),
-        const ToolsElementWidget(
-            buttonName: 'Share your weather', iconType: Icons.share)
-      ],
-    );
-  }
-}
-
-class ToolsElementWidget extends StatelessWidget {
-  final String buttonName;
-  final IconData iconType;
-
-  const ToolsElementWidget(
-      {super.key, required this.buttonName, required this.iconType});
-
-  @override
-  Widget build(BuildContext context) {
-    return SizedBox(
-      height: 50,
-      child: Padding(
-        padding: const EdgeInsets.symmetric(horizontal: 20),
-        child: TextButton(
-            onPressed: () {},
-            child: Row(
-              children: [
-                Icon(iconType, color: whiteColor, size: 30),
-                const SizedBox(width: 10),
-                Expanded(
-                  child: Text(
-                    buttonName,
-                    style:
-                        poppinsRegularExtended(20, whiteColor, FontWeight.w500),
-                  ),
-                ),
-              ],
-            )),
-      ),
     );
   }
 }
