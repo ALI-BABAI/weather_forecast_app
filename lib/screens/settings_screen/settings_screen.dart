@@ -62,9 +62,9 @@ class SettingsScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: ListView(children: [
+          child: ListView(children: const [
             LocationWidget(),
-            const ToolsWidget(),
+            ToolsWidget(),
           ]),
         ),
       ),
