@@ -2,7 +2,6 @@
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/text.dart';
@@ -39,12 +38,12 @@ class SettingsScreen extends StatelessWidget {
               width: 50,
               child: ElevatedButton(
                   onPressed: () {
-                    //  Navigator.pushNamed(context, '/second');
-                    Navigator.push(
-                      context,
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                    Navigator.popAndPushNamed(context, '/home');
+                    // Navigator.push(
+                    //   context,
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const HomeScreen()),
+                    // );
                   },
                   style: AppNavigattionButtonStyle.buttonStyle,
                   child: const Icon(

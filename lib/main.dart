@@ -1,17 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
+import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'theme/colors.dart';
 
 void main() {
-  runApp(const MaterialApp(
+  // runApp(const MaterialApp(
+  runApp(MaterialApp(
+    //home: InitializationScreen(),
     title: 'Weather forecast',
-    home: InitializationScreen(),
-    // routes: {
-    //   '/': (BuildContext context) => const InitializationScreen(),
-    //   '/home': (BuildContext context) => const HomeScreen(),
-    //   '/settings': (BuildContext context) => const SettingsScreen()
-    // },
+    initialRoute: '/',
+    routes: {
+      '/': (context) => const InitializationScreen(),
+      '/home': (context) => const HomeScreen(),
+      '/settings': (context) => const SettingsScreen(),
+    },
   ));
 }
 
@@ -25,10 +28,10 @@ class InitializationScreen extends StatelessWidget {
     Future.delayed(
       const Duration(seconds: 2),
       () {
-        Navigator.of(context).pushReplacement(
-          //MaterialPageRoute(builder: (context) => const SettingsScreen()),
-          MaterialPageRoute(builder: (context) => const HomeScreen()),
-        );
+        // Navigator.of(context).pushReplacement(
+        //   MaterialPageRoute(builder: (context) => const HomeScreen()),
+        // );
+        Navigator.pushReplacementNamed(context, '/home');
       },
     );
 

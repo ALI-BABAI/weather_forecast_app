@@ -3,7 +3,6 @@ import 'package:weather_forecast_app/screens/home_screen/widgets/current_day_mai
 import 'package:weather_forecast_app/screens/home_screen/widgets/dotted_diveder.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/forecast_per_hours.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/seven_days_forecast.dart';
-import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
@@ -28,8 +27,6 @@ class HomeScreen extends StatelessWidget {
             ),
           ),
           backgroundColor: const Color(0xFF484B5B),
-          automaticallyImplyLeading:
-              false, // убираем автоматически созданную кнопку "назад"
           actionsIconTheme:
               const IconThemeData(color: Color(0xFF484B5B), opacity: 1),
           actions: <Widget>[
@@ -38,12 +35,13 @@ class HomeScreen extends StatelessWidget {
             width: 50,
               child: ElevatedButton(
                 onPressed: () {
-                  //  Navigator.pushNamed(context, '/second');
-                  Navigator.push(
-                    context,
-                    MaterialPageRoute(
-                        builder: (context) => const SettingsScreen()),
-                  );
+                  // Navigator.push(
+                  //   context,
+                  //   MaterialPageRoute(
+                  //       builder: (context) => const SettingsScreen()),
+                  // );
+                  // удаляет текущую странницу
+                  Navigator.pushNamed(context, '/settings');
                 },
                 style: AppNavigattionButtonStyle.buttonStyle,
                 child: const Icon(
