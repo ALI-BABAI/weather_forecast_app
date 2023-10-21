@@ -1,7 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/text.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
 
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
 
@@ -53,12 +52,13 @@ class CurrentDayWeatherWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: const BoxDecoration(
+                // color: Color(0xFF32333E),
                 color: Color(0xFF32333E),
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Text(
                 '$dayOfWeek, $currentDay $month',
-                style: poppinsRegularExtended(12, grayColor, FontWeight.w200),
+                style: AppTextStyles.smallestSecondaryFont,
               ),
             ),
           ],
@@ -76,18 +76,19 @@ class CurrentDayWeatherWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
+                  crossAxisAlignment: CrossAxisAlignment.center,
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
                   children: [
-                    GradientText('14°',
+                    //const SizedBox(width: 30),
+                    GradientText('7',
                         style: const TextStyle(
                             fontSize: 100, fontWeight: FontWeight.w700),
                         colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
                   ],
                 ),
-                Text(
+                const Text(
                   'Sunny',
-                  style:
-                      poppinsRegularExtended(18, whiteColor, FontWeight.w500),
+                  style: AppTextStyles.expandedMainFont,
                 )
               ],
             )
@@ -96,37 +97,28 @@ class CurrentDayWeatherWidget extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.symmetric(vertical: 20),
           child: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
               RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                text: const TextSpan(
+                  style: AppTextStyles.secondaryFont,
                   children: <TextSpan>[
-                    const TextSpan(text: '29°/27° | Feels like '),
+                    TextSpan(text: '5°/12° Feels like '),
                     TextSpan(
-                      text: '39°C',
-                      style: poppinsRegularExtended(
-                          12, whiteColor, FontWeight.w300),
+                      text: '7°C',
+                      style: AppTextStyles.mainFont,
                     )
                   ],
                 ),
               ),
-              Text('|',
-                  style:
-                      poppinsRegularExtended(12, grayColor, FontWeight.w300)),
               RichText(
                 textAlign: TextAlign.center,
-                text: TextSpan(
-                  style: poppinsRegularExtended(12, grayColor, FontWeight.w300),
+                text: const TextSpan(
+                  style: AppTextStyles.secondaryFont,
                   children: <TextSpan>[
-                    const TextSpan(text: 'Wind '),
-                    TextSpan(
-                      text: '9 KM',
-                      style: poppinsRegularExtended(
-                          12, whiteColor, FontWeight.w300),
-                    ),
-                    const TextSpan(text: '/H WSW'),
+                    TextSpan(text: 'Wind '),
+                    TextSpan(text: '9 KM', style: AppTextStyles.mainFont),
                   ],
                 ),
               ),
@@ -148,8 +140,8 @@ class CurrentDayAllParametersWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(vertical: 20),
+    return const Padding(
+      padding: EdgeInsets.symmetric(vertical: 20),
       child: Column(
         children: [
           Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
@@ -160,33 +152,28 @@ class CurrentDayAllParametersWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                     children: [
-                      const Icon(Icons.wb_cloudy_outlined, color: Colors.white),
+                      Icon(Icons.wb_cloudy_outlined, color: Colors.white),
+                      SizedBox(width: 12),
                       Text(
-                        '   Precipation: ',
-                        style: poppinsRegularExtended(
-                            14, grayColor, FontWeight.w300),
+                        'Precipation: ',
+                        style: AppTextStyles.secondaryFont,
                       ),
-                      Text('21%',
-                          style: poppinsRegularExtended(
-                              14, whiteColor, FontWeight.w300)),
+                      Text('21%', style: AppTextStyles.mainFont),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
                     children: [
-                      const Icon(Icons.wind_power_outlined,
-                          color: Colors.white),
+                      Icon(Icons.wind_power_outlined, color: Colors.white),
+                      SizedBox(width: 12),
                       Text(
-                        '   Wind: ',
-                        style: poppinsRegularExtended(
-                            14, grayColor, FontWeight.w300),
+                        'Wind: ',
+                        style: AppTextStyles.secondaryFont,
                       ),
-                      Text('10 km/h',
-                          style: poppinsRegularExtended(
-                              14, whiteColor, FontWeight.w300)),
+                      Text('10 km/h', style: AppTextStyles.mainFont),
                     ],
                   ),
                 ]),
@@ -197,33 +184,28 @@ class CurrentDayAllParametersWidget extends StatelessWidget {
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.water_drop_outlined,
-                          color: Colors.white),
+                      Icon(Icons.water_drop_outlined, color: Colors.white),
+                      SizedBox(width: 12),
                       Text(
-                        '   Humidity: ',
-                        style: poppinsRegularExtended(
-                            14, grayColor, FontWeight.w300),
+                        'Humidity: ',
+                        style: AppTextStyles.secondaryFont,
                       ),
-                      Text('59%',
-                          style: poppinsRegularExtended(
-                              14, whiteColor, FontWeight.w300)),
+                      Text('59%', style: AppTextStyles.mainFont),
                     ],
                   ),
-                  const SizedBox(
+                  SizedBox(
                     height: 15,
                   ),
                   Row(
                     mainAxisAlignment: MainAxisAlignment.center,
                     children: [
-                      const Icon(Icons.sunny_snowing, color: Colors.white),
+                      Icon(Icons.sunny_snowing, color: Colors.white),
+                      SizedBox(width: 12),
                       Text(
-                        '   Sunset: ',
-                        style: poppinsRegularExtended(
-                            14, grayColor, FontWeight.w300),
+                        'Sunset: ',
+                        style: AppTextStyles.secondaryFont,
                       ),
-                      Text('29%',
-                          style: poppinsRegularExtended(
-                              14, whiteColor, FontWeight.w300)),
+                      Text('29%', style: AppTextStyles.mainFont),
                     ],
                   ),
                 ]),

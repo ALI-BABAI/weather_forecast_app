@@ -27,7 +27,7 @@ class SettingsScreen extends StatelessWidget {
           titleSpacing: 30,
           title: const Text(
             'Settings',
-            style: AppTextStyles.appBarText,
+            style: AppTextStyles.appBarFont,
           ),
           backgroundColor: const Color(0xFF484B5B),
           automaticallyImplyLeading:
@@ -38,7 +38,7 @@ class SettingsScreen extends StatelessWidget {
               width: 50,
               child: ElevatedButton(
                   onPressed: () {
-                    Navigator.popAndPushNamed(context, '/home');
+                    Navigator.pop(context, '/home');
                     // Navigator.push(
                     //   context,
                     //   MaterialPageRoute(
@@ -61,10 +61,13 @@ class SettingsScreen extends StatelessWidget {
               end: Alignment.bottomCenter,
             ),
           ),
-          child: ListView(children: const [
-            LocationWidget(),
-            ToolsWidget(),
-          ]),
+          child: ListView(
+            primary: true,
+            children: const [
+              LocationWidget(),
+              ToolsWidget(),
+            ],
+          ),
         ),
       ),
     );

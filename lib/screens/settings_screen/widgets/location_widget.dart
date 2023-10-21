@@ -50,12 +50,10 @@ class _LocationWidgetState extends State<LocationWidget> {
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
-          Padding(
-            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
-            child: Text(
-              'Location',
-              style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
-            ),
+          const Padding(
+            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+            child:
+                Text('Location', style: AppTextStyles.settingsScreenHeaderFont),
           ),
           TextField(
             // можно ограничить ввод "левых" символов в текстбокс
@@ -65,18 +63,22 @@ class _LocationWidgetState extends State<LocationWidget> {
 
             keyboardAppearance: Brightness.dark,
             textCapitalization: TextCapitalization.words,
-            style: poppinsRegularExtended(20, whiteColor, FontWeight.w300),
+            style: AppTextStyles.expandedMainFont,
             cursorColor: Colors.cyan,
             onSubmitted: (String text) {
               print('on submitted --> $text');
               if (text.isNotEmpty) {
-                setState(() {
-                  _userAddedCity = text;
-                  _cities.add(
-                    Cities(
-                        cityName: _userAddedCity, cityWeather: 'время покажет'),
-                  );
-                });
+                setState(
+                  () {
+                    _userAddedCity = text;
+                    _cities.add(
+                      Cities(
+                          cityName: _userAddedCity,
+                          cityWeather: 'время покажет'),
+                    );
+                    text = ''; // не работает очистка
+                  },
+                );
               }
             },
             onChanged: (String text) => _userAddedCity = text,
@@ -85,7 +87,7 @@ class _LocationWidgetState extends State<LocationWidget> {
             decoration: InputDecoration(
               contentPadding: const EdgeInsets.only(left: 20),
               hintText: 'Enter a city name',
-              hintStyle: poppinsRegularExtended(18, grayColor, FontWeight.w300),
+              hintStyle: AppTextStyles.secondaryFont,
               suffixIcon: Row(
                 mainAxisSize: MainAxisSize.min,
                 children: [
@@ -115,15 +117,14 @@ class _LocationWidgetState extends State<LocationWidget> {
                                 cityWeather: 'время покажет'),
                           );
                           FocusScope.of(context).unfocus();
+                          _userAddedCity = ''; // не работает
                         });
                       }
                     },
                     child: Text(
                       'add',
-                      style:
-                          // poppinsRegularExtended(22, Color(0xFF484B5B), FontWeight.bold),
-                          poppinsRegularExtended(
-                              22, Colors.black, FontWeight.bold),
+                      style: poppinsRegularExtended(
+                          22, Colors.black, FontWeight.bold),
                     ),
                   ),
                 ],
@@ -139,6 +140,7 @@ class _LocationWidgetState extends State<LocationWidget> {
           ListView.builder(
             itemCount: _cities.length,
             shrinkWrap: true,
+            primary: false, // убирает эффект скролла блока
             itemBuilder: (context, index) {
               final city = _cities[index];
               return Dismissible(
@@ -190,17 +192,11 @@ class InfoPerCity extends StatelessWidget {
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: [
-                    const SizedBox(height: 10),
-                    Text(
-                      currentCity.cityName,
-                      style: poppinsRegularExtended(
-                          18, whiteColor, FontWeight.w600),
-                    ),
-                    Text(
-                      currentCity.cityWeather,
-                      style: poppinsRegularExtended(
-                          14, grayColor, FontWeight.w500),
-                    ),
+                    const SizedBox(height: 5),
+                    Text(currentCity.cityName,
+                        style: AppTextStyles.expandedMainFont),
+                    Text(currentCity.cityWeather,
+                        style: AppTextStyles.secondaryFont),
                   ],
                 ),
               ],

@@ -67,10 +67,11 @@ class PerHourForecastWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return SizedBox(
-      height: 110, // Высота элементов
+      height: 115, // Высота элементов
       child: ListView.builder(
-      // if (ListViewWidth>AllElementsWidth)
-      //  padding: EdgeInsets.symmetric(horizontal: (ListViewWidth-AllElementsWidth)/2),
+        shrinkWrap: true,
+        // if (ListViewWidth>AllElementsWidth)
+        //  padding: EdgeInsets.symmetric(horizontal: (ListViewWidth-AllElementsWidth)/2),
         scrollDirection: Axis.horizontal,
         itemCount: 24, // Количество элементов
         itemBuilder: (BuildContext context, int index) {
@@ -111,7 +112,7 @@ class HourlyWidget extends StatelessWidget {
     return Container(
       padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
       decoration: const BoxDecoration(
-          color: Color(0x1F000000),
+          color: backgraundColor,
           borderRadius: BorderRadius.vertical(
               bottom: Radius.circular(25), top: Radius.circular(25))),
       child: Column(
@@ -121,7 +122,7 @@ class HourlyWidget extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               formattedHour,
-              style: poppinsRegularExtended(10, grayColor, FontWeight.w300),
+              style: AppTextStyles.smallestSecondaryFont,
             ),
             const SizedBox(height: 5),
             Image(
@@ -130,7 +131,7 @@ class HourlyWidget extends StatelessWidget {
             const SizedBox(height: 5),
             Text(
               weather,
-              style: poppinsRegularExtended(12, whiteColor, FontWeight.w300),
+              style: AppTextStyles.mainFont,
             ),
           ]),
     );

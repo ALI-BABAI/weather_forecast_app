@@ -23,7 +23,7 @@ class HomeScreen extends StatelessWidget {
           title: const Center(
             child: Text(
               'Moscow, Russia',
-              style: AppTextStyles.appBarText,
+              style: AppTextStyles.appBarFont,
             ),
           ),
           backgroundColor: const Color(0xFF484B5B),
@@ -31,8 +31,8 @@ class HomeScreen extends StatelessWidget {
               const IconThemeData(color: Color(0xFF484B5B), opacity: 1),
           actions: <Widget>[
             SizedBox(
-            height: 50,
-            width: 50,
+              height: 50,
+              width: 50,
               child: ElevatedButton(
                 onPressed: () {
                   // Navigator.push(
@@ -66,7 +66,7 @@ class HomeScreen extends StatelessWidget {
               // const SelectedCityAndSettingsMenu(),
               // const Divider(color: grayColor, thickness: 2),
               // const DottedDivederWidget(),
-              const SizedBox(height: 10),
+              const SizedBox(height: 15),
               CurrentDayWeatherWidget(
                 currentWeekDay: currentTime.weekday,
                 currentDay: currentTime.day,
@@ -74,6 +74,8 @@ class HomeScreen extends StatelessWidget {
               ),
               const DottedDivederWidget(), // пунктирный разделитель
               const CurrentDayAllParametersWidget(),
+              Center(
+                  child: PerHourForecastWidget(currentHour: currentTime.hour)),
               ForecastPerSevenDaysWidget(
                 currentDay: currentTime.day,
                 currentMonth: currentTime.month,

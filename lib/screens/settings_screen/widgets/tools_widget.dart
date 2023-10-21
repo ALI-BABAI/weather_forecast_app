@@ -2,6 +2,36 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
+final class SettingButtonItem {
+  final String buttonName;
+  final IconData iconType;
+
+  SettingButtonItem({required this.buttonName, required this.iconType});
+}
+
+final List settingsItems = [
+  SettingButtonItem(
+    buttonName: 'Notifications',
+    iconType: Icons.notifications,
+  ),
+  SettingButtonItem(
+    buttonName: 'Language',
+    iconType: Icons.language,
+  ),
+  SettingButtonItem(
+    buttonName: 'Seed fedback',
+    iconType: Icons.sms_outlined,
+  ),
+  SettingButtonItem(
+    buttonName: 'Rate this app',
+    iconType: Icons.star,
+  ),
+  SettingButtonItem(
+    buttonName: 'Share your weather',
+    iconType: Icons.share,
+  ),
+];
+
 class ToolsWidget extends StatelessWidget {
   const ToolsWidget({super.key});
 
@@ -10,34 +40,32 @@ class ToolsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        Padding(
-          padding: const EdgeInsets.symmetric(horizontal: 30, vertical: 10),
+        const Padding(
+          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Text(
             'Tools',
-            style: poppinsRegularExtended(28, orangeColor, FontWeight.w500),
+            style: AppTextStyles.settingsScreenHeaderFont,
           ),
         ),
-        const ToolsElementWidget(
-            buttonName: 'Notifications', iconType: Icons.notifications),
-        const ToolsElementWidget(
-            buttonName: 'Language', iconType: Icons.language),
-        const ToolsElementWidget(
-            buttonName: 'Seed fedback', iconType: Icons.sms_outlined),
-        const ToolsElementWidget(
-            buttonName: 'Rate this app', iconType: Icons.star),
-        const ToolsElementWidget(
-            buttonName: 'Share your weather', iconType: Icons.share)
+        ListView.builder(
+            shrinkWrap: true,
+            primary: false, // убирает эффект скролла блока
+            itemCount: settingsItems.length,
+            itemBuilder: (context, index) {
+              final settingUnit = settingsItems[index];
+              return ToolsElementWidget(
+                setting: settingUnit,
+              );
+            }),
       ],
     );
   }
 }
 
 class ToolsElementWidget extends StatelessWidget {
-  final String buttonName;
-  final IconData iconType;
+  final SettingButtonItem setting;
 
-  const ToolsElementWidget(
-      {super.key, required this.buttonName, required this.iconType});
+  const ToolsElementWidget({super.key, required this.setting});
 
   @override
   Widget build(BuildContext context) {
@@ -49,13 +77,12 @@ class ToolsElementWidget extends StatelessWidget {
             onPressed: () {},
             child: Row(
               children: [
-                Icon(iconType, color: whiteColor, size: 30),
+                Icon(setting.iconType, color: whiteColor, size: 30),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(
-                    buttonName,
-                    style:
-                        poppinsRegularExtended(20, whiteColor, FontWeight.w500),
+                    setting.buttonName,
+                    style: AppTextStyles.expandedMainFont,
                   ),
                 ),
               ],

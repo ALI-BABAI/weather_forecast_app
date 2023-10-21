@@ -31,7 +31,7 @@ class ForecastPerSevenDaysWidget extends StatelessWidget {
       padding: const EdgeInsets.all(16),
       child: DecoratedBox(
         decoration: const BoxDecoration(
-          color: Color(0x1F000000),
+          color: backgraundColor,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
         child: Row(
@@ -57,39 +57,35 @@ class ForecastPerSevenDaysWidget extends StatelessWidget {
               child: Column(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
-                  SizedBox(
+                  const SizedBox(
                     height: 38,
                     child: Row(
                       mainAxisAlignment: MainAxisAlignment.spaceAround,
                       children: [
                         Text(
                           'low',
-                          style: poppinsRegularExtended(
-                              15, whiteColor, FontWeight.w300),
+                          style: AppTextStyles.mainFont,
                         ),
                         Text(
                           'high',
-                          style: poppinsRegularExtended(
-                              15, whiteColor, FontWeight.w300),
+                          style: AppTextStyles.mainFont,
                         )
                       ],
                     ),
                   ),
                   for (int i = 0; i < 7; i++)
-                    SizedBox(
+                    const SizedBox(
                       height: 38,
                       child: Row(
                         mainAxisAlignment: MainAxisAlignment.spaceAround,
                         children: [
                           Text(
                             '26°',
-                            style: poppinsRegularExtended(
-                                15, whiteColor, FontWeight.w300),
+                            style: AppTextStyles.mainFont,
                           ),
                           Text(
                             '28°',
-                            style: poppinsRegularExtended(
-                                15, whiteColor, FontWeight.w300),
+                            style: AppTextStyles.mainFont,
                           )
                         ],
                       ),
@@ -123,8 +119,7 @@ class InfoPerDay extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceAround,
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
-            Text('$day $month',
-                style: poppinsRegularExtended(15, whiteColor, FontWeight.w300)),
+            Text('$day $month', style: AppTextStyles.mainFont),
             Image(
               image: weatherImage,
             ),
@@ -139,7 +134,7 @@ class InfoPerDay extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0x1F000000),
+        color: backgraundColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: const Column(
@@ -204,7 +199,7 @@ class InfoPerDay extends StatelessWidget {
     return Container(
       margin: const EdgeInsets.all(16),
       decoration: const BoxDecoration(
-        color: Color(0x1F000000),
+        color: backgraundColor,
         borderRadius: BorderRadius.all(Radius.circular(10)),
       ),
       child: const SizedBox(
