@@ -21,7 +21,7 @@ abstract class AppIconsExpanded {
   static const sunWithRain =
       AssetImage('assets/images/icons/icons_expanded/sun_with_rain.png');
   static const sunWithSmallCloud =
-      AssetImage('assets/images/icons/icons_expanded/small_cloudy.png');
+      AssetImage('assets/images/icons/icons_expanded/small _cloudy.png');
   static const sun = AssetImage('assets/images/icons/icons_expanded/sunny.png');
   static const thunder =
       AssetImage('assets/images/icons/icons_expanded/thunder.png');

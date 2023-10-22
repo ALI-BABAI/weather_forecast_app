@@ -6,7 +6,7 @@ class DottedDivederWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 24),
+      padding: EdgeInsets.symmetric(horizontal: 20),
       child: DottedDivider(height: 1, color: Color(0x50979797)),
     );
   }
@@ -39,14 +39,12 @@ class DottedLinePainter extends CustomPainter {
   void paint(Canvas canvas, Size size) {
     final paint = Paint()
       ..color = color
-      ..strokeWidth = size.height
+      ..strokeWidth = size.height / 2
       ..strokeCap = StrokeCap.round;
 
-    //paint.strokeWidth = 6;
+    const dashWidth = 3; // Расстояние между пунктирами
 
-    const dashWidth = 5; // Расстояние между пунктирами
-
-    const space = 5; // Длина пунктира
+    const space = 6; // Длина пунктира
     double currentX = 0;
     bool draw = true;
 

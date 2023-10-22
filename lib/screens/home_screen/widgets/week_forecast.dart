@@ -3,11 +3,11 @@ import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
-class ForecastPerSevenDaysWidget extends StatelessWidget {
+class WeekForecastWidget extends StatelessWidget {
   final int currentDay;
   final int currentMonth; // из DateTime.now() выводится дд.мм.гггг
 
-  const ForecastPerSevenDaysWidget(
+  const WeekForecastWidget(
       {super.key, required this.currentDay, required this.currentMonth});
 
   @override

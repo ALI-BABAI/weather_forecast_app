@@ -1,8 +1,7 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/current_day_main_weather.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/dotted_diveder.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/forecast_per_hours.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/seven_days_forecast.dart';
+import 'package:weather_forecast_app/screens/home_screen/widgets/main_forecast.dart';
+import 'package:weather_forecast_app/screens/home_screen/widgets/hourly_forecast.dart';
+import 'package:weather_forecast_app/screens/home_screen/widgets/week_forecast.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
@@ -63,17 +62,13 @@ class HomeScreen extends StatelessWidget {
           primary: true, // не отрабатывает должным образом
           children: [
             const SizedBox(height: 15),
-            CurrentDayWeatherWidget(
+            MainForecastWidget(
               currentWeekDay: currentTime.weekday,
               currentDay: currentTime.day,
               currentMonth: currentTime.month,
             ),
-            const DottedDivederWidget(), // пунктирный разделитель
-            const CurrentDayAllParametersWidget(),
-            Center(
-              child: PerHourForecastWidget(currentHour: currentTime.hour),
-            ),
-            ForecastPerSevenDaysWidget(
+            HourlyForecastWidget(currentHour: currentTime.hour),
+            WeekForecastWidget(
               currentDay: currentTime.day,
               currentMonth: currentTime.month,
             ),
