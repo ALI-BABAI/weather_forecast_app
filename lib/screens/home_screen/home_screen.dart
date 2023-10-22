@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // получаем текущее время с устройства  (! правильнее ловить его из сети)
-    final currentTime = DateTime.now();
+    // final currentTime = DateTime.now();
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
@@ -58,65 +58,63 @@ class HomeScreen extends StatelessWidget {
             end: Alignment.bottomCenter,
           ),
         ),
-        child: ListView(
-          primary: true, // не отрабатывает должным образом
-          children: [
-            const SizedBox(height: 15),
-            MainForecastWidget(
-              currentWeekDay: currentTime.weekday,
-              currentDay: currentTime.day,
-              currentMonth: currentTime.month,
-            ),
-            HourlyForecastWidget(currentHour: currentTime.hour),
-            WeekForecastWidget(
-              currentDay: currentTime.day,
-              currentMonth: currentTime.month,
-            ),
-            const Divider(color: AppColors.gray, thickness: 1),
-            const SizedBox(height: 20),
-            const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
-          ],
-        ),
+        child: ReoradbleHomeScreen(key: key),
       ),
     );
   }
 }
 
-class ReorderableExample extends StatefulWidget {
-  const ReorderableExample({super.key});
+class ReoradbleHomeScreen extends StatefulWidget {
+  const ReoradbleHomeScreen({super.key});
 
   @override
-  State<ReorderableExample> createState() => _ReorderableListViewExampleState();
+  State<ReoradbleHomeScreen> createState() => _ReoradbleHomeScreenState();
 }
 
-class _ReorderableListViewExampleState extends State<ReorderableExample> {
-  final List<int> _items = List<int>.generate(50, (int index) => index);
+class _ReoradbleHomeScreenState extends State<ReoradbleHomeScreen> {
+  // final currentTimee = DateTime.now();
+
+  final List<Widget> _items = [
+    // HourlyForecastWidget(currentHour: currentTime.hour),
+    // WeekForecastWidget(
+    //   currentDay: currentTime.day,
+    //   currentMonth: currentTime.month,
+    // ),
+    const SizedBox(height: 15),
+    const MainForecastWidget(
+      currentWeekDay: 7,
+      currentDay: 22,
+      currentMonth: 10,
+    ),
+
+    const HourlyForecastWidget(currentHour: 15),
+    const WeekForecastWidget(
+      currentDay: 22,
+      currentMonth: 10,
+    ),
+    const Divider(color: AppColors.gray, thickness: 1),
+    const SizedBox(height: 20),
+    const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+  ];
 
   @override
   Widget build(BuildContext context) {
-    final ColorScheme colorScheme = Theme.of(context).colorScheme;
-    final Color oddItemColor = colorScheme.primary.withOpacity(0.05);
-    final Color evenItemColor = colorScheme.primary.withOpacity(0.15);
-
     return ReorderableListView(
-      padding: const EdgeInsets.symmetric(horizontal: 40),
-      children: <Widget>[
-        for (int index = 0; index < _items.length; index += 1)
-          ListTile(
-            key: Key('$index'),
-            tileColor: _items[index].isOdd ? oddItemColor : evenItemColor,
-            title: Text('Item ${_items[index]}'),
-          ),
-      ],
-      onReorder: (int oldIndex, int newIndex) {
-        setState(() {
-          if (oldIndex < newIndex) {
-            newIndex -= 1;
-          }
-          final int item = _items.removeAt(oldIndex);
-          _items.insert(newIndex, item);
+        children: <Widget>[
+          for (int index = 0; index < _items.length; index += 1)
+            ListTile(
+              key: Key('$index'),
+              title: _items[index],
+            ),
+        ],
+        onReorder: (int oldIndex, int newIndex) {
+          setState(() {
+            if (oldIndex < newIndex) {
+              newIndex -= 1;
+            }
+            final Widget item = _items.removeAt(oldIndex);
+            _items.insert(newIndex, item);
+          });
         });
-      },
-    );
   }
 }
