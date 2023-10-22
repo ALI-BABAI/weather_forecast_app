@@ -11,6 +11,12 @@ final class SettingButtonItem {
 
 final List settingsItems = [
   SettingButtonItem(
+    buttonName: 'Measurement units',
+    iconType: Icons.balance_rounded,  
+    //settings_system_daydream_outlined
+    //balance_rounded
+  ),
+  SettingButtonItem(
     buttonName: 'Notifications',
     iconType: Icons.notifications,
   ),
