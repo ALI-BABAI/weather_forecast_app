@@ -29,7 +29,8 @@ class SelectedCityAndSettingsMenu extends StatelessWidget {
             Expanded(
               child: Text(
                 'Moscow, Russia',
-                style: poppinsRegularExtended(30, whiteColor, FontWeight.bold),
+                style: poppinsRegularExtended(
+                    30, AppColors.white, FontWeight.bold),
                 textAlign: TextAlign.center,
               ),
             ),
@@ -53,7 +54,6 @@ class SelectedCityAndSettingsMenu extends StatelessWidget {
                     ),
                   )),
             ),
-            
           ],
         ),
       ),

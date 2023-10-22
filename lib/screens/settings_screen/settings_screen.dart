@@ -4,6 +4,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
+import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 import 'widgets/tools_widget.dart';
@@ -29,7 +30,7 @@ class SettingsScreen extends StatelessWidget {
             'Settings',
             style: AppTextStyles.appBarFont,
           ),
-          backgroundColor: const Color(0xFF484B5B),
+          backgroundColor: AppColors.appBackground,
           automaticallyImplyLeading:
               false, // убираем автоматически созданную кнопку "назад"
           actions: <Widget>[
@@ -56,7 +57,7 @@ class SettingsScreen extends StatelessWidget {
         body: DecoratedBox(
           decoration: const BoxDecoration(
             gradient: LinearGradient(
-              colors: [Color(0xFF484B5B), Color(0xFF2C2D35)],
+              colors: AppColors.gradientBackground,
               begin: Alignment.topCenter,
               end: Alignment.bottomCenter,
             ),

@@ -58,13 +58,14 @@ class InitializationScreen extends StatelessWidget {
               const SizedBox(height: 5),
               Text(
                 'Weather',
-                style:
-                    poppinsRegularExtended(40, darkBlueColor, FontWeight.w600),
+                style: poppinsRegularExtended(
+                    40, AppColors.darkBlue, FontWeight.w600),
               ),
               const SizedBox(height: 5),
               Text(
                 'Forecast',
-                style: poppinsRegularExtended(33, grayColor, FontWeight.w400),
+                style:
+                    poppinsRegularExtended(33, AppColors.gray, FontWeight.w400),
               ),
               const SizedBox(
                 height: 150,

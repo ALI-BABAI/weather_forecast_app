@@ -55,86 +55,85 @@ class _LocationWidgetState extends State<LocationWidget> {
             child:
                 Text('Location', style: AppTextStyles.settingsScreenHeaderFont),
           ),
-          TextField(
-            // можно ограничить ввод "левых" символов в текстбокс
-            // inputFormatters: [FilteringTextInputFormatter.digitsOnly],
-            readOnly: false,
-            autocorrect: true,
-
-            keyboardAppearance: Brightness.dark,
-            textCapitalization: TextCapitalization.words,
-            style: AppTextStyles.expandedMainFont,
-            cursorColor: Colors.cyan,
-            onSubmitted: (String text) {
-              print('on submitted --> $text');
-              if (text.isNotEmpty) {
-                setState(
-                  () {
-                    _userAddedCity = text;
-                    _cities.add(
-                      Cities(
-                          cityName: _userAddedCity,
-                          cityWeather: 'время покажет'),
-                    );
-                    text = ''; // не работает очистка
-                  },
-                );
-              }
-            },
-            onChanged: (String text) => _userAddedCity = text,
-
-            // стили
-            decoration: InputDecoration(
-              contentPadding: const EdgeInsets.only(left: 20),
-              hintText: 'Enter a city name',
-              hintStyle: AppTextStyles.secondaryFont,
-              suffixIcon: Row(
-                mainAxisSize: MainAxisSize.min,
-                children: [
-                  TextButton(
-                      style: const ButtonStyle(
-                        fixedSize:
-                            MaterialStatePropertyAll(Size.fromHeight(46)),
-                      ),
-                      onPressed: () {},
-                      child: const Icon(
-                        Icons.add_location_alt_outlined,
-                        color: orangeColor,
-                        size: 30,
-                      )),
-                  TextButton(
-                    style: const ButtonStyle(
-                        // костыль, но красиво)
-                        fixedSize:
-                            MaterialStatePropertyAll(Size.fromHeight(46)),
-                        backgroundColor: MaterialStatePropertyAll(orangeColor)),
-                    onPressed: () {
-                      if (_userAddedCity.isNotEmpty) {
-                        setState(() {
-                          _cities.add(
-                            Cities(
-                                cityName: _userAddedCity,
-                                cityWeather: 'время покажет'),
-                          );
-                          FocusScope.of(context).unfocus();
-                          _userAddedCity = ''; // не работает
-                        });
+          SizedBox(
+            height: 46,
+            child: Row(
+              children: [
+                Expanded(
+                  child: TextField(
+                    keyboardAppearance: Brightness.dark,
+                    textCapitalization: TextCapitalization.words,
+                    style: AppTextStyles.expandedMainFont,
+                    cursorColor: Colors.cyan,
+                    onSubmitted: (String text) {
+                      print('on submitted --> $text');
+                      if (text.isNotEmpty) {
+                        setState(
+                          () {
+                            _userAddedCity = text;
+                            _cities.add(
+                              Cities(
+                                  cityName: _userAddedCity,
+                                  cityWeather: 'время покажет'),
+                            );
+                            text = ''; // не работает очистка
+                          },
+                        );
                       }
                     },
-                    child: Text(
-                      'add',
-                      style: poppinsRegularExtended(
-                          22, Colors.black, FontWeight.bold),
+                    onChanged: (String text) => _userAddedCity = text,
+                    // стили
+                    decoration: InputDecoration(
+                      hintText: 'Enter a city name',
+                      hintStyle: AppTextStyles.secondaryFont,
+                      suffixIcon: Row(
+                        mainAxisSize: MainAxisSize.min,
+                        children: [
+                          TextButton(
+                            onPressed: () {},
+                            child: const Icon(
+                              Icons.add_location_alt_outlined,
+                              color: AppColors.orange,
+                              size: 30,
+                            ),
+                          ),
+                          TextButton(
+                            style: const ButtonStyle(
+                                fixedSize: MaterialStatePropertyAll(
+                                    Size.fromHeight(46)),
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange)),
+                            onPressed: () {
+                              if (_userAddedCity.isNotEmpty) {
+                                setState(() {
+                                  _cities.add(
+                                    Cities(
+                                        cityName: _userAddedCity,
+                                        cityWeather: 'время покажет'),
+                                  );
+                                  FocusScope.of(context).unfocus();
+                                  _userAddedCity = ''; // не работает
+                                });
+                              }
+                            },
+                            child: Text(
+                              'add',
+                              style: poppinsRegularExtended(
+                                  22, Colors.black, FontWeight.bold),
+                            ),
+                          ),
+                        ],
+                      ),
+                      focusedBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.orange),
+                      ),
+                      enabledBorder: const OutlineInputBorder(
+                        borderSide: BorderSide(color: AppColors.orange),
+                      ),
                     ),
                   ),
-                ],
-              ),
-              focusedBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: orangeColor),
-              ),
-              enabledBorder: const OutlineInputBorder(
-                borderSide: BorderSide(color: orangeColor),
-              ),
+                ),
+              ],
             ),
           ),
           ListView.builder(
@@ -186,7 +185,7 @@ class InfoPerCity extends StatelessWidget {
                 const Icon(
                   Icons.location_on,
                   size: 40,
-                  color: whiteColor,
+                  color: AppColors.white,
                 ),
                 const SizedBox(width: 10),
                 Column(
@@ -212,7 +211,7 @@ class InfoPerCity extends StatelessWidget {
                     side: MaterialStatePropertyAll(BorderSide.none)),
                 child: const Icon(
                   Icons.delete_forever,
-                  color: orangeColor,
+                  color: AppColors.orange,
                   size: 35,
                 ))
           ],

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
@@ -52,8 +53,8 @@ class CurrentDayWeatherWidget extends StatelessWidget {
             Container(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
               decoration: const BoxDecoration(
-                // color: Color(0xFF32333E),
-                color: Color(0xFF32333E),
+                // color: Color(0xFF32333E),  // потемнее будет
+                color: AppColors.widgetBackground,
                 borderRadius: BorderRadius.all(Radius.circular(16)),
               ),
               child: Text(
@@ -178,37 +179,38 @@ class CurrentDayAllParametersWidget extends StatelessWidget {
                   ),
                 ]),
             Column(
-                crossAxisAlignment: CrossAxisAlignment.start,
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.water_drop_outlined, color: Colors.white),
-                      SizedBox(width: 12),
-                      Text(
-                        'Humidity: ',
-                        style: AppTextStyles.secondaryFont,
-                      ),
-                      Text('59%', style: AppTextStyles.mainFont),
-                    ],
-                  ),
-                  SizedBox(
-                    height: 15,
-                  ),
-                  Row(
-                    mainAxisAlignment: MainAxisAlignment.center,
-                    children: [
-                      Icon(Icons.sunny_snowing, color: Colors.white),
-                      SizedBox(width: 12),
-                      Text(
-                        'Sunset: ',
-                        style: AppTextStyles.secondaryFont,
-                      ),
-                      Text('29%', style: AppTextStyles.mainFont),
-                    ],
-                  ),
-                ]),
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.water_drop_outlined, color: Colors.white),
+                    SizedBox(width: 12),
+                    Text(
+                      'Humidity: ',
+                      style: AppTextStyles.secondaryFont,
+                    ),
+                    Text('59%', style: AppTextStyles.mainFont),
+                  ],
+                ),
+                SizedBox(
+                  height: 15,
+                ),
+                Row(
+                  mainAxisAlignment: MainAxisAlignment.center,
+                  children: [
+                    Icon(Icons.sunny_snowing, color: Colors.white),
+                    SizedBox(width: 12),
+                    Text(
+                      'Sunset: ',
+                      style: AppTextStyles.secondaryFont,
+                    ),
+                    Text('29%', style: AppTextStyles.mainFont),
+                  ],
+                ),
+              ],
+            ),
           ])
         ],
       ),

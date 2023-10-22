@@ -77,7 +77,7 @@ class ToolsElementWidget extends StatelessWidget {
             onPressed: () {},
             child: Row(
               children: [
-                Icon(setting.iconType, color: whiteColor, size: 30),
+                Icon(setting.iconType, color: AppColors.white, size: 30),
                 const SizedBox(width: 10),
                 Expanded(
                   child: Text(

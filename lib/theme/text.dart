@@ -18,41 +18,41 @@ abstract class AppTextStyles {
     fontWeight: FontWeight.bold,
     fontSize: 33,
     height: 1,
-    color: whiteColor,
+    color: AppColors.white,
   );
   static const settingsScreenHeaderFont = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 28,
     height: 1,
-    color: orangeColor,
+    color: AppColors.orange,
   );
   static const expandedMainFont = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 20,
     height: 1,
-    color: whiteColor,
+    color: AppColors.white,
   );
   static const mainFont = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 15,
     height: 1,
-    color: whiteColor,
+    color: AppColors.white,
   );
   static const secondaryFont = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 15,
     height: 1,
-    color: grayColor,
+    color: AppColors.gray,
   );
   static const smallestSecondaryFont = TextStyle(
     fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 12,
     height: 1,
-    color: grayColor,
+    color: AppColors.gray,
   );
 }
