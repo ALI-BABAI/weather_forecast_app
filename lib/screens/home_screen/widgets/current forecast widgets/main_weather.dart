@@ -1,5 +1,9 @@
+import 'dart:convert';
+
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
+import 'package:weather_forecast_app/api%20and%20json/answer.dart';
+import 'package:weather_forecast_app/api%20and%20json/example_json.dart';
 import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
@@ -13,13 +17,9 @@ class MainWeatherForecast extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Column(
-            children: [
-              Image(
-                fit: BoxFit.fill,
-                image: AppIconsExpanded.sunWithSmallCloud,
-              ),
-            ],
+          const Image(
+            fit: BoxFit.fill,
+            image: AppIconsExpanded.sunWithSmallCloud,
           ),
           SizedBox(
             height: 160,
@@ -39,7 +39,7 @@ class MainWeatherForecast extends StatelessWidget {
                   ),
                 ),
                 const Text(
-                  '5°/12° Feels like 7°C',
+                  '-5°/-12° Feels like -7°C',
                   style: AppTextStyles.secondaryFont,
                 ),
               ],

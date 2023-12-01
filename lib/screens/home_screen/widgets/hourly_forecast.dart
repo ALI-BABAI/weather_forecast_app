@@ -57,9 +57,12 @@ class HourlyWidget extends StatelessWidget {
         '$hour:00'; // сцепляем текущий час с ":00" для вывода времени
     return DecoratedBox(
       decoration: const BoxDecoration(
-          color: AppColors.widgetBackground,
-          borderRadius: BorderRadius.vertical(
-              bottom: Radius.circular(25), top: Radius.circular(25))),
+        color: AppColors.widgetBackground,
+        borderRadius: BorderRadius.vertical(
+          bottom: Radius.circular(25),
+          top: Radius.circular(25),
+        ),
+      ),
       child: Padding(
         padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
         child: Column(

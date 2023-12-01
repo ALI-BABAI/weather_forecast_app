@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/theme/colors.dart';
 
 class DottedDivederWidget extends StatelessWidget {
   const DottedDivederWidget({super.key});
@@ -7,7 +8,7 @@ class DottedDivederWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return const Padding(
       padding: EdgeInsets.symmetric(horizontal: 20),
-      child: DottedDivider(height: 1, color: Color(0x50979797)),
+      child: DottedDivider(height: 1, color: AppColors.gray),
     );
   }
 }
@@ -16,6 +17,7 @@ class DottedDivider extends StatelessWidget {
   final double height;
   final Color color;
 
+  // значения по умолчанию:
   const DottedDivider({Key? key, this.height = 1.0, this.color = Colors.grey})
       : super(key: key);
 

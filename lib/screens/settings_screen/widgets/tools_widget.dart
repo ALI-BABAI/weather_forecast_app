@@ -5,36 +5,59 @@ import 'package:weather_forecast_app/theme/text.dart';
 final class SettingButtonItem {
   final String buttonName;
   final IconData iconType;
+  final void function;
 
-  SettingButtonItem({required this.buttonName, required this.iconType});
+  SettingButtonItem({
+    required this.buttonName,
+    required this.iconType,
+    required this.function,
+  });
 }
 
 final List settingsItems = [
   SettingButtonItem(
     buttonName: 'Measurement units',
-    iconType: Icons.balance_rounded,  
+    iconType: Icons.balance_rounded,
+    function: () {
+      print('handling...');
+    },
     //settings_system_daydream_outlined
     //balance_rounded
   ),
   SettingButtonItem(
     buttonName: 'Notifications',
     iconType: Icons.notifications,
+    function: () {
+      print('handling...');
+    },
   ),
   SettingButtonItem(
     buttonName: 'Language',
     iconType: Icons.language,
+    function: () {
+      print('handling...');
+    },
   ),
   SettingButtonItem(
     buttonName: 'Seed fedback',
     iconType: Icons.sms_outlined,
+    function: () {
+      print('handling...');
+    },
   ),
   SettingButtonItem(
     buttonName: 'Rate this app',
     iconType: Icons.star,
+    function: () {
+      print('handling...');
+    },
   ),
   SettingButtonItem(
     buttonName: 'Share your weather',
     iconType: Icons.share,
+    function: () {
+      print('handling...');
+    },
   ),
 ];
 
@@ -54,15 +77,16 @@ class ToolsWidget extends StatelessWidget {
           ),
         ),
         ListView.builder(
-            shrinkWrap: true,
-            primary: false, // убирает эффект скролла блока
-            itemCount: settingsItems.length,
-            itemBuilder: (context, index) {
-              final settingUnit = settingsItems[index];
-              return ToolsElementWidget(
-                setting: settingUnit,
-              );
-            }),
+          shrinkWrap: true,
+          primary: false, // убирает эффект скролла блока
+          itemCount: settingsItems.length,
+          itemBuilder: (context, index) {
+            final settingUnit = settingsItems[index];
+            return ToolsElementWidget(
+              setting: settingUnit,
+            );
+          },
+        ),
       ],
     );
   }
@@ -80,7 +104,84 @@ class ToolsElementWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: TextButton(
-            onPressed: () {},
+            onPressed: () => showDialog<String>(
+                  context: context,
+                  builder: (BuildContext context) => AlertDialog(
+                    backgroundColor: AppColors.appBackground,
+                    title: const Text(
+                      'App unit\'s:',
+                      style: AppTextStyles.settingsScreenHeaderFont,
+                    ),
+                    // content: const Text(
+                    //   'Temperature:',
+                    //   style: AppTextStyles.mainFont,
+                    // ),
+                    actionsAlignment: MainAxisAlignment.spaceAround,
+                    actions: <Widget>[
+                      Row(
+                        children: [
+                          const Expanded(
+                            child: Text(
+                              'Temperature:',
+                              style: AppTextStyles.mainFont,
+                            ),
+                          ),
+                          TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange)),
+                            onPressed: () => Navigator.pop(context, '°C'),
+                            child: const Text(
+                              '°C',
+                              style: AppTextStyles.expandedMainFont,
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange)),
+                            onPressed: () => Navigator.pop(context, '°F'),
+                            child: const Text(
+                              '°F',
+                              style: AppTextStyles.expandedMainFont,
+                            ),
+                          ),
+                        ],
+                      ),
+                      Row(
+                        children: [
+                          const Expanded(
+                              child: Text(
+                            'Pressure:',
+                            style: AppTextStyles.mainFont,
+                          )),
+                          TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange)),
+                            onPressed: () => Navigator.pop(context, '°C'),
+                            child: const Text(
+                              'hPa',
+                              style: AppTextStyles.expandedMainFont,
+                            ),
+                          ),
+                          const SizedBox(width: 15),
+                          TextButton(
+                            style: const ButtonStyle(
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange)),
+                            onPressed: () => Navigator.pop(context, '°F'),
+                            child: const Text(
+                              'mmHg',
+                              style: AppTextStyles.expandedMainFont,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ],
+                  ),
+                ),
             child: Row(
               children: [
                 Icon(setting.iconType, color: AppColors.white, size: 30),

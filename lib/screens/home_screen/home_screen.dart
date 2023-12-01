@@ -19,7 +19,6 @@ class HomeScreen extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 4, // тень
-        titleSpacing: 30,
         title: const Center(
           child: Text(
             'Moscow, Russia',

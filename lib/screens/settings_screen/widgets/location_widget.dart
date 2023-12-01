@@ -4,7 +4,6 @@ import 'package:weather_forecast_app/theme/text.dart';
 import '../../../theme/colors.dart';
 
 final List<Cities> _cities = []; // global is not reccomended
-// final Set<Cities> _cities = {}; // global is not reccomended
 
 class Cities {
   final String cityName;
@@ -36,8 +35,8 @@ class _LocationWidgetState extends State<LocationWidget> {
 // дебаг
     if (_cities.isEmpty) {
       _cities.addAll([
-        Cities(cityName: 'Moscow, Ru', cityWeather: '29° , Clear'),
-        Cities(cityName: 'Naples, ITA', cityWeather: '39° , Partly cloudy'),
+        Cities(cityName: 'Moscow, Ru', cityWeather: '-9° , Clear'),
+        Cities(cityName: 'Naples, ITA', cityWeather: '12° , Partly cloudy'),
         Cities(cityName: 'Vorkuta, Ru', cityWeather: '-40° , Warm'),
       ]);
     }
@@ -99,10 +98,11 @@ class _LocationWidgetState extends State<LocationWidget> {
                           ),
                           TextButton(
                             style: const ButtonStyle(
-                                fixedSize: MaterialStatePropertyAll(
-                                    Size.fromHeight(46)),
-                                backgroundColor:
-                                    MaterialStatePropertyAll(AppColors.orange)),
+                              fixedSize:
+                                  MaterialStatePropertyAll(Size.fromHeight(46)),
+                              backgroundColor:
+                                  MaterialStatePropertyAll(AppColors.orange),
+                            ),
                             onPressed: () {
                               if (_userAddedCity.isNotEmpty) {
                                 setState(() {
@@ -152,9 +152,11 @@ class _LocationWidgetState extends State<LocationWidget> {
                   indexToDelete: index,
                 ),
                 onDismissed: (direction) {
-                  setState(() {
-                    _cities.removeAt(index);
-                  });
+                  setState(
+                    () {
+                      _cities.removeAt(index);
+                    },
+                  );
                 },
               );
             },
@@ -203,17 +205,18 @@ class InfoPerCity extends StatelessWidget {
             // Удаление происходит из списка, но нужно перезапустить экран
             // нужно в обработчик нажатия добавить setState, но это недоступно...
             OutlinedButton(
-                onPressed: () {
-                  _cities.removeAt(indexToDelete);
-                },
-                style: const ButtonStyle(
-                    fixedSize: MaterialStatePropertyAll(Size(30, 30)),
-                    side: MaterialStatePropertyAll(BorderSide.none)),
-                child: const Icon(
-                  Icons.delete_forever,
-                  color: AppColors.orange,
-                  size: 35,
-                ))
+              onPressed: () {
+                _cities.removeAt(indexToDelete);
+              },
+              style: const ButtonStyle(
+                  fixedSize: MaterialStatePropertyAll(Size(30, 30)),
+                  side: MaterialStatePropertyAll(BorderSide.none)),
+              child: const Icon(
+                Icons.delete_forever,
+                color: AppColors.orange,
+                size: 35,
+              ),
+            )
           ],
         ),
       ],

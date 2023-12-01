@@ -12,41 +12,47 @@ class WeatherExtendedParameters extends StatelessWidget {
       padding: EdgeInsets.only(top: 15, bottom: 10),
       child: Column(
         children: [
-          Row(mainAxisAlignment: MainAxisAlignment.spaceAround, children: [
-            Column(crossAxisAlignment: CrossAxisAlignment.start, children: [
-              WeatherParameter(
-                name: 'Wind: ',
-                info: '10 km/h',
-                icon: Icons.air_rounded,
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WeatherParameter(
+                    name: 'Wind: ',
+                    info: '10 km/h',
+                    icon: Icons.air_rounded,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  WeatherParameter(
+                    name: 'Pressure: ',
+                    info: '1006hPa',
+                    icon: Icons.speed_rounded,
+                  ),
+                ],
               ),
-              SizedBox(
-                height: 15,
+              Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  WeatherParameter(
+                    name: 'visibility: ',
+                    info: '10km',
+                    icon: Icons.visibility_outlined,
+                  ),
+                  SizedBox(
+                    height: 15,
+                  ),
+                  WeatherParameter(
+                    name: 'Humidity: ',
+                    info: '5%',
+                    icon: Icons.water_drop_outlined,
+                  ),
+                ],
               ),
-              WeatherParameter(
-                name: 'Pressure: ',
-                info: '1006hPa',
-                icon: Icons.speed_rounded,
-              ),
-            ]),
-            Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                WeatherParameter(
-                  name: 'Direction: ',
-                  info: 'SW',
-                  icon: Icons.air_rounded,
-                ),
-                SizedBox(
-                  height: 15,
-                ),
-                WeatherParameter(
-                  name: 'Humidity: ',
-                  info: '59%',
-                  icon: Icons.water_drop_outlined,
-                ),
-              ],
-            ),
-          ])
+            ],
+          )
         ],
       ),
     );
