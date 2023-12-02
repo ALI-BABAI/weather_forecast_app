@@ -1,0 +1,29 @@
+
+Example of API call:
+// 2.5 Сеньора
+https://api.openweathermap.org/data/2.5/onecall?lat=54.3282&lon=48.3866&lang=ru&units=metric&appid=6f6f192517f2b62b4364d19778420b76&exclude=minutely,alerts
+
+---------------------------------------------------------------------------------------
+For temperature in Celsius and wind speed in meter/sec, use units=metric
+
+Temperature in Kelvin and wind speed in meter/sec is used by default, so 
+there is no need to use the units parameter in the API call if you want this
+---------------------------------------------------------------------------------------
+Параметры запроса:
+
+&units=metric|imperial
+&lang=ru
+&tz=+04:00              // часовой пояс
+&date=2023-11-26        // Date in the `YYYY-MM-DD` format 
+---------------------------------------------------------------------------------------
+lat Latitude of the location, decimal (−90; 90)         // Широта
+lon Longitude of the location, decimal (-180; 180)      // Долгота
+
+Ульянвоск:
+Широта, долгота: 54.3282, 48.3866
+
+Воркута:
+Широта, долгота: 67.4988, 64.0525
+
+Йошка:
+Широта, долгота: 56.6388, 47.8908

@@ -13,6 +13,10 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // ApiClient().getWeatherInfo();
+    // ApiClient().printWeatherParam(responseString);
+
+    //ApiClient().getWeatherInfo();
     // получаем текущее время с устройства  (! правильнее ловить его из сети)
     final currentTime = DateTime.now();
     return Scaffold(

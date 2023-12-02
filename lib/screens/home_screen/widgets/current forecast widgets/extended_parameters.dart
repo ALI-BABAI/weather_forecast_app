@@ -37,7 +37,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   WeatherParameter(
-                    name: 'visibility: ',
+                    name: 'Visibility: ',
                     info: '10km',
                     icon: Icons.visibility_outlined,
                   ),

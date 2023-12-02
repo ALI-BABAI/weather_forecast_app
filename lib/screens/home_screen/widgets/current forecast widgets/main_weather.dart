@@ -12,6 +12,13 @@ class MainWeatherForecast extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // создаётся класс с всеми ключами объектами ответа JSON
+    final jsonData = jsonDecode(jsonString);
+
+    // Создать экземпляр WeatherInfo с использованием фабричного метода fromJson
+    final weatherInfo = WeatherInfo.fromJson(jsonData);
+    final temperature = weatherInfo.temperature.round();
+
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Row(
@@ -25,7 +32,9 @@ class MainWeatherForecast extends StatelessWidget {
             height: 160,
             child: Column(
               children: [
-                GradientText('5°',
+                GradientText(
+                    //'-12°',
+                    '${temperature.toInt()}°',
                     gradientDirection: GradientDirection.ttb,
                     style: const TextStyle(
                       fontSize: 100,

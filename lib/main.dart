@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/api%20and%20json/example_json.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 import 'theme/colors.dart';
 
 void main() {
-  // runApp(const MaterialApp(
   runApp(MaterialApp(
     //home: InitializationScreen(),
     title: 'Weather forecast',
@@ -24,7 +24,10 @@ class InitializationScreen extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
+    decodeJson();
+    //decodeJsonSerializable();
     // Задержка в 2-3 секунды перед переходом
+
     Future.delayed(
       const Duration(seconds: 2),
       () {
