@@ -69,6 +69,7 @@ flutter:
     - assets/images/
     - assets/images/icons/icons_expanded/
     - assets/images/icons/icons_mini/
+    - assets/city_list.json
     
     # - images/a_dot_ham.jpeg
 

@@ -9,8 +9,17 @@ import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
+// This class (or a class that this class inherits from) is marked as '@immutable',
+// but one or more of its instance fields aren't final: HomeScreen.cities
+// FavouriteCitiesData? cities;
+// HomeScreen({super.key, required this.cities});
+
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  // final FavouriteCitiesData? cities;
+  const HomeScreen({
+    super.key,
+    // required this.cities,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -152,7 +161,9 @@ class SelectedCityWeatherWidget extends StatelessWidget {
               padding: EdgeInsets.only(right: 45),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
-                children: [Text('DAY / NIGHT', style: AppTextStyles.mainFont),],
+                children: [
+                  Text('DAY / NIGHT', style: AppTextStyles.mainFont),
+                ],
               ),
             ),
             WeekForecastWidget(weatherData: weatherData),

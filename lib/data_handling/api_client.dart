@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
 import 'serialisator/weather_data.dart';
 
 const String urlRequest =
@@ -83,6 +82,8 @@ class ApiClient {
     }
   }
 }
+
+
 
 /*
  void getWeatherInfokek() async {
