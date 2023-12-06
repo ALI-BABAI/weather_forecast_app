@@ -1,5 +1,6 @@
 import 'dart:convert';
 
+import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/api%20and%20json/answer.dart';
 
 // Создаём класс, хранящий необходимые ключи из ответа сервера
@@ -64,10 +65,10 @@ void decodeJson() {
   final temperature = weatherInfo.temperature;
 
   // Принтуем в консоль чтобы убедиться в роботоспособности
-  print('Широта: $latitude');
-  print('Долгота: $longitude');
-  print('Долгота: $weatherId');
-  print('temperature: $temperature');
+  debugPrint('Широта: $latitude');
+  debugPrint('Долгота: $longitude');
+  debugPrint('Долгота: $weatherId');
+  debugPrint('temperature: $temperature');
 
   // Преобразование Unix timestamp в объект DateTime
   // Из числа получаем текущее время
@@ -75,7 +76,7 @@ void decodeJson() {
       DateTime.fromMillisecondsSinceEpoch(date * 1000, isUtc: true);
 
   // Вывод значения на экран в человеко-читаемом формате
-  print('Значение ключа "dt": ${dateTime.toLocal()}');
+  debugPrint('Значение ключа "dt": ${dateTime.toLocal()}');
 }
 
 // 2 способ
@@ -87,6 +88,6 @@ final latitude = jsonData['lat'];
 final longitude = jsonData['lon'];
 
 // Выводим результат
-print('Широта: $latitude');
-print('Долгота: $longitude');
+debugPrint('Широта: $latitude');
+debugPrint('Долгота: $longitude');
 */

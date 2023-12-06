@@ -3,6 +3,7 @@
 // example_json.dart --> мануальный метод
 
 import 'dart:convert';
+import 'package:flutter/material.dart';
 import 'package:json_annotation/json_annotation.dart';
 import 'package:weather_forecast_app/api%20and%20json/answer.dart';
 import 'package:weather_forecast_app/api%20and%20json/example_json.dart';
@@ -51,7 +52,7 @@ void decodeJsonSerializable() {
   final weatherId = weatherInfo.weatherId;
 
   // Вывести результат
-  print('Широта Serializable: $latitude');
-  print('Долгота Serializable: $longitude');
-  print('id Serializable: $weatherId');
+  debugPrint('Широта Serializable: $latitude');
+  debugPrint('Долгота Serializable: $longitude');
+  debugPrint('id Serializable: $weatherId');
 }

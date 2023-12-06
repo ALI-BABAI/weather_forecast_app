@@ -19,7 +19,7 @@ final List settingsItems = [
     buttonName: 'Measurement units',
     iconType: Icons.balance_rounded,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
     //settings_system_daydream_outlined
     //balance_rounded
@@ -28,35 +28,35 @@ final List settingsItems = [
     buttonName: 'Notifications',
     iconType: Icons.notifications,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
   ),
   SettingButtonItem(
     buttonName: 'Language',
     iconType: Icons.language,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
   ),
   SettingButtonItem(
     buttonName: 'Seed fedback',
     iconType: Icons.sms_outlined,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
   ),
   SettingButtonItem(
     buttonName: 'Rate this app',
     iconType: Icons.star,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
   ),
   SettingButtonItem(
     buttonName: 'Share your weather',
     iconType: Icons.share,
     function: () {
-      print('handling...');
+      debugPrint('handling...');
     },
   ),
 ];

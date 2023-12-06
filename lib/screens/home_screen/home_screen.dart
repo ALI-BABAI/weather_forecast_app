@@ -1,31 +1,111 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/main_forecast.dart';
+import 'package:weather_forecast_app/data_handling/api_client.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+
 import 'package:weather_forecast_app/screens/home_screen/widgets/hourly_forecast.dart';
+import 'package:weather_forecast_app/screens/home_screen/widgets/main_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/week_forecast.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
-// Использовать пакет INTL для работы с датами
-// https://api.flutter.dev/flutter/intl/DateFormat-class.html
 class HomeScreen extends StatelessWidget {
   const HomeScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
-    // ApiClient().getWeatherInfo();
-    // ApiClient().printWeatherParam(responseString);
+    return Scaffold(
+      body: FutureBuilder<WeatherData?>(
+        future: ApiClient().getWeatherInfoAsObject(),
+        builder: (context, snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return LoadingWidget(
+              infoWidget: () => const CircularProgressIndicator(),
+            );
+          } else if (snapshot.hasError) {
+            return LoadingWidget(
+              infoWidget: () => Text('Ошибка: ${snapshot.error}'),
+            );
+          } else if ((snapshot.hasData) && (snapshot.data != null)) {
+            return SelectedCityWeatherWidget(weatherData: snapshot.data!);
+          } else {
+            return LoadingWidget(
+              infoWidget: () =>
+                  const Text('Не удалось получить ответ с сервера'),
+            );
+          }
+        },
+      ),
+    );
+  }
+}
 
-    //ApiClient().getWeatherInfo();
-    // получаем текущее время с устройства  (! правильнее ловить его из сети)
-    final currentTime = DateTime.now();
+class LoadingWidget extends StatelessWidget {
+  final Widget Function() infoWidget;
+  const LoadingWidget({super.key, required this.infoWidget});
+
+  @override
+  Widget build(BuildContext context) {
+    return Scaffold(
+      body: DecoratedBox(
+        decoration: const BoxDecoration(
+          color: Colors.white,
+          gradient: LinearGradient(
+            colors: [Color(0xFFBCC8D6), Color(0xFFF2F4F7)],
+            begin: Alignment.bottomCenter,
+            end: Alignment.center,
+          ),
+        ),
+        child: Center(
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              const Image(
+                image: AssetImage('assets/images/app_logo.png'),
+                height: 275,
+                width: 275,
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Weather',
+                style: poppinsRegularExtended(
+                    40, AppColors.darkBlue, FontWeight.w600),
+              ),
+              const SizedBox(height: 5),
+              Text(
+                'Forecast',
+                style:
+                    poppinsRegularExtended(33, AppColors.gray, FontWeight.w400),
+              ),
+              const SizedBox(
+                height: 150,
+              ),
+              infoWidget(),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class SelectedCityWeatherWidget extends StatelessWidget {
+  final WeatherData weatherData;
+  const SelectedCityWeatherWidget({
+    super.key,
+    required this.weatherData,
+  });
+
+  @override
+  Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 4, // тень
         title: const Center(
           child: Text(
-            'Moscow, Russia',
+            'Ulyanovsk, Russia',
             style: AppTextStyles.appBarFont,
           ),
         ),
@@ -47,6 +127,7 @@ class HomeScreen extends StatelessWidget {
               style: AppNavigattionButtonStyle.buttonStyle,
               child: const Icon(
                 Icons.settings,
+                color: AppColors.white,
                 size: 40,
               ),
             ),
@@ -65,16 +146,16 @@ class HomeScreen extends StatelessWidget {
           primary: true, // не отрабатывает должным образом
           children: [
             const SizedBox(height: 15),
-            MainForecastWidget(
-              currentWeekDay: currentTime.weekday,
-              currentDay: currentTime.day,
-              currentMonth: currentTime.month,
+            MainForecastWidget(weatherData: weatherData),
+            HourlyForecastWidget(weatherData: weatherData),
+            const Padding(
+              padding: EdgeInsets.only(right: 45),
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [Text('DAY / NIGHT', style: AppTextStyles.mainFont),],
+              ),
             ),
-            HourlyForecastWidget(currentHour: currentTime.hour),
-            WeekForecastWidget(
-              currentDay: currentTime.day,
-              currentMonth: currentTime.month,
-            ),
+            WeekForecastWidget(weatherData: weatherData),
             const Divider(color: AppColors.gray, thickness: 1),
             const SizedBox(height: 20),
             const Placeholder(fallbackHeight: 400, fallbackWidth: 400)

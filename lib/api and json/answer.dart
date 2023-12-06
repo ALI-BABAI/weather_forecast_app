@@ -1,4 +1,7 @@
 // троиные ковычки == многострочный текст.
+
+// Map<String, dynamic> firstMap = {'first': 54, 'second': secondMap,};
+// Map<String, dynamic> secondMap = {'third': thirdMap};
 const jsonString = '''
 {
     "lat": 54.3282,
@@ -8,17 +11,6 @@ const jsonString = '''
     "current": {
         "dt": 1701238798,
         "sunrise": 1701232793,
-        "sunset": 1701260979,
-        "temp": -8.02,
-        "feels_like": -12.04,
-        "pressure": 1023,
-        "humidity": 97,
-        "dew_point": -8.37,
-        "uvi": 0.16,
-        "clouds": 83,
-        "visibility": 10000,
-        "wind_speed": 2.16,
-        "wind_deg": 241,
         "wind_gust": 2.37,
         "weather": [
             {

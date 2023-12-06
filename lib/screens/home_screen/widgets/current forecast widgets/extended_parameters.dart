@@ -1,15 +1,18 @@
 // Давление, влажность, сила и направление ветра
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+
 
 import '../../../../theme/text.dart';
 
 class WeatherExtendedParameters extends StatelessWidget {
-  const WeatherExtendedParameters({super.key});
+  final WeatherData? weatherData;
+  const WeatherExtendedParameters({super.key, required this.weatherData});
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.only(top: 15, bottom: 10),
+    return Padding(
+      padding: const EdgeInsets.only(top: 15, bottom: 10),
       child: Column(
         children: [
           Row(
@@ -20,15 +23,16 @@ class WeatherExtendedParameters extends StatelessWidget {
                 children: [
                   WeatherParameter(
                     name: 'Wind: ',
-                    info: '10 km/h',
+                    info: ' ${weatherData?.current.windSpeed ?? 'N/A'}m/s',
                     icon: Icons.air_rounded,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   WeatherParameter(
                     name: 'Pressure: ',
-                    info: '1006hPa',
+                    info:
+                        '${weatherData?.current.pressure.toInt() ?? 'N/A'}hPa',
                     icon: Icons.speed_rounded,
                   ),
                 ],
@@ -38,15 +42,16 @@ class WeatherExtendedParameters extends StatelessWidget {
                 children: [
                   WeatherParameter(
                     name: 'Visibility: ',
-                    info: '10km',
+                    info:
+                        '${weatherData?.current.visibility != null ? weatherData!.current.visibility / 1000 : 'N/A'}km',
                     icon: Icons.visibility_outlined,
                   ),
-                  SizedBox(
+                  const SizedBox(
                     height: 15,
                   ),
                   WeatherParameter(
                     name: 'Humidity: ',
-                    info: '5%',
+                    info: '${weatherData?.current.humidity ?? 'N/A'}%',
                     icon: Icons.water_drop_outlined,
                   ),
                 ],

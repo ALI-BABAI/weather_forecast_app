@@ -49,7 +49,8 @@ class SettingsScreen extends StatelessWidget {
                   style: AppNavigattionButtonStyle.buttonStyle,
                   child: const Icon(
                     Icons.close,
-                    size: 40,
+                    color: AppColors.white,
+                    size: 50,
                   )),
             ),
           ],

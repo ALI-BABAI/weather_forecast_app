@@ -65,7 +65,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                     style: AppTextStyles.expandedMainFont,
                     cursorColor: Colors.cyan,
                     onSubmitted: (String text) {
-                      print('on submitted --> $text');
+                      debugPrint('on submitted --> $text');
                       if (text.isNotEmpty) {
                         setState(
                           () {
@@ -96,30 +96,36 @@ class _LocationWidgetState extends State<LocationWidget> {
                               size: 30,
                             ),
                           ),
-                          TextButton(
-                            style: const ButtonStyle(
-                              fixedSize:
-                                  MaterialStatePropertyAll(Size.fromHeight(46)),
-                              backgroundColor:
-                                  MaterialStatePropertyAll(AppColors.orange),
-                            ),
-                            onPressed: () {
-                              if (_userAddedCity.isNotEmpty) {
-                                setState(() {
-                                  _cities.add(
-                                    Cities(
-                                        cityName: _userAddedCity,
-                                        cityWeather: 'время покажет'),
-                                  );
-                                  FocusScope.of(context).unfocus();
-                                  _userAddedCity = ''; // не работает
-                                });
-                              }
-                            },
-                            child: Text(
-                              'add',
-                              style: poppinsRegularExtended(
-                                  22, Colors.black, FontWeight.bold),
+                          SizedBox(
+                          height: 50,
+                          width: 70,
+                            child: TextButton(
+                              style: const ButtonStyle(
+                                // fixedSize:
+                                //     MaterialStatePropertyAll(Size.fromHeight(46)),
+                                
+                                backgroundColor:
+                                    MaterialStatePropertyAll(AppColors.orange),
+                              ),
+                              
+                              onPressed: () {
+                                if (_userAddedCity.isNotEmpty) {
+                                  setState(() {
+                                    _cities.add(
+                                      Cities(
+                                          cityName: _userAddedCity,
+                                          cityWeather: 'время покажет'),
+                                    );
+                                    FocusScope.of(context).unfocus();
+                                    _userAddedCity = ''; // не работает
+                                  });
+                                }
+                              },
+                              child: Text(
+                                'add',
+                                style: poppinsRegularExtended(
+                                    22, Colors.black, FontWeight.bold),
+                              ),
                             ),
                           ),
                         ],
@@ -204,14 +210,24 @@ class InfoPerCity extends StatelessWidget {
             ),
             // Удаление происходит из списка, но нужно перезапустить экран
             // нужно в обработчик нажатия добавить setState, но это недоступно...
-            OutlinedButton(
+            // OutlinedButton(
+            //   onPressed: () {
+            //     _cities.removeAt(indexToDelete);
+            //   },
+            //   style: const ButtonStyle(
+            //       fixedSize: MaterialStatePropertyAll(Size(30, 30)),
+            //       side: MaterialStatePropertyAll(BorderSide.none)),
+            //   child: const Icon(
+            //     Icons.delete_forever,
+            //     color: AppColors.orange,
+            //     size: 35,
+            //   ),
+            // ),
+            IconButton(
               onPressed: () {
                 _cities.removeAt(indexToDelete);
               },
-              style: const ButtonStyle(
-                  fixedSize: MaterialStatePropertyAll(Size(30, 30)),
-                  side: MaterialStatePropertyAll(BorderSide.none)),
-              child: const Icon(
+              icon: const Icon(
                 Icons.delete_forever,
                 color: AppColors.orange,
                 size: 35,

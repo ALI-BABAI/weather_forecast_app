@@ -1,45 +1,10 @@
 // GENERATED CODE - DO NOT MODIFY BY HAND
 
-part of 'weather_data.dart';
+part of 'daily_weather_info.dart';
 
 // **************************************************************************
 // JsonSerializableGenerator
 // **************************************************************************
-
-WeatherData _$WeatherDataFromJson(Map<String, dynamic> json) => WeatherData(
-      timezoneOffset: json['timezone_offset'] as int,
-      current: Current.fromJson(json['current'] as Map<String, dynamic>),
-      daily: (json['daily'] as List<dynamic>)
-          .map((e) => Daily.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-
-Map<String, dynamic> _$WeatherDataToJson(WeatherData instance) =>
-    <String, dynamic>{
-      'timezone_offset': instance.timezoneOffset,
-      'current': instance.current,
-      'daily': instance.daily,
-    };
-
-Current _$CurrentFromJson(Map<String, dynamic> json) => Current(
-      date: json['dt'] as int,
-      temperature: (json['temp'] as num).toDouble(),
-      temperatureFillsLike: (json['feels_like'] as num).toDouble(),
-      pressure: json['pressure'] as int,
-      humidity: json['humidity'] as int,
-      visibility: json['visibility'] as int,
-      windSpeed: (json['wind_speed'] as num).toDouble(),
-    );
-
-Map<String, dynamic> _$CurrentToJson(Current instance) => <String, dynamic>{
-      'dt': instance.date,
-      'temp': instance.temperature,
-      'feels_like': instance.temperatureFillsLike,
-      'pressure': instance.pressure,
-      'humidity': instance.humidity,
-      'visibility': instance.visibility,
-      'wind_speed': instance.windSpeed,
-    };
 
 Daily _$DailyFromJson(Map<String, dynamic> json) => Daily(
       date: json['dt'] as int,
@@ -50,6 +15,9 @@ Daily _$DailyFromJson(Map<String, dynamic> json) => Daily(
           DailyTemperature.fromJson(json['temp'] as Map<String, dynamic>),
       dailyFillsLike:
           DailyFillsLike.fromJson(json['feels_like'] as Map<String, dynamic>),
+      weather: (json['weather'] as List<dynamic>)
+          .map((e) => Weather.fromJson(e as Map<String, dynamic>))
+          .toList(),
     );
 
 Map<String, dynamic> _$DailyToJson(Daily instance) => <String, dynamic>{
@@ -59,6 +27,7 @@ Map<String, dynamic> _$DailyToJson(Daily instance) => <String, dynamic>{
       'wind_speed': instance.windSpeed,
       'temp': instance.dailyTemperature,
       'feels_like': instance.dailyFillsLike,
+      'weather': instance.weather,
     };
 
 DailyTemperature _$DailyTemperatureFromJson(Map<String, dynamic> json) =>
