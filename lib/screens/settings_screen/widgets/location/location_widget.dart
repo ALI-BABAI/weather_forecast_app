@@ -179,8 +179,8 @@ class _LocationWidgetState extends State<LocationWidget> {
             savedCities.add(
               Cities(
                 city: cityName!,
-                lon: cityLon.toString(),
-                lat: cityLat.toString(),
+                lon: cityLon!,
+                lat: cityLat!,
                 country: cityCountry!,
                 weatherData: selectedCityWeatherData!,
               ),

@@ -11,6 +11,13 @@ abstract class AppIconsMini {
   static const sun = AssetImage('assets/images/icons/icons_mini/sunny.png');
   static const thunder =
       AssetImage('assets/images/icons/icons_mini/thunder.png');
+  static const snowy = AssetImage('assets/images/icons/icons_mini/snowy.png');
+  static const sunWithSnow =
+      AssetImage('assets/images/icons/icons_mini/sun_with_snow.png');
+  static const strongSnow =
+      AssetImage('assets/images/icons/icons_mini/strong_snow.png');
+  static const windWithSnow =
+      AssetImage('assets/images/icons/icons_mini/wind_with_snow.png');
 }
 
 abstract class AppIconsExpanded {
@@ -25,4 +32,12 @@ abstract class AppIconsExpanded {
   static const sun = AssetImage('assets/images/icons/icons_expanded/sunny.png');
   static const thunder =
       AssetImage('assets/images/icons/icons_expanded/thunder.png');
+  static const snowy =
+      AssetImage('assets/images/icons/icons_expanded/snowy.png');
+  static const sunWithSnow =
+      AssetImage('assets/images/icons/icons_expanded/sun_with_snow.png');
+  static const strongSnow =
+      AssetImage('assets/images/icons/icons_expanded/strong_snow.png');
+  static const windWithSnow =
+      AssetImage('assets/images/icons/icons_expanded/wind_with_snow.png');
 }

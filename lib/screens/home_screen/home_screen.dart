@@ -5,6 +5,7 @@ import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dar
 import 'package:weather_forecast_app/screens/home_screen/widgets/hourly_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/main_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/week_forecast.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
@@ -15,17 +16,20 @@ import 'package:weather_forecast_app/theme/text.dart';
 // HomeScreen({super.key, required this.cities});
 
 class HomeScreen extends StatelessWidget {
-  // final FavouriteCitiesData? cities;
+  final List<Cities> listCities;
   const HomeScreen({
     super.key,
-    // required this.cities,
+    required this.listCities,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: FutureBuilder<WeatherData?>(
-        future: ApiClient().getWeatherInfoAsObject(),
+        future: ApiClient().getWeatherInfoAsObject(
+          lat: listCities.first.lat,
+          lon: listCities.first.lon,
+        ),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return LoadingWidget(
@@ -36,7 +40,10 @@ class HomeScreen extends StatelessWidget {
               infoWidget: () => Text('Ошибка: ${snapshot.error}'),
             );
           } else if ((snapshot.hasData) && (snapshot.data != null)) {
-            return SelectedCityWeatherWidget(weatherData: snapshot.data!);
+            return SelectedCityWeatherWidget(
+              weatherData: snapshot.data!,
+              listCities: listCities,
+            );
           } else {
             return LoadingWidget(
               infoWidget: () =>
@@ -101,9 +108,11 @@ class LoadingWidget extends StatelessWidget {
 
 class SelectedCityWeatherWidget extends StatelessWidget {
   final WeatherData weatherData;
+  final List<Cities> listCities;
   const SelectedCityWeatherWidget({
     super.key,
     required this.weatherData,
+    required this.listCities,
   });
 
   @override
@@ -112,9 +121,10 @@ class SelectedCityWeatherWidget extends StatelessWidget {
       appBar: AppBar(
         toolbarHeight: 50,
         elevation: 4, // тень
-        title: const Center(
+        title: Center(
           child: Text(
-            'Ulyanovsk, RU',
+            // 'Ulyanovsk, RU',
+            '${listCities.first.city}, ${listCities.first.country}',
             //weatherData.current.weather.first.weatherLogo,
             style: AppTextStyles.appBarFont,
           ),

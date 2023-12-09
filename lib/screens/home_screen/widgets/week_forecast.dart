@@ -45,7 +45,7 @@ class WeekForecastWidget extends StatelessWidget {
                               date: e.date,
                               temperatureDay: e.dailyTemperature.day.round(),
                               temperatureEvening: e.dailyTemperature.eve.round(),
-                              weatherImage: AppIconsMini.thunder,
+                              weatherImage: AppIconsMini.windWithSnow,
                             ),
                           ),
                         )

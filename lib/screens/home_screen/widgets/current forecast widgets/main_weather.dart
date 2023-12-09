@@ -17,7 +17,7 @@ class MainWeatherForecast extends StatelessWidget {
         children: [
           const Image(
             fit: BoxFit.fill,
-            image: AppIconsExpanded.sunWithSmallCloud,
+            image: AppIconsExpanded.windWithSnow,
           ),
           SizedBox(
             height: 160,
@@ -25,7 +25,6 @@ class MainWeatherForecast extends StatelessWidget {
               children: [
                 Expanded(
                   child: GradientText(
-                      //'-12°',
                       '${weatherData.current.temperature.round()}°',
                       gradientDirection: GradientDirection.ttb,
                       style: const TextStyle(
@@ -40,7 +39,6 @@ class MainWeatherForecast extends StatelessWidget {
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  //'-5°/-12° Feels like -7°C',
                   '${weatherData.daily.first.dailyTemperature.max.round()}°/${weatherData.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherData.current.temperatureFillsLike.round()}°C',
                   style: AppTextStyles.secondaryFont,
                 ),

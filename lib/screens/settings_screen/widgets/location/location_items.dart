@@ -5,8 +5,8 @@ final List<Cities> savedCities = []; // глобальная переменна�
 class Cities {
   final String city;
   final String country;
-  final String lon;
-  final String lat;
+  final double lon;
+  final double lat;
   final WeatherData weatherData;
 
   Cities({

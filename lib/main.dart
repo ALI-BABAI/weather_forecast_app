@@ -6,6 +6,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 
 void main() async {
   // // получаем расположение дефолтной директории файлов программы
@@ -44,7 +45,8 @@ void main() async {
       initialRoute: '/settings',
       routes: {
         // '/home': (context) => HomeScreen(cities: favouriteCities),
-        '/home': (context) => const HomeScreen(),
+        // '/home': (context) => const HomeScreen(),
+        '/home': (context) => HomeScreen(listCities: savedCities),
         '/settings': (context) => const SettingsScreen(),
       },
     ),

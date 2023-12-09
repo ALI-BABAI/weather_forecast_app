@@ -41,7 +41,7 @@ class HourlyForecastWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: HourlyWidget(
                   hour: DateFormat.Hm().format(currentDate),
-                  image: AppIconsMini.sunWithRain,
+                  image: AppIconsMini.strongSnow,
                   weather: temperatureAtHour,
                 ),
               );
