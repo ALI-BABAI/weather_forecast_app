@@ -2,14 +2,14 @@
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location_widget.dart';
+import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 import 'widgets/tools_widget.dart';
-
-void exitScreen() {}
 
 class SettingsScreen extends StatelessWidget {
   const SettingsScreen({super.key});
@@ -31,27 +31,32 @@ class SettingsScreen extends StatelessWidget {
             style: AppTextStyles.appBarFont,
           ),
           backgroundColor: AppColors.appBackground,
-          automaticallyImplyLeading:
-              false, // убираем автоматически созданную кнопку "назад"
+          // убираем автоматически созданную кнопку "назад"
+          automaticallyImplyLeading: false,
           actions: <Widget>[
-            SizedBox(
-              height: 50,
-              width: 50,
-              child: ElevatedButton(
+            Padding(
+              padding: const EdgeInsets.only(right: 10),
+              child: SizedBox(
+                height: 50,
+                width: 50,
+                child: ElevatedButton(
                   onPressed: () {
-                    Navigator.pop(context, '/home');
-                    // Navigator.push(
-                    //   context,
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const HomeScreen()),
-                    // );
+                    //Navigator.pushNamed(context, '/home');
+                    Navigator.push(
+                      context,
+                      MaterialPageRoute(
+                          builder: (context) =>
+                              HomeScreen(listCities: savedCities)),
+                    );
                   },
                   style: AppNavigattionButtonStyle.buttonStyle,
                   child: const Icon(
                     Icons.close,
                     color: AppColors.white,
-                    size: 50,
-                  )),
+                    size: 40,
+                  ),
+                ),
+              ),
             ),
           ],
         ),

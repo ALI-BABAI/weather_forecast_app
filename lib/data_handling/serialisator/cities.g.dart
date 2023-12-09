@@ -6,21 +6,21 @@ part of 'cities.dart';
 // JsonSerializableGenerator
 // **************************************************************************
 
-City _$CityFromJson(Map<String, dynamic> json) => City(
+ApiCity _$ApiCityFromJson(Map<String, dynamic> json) => ApiCity(
       name: json['name'] as String,
       country: json['country'] as String,
       location: Location.fromJson(json['coord'] as Map<String, dynamic>),
     );
 
-Map<String, dynamic> _$CityToJson(City instance) => <String, dynamic>{
+Map<String, dynamic> _$ApiCityToJson(ApiCity instance) => <String, dynamic>{
       'name': instance.name,
       'country': instance.country,
       'coord': instance.location,
     };
 
 Location _$LocationFromJson(Map<String, dynamic> json) => Location(
-      lon: json['lon'] as String,
-      lat: json['lat'] as String,
+      lon: (json['lon'] as num).toDouble(),
+      lat: (json['lat'] as num).toDouble(),
     );
 
 Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
@@ -32,7 +32,7 @@ FavouriteCitiesData _$FavouriteCitiesDataFromJson(Map<String, dynamic> json) =>
     FavouriteCitiesData(
       selectedCity: json['item'] as int,
       favouriteCities: (json['favouriteCities'] as List<dynamic>)
-          .map((e) => City.fromJson(e as Map<String, dynamic>))
+          .map((e) => ApiCity.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 

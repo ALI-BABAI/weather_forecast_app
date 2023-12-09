@@ -123,7 +123,7 @@ class ToolsElementWidget extends StatelessWidget {
                           const Expanded(
                             child: Text(
                               'Temperature:',
-                              style: AppTextStyles.mainFont,
+                              style: AppTextStyles.expandedMainFont,
                             ),
                           ),
                           TextButton(
@@ -154,7 +154,7 @@ class ToolsElementWidget extends StatelessWidget {
                           const Expanded(
                               child: Text(
                             'Pressure:',
-                            style: AppTextStyles.mainFont,
+                            style: AppTextStyles.expandedMainFont,
                           )),
                           TextButton(
                             style: const ButtonStyle(

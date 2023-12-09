@@ -12,29 +12,29 @@ part 'cities.g.dart';
 
 // Признак для автосборщика чтоб он "творил"
 @JsonSerializable()
-class City {
+class ApiCity {
   final String name;
   final String country;
   // Передаёт автосборщику инструкцию о привязке данных из ключа в переменную timezoneOffset
   @JsonKey(name: 'coord')
   final Location location; // объект содержащий в себя свои вложеные ключи
 
-  City({
+  ApiCity({
     required this.name,
     required this.country,
     required this.location,
   });
   // конвертация из гсона в класс
-  factory City.fromJson(Map<String, dynamic> json) => _$CityFromJson(json);
+  factory ApiCity.fromJson(Map<String, dynamic> json) => _$ApiCityFromJson(json);
 
   // конвертация из сгенирированных данных в джсон
-  Map<String, dynamic> toJson() => _$CityToJson(this);
+  Map<String, dynamic> toJson() => _$ApiCityToJson(this);
 }
 
 @JsonSerializable()
 class Location {
-  final String lon;
-  final String lat;
+  final double lon;
+  final double lat;
 
   Location({
     required this.lon,
@@ -53,7 +53,7 @@ class FavouriteCitiesData {
   @JsonKey(name: 'item')
   final int selectedCity;
   @JsonKey(name: 'favouriteCities')
-  final List<City> favouriteCities;
+  final List<ApiCity> favouriteCities;
 
   FavouriteCitiesData({
     required this.selectedCity,

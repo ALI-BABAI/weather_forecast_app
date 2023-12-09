@@ -38,8 +38,8 @@ class ApiClient {
 // Возвращаем из метода экземпляр класса WeatherData, хранящий свойства ответа по ключам
 // WeatherData actualWeatherData = ApiClient.getWeatherInfo();
 // actualWeatherData.current.visibility.ToString();
-  Future<WeatherData?> getWeatherInfoAsObject() async {
-    await Future.delayed(const Duration(seconds: 2));
+  Future<WeatherData?> getWeatherInfoAsObject({double lat = 54.27028, double lon = 48.302364}) async {
+    await Future.delayed(const Duration(seconds: 0));
     
     //final citiesList = City.fromJson(jsonData);
     
@@ -49,8 +49,8 @@ class ApiClient {
       host: "api.openweathermap.org",
       path: "data/2.5/onecall",
       queryParameters: {
-        'lat': '54.3282',
-        'lon': '48.3866',
+        'lat': lat.toString(),     // '54.3282'
+        'lon': lon.toString(),   //'48.3866'
         'units': 'metric',
         'exclude': 'alerts,minutely',
         'appid': '6f6f192517f2b62b4364d19778420b76',

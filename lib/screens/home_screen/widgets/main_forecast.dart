@@ -25,22 +25,32 @@ class MainForecastWidget extends StatelessWidget {
 
     return Column(
       children: [
+        // const Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+        //   Text(
+        //     'Ulyanovsk, RU',
+        //     style: AppTextStyles.expandedMainFont,
+        //   )
+        // ]),
+        // const SizedBox(height: 15),
         // День недели и месяц
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
-              decoration: const BoxDecoration(
-                // color: Color(0xFF32333E),  // потемнее будет
-                color: AppColors.widgetBackground,
-                borderRadius: BorderRadius.all(Radius.circular(16)),
+    DecoratedBox(
+                decoration: const BoxDecoration(
+                  // color: Color(0xFF32333E),  // потемнее будет
+                  color: AppColors.widgetBackground,
+                  borderRadius: BorderRadius.all(Radius.circular(16)),
+                ),
+                child: Padding(
+                  padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
+                  child: Text(
+                    '${DateFormat.EEEE().format(currentDate)}, ${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
+                    style: AppTextStyles.smallestSecondaryFont,
+                  ),
+                ),
               ),
-              child: Text(
-                '${DateFormat.EEEE().format(currentDate)}, ${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
-                style: AppTextStyles.smallestSecondaryFont,
-              ),
-            ),
+          
           ],
         ),
         // Текущая информация о погоде

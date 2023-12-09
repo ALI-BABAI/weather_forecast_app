@@ -114,10 +114,13 @@ class SelectedCityWeatherWidget extends StatelessWidget {
         elevation: 4, // тень
         title: const Center(
           child: Text(
-            'Ulyanovsk, Russia',
+            'Ulyanovsk, RU',
+            //weatherData.current.weather.first.weatherLogo,
             style: AppTextStyles.appBarFont,
           ),
         ),
+        // убираем автоматически созданную кнопку "назад"
+        automaticallyImplyLeading: false,
         backgroundColor: AppColors.appBackground,
         actions: <Widget>[
           SizedBox(
@@ -131,7 +134,8 @@ class SelectedCityWeatherWidget extends StatelessWidget {
                 //       builder: (context) => const SettingsScreen()),
                 // );
                 // удаляет текущую странницу
-                Navigator.pushNamed(context, '/settings');
+                //Navigator.pushNamed(context, '/settings');
+                Navigator.pop(context, '/settings');
               },
               style: AppNavigattionButtonStyle.buttonStyle,
               child: const Icon(
