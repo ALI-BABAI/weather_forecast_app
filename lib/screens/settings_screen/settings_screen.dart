@@ -3,7 +3,6 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
@@ -12,7 +11,9 @@ import 'package:weather_forecast_app/theme/text.dart';
 import 'widgets/tools_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({super.key});
+  const SettingsScreen({
+    super.key,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -44,9 +45,11 @@ class SettingsScreen extends StatelessWidget {
                     //Navigator.pushNamed(context, '/home');
                     Navigator.push(
                       context,
+                      // MaterialPageRoute(
+                      //     builder: (context) =>
+                      //         HomeScreen(savedCitiesData: savedCitiesData!)),
                       MaterialPageRoute(
-                          builder: (context) =>
-                              HomeScreen(listCities: savedCities)),
+                          builder: (context) => const HomeScreen()),
                     );
                   },
                   style: AppNavigattionButtonStyle.buttonStyle,

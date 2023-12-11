@@ -1,17 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 class WeekForecastWidget extends StatelessWidget {
-  final WeatherData weatherData;
-
-  const WeekForecastWidget({
-    super.key,
-    required this.weatherData,
-  });
+  const WeekForecastWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -37,14 +32,15 @@ class WeekForecastWidget extends StatelessWidget {
                     //     weatherImage: AppIconsMini.thunder,
                     //   ),
                     // спред-оператор
-                    weatherData.daily
+                    weatherInSavedCities.first!.daily
                         .map(
                           (e) => SizedBox(
                             height: 38,
                             child: InfoPerDay(
                               date: e.date,
                               temperatureDay: e.dailyTemperature.day.round(),
-                              temperatureEvening: e.dailyTemperature.eve.round(),
+                              temperatureEvening:
+                                  e.dailyTemperature.eve.round(),
                               weatherImage: AppIconsMini.windWithSnow,
                             ),
                           ),
@@ -89,14 +85,14 @@ class InfoPerDay extends StatelessWidget {
           Image(
             image: weatherImage,
           ),
-           Text(
-                '${temperatureDay.toString()}°',
-                style: AppTextStyles.mainFont,
-              ),
-              Text(
-                '${temperatureEvening.toString()}°',
-                style: AppTextStyles.mainFont,
-              )
+          Text(
+            '${temperatureDay.toString()}°',
+            style: AppTextStyles.mainFont,
+          ),
+          Text(
+            '${temperatureEvening.toString()}°',
+            style: AppTextStyles.mainFont,
+          )
         ],
       ),
     );

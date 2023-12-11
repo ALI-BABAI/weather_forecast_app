@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'serialisator/weather_data.dart';
 
 const String urlRequest =
@@ -35,22 +36,17 @@ class ApiClient {
     }
   }
 
-// Возвращаем из метода экземпляр класса WeatherData, хранящий свойства ответа по ключам
-// WeatherData actualWeatherData = ApiClient.getWeatherInfo();
-// actualWeatherData.current.visibility.ToString();
-  Future<WeatherData?> getWeatherInfoAsObject({double lat = 54.27028, double lon = 48.302364}) async {
-    await Future.delayed(const Duration(seconds: 0));
-    
-    //final citiesList = City.fromJson(jsonData);
-    
+// Возвращаем из метода объект типа WeatherData, хранящий информацию о погоде по переданным координатам
+  Future<WeatherData?> getWeatherInfoAsObject(
+      {double lat = 54.27028, double lon = 48.302364}) async {
     // Ручная сборка URI
     Uri url = Uri(
       scheme: "https",
       host: "api.openweathermap.org",
       path: "data/2.5/onecall",
       queryParameters: {
-        'lat': lat.toString(),     // '54.3282'
-        'lon': lon.toString(),   //'48.3866'
+        'lat': lat.toString(),
+        'lon': lon.toString(),
         'units': 'metric',
         'exclude': 'alerts,minutely',
         'appid': '6f6f192517f2b62b4364d19778420b76',
@@ -81,65 +77,21 @@ class ApiClient {
       return null;
     }
   }
+
+// Возвращает список объектов типа WeatherData, хранящий информацию
+// по погоде во всех сохранённых городах
+  Future<List<WeatherData?>> getWeatherInfoForSavedCities() async {
+    List<WeatherData?> weatherDataList = [];
+
+    for (final city in savedCitiesData!.favouriteCities) {
+      final weatherData = await getWeatherInfoAsObject(
+        lat: city.location.lat,
+        lon: city.location.lon,
+      );
+      weatherDataList.add(weatherData);
+    }
+    return weatherDataList;
+  }
 }
 
-
-
-/*
- void getWeatherInfokek() async {
-    Uri url = Uri.parse(urlRequest);
-
-    final request = await apiClietn.getUrl(url); // отправка запроса
-    final response = await request.close(); // ожидание ответа
-
-    if (response.statusCode != 200) {
-      debugPrint('Ошибка при работе с сервером: err = ${response.statusCode}');
-      // return 0;
-    } else {
-      final responseStrings =
-          await response.transform(const Utf8Decoder()).toList();
-      final responseString = responseStrings.join();
-
-      // debugPrint(responseString);
-
-      // библиотечный метод преобразования строки типа json
-      final jsonData = jsonDecode(responseString);
-      // Вызываем метод класса WeatherInfo, и записываем возвращающийся результат
-      // в переменную типа WeatherInfo
-      final weatherData = WeatherData.fromJson(jsonData);
-
-      // Полагаю, правильно было бы ретёрнить weatherData и уже с этим всюду работать.
-      // другой файл...
-      // WeatherData actualWeatherData = ApiClient.getWeatherInfo();
-      //  WeatherParameter(
-      //   name: 'visibility: ',
-      //   info: '10km',            // actualWeatherData.current.visibility.ToString();
-      //   icon: Icons.visibility_outlined,
-      //   ),
-
-      // И уже отсюда получаем значения необходимые для "жизни"...
-      final date = weatherData.current.date;
-      final timezoneOffset = weatherData.timezoneOffset;
-      final humidity = weatherData.current.humidity;
-      final pressure = weatherData.current.pressure;
-      final temperature = weatherData.current.temperature;
-      final temperatureMin = weatherData.daily.first.dailyTemperature.min;
-      final temperatureMax = weatherData.daily.first.dailyTemperature.max;
-      final temperatureFilsLike = weatherData.current.temperatureFillsLike;
-      final visibility = weatherData.current.visibility;
-      final windSpeed = weatherData.current.windSpeed;
-
-      // Выводим результат в консоль
-      debugPrint('date: $date');
-      debugPrint('timezoneOffset: $timezoneOffset');
-      debugPrint('humidity: $humidity');
-      debugPrint('pressure: $pressure');
-      debugPrint('temperature: $temperature');
-      debugPrint('temperatureMin: $temperatureMin');
-      debugPrint('temperatureMax: $temperatureMax');
-      debugPrint('temperatureFilsLike: $temperatureFilsLike');
-      debugPrint('visibility: $visibility');
-      debugPrint('windSpeed: $windSpeed');
-    }
-  }
-*/
+// await Future.delayed(const Duration(seconds: 0));

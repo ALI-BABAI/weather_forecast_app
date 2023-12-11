@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 class HourlyForecastWidget extends StatelessWidget {
-  final WeatherData weatherData;
   const HourlyForecastWidget({
     super.key,
-    required this.weatherData,
   });
 
   @override
@@ -27,11 +25,11 @@ class HourlyForecastWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               // Выводим для каждого следующего часа информацию по погоде
               DateTime currentDate = DateTime.fromMillisecondsSinceEpoch(
-                  (weatherData.timezoneOffset +
-                          weatherData.hourly.elementAt(index).date) *
+                  (weatherInSavedCities.first!.timezoneOffset +
+                          weatherInSavedCities.first!.hourly.elementAt(index).date) *
                       1000,
                   isUtc: true);
-              String temperatureAtHour = weatherData.hourly
+              String temperatureAtHour = weatherInSavedCities.first!.hourly
                   .elementAt(index)
                   .temperature
                   .round()

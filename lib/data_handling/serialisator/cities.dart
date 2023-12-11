@@ -25,7 +25,8 @@ class ApiCity {
     required this.location,
   });
   // конвертация из гсона в класс
-  factory ApiCity.fromJson(Map<String, dynamic> json) => _$ApiCityFromJson(json);
+  factory ApiCity.fromJson(Map<String, dynamic> json) =>
+      _$ApiCityFromJson(json);
 
   // конвертация из сгенирированных данных в джсон
   Map<String, dynamic> toJson() => _$ApiCityToJson(this);
@@ -49,21 +50,18 @@ class Location {
 }
 
 @JsonSerializable()
-class FavouriteCitiesData {
-  @JsonKey(name: 'item')
-  final int selectedCity;
+class SavedCitiesData {
   @JsonKey(name: 'favouriteCities')
   final List<ApiCity> favouriteCities;
 
-  FavouriteCitiesData({
-    required this.selectedCity,
+  SavedCitiesData({
     required this.favouriteCities,
   });
 
   // конвертация из гсона в класс
-  factory FavouriteCitiesData.fromJson(Map<String, dynamic> json) =>
-      _$FavouriteCitiesDataFromJson(json);
+  factory SavedCitiesData.fromJson(Map<String, dynamic> json) =>
+      _$SavedCitiesDataFromJson(json);
 
   // конвертация из сгенирированных данных в джсон
-  Map<String, dynamic> toJson() => _$FavouriteCitiesDataToJson(this);
+  Map<String, dynamic> toJson() => _$SavedCitiesDataToJson(this);
 }

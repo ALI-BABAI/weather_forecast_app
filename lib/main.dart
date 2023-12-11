@@ -1,72 +1,82 @@
-// import 'dart:io';
-// import 'dart:convert';
-// import 'package:path_provider/path_provider.dart';
-// import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
+import 'dart:io';
+import 'dart:convert';
+import 'package:path_provider/path_provider.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
+
+// глобавльная переменная, хранящая список сохранённых городов
+// может меняться внутри любого экрана и изменения будут актуальны везде.
+late SavedCitiesData? savedCitiesData;
+late List<WeatherData?> weatherInSavedCities;
+late File savedCitiesFile;
 
 void main() async {
-  // // получаем расположение дефолтной директории файлов программы
-  // Directory appDirectory = await getApplicationDocumentsDirectory();
-  // String appDirectoryPath = appDirectory.path;
+  // ошибка без строки
+  WidgetsFlutterBinding.ensureInitialized();
 
-  // // формируем путь к файлу который нас интересует
-  // // и создаём объект == самому файлу
-  // final favouriteCitiesFilePath = '$appDirectoryPath/favourite_cities.json';
-  // final favouriteCitiesFile = File(favouriteCitiesFilePath);
+  // получаем расположение дефолтной директории файлов программы
+  Directory appDirectory = await getApplicationDocumentsDirectory();
+  String appDirectoryPath = appDirectory.path;
 
-  // // если файла нет, он создаётся с дефолтным городом МОСКАВА
-  // if (!await favouriteCitiesFile.exists()) {
-  //   FavouriteCitiesData initialData = FavouriteCitiesData(
-  //     selectedCity: 0,
-  //     favouriteCities: [
-  //       City(
-  //         name: "Moscow",
-  //         country: "RU",
-  //         location: Location(lon: "37.615555", lat: "55.75222"),
-  //       ),
-  //     ],
-  //   );
-  //   // записываем в файл
-  //   await favouriteCitiesFile.writeAsString(jsonEncode(initialData));
-  //   debugPrint('File created with initial data: $initialData');
-  // }
+  // формируем путь к файлу который нас интересует
+  // и создаём объект == самому файлу
+  final savedCitiesFilePath = '$appDirectoryPath/saved_cities.json';
+  savedCitiesFile = File(savedCitiesFilePath);
 
-  // // Подтягиваем инфу по выбранному и избранным городам в приложение
-  // final FavouriteCitiesData? favouriteCities =
-  //     await readFavouriteCitiesData(favouriteCitiesFile);
+  // если файла нет, он создаётся с дефолтным городом
+  if (!await savedCitiesFile.exists()) {
+    SavedCitiesData initialData = SavedCitiesData(
+      favouriteCities: [
+        ApiCity(
+          name: "Samara",
+          country: "RU",
+          location: Location(lon: 50.150002, lat: 53.200001),
+        ),
+        ApiCity(
+          name: "Ulyanovsk",
+          country: "RU",
+          location: Location(lon: 48.400002, lat: 54.333332),
+        ),
+      ],
+    );
+    // записываем в файл
+    await savedCitiesFile.writeAsString(jsonEncode(initialData));
+  }
 
+  // Подтягиваем инфу по выбранному и избранным городам в приложение
+  // Получаем объект == списку сохранённых городов (типа ApiCity)
+  savedCitiesData = await readSavedCitiesInfo(savedCitiesFile);
+
+  // полученный список передать в HomeScreen чтобы
+  // в отдельный список сохранить данные по сохранённым городам?
   runApp(
     MaterialApp(
       title: 'Weather forecast',
-      initialRoute: '/settings',
+      initialRoute: '/home',
       routes: {
-        // '/home': (context) => HomeScreen(cities: favouriteCities),
-        // '/home': (context) => const HomeScreen(),
-        '/home': (context) => HomeScreen(listCities: savedCities),
+        '/home': (context) => const HomeScreen(),
         '/settings': (context) => const SettingsScreen(),
       },
     ),
   );
 }
 
-// Future<FavouriteCitiesData?> readFavouriteCitiesData(
-//     File favouriteCitiesFile) async {
-//   try {
-//     // считываем файл и записываем его в строку
-//     // вызываем метод преобразующий ключи в объект
-//     final String data = await favouriteCitiesFile.readAsString();
-//     final Map<String, dynamic> jsonData = jsonDecode(data);
-//     return FavouriteCitiesData.fromJson(jsonData);
-//   } catch (exeption) {
-//     debugPrint('Ошибка при чтении файла: $exeption');
-//     return null;
-//   }
-// }
-
+Future<SavedCitiesData?> readSavedCitiesInfo(File savedCitiesFile) async {
+  try {
+    // считываем файл и записываем его в строку
+    // вызываем метод преобразующий ключи в объект
+    final String data = await savedCitiesFile.readAsString();
+    final Map<String, dynamic> jsonData = jsonDecode(data);
+    return SavedCitiesData.fromJson(jsonData);
+  } catch (exeption) {
+    debugPrint('Ошибка при чтении файла: $exeption');
+    return null;
+  }
+}
 
 // https://api.flutter.dev/flutter/intl/DateFormat-class.html
 
@@ -85,7 +95,6 @@ void main() async {
 
 //  favourite_cities.json
 // {
-//   "selectedCity": 0
 //   "favouriteCities": [
 //     {
 //       "name": "Taglag",

@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/api_client.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/saved_city_info_widget.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
@@ -105,37 +106,39 @@ class _LocationWidgetState extends State<LocationWidget> {
             ),
           ),
           // Блок сохранённых городов
-          if (savedCities.isNotEmpty)
-            ListView.builder(
-              primary: false,
-              shrinkWrap: true,
-              itemCount: savedCities.length,
-              itemBuilder: (context, index) {
-                final savedCity = savedCities[index];
-                return Dismissible(
-                  key: UniqueKey(),
-                  child: SavedCityInfo(
-                    currentCity: savedCity,
-                    deleteItem: () {
-                      setState(
-                        () => savedCities.removeAt(index),
-                      );
-                    },
-                  ),
-                  onDismissed: (direction) {
+          // if (savedCities.isNotEmpty)
+          ListView.builder(
+            primary: false,
+            shrinkWrap: true,
+            itemCount: savedCitiesData!.favouriteCities.length,
+            itemBuilder: (context, index) {
+              final savedCity = savedCitiesData!.favouriteCities[index];
+              return Dismissible(
+                key: UniqueKey(),
+                child: SavedCityInfo(
+                  index: index,
+                  currentCity: savedCity,
+                  deleteItem: () {
                     setState(
                       () => savedCities.removeAt(index),
                     );
                   },
-                );
-              },
-            ),
+                ),
+                onDismissed: (direction) {
+                  setState(
+                    () => savedCities.removeAt(index),
+                  );
+                },
+              );
+            },
+          ),
         ],
       ),
     );
   }
 
   // проверка введённого текста с сохранённым списком городов
+  // сохранение в случае совпадения в глобальный файл
   void _checkCity(String userString) async {
     late String jsonString;
 
@@ -161,12 +164,24 @@ class _LocationWidgetState extends State<LocationWidget> {
       WeatherData? selectedCityWeatherData;
 
       // Проверка на совпадение города +
+      // вот тут нужно сохранять в файл.
       if (selectedCity.name != '') {
-        cityName = selectedCity.name;
-        cityCountry = selectedCity.country;
-        cityLon = selectedCity.location.lon;
-        cityLat = selectedCity.location.lat;
+        savedCitiesData!.favouriteCities.add(ApiCity(
+          name: selectedCity.name,
+          country: selectedCity.country,
+          location: selectedCity.location,
+        ));
+        // записываем в файл
+        await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
 
+        // cityName = selectedCity.name;
+        // cityCountry = selectedCity.country;
+        // cityLon = selectedCity.location.lon;
+        // cityLat = selectedCity.location.lat;
+        cityName = savedCitiesData!.favouriteCities.last.name;
+        cityCountry = savedCitiesData!.favouriteCities.last.country;
+        cityLon = savedCitiesData!.favouriteCities.last.location.lon;
+        cityLat = savedCitiesData!.favouriteCities.last.location.lat;
         // + отправка запроса по выбранному городу.
         selectedCityWeatherData = await ApiClient()
             .getWeatherInfoAsObject(lat: cityLat!, lon: cityLon!);

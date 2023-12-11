@@ -1,13 +1,12 @@
 // Давление, влажность, сила и направление ветра
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/main.dart';
 
 
 import '../../../../theme/text.dart';
 
 class WeatherExtendedParameters extends StatelessWidget {
-  final WeatherData? weatherData;
-  const WeatherExtendedParameters({super.key, required this.weatherData});
+  const WeatherExtendedParameters({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -23,7 +22,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                 children: [
                   WeatherParameter(
                     name: 'Wind: ',
-                    info: ' ${weatherData?.current.windSpeed ?? 'N/A'}m/s',
+                    info: ' ${weatherInSavedCities.first?.current.windSpeed ?? 'N/A'}m/s',
                     icon: Icons.air_rounded,
                   ),
                   const SizedBox(
@@ -32,7 +31,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                   WeatherParameter(
                     name: 'Pressure: ',
                     info:
-                        '${weatherData?.current.pressure.toInt() ?? 'N/A'}hPa',
+                        '${weatherInSavedCities.first?.current.pressure.toInt() ?? 'N/A'}hPa',
                     icon: Icons.speed_rounded,
                   ),
                 ],
@@ -43,7 +42,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                   WeatherParameter(
                     name: 'Visibility: ',
                     info:
-                        '${weatherData?.current.visibility != null ? weatherData!.current.visibility / 1000 : 'N/A'}km',
+                        '${weatherInSavedCities.first?.current.visibility != null ? weatherInSavedCities.first!.current.visibility / 1000 : 'N/A'}km',
                     icon: Icons.visibility_outlined,
                   ),
                   const SizedBox(
@@ -51,7 +50,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                   ),
                   WeatherParameter(
                     name: 'Humidity: ',
-                    info: '${weatherData?.current.humidity ?? 'N/A'}%',
+                    info: '${weatherInSavedCities.first?.current.humidity ?? 'N/A'}%',
                     icon: Icons.water_drop_outlined,
                   ),
                 ],

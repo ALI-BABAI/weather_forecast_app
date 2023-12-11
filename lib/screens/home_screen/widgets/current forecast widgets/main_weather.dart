@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 class MainWeatherForecast extends StatelessWidget {
-  final WeatherData weatherData;
-  const MainWeatherForecast({super.key, required this.weatherData});
+  const MainWeatherForecast({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -25,7 +24,8 @@ class MainWeatherForecast extends StatelessWidget {
               children: [
                 Expanded(
                   child: GradientText(
-                      '${weatherData.current.temperature.round()}°',
+                      // '${weatherData.current.temperature.round()}°',
+                      '${weatherInSavedCities.first!.current.temperature.round()}°',
                       gradientDirection: GradientDirection.ttb,
                       style: const TextStyle(
                         fontSize: 100,
@@ -34,12 +34,14 @@ class MainWeatherForecast extends StatelessWidget {
                       colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
                 ),
                 Text(
-                  weatherData.current.weather.first.description,
+                  // weatherData.current.weather.first.description,
+                  '${weatherInSavedCities.first!.current.weather.first.description}°',
                   style: AppTextStyles.expandedMainFont,
                 ),
                 const SizedBox(height: 5),
                 Text(
-                  '${weatherData.daily.first.dailyTemperature.max.round()}°/${weatherData.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherData.current.temperatureFillsLike.round()}°C',
+                  // '${weatherData.daily.first.dailyTemperature.max.round()}°/${weatherData.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherData.current.temperatureFillsLike.round()}°C',
+                  '${weatherInSavedCities.first!.daily.first.dailyTemperature.max.round()}°/${weatherInSavedCities.first!.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherInSavedCities.first!.current.temperatureFillsLike.round()}°C',
                   style: AppTextStyles.secondaryFont,
                 ),
               ],

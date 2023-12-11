@@ -1,11 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/api_client.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/main.dart';
 
 import 'package:weather_forecast_app/screens/home_screen/widgets/hourly_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/main_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/week_forecast.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
+import 'package:weather_forecast_app/screens/loading_screen/loading_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
@@ -16,20 +17,15 @@ import 'package:weather_forecast_app/theme/text.dart';
 // HomeScreen({super.key, required this.cities});
 
 class HomeScreen extends StatelessWidget {
-  final List<Cities> listCities;
   const HomeScreen({
     super.key,
-    required this.listCities,
   });
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: FutureBuilder<WeatherData?>(
-        future: ApiClient().getWeatherInfoAsObject(
-          lat: listCities.first.lat,
-          lon: listCities.first.lon,
-        ),
+      body: FutureBuilder<List<WeatherData?>>(
+        future: ApiClient().getWeatherInfoForSavedCities(),
         builder: (context, snapshot) {
           if (snapshot.connectionState == ConnectionState.waiting) {
             return LoadingWidget(
@@ -40,10 +36,8 @@ class HomeScreen extends StatelessWidget {
               infoWidget: () => Text('Ошибка: ${snapshot.error}'),
             );
           } else if ((snapshot.hasData) && (snapshot.data != null)) {
-            return SelectedCityWeatherWidget(
-              weatherData: snapshot.data!,
-              listCities: listCities,
-            );
+            weatherInSavedCities = snapshot.data!;
+            return const SelectedCityWeatherWidget();
           } else {
             return LoadingWidget(
               infoWidget: () =>
@@ -56,64 +50,8 @@ class HomeScreen extends StatelessWidget {
   }
 }
 
-class LoadingWidget extends StatelessWidget {
-  final Widget Function() infoWidget;
-  const LoadingWidget({super.key, required this.infoWidget});
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      body: DecoratedBox(
-        decoration: const BoxDecoration(
-          color: Colors.white,
-          gradient: LinearGradient(
-            colors: [Color(0xFFBCC8D6), Color(0xFFF2F4F7)],
-            begin: Alignment.bottomCenter,
-            end: Alignment.center,
-          ),
-        ),
-        child: Center(
-          child: Column(
-            mainAxisAlignment: MainAxisAlignment.center,
-            crossAxisAlignment: CrossAxisAlignment.center,
-            children: [
-              const Image(
-                image: AssetImage('assets/images/app_logo.png'),
-                height: 275,
-                width: 275,
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Weather',
-                style: poppinsRegularExtended(
-                    40, AppColors.darkBlue, FontWeight.w600),
-              ),
-              const SizedBox(height: 5),
-              Text(
-                'Forecast',
-                style:
-                    poppinsRegularExtended(33, AppColors.gray, FontWeight.w400),
-              ),
-              const SizedBox(
-                height: 150,
-              ),
-              infoWidget(),
-            ],
-          ),
-        ),
-      ),
-    );
-  }
-}
-
 class SelectedCityWeatherWidget extends StatelessWidget {
-  final WeatherData weatherData;
-  final List<Cities> listCities;
-  const SelectedCityWeatherWidget({
-    super.key,
-    required this.weatherData,
-    required this.listCities,
-  });
+  const SelectedCityWeatherWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -124,8 +62,7 @@ class SelectedCityWeatherWidget extends StatelessWidget {
         title: Center(
           child: Text(
             // 'Ulyanovsk, RU',
-            '${listCities.first.city}, ${listCities.first.country}',
-            //weatherData.current.weather.first.weatherLogo,
+            '${savedCitiesData!.favouriteCities.first.name}, ${savedCitiesData!.favouriteCities.first.country}',
             style: AppTextStyles.appBarFont,
           ),
         ),
@@ -145,7 +82,7 @@ class SelectedCityWeatherWidget extends StatelessWidget {
                 // );
                 // удаляет текущую странницу
                 //Navigator.pushNamed(context, '/settings');
-                Navigator.pop(context, '/settings');
+                Navigator.pushNamed(context, '/settings');
               },
               style: AppNavigattionButtonStyle.buttonStyle,
               child: const Icon(
@@ -167,11 +104,11 @@ class SelectedCityWeatherWidget extends StatelessWidget {
         ),
         child: ListView(
           primary: true, // не отрабатывает должным образом
-          children: [
-            const SizedBox(height: 15),
-            MainForecastWidget(weatherData: weatherData),
-            HourlyForecastWidget(weatherData: weatherData),
-            const Padding(
+          children: const [
+            SizedBox(height: 15),
+            MainForecastWidget(),
+            HourlyForecastWidget(),
+            Padding(
               padding: EdgeInsets.only(right: 45),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.end,
@@ -180,10 +117,10 @@ class SelectedCityWeatherWidget extends StatelessWidget {
                 ],
               ),
             ),
-            WeekForecastWidget(weatherData: weatherData),
-            const Divider(color: AppColors.gray, thickness: 1),
-            const SizedBox(height: 20),
-            const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+            WeekForecastWidget(),
+            Divider(color: AppColors.gray, thickness: 1),
+            SizedBox(height: 20),
+            Placeholder(fallbackHeight: 400, fallbackWidth: 400)
           ],
         ),
       ),

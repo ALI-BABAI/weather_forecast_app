@@ -7,7 +7,7 @@ class Cities {
   final String country;
   final double lon;
   final double lat;
-  final WeatherData weatherData;
+  late WeatherData weatherData;
 
   Cities({
     required this.city,

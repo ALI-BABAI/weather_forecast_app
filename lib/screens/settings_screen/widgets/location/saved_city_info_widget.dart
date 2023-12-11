@@ -1,19 +1,19 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
+import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 class SavedCityInfo extends StatelessWidget {
-  final Cities currentCity;
+  final int index;
+  final ApiCity currentCity;
   final Function()? deleteItem;
-  // final WeatherData weatherData;
-  // final int indexToDelete;
 
   const SavedCityInfo({
     super.key,
+    required this.index,
     required this.currentCity,
     required this.deleteItem,
-    // required this.weatherData,
   });
 
   @override
@@ -37,10 +37,10 @@ class SavedCityInfo extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.center,
                   children: [
                     const SizedBox(height: 5),
-                    Text('${currentCity.city}, ${currentCity.country}',
+                    Text('${currentCity.name}, ${currentCity.country}',
                         style: AppTextStyles.expandedMainFont),
                     Text(
-                        '${currentCity.weatherData.current.temperature.round()}°, ${currentCity.weatherData.current.weather.first.description}',
+                        '${weatherInSavedCities.elementAt(index)!.current.temperature.round()}°, ${weatherInSavedCities.elementAt(index)!.current.weather.first.description}',
                         style: AppTextStyles.secondaryFont),
                   ],
                 ),

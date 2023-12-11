@@ -28,17 +28,14 @@ Map<String, dynamic> _$LocationToJson(Location instance) => <String, dynamic>{
       'lat': instance.lat,
     };
 
-FavouriteCitiesData _$FavouriteCitiesDataFromJson(Map<String, dynamic> json) =>
-    FavouriteCitiesData(
-      selectedCity: json['item'] as int,
+SavedCitiesData _$SavedCitiesDataFromJson(Map<String, dynamic> json) =>
+    SavedCitiesData(
       favouriteCities: (json['favouriteCities'] as List<dynamic>)
           .map((e) => ApiCity.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
 
-Map<String, dynamic> _$FavouriteCitiesDataToJson(
-        FavouriteCitiesData instance) =>
+Map<String, dynamic> _$SavedCitiesDataToJson(SavedCitiesData instance) =>
     <String, dynamic>{
-      'item': instance.selectedCity,
       'favouriteCities': instance.favouriteCities,
     };
