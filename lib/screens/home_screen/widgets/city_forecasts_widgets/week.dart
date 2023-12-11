@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
-import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
 class WeekForecastWidget extends StatelessWidget {
-  const WeekForecastWidget({super.key});
+final WeatherData weatherData;
+  const WeekForecastWidget({super.key, required this.weatherData});
 
   @override
   Widget build(BuildContext context) {
@@ -32,7 +33,7 @@ class WeekForecastWidget extends StatelessWidget {
                     //     weatherImage: AppIconsMini.thunder,
                     //   ),
                     // спред-оператор
-                    weatherInSavedCities.first!.daily
+                    weatherData.daily
                         .map(
                           (e) => SizedBox(
                             height: 38,

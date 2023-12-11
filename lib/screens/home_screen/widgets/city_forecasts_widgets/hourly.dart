@@ -1,13 +1,15 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
+import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
-import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
-class HourlyForecastWidget extends StatelessWidget {
-  const HourlyForecastWidget({
+class HoursForecastWidget extends StatelessWidget {
+  final WeatherData weatherData;
+  const HoursForecastWidget({
     super.key,
+    required this.weatherData,
   });
 
   @override
@@ -25,11 +27,11 @@ class HourlyForecastWidget extends StatelessWidget {
             itemBuilder: (BuildContext context, int index) {
               // Выводим для каждого следующего часа информацию по погоде
               DateTime currentDate = DateTime.fromMillisecondsSinceEpoch(
-                  (weatherInSavedCities.first!.timezoneOffset +
-                          weatherInSavedCities.first!.hourly.elementAt(index).date) *
+                  (weatherData.timezoneOffset +
+                          weatherData.hourly.elementAt(index).date) *
                       1000,
                   isUtc: true);
-              String temperatureAtHour = weatherInSavedCities.first!.hourly
+              String temperatureAtHour = weatherData.hourly
                   .elementAt(index)
                   .temperature
                   .round()
@@ -37,7 +39,7 @@ class HourlyForecastWidget extends StatelessWidget {
               return Padding(
                 // отступ между элементами
                 padding: const EdgeInsets.symmetric(horizontal: 10),
-                child: HourlyWidget(
+                child: HourItem(
                   hour: DateFormat.Hm().format(currentDate),
                   image: AppIconsMini.strongSnow,
                   weather: temperatureAtHour,
@@ -51,12 +53,12 @@ class HourlyForecastWidget extends StatelessWidget {
   }
 }
 
-class HourlyWidget extends StatelessWidget {
+class HourItem extends StatelessWidget {
   final String hour;
   final String weather;
   final AssetImage image;
 
-  const HourlyWidget({
+  const HourItem({
     super.key,
     required this.hour,
     required this.weather,

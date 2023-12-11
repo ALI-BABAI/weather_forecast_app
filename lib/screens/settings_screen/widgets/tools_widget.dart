@@ -112,10 +112,6 @@ class ToolsElementWidget extends StatelessWidget {
                       'App unit\'s:',
                       style: AppTextStyles.settingsScreenHeaderFont,
                     ),
-                    // content: const Text(
-                    //   'Temperature:',
-                    //   style: AppTextStyles.mainFont,
-                    // ),
                     actionsAlignment: MainAxisAlignment.spaceAround,
                     actions: <Widget>[
                       Row(

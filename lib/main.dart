@@ -51,8 +51,6 @@ void main() async {
   // Получаем объект == списку сохранённых городов (типа ApiCity)
   savedCitiesData = await readSavedCitiesInfo(savedCitiesFile);
 
-  // полученный список передать в HomeScreen чтобы
-  // в отдельный список сохранить данные по сохранённым городам?
   runApp(
     MaterialApp(
       title: 'Weather forecast',
@@ -93,9 +91,9 @@ Future<SavedCitiesData?> readSavedCitiesInfo(File savedCitiesFile) async {
 *    String jsonString = await rootBundle.loadString('assets/city_list.json');
 */
 
-//  favourite_cities.json
+//  saved_cities.json:
 // {
-//   "favouriteCities": [
+//   "savedCitiesData": [
 //     {
 //       "name": "Taglag",
 //       "country": "IR",

@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
+// Иконка приложения + название + опциональный виджет
 class LoadingWidget extends StatelessWidget {
   final Widget Function() infoWidget;
   const LoadingWidget({super.key, required this.infoWidget});
@@ -43,6 +44,7 @@ class LoadingWidget extends StatelessWidget {
               const SizedBox(
                 height: 150,
               ),
+              // опциональный виджет
               infoWidget(),
             ],
           ),

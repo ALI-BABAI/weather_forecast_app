@@ -5,6 +5,7 @@ import 'package:weather_forecast_app/data_handling/api_client.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/location/alert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/saved_city_info_widget.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
@@ -106,13 +107,14 @@ class _LocationWidgetState extends State<LocationWidget> {
             ),
           ),
           // Блок сохранённых городов
-          // if (savedCities.isNotEmpty)
           ListView.builder(
             primary: false,
             shrinkWrap: true,
             itemCount: savedCitiesData!.favouriteCities.length,
             itemBuilder: (context, index) {
               final savedCity = savedCitiesData!.favouriteCities[index];
+              // элементы в списке сохранённых можно удалять свайпом
+              // костыль. актуализировать данные и привязки надо, а также перезапись файла
               return Dismissible(
                 key: UniqueKey(),
                 child: SavedCityInfo(
@@ -120,13 +122,15 @@ class _LocationWidgetState extends State<LocationWidget> {
                   currentCity: savedCity,
                   deleteItem: () {
                     setState(
-                      () => savedCities.removeAt(index),
+                      // () => savedCities.removeAt(index),
+                      () => savedCitiesData!.favouriteCities.removeAt(index),
                     );
                   },
                 ),
                 onDismissed: (direction) {
                   setState(
-                    () => savedCities.removeAt(index),
+                    // () => savedCities.removeAt(index),
+                    () => savedCitiesData!.favouriteCities.removeAt(index),
                   );
                 },
               );
@@ -137,8 +141,8 @@ class _LocationWidgetState extends State<LocationWidget> {
     );
   }
 
-  // проверка введённого текста с сохранённым списком городов
-  // сохранение в случае совпадения в глобальный файл
+  // Проверка введённого текста с сохранённым списком городов
+  // В случае совпадения город добавляется в глобальный файл, содержащий список сохранённых локаций
   void _checkCity(String userString) async {
     late String jsonString;
 
@@ -174,10 +178,6 @@ class _LocationWidgetState extends State<LocationWidget> {
         // записываем в файл
         await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
 
-        // cityName = selectedCity.name;
-        // cityCountry = selectedCity.country;
-        // cityLon = selectedCity.location.lon;
-        // cityLat = selectedCity.location.lat;
         cityName = savedCitiesData!.favouriteCities.last.name;
         cityCountry = savedCitiesData!.favouriteCities.last.country;
         cityLon = savedCitiesData!.favouriteCities.last.location.lon;
@@ -185,6 +185,9 @@ class _LocationWidgetState extends State<LocationWidget> {
         // + отправка запроса по выбранному городу.
         selectedCityWeatherData = await ApiClient()
             .getWeatherInfoAsObject(lat: cityLat!, lon: cityLon!);
+
+        // добавляем в глобальную переменную инфу по добавленному городу
+        weatherInSavedCities.add(selectedCityWeatherData);
       }
       // Обновление состояния виджета
       setState(
@@ -218,35 +221,4 @@ class _LocationWidgetState extends State<LocationWidget> {
       setState(() => getAllertScreen(context));
     }
   }
-}
-
-// Уведомление всплывающее о потере уважения...
-void getAllertScreen(BuildContext context) {
-  showDialog<String>(
-    context: context,
-    builder: (BuildContext context) => AlertDialog(
-      title: const Row(
-        children: [
-          Icon(Icons.error_outline, color: AppColors.orange),
-          Text(' ПРОБЛЕМОЧКА'),
-        ],
-      ),
-      content: const Text('Не удалось найти город. \nПопробуй заново!'),
-      actions: <Widget>[
-        TextButton(
-          style: const ButtonStyle(
-            shape: MaterialStatePropertyAll(
-              CircleBorder(
-                side: BorderSide(
-                  color: AppColors.orange,
-                ),
-              ),
-            ),
-          ),
-          onPressed: () => Navigator.pop(context, 'OK'),
-          child: const Text('OK'),
-        ),
-      ],
-    ),
-  );
 }

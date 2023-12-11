@@ -2,7 +2,6 @@
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
@@ -32,8 +31,6 @@ class SettingsScreen extends StatelessWidget {
             style: AppTextStyles.appBarFont,
           ),
           backgroundColor: AppColors.appBackground,
-          // убираем автоматически созданную кнопку "назад"
-          automaticallyImplyLeading: false,
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -42,15 +39,15 @@ class SettingsScreen extends StatelessWidget {
                 width: 50,
                 child: ElevatedButton(
                   onPressed: () {
-                    //Navigator.pushNamed(context, '/home');
-                    Navigator.push(
-                      context,
-                      // MaterialPageRoute(
-                      //     builder: (context) =>
-                      //         HomeScreen(savedCitiesData: savedCitiesData!)),
-                      MaterialPageRoute(
-                          builder: (context) => const HomeScreen()),
-                    );
+                    Navigator.pushReplacementNamed(context, '/home');
+                    // Navigator.push(
+                    //   context,
+                    //   // MaterialPageRoute(
+                    //   //     builder: (context) =>
+                    //   //         HomeScreen(savedCitiesData: savedCitiesData!)),
+                    //   MaterialPageRoute(
+                    //       builder: (context) => const HomeScreen()),
+                    // );
                   },
                   style: AppNavigattionButtonStyle.buttonStyle,
                   child: const Icon(

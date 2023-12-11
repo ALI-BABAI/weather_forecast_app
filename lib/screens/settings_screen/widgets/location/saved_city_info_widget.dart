@@ -25,6 +25,7 @@ class SavedCityInfo extends StatelessWidget {
           mainAxisAlignment: MainAxisAlignment.spaceBetween,
           children: [
             Row(
+              // иконка + название города(страны)
               children: [
                 const Icon(
                   Icons.location_on,
@@ -32,6 +33,7 @@ class SavedCityInfo extends StatelessWidget {
                   color: AppColors.white,
                 ),
                 const SizedBox(height: 10),
+                // название города(страны) + краткая информация по текущей погоде
                 Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -46,6 +48,7 @@ class SavedCityInfo extends StatelessWidget {
                 ),
               ],
             ),
+            // кнопка для удаления элемента из списка
             IconButton(
               onPressed: deleteItem,
               icon: const Icon(
