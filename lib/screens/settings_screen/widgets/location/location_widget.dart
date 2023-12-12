@@ -116,24 +116,19 @@ class _LocationWidgetState extends State<LocationWidget> {
               // элементы в списке сохранённых можно удалять свайпом
               // костыль. актуализировать данные и привязки надо, а также перезапись файла
               return Dismissible(
-                key: UniqueKey(),
-                child: SavedCityInfo(
-                  index: index,
-                  currentCity: savedCity,
-                  deleteItem: () {
-                    setState(
-                      // () => savedCities.removeAt(index),
-                      () => savedCitiesData!.favouriteCities.removeAt(index),
-                    );
-                  },
-                ),
-                onDismissed: (direction) {
-                  setState(
-                    // () => savedCities.removeAt(index),
-                    () => savedCitiesData!.favouriteCities.removeAt(index),
-                  );
-                },
-              );
+                  key: UniqueKey(),
+                  child: SavedCityInfo(
+                    index: index,
+                    currentCity: savedCity,
+                    deleteItem: () {
+                      deleteCity(index);
+                      setState(() => {});
+                    },
+                  ),
+                  onDismissed: (direction) {
+                    deleteCity(index);
+                    setState(() => {});
+                  });
             },
           ),
         ],
@@ -221,4 +216,11 @@ class _LocationWidgetState extends State<LocationWidget> {
       setState(() => getAllertScreen(context));
     }
   }
+}
+
+void deleteCity(int index) async {
+  savedCitiesData!.favouriteCities.removeAt(index);
+  weatherInSavedCities.removeAt(index);
+  // записываем в файл
+  await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
 }
