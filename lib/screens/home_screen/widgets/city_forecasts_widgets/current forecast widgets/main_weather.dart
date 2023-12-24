@@ -34,7 +34,7 @@ class MainWeatherForecast extends StatelessWidget {
                       colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
                 ),
                 Text(
-                  '${weatherData.current.weather.first.description}°',
+                  weatherData.current.weather.first.description,
                   style: AppTextStyles.expandedMainFont,
                 ),
                 const SizedBox(height: 5),

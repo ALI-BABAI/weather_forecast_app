@@ -19,6 +19,7 @@ class CityWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context);
     return Scaffold(
       // имя текущего города храниться в свойстве title:
       appBar: AppBar(
@@ -28,7 +29,8 @@ class CityWidget extends StatelessWidget {
           child: Text(
             // 'Ulyanovsk, RU',
             '${currentCity.name}, ${currentCity.country}',
-            style: AppTextStyles.appBarFont,
+            // style: AppTextStyles.appBarFont,
+            style: theme.textTheme.titleLarge,
           ),
         ),
         backgroundColor: AppColors.appBackground,

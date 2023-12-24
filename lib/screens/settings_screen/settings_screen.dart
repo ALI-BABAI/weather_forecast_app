@@ -16,6 +16,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return GestureDetector(
       onTap: () {
         // скрытие клавиатуры при нажатии на свободную область экрана
@@ -26,9 +27,9 @@ class SettingsScreen extends StatelessWidget {
           toolbarHeight: 50,
           elevation: 4, // тень
           titleSpacing: 30,
-          title: const Text(
+          title: Text(
             'Settings',
-            style: AppTextStyles.appBarFont,
+            style: theme.titleLarge, // style: AppTextStyles.appBarFont,
           ),
           backgroundColor: AppColors.appBackground,
           actions: <Widget>[

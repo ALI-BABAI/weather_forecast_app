@@ -33,16 +33,20 @@ class _LocationWidgetState extends State<LocationWidget> {
 
   @override
   Widget build(BuildContext context) {
+    final theme = Theme.of(context).textTheme;
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 22),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: [
           // Location - заголовок
-          const Padding(
-            padding: EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
-            child:
-                Text('Location', style: AppTextStyles.settingsScreenHeaderFont),
+          Padding(
+            padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
+            child: Text(
+              'Location',
+              // style: AppTextStyles.settingsScreenHeaderFont,
+              style: theme.titleSmall,
+            ),
           ),
           // TextField
           SizedBox(

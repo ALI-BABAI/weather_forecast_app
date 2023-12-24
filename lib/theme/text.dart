@@ -4,7 +4,7 @@ import 'package:weather_forecast_app/theme/colors.dart';
 TextStyle poppinsRegularExtended(
     double fontSize, Color color, FontWeight fontWeight) {
   return TextStyle(
-    fontFamily: 'Poppins',
+    // fontFamily: 'Poppins',
     fontWeight: fontWeight,
     fontSize: fontSize,
     height: 1,
@@ -14,42 +14,36 @@ TextStyle poppinsRegularExtended(
 
 abstract class AppTextStyles {
   static const appBarFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.bold,
     fontSize: 33,
     height: 1,
     color: AppColors.white,
   );
   static const settingsScreenHeaderFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 28,
     height: 1,
     color: AppColors.orange,
   );
   static const expandedMainFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 20,
     height: 1,
     color: AppColors.white,
   );
   static const mainFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 15,
     height: 1,
     color: AppColors.white,
   );
   static const secondaryFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 15,
     height: 1,
     color: AppColors.gray,
   );
   static const smallestSecondaryFont = TextStyle(
-    fontFamily: 'Poppins',
     fontWeight: FontWeight.w500,
     fontSize: 12,
     height: 1,
