@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/images.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
-import 'package:weather_forecast_app/theme/text.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class HoursForecastWidget extends StatelessWidget {
   final WeatherData weatherData;

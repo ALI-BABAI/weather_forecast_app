@@ -1,8 +1,8 @@
 // Давление, влажность, сила и направление ветра
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 
-import '../../../../../theme/text.dart';
+import '../../../../../theme/app_text_styles.dart';
 
 class WeatherExtendedParameters extends StatelessWidget {
   final WeatherData weatherData;
@@ -22,8 +22,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                 children: [
                   WeatherParameter(
                     name: 'Wind: ',
-                    info:
-                        ' ${weatherData.current.windSpeed}m/s',
+                    info: ' ${weatherData.current.windSpeed}m/s',
                     icon: Icons.air_rounded,
                   ),
                   const SizedBox(
@@ -31,8 +30,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                   ),
                   WeatherParameter(
                     name: 'Pressure: ',
-                    info:
-                        '${weatherData.current.pressure.toInt()}hPa',
+                    info: '${weatherData.current.pressure.toInt()}hPa',
                     icon: Icons.speed_rounded,
                   ),
                 ],
@@ -42,8 +40,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                 children: [
                   WeatherParameter(
                     name: 'Visibility: ',
-                    info:
-                        '${weatherData.current.visibility / 1000}km',
+                    info: '${weatherData.current.visibility / 1000}km',
                     icon: Icons.visibility_outlined,
                   ),
                   const SizedBox(
@@ -51,8 +48,7 @@ class WeatherExtendedParameters extends StatelessWidget {
                   ),
                   WeatherParameter(
                     name: 'Humidity: ',
-                    info:
-                        '${weatherData.current.humidity}%',
+                    info: '${weatherData.current.humidity}%',
                     icon: Icons.water_drop_outlined,
                   ),
                 ],
@@ -78,7 +74,7 @@ class WeatherParameter extends StatelessWidget {
     return Row(
       mainAxisAlignment: MainAxisAlignment.spaceBetween,
       children: [
-        Icon(icon, color: Colors.white),
+        Icon(icon),
         const SizedBox(width: 12),
         Text(
           name,

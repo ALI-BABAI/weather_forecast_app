@@ -2,39 +2,11 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
-import 'serialisator/weather_data.dart';
-
-const String urlRequest =
-    'https://api.openweathermap.org/data/2.5/onecall?lat=54.244549&lon=48.31618&units=metric&exclude=minutely,alerts&appid=6f6f192517f2b62b4364d19778420b76';
-// Uri url = Uri.parse(urlRequest);
 
 class ApiClient {
   final apiClient = HttpClient();
-
-  // Возвращаем из метода строку ответа / null
-  Future<String?> getWeatherInfoAsResponseString() async {
-    Uri url = Uri.parse(urlRequest);
-
-    try {
-      final request = await apiClient.getUrl(url); // отправка запроса
-      final response = await request.close(); // ожидание ответа
-
-      if (response.statusCode != 200) {
-        debugPrint(
-            'Ошибка при работе с сервером: err = ${response.statusCode}');
-        return null;
-      } else {
-        // Приведение к формату UTF8
-        final responseString =
-            await response.transform(const Utf8Decoder()).join();
-        return responseString;
-      }
-    } catch (exeption) {
-      debugPrint('Произошла ошибка: $exeption');
-      return null;
-    }
-  }
 
 // Возвращаем из метода объект типа WeatherData, хранящий информацию о погоде по переданным координатам
   Future<WeatherData?> getWeatherInfoAsObject(
@@ -68,8 +40,7 @@ class ApiClient {
 
       // библиотечный метод преобразования строки типа json
       final jsonData = jsonDecode(responseString);
-      // Вызываем метод класса WeatherInfo, и записываем возвращающийся результат
-      // в переменную типа WeatherInfo
+      // Вызываем метод класса WeatherInfo, и записываем результат  в переменную типа WeatherInfo
       final weatherData = WeatherData.fromJson(jsonData);
       return weatherData;
     } catch (exeption) {

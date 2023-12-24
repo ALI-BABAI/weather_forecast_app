@@ -3,8 +3,8 @@
 
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
-import 'package:weather_forecast_app/theme/button.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
+import 'package:weather_forecast_app/theme/app_bar_button.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
 
 import 'widgets/tools_widget.dart';
 
@@ -23,14 +23,10 @@ class SettingsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
-          toolbarHeight: 50,
-          elevation: 4, // тень
-          titleSpacing: 30,
           title: Text(
             'Settings',
             style: theme.titleLarge, // style: AppTextStyles.appBarFont,
           ),
-          backgroundColor: AppColors.appBackground,
           actions: <Widget>[
             Padding(
               padding: const EdgeInsets.only(right: 10),
@@ -38,18 +34,9 @@ class SettingsScreen extends StatelessWidget {
                 height: 50,
                 width: 50,
                 child: ElevatedButton(
-                  onPressed: () {
-                    Navigator.pushReplacementNamed(context, '/home');
-                    // Navigator.push(
-                    //   context,
-                    //   // MaterialPageRoute(
-                    //   //     builder: (context) =>
-                    //   //         HomeScreen(savedCitiesData: savedCitiesData!)),
-                    //   MaterialPageRoute(
-                    //       builder: (context) => const HomeScreen()),
-                    // );
-                  },
-                  style: AppNavigattionButtonStyle.buttonStyle,
+                  onPressed: () =>
+                      Navigator.pushReplacementNamed(context, '/home'),
+                  style: appBarButtonStyle,
                   child: const Icon(
                     Icons.close,
                     color: AppColors.white,

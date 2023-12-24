@@ -1,8 +1,7 @@
 import 'package:json_annotation/json_annotation.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/general_key/weather.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/general_key/weather.dart';
 
 part 'current_weather_info.g.dart'; 
-
 
 @JsonSerializable()
 class Current {

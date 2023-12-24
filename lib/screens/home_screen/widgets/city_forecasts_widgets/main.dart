@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/current%20forecast%20widgets/dotted_divider.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/current%20forecast%20widgets/extended_parameters.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/current%20forecast%20widgets/main_weather.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
-import 'package:weather_forecast_app/theme/text.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class MainForecastWidget extends StatelessWidget {
   final WeatherData weatherData;

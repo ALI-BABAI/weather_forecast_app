@@ -3,12 +3,12 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/api_client.dart';
 import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/api_client.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/alert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
-import 'package:weather_forecast_app/theme/text.dart';
 
 /* show rootBundle;  прописывается для явного импорта только rootBundle из пакета
 // flutter/services.dart. Это позволяет избежать импорта всех символов из пакета
@@ -84,7 +84,20 @@ class _LocationWidgetState extends State<LocationWidget> {
                     SizedBox(
                       height: 50,
                       child: TextButton(
-                        onPressed: () => _checkCity(_cityController.text),
+                        // https://www.youtube.com/watch?v=f3mI0thSNOs
+                        onPressed: () async {
+                          BuildContext thisContext = context;
+                          showDialog(
+                            context: thisContext,
+                            builder: (context) {
+                              return const Center(
+                                  child: CircularProgressIndicator());
+                            },
+                          );
+                          _checkCity(_cityController.text);
+                          // await Future.delayed(Duration(seconds: 1));
+                          Navigator.of(thisContext).pop();
+                        },
                         style: ButtonStyle(
                           backgroundColor:
                               MaterialStateProperty.all(AppColors.orange),

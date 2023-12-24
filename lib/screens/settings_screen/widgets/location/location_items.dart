@@ -1,4 +1,5 @@
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
+
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 
 final List<Cities> savedCities = []; // глобальная переменная...
 

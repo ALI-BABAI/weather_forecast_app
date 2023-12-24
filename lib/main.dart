@@ -1,13 +1,12 @@
 import 'dart:io';
 import 'dart:convert';
-import 'package:path_provider/path_provider.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
-
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dart';
-import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
-import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
-import 'package:weather_forecast_app/theme/text.dart';
+import 'package:path_provider/path_provider.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
+
+import 'package:weather_forecast_app/routes/routes.dart';
+import 'package:weather_forecast_app/theme/app_main_themes.dart';
 
 // глобавльная переменная, хранящая список сохранённых городов
 // может меняться внутри любого экрана и изменения будут актуальны везде.
@@ -54,18 +53,10 @@ void main() async {
 
   runApp(
     MaterialApp(
-      theme: ThemeData(
-          fontFamily: 'Poppins',
-          textTheme: const TextTheme(
-            titleLarge: AppTextStyles.appBarFont,
-            titleSmall: AppTextStyles.settingsScreenHeaderFont,
-          )),
+      theme: mainThemes,
       title: 'Weather forecast',
       initialRoute: '/home',
-      routes: {
-        '/home': (context) => const HomeScreen(),
-        '/settings': (context) => const SettingsScreen(),
-      },
+      routes: routes,
     ),
   );
 }

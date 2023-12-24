@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
-import 'package:weather_forecast_app/theme/text.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 final class SettingButtonItem {
   final String buttonName;
@@ -105,7 +105,7 @@ class ToolsElementWidget extends StatelessWidget {
           onPressed: () => showDialog<String>(
             context: context,
             builder: (BuildContext context) => AlertDialog(
-              backgroundColor: AppColors.appBackground,
+              backgroundColor: AppColors.mainBackground,
               title: const Text(
                 'App unit\'s:',
                 style: AppTextStyles.settingsScreenHeaderFont,
@@ -178,7 +178,10 @@ class ToolsElementWidget extends StatelessWidget {
           ),
           child: Row(
             children: [
-              Icon(setting.iconType, color: AppColors.white, size: 30),
+              Icon(
+                setting.iconType,
+                color: AppColors.white,
+              ),
               const SizedBox(width: 10),
               Expanded(
                 child: Text(

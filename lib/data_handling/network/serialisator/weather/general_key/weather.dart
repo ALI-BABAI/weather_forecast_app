@@ -1,4 +1,3 @@
-
 import 'package:json_annotation/json_annotation.dart';
 
 part 'weather.g.dart'; 
@@ -13,9 +12,7 @@ class Weather {
     required this.weatherLogo,
     required this.description,
   });
-  // конвертация из гсона в класс
   factory Weather.fromJson(Map<String, dynamic> json) =>
       _$WeatherFromJson(json);
-  // конвертация из сгенирированных данных в джсон
   Map<String, dynamic> toJson() => _$WeatherToJson(this);
 }

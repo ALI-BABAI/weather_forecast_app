@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/theme/colors.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
 
 TextStyle poppinsRegularExtended(
     double fontSize, Color color, FontWeight fontWeight) {
