@@ -7,7 +7,6 @@ import 'package:weather_forecast_app/data_handling/serialisator/weather_data.dar
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/alert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/saved_city_info_widget.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
 import 'package:weather_forecast_app/theme/text.dart';
 
@@ -117,22 +116,44 @@ class _LocationWidgetState extends State<LocationWidget> {
             itemCount: savedCitiesData!.favouriteCities.length,
             itemBuilder: (context, index) {
               final savedCity = savedCitiesData!.favouriteCities[index];
-              // элементы в списке сохранённых можно удалять свайпом
-              // костыль. актуализировать данные и привязки надо, а также перезапись файла
               return Dismissible(
-                  key: UniqueKey(),
-                  child: SavedCityInfo(
-                    index: index,
-                    currentCity: savedCity,
-                    deleteItem: () {
+                key: UniqueKey(),
+                onDismissed: (direction) {
+                  deleteCity(index);
+                  setState(() => {});
+                },
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 3),
+                  // константная иконка геопозиции
+                  leading: const Icon(
+                    Icons.location_on,
+                    size: 40,
+                    color: AppColors.white,
+                  ),
+                  // кнопка удаления
+                  trailing: IconButton(
+                    onPressed: () {
                       deleteCity(index);
                       setState(() => {});
                     },
+                    icon: const Icon(
+                      Icons.delete_forever,
+                      color: AppColors.orange,
+                      size: 35,
+                    ),
                   ),
-                  onDismissed: (direction) {
-                    deleteCity(index);
-                    setState(() => {});
-                  });
+                  // город и страна
+                  title: Text(
+                    '${savedCity.name}, ${savedCity.country}',
+                    style: AppTextStyles.expandedMainFont,
+                  ),
+                  // информация по текущему городу
+                  subtitle: Text(
+                    '${weatherInSavedCities.elementAt(index)!.current.temperature.round()}°, ${weatherInSavedCities.elementAt(index)!.current.weather.first.description}',
+                    style: AppTextStyles.secondaryFont,
+                  ),
+                ),
+              );
             },
           ),
         ],
@@ -143,6 +164,7 @@ class _LocationWidgetState extends State<LocationWidget> {
   // Проверка введённого текста с сохранённым списком городов
   // В случае совпадения город добавляется в глобальный файл, содержащий список сохранённых локаций
   void _checkCity(String userString) async {
+    // Future _checkCity(String userString) async {
     late String jsonString;
 
     try {

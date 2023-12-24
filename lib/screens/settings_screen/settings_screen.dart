@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/button.dart';
 import 'package:weather_forecast_app/theme/colors.dart';
-import 'package:weather_forecast_app/theme/text.dart';
 
 import 'widgets/tools_widget.dart';
 
