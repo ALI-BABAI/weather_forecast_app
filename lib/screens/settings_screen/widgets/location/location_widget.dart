@@ -1,14 +1,14 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/api_client.dart';
-import 'package:weather_forecast_app/data_handling/serialisator/cities.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/alert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
+import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 /* show rootBundle;  прописывается для явного импорта только rootBundle из пакета
 // flutter/services.dart. Это позволяет избежать импорта всех символов из пакета

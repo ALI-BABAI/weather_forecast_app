@@ -28,6 +28,12 @@ class ApiClient {
       final request = await apiClient.getUrl(url); // отправка запроса
       final response = await request.close(); // ожидание ответа
 
+      if (response.statusCode == 429) {
+        debugPrint(
+            'Превышено количество запросов к серверу = ${response.statusCode}');
+        return null;
+      }
+
       if (response.statusCode != 200) {
         debugPrint(
             'Ошибка при работе с сервером: err = ${response.statusCode}');

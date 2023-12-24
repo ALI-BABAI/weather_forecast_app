@@ -28,6 +28,14 @@ class HomeScreen extends StatelessWidget {
             return LoadingWidget(
               infoWidget: () => Text('Ошибка: ${snapshot.error}'),
             );
+          } else if (snapshot.data!.any((element) => element == null)) {
+            return LoadingWidget(
+              infoWidget: () => const Padding(
+                padding: EdgeInsets.symmetric(horizontal: 40),
+                child: Text(
+                    'Превышено количество запросов к серверу: или еще что-то...'),
+              ),
+            );
           }
           // экран с данными по сохранённым городам
           else if ((snapshot.hasData) && (snapshot.data != null)) {
