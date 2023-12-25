@@ -22,39 +22,34 @@ class DailyForecastWidget extends StatelessWidget {
           color: AppColors.widgetBackground,
           borderRadius: BorderRadius.all(Radius.circular(10)),
         ),
-        child: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: Column(
-                mainAxisAlignment: MainAxisAlignment.start,
-                children:
-                    // for (int i = 0; i < 7; i++)
-                    //   InfoPerDay(
-                    //     // day: currentDay + i,
-                    //     // month: monthNames[currentMonth - 1],
-                    //     date: weatherData?.daily.elementAt(i).date,
-                    //     weatherImage: AppIconsMini.thunder,
-                    //   ),
-                    // спред-оператор
-                    weatherData.daily
-                        .map(
-                          (element) => SizedBox(
-                            height: 38,
-                            child: InfoPerDay(
-                              date: element.date,
-                              temperatureDay:
-                                  element.dailyTemperature.day.round(),
-                              temperatureEvening:
-                                  element.dailyTemperature.eve.round(),
-                              weatherImage: 'assets/images/weather_conditions/${element.weather.first.id}.svg',
-                            ),
+        child: Padding(
+          padding: const EdgeInsets.only(left: 20, top: 10, bottom: 10),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: [
+              Expanded(
+                child: Column(
+                  mainAxisAlignment: MainAxisAlignment.start,
+                  children: weatherData.daily
+                      .map(
+                        (element) => SizedBox(
+                          height: 38,
+                          child: InfoPerDay(
+                            date: element.date,
+                            temperatureDay:
+                                element.dailyTemperature.day.round(),
+                            temperatureEvening:
+                                element.dailyTemperature.eve.round(),
+                            weatherImage:
+                                'assets/images/weather_conditions/${element.weather.first.id}.svg',
                           ),
-                        )
-                        .toList(),
-              ),
-            )
-          ],
+                        ),
+                      )
+                      .toList(),
+                ),
+              )
+            ],
+          ),
         ),
       ),
     );
@@ -81,29 +76,38 @@ class InfoPerDay extends StatelessWidget {
         DateTime.fromMillisecondsSinceEpoch(date * 1000, isUtc: true);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
-        crossAxisAlignment: CrossAxisAlignment.center,
+      child: Table(
+        defaultVerticalAlignment: TableCellVerticalAlignment.middle,
+        columnWidths: const {
+          0: FixedColumnWidth(120),
+          1: FixedColumnWidth(120),
+          2: FixedColumnWidth(50),
+          3: FixedColumnWidth(50),
+        },
         children: [
-          Text(
-              '${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
-              style: AppTextStyles.mainFont),
-          SvgPicture.asset(
-            weatherImage,
-            semanticsLabel: 'Main weather icon',
-            // не работает
-            // fit: BoxFit.fill,
-            height: 30,
-            width: 30,
+          TableRow(
+            children: [
+              Text(
+                  '${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
+                  style: AppTextStyles.mainFont),
+              SvgPicture.asset(
+                weatherImage,
+                semanticsLabel: 'Main weather icon',
+                // не работает
+                // fit: BoxFit.fill,
+                height: 30,
+                width: 30,
+              ),
+              Text(
+                '${temperatureDay.toString()}°',
+                style: AppTextStyles.mainFont,
+              ),
+              Text(
+                '${temperatureEvening.toString()}°',
+                style: AppTextStyles.mainFont,
+              ),
+            ],
           ),
-          Text(
-            '${temperatureDay.toString()}°',
-            style: AppTextStyles.mainFont,
-          ),
-          Text(
-            '${temperatureEvening.toString()}°',
-            style: AppTextStyles.mainFont,
-          )
         ],
       ),
     );

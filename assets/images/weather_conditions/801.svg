@@ -39,9 +39,9 @@
 <stop offset="1" stop-color="#FFC100"/>
 </linearGradient>
 <linearGradient id="paint1_linear_109_594" x1="1.83051" y1="28.125" x2="34.8712" y2="8.02342" gradientUnits="userSpaceOnUse">
-<stop stop-color="#ABAAAA"/>
+<stop stop-color="#DEDEDE"/>
 <stop offset="1" stop-color="#DEDEDE" stop-opacity="0.9"/>
-<stop offset="1" stop-color="#DEDEDE" stop-opacity="0.5"/>
+<stop offset="1" stop-color="#DEDEDE" stop-opacity="0.8"/>
 </linearGradient>
 </defs>
 </svg>
