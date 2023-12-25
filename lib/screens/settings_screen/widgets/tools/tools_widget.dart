@@ -11,6 +11,7 @@ class ToolsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
+        // название
         const Padding(
           padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
           child: Text(
@@ -18,15 +19,14 @@ class ToolsWidget extends StatelessWidget {
             style: AppTextStyles.settingsScreenHeaderFont,
           ),
         ),
+        // элементы настроек?
         ListView.builder(
           shrinkWrap: true,
           primary: false, // убирает эффект скролла блока
           itemCount: settingsItems.length,
           itemBuilder: (context, index) {
             final settingUnit = settingsItems[index];
-            return ToolElementWidget(
-              setting: settingUnit,
-            );
+            return ToolElementWidget(setting: settingUnit);
           },
         ),
       ],

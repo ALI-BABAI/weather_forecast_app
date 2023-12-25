@@ -6,7 +6,7 @@ import 'package:weather_forecast_app/data_handling/network/api_client.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
-import 'package:weather_forecast_app/screens/settings_screen/widgets/location/alert_window.dart';
+import 'package:weather_forecast_app/screens/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
@@ -243,7 +243,7 @@ class _LocationWidgetState extends State<LocationWidget> {
             FocusScope.of(context).unfocus();
           } else {
             // всплывающее окно
-            getAllertScreen(context);
+            AppAllertWindow.warningCityNotFound(context);
             cityName = null;
             cityCountry = null;
             cityLon = null;
@@ -253,7 +253,7 @@ class _LocationWidgetState extends State<LocationWidget> {
       );
     } catch (exeprion) {
       debugPrint('Ошибка при загрузке файла: $exeprion');
-      setState(() => getAllertScreen(context));
+      setState(() => AppAllertWindow.warningCityNotFound(context));
     }
   }
 }

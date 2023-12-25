@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/screens/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/tools/setting_button_items.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
@@ -15,80 +16,8 @@ class ToolElementWidget extends StatelessWidget {
       child: Padding(
         padding: const EdgeInsets.symmetric(horizontal: 20),
         child: TextButton(
-          onPressed: () => showDialog<String>(
-            context: context,
-            builder: (BuildContext context) => AlertDialog(
-              backgroundColor: AppColors.mainBackground,
-              title: const Text(
-                'App unit\'s:',
-                style: AppTextStyles.settingsScreenHeaderFont,
-              ),
-              actionsAlignment: MainAxisAlignment.spaceAround,
-              actions: <Widget>[
-                Row(
-                  children: [
-                    const Expanded(
-                      child: Text(
-                        'Temperature:',
-                        style: AppTextStyles.expandedMainFont,
-                      ),
-                    ),
-                    TextButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.orange)),
-                      onPressed: () => Navigator.pop(context, '°C'),
-                      child: const Text(
-                        '°C',
-                        style: AppTextStyles.expandedMainFont,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    TextButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.orange)),
-                      onPressed: () => Navigator.pop(context, '°F'),
-                      child: const Text(
-                        '°F',
-                        style: AppTextStyles.expandedMainFont,
-                      ),
-                    ),
-                  ],
-                ),
-                Row(
-                  children: [
-                    const Expanded(
-                        child: Text(
-                      'Pressure:',
-                      style: AppTextStyles.expandedMainFont,
-                    )),
-                    TextButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.orange)),
-                      onPressed: () => Navigator.pop(context, '°C'),
-                      child: const Text(
-                        'hPa',
-                        style: AppTextStyles.expandedMainFont,
-                      ),
-                    ),
-                    const SizedBox(width: 15),
-                    TextButton(
-                      style: const ButtonStyle(
-                          backgroundColor:
-                              MaterialStatePropertyAll(AppColors.orange)),
-                      onPressed: () => Navigator.pop(context, '°F'),
-                      child: const Text(
-                        'mmHg',
-                        style: AppTextStyles.expandedMainFont,
-                      ),
-                    ),
-                  ],
-                ),
-              ],
-            ),
-          ),
+          onPressed: () => AppAllertWindow.changeMeasurementUnits(context),
+          // иконка и название итема
           child: Row(
             children: [
               Icon(
