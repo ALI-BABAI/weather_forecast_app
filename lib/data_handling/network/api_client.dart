@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
 
 class ApiClient {

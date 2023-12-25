@@ -1,8 +1,8 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/directory/initialize_app.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 
 import 'package:weather_forecast_app/routes/routes.dart';
 import 'package:weather_forecast_app/theme/app_main_themes.dart';
@@ -34,7 +34,7 @@ late File savedCitiesFile;
 void main() async {
   // ошибка без строки
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Получение/создание списка сохранённых городов на устройстве пользователя
   await initializeApp();
   runApp(

@@ -1,6 +1,6 @@
 // Давление, влажность, сила и направление ветра
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class ExtendedWeatherInfoWidget extends StatelessWidget {

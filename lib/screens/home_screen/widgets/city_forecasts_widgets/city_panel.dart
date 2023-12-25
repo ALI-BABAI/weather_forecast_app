@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 

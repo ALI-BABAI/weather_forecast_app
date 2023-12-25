@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
-import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
@@ -16,9 +16,13 @@ class BasicWeatherInfoWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          const Image(
-            fit: BoxFit.fill,
-            image: AppIconsExpanded.windWithSnow,
+          SvgPicture.asset(
+            'assets/images/weather_conditions/${weatherData.current.weather.first.id}.svg',
+            semanticsLabel: 'Main weather icon',
+            // не работает
+            // fit: BoxFit.fill,
+            height: 125,
+            width: 125,
           ),
           SizedBox(
             height: 160,

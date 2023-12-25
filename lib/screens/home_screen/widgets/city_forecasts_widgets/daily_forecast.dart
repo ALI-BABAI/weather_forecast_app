@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
-import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
@@ -47,7 +47,7 @@ class DailyForecastWidget extends StatelessWidget {
                                   element.dailyTemperature.day.round(),
                               temperatureEvening:
                                   element.dailyTemperature.eve.round(),
-                              weatherImage: AppIconsMini.windWithSnow,
+                              weatherImage: 'assets/images/weather_conditions/${element.weather.first.id}.svg',
                             ),
                           ),
                         )
@@ -65,7 +65,7 @@ class InfoPerDay extends StatelessWidget {
   final int date;
   final int temperatureDay;
   final int temperatureEvening;
-  final AssetImage weatherImage;
+  final String weatherImage;
 
   const InfoPerDay({
     super.key,
@@ -88,8 +88,13 @@ class InfoPerDay extends StatelessWidget {
           Text(
               '${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
               style: AppTextStyles.mainFont),
-          Image(
-            image: weatherImage,
+          SvgPicture.asset(
+            weatherImage,
+            semanticsLabel: 'Main weather icon',
+            // не работает
+            // fit: BoxFit.fill,
+            height: 30,
+            width: 30,
           ),
           Text(
             '${temperatureDay.toString()}°',

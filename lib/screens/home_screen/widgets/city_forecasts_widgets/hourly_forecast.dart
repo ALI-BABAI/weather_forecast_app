@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
-import 'package:weather_forecast_app/images.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
@@ -41,7 +41,7 @@ class HourlyForecastWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: HourItem(
                   hour: DateFormat.Hm().format(currentDate),
-                  image: AppIconsMini.strongSnow,
+                  image: 'assets/images/weather_conditions/${weatherData.hourly.elementAt(index).weather.first.id}.svg',
                   weather: temperatureAtHour,
                 ),
               );
@@ -56,7 +56,7 @@ class HourlyForecastWidget extends StatelessWidget {
 class HourItem extends StatelessWidget {
   final String hour;
   final String weather;
-  final AssetImage image;
+  final String image;
 
   const HourItem({
     super.key,
@@ -87,9 +87,14 @@ class HourItem extends StatelessWidget {
               style: AppTextStyles.smallestSecondaryFont,
             ),
             const SizedBox(height: 5),
-            Image(
-              image: image,
-            ),
+          SvgPicture.asset(
+            image,
+            semanticsLabel: 'Main weather icon',
+            // не работает
+            // fit: BoxFit.fill,
+            height: 25,
+            width: 25,
+          ),
             const SizedBox(height: 5),
             Text(
               '$weather°',

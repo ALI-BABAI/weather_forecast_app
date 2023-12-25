@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_forecast_app/data_handling/directory/read_cities.dart';
-import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
 import 'package:weather_forecast_app/main.dart';
 
 Future initializeApp() async {
