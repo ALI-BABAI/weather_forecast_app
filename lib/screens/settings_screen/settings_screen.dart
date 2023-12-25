@@ -23,6 +23,7 @@ class SettingsScreen extends StatelessWidget {
       },
       child: Scaffold(
         appBar: AppBar(
+        backgroundColor: AppColors.mainBackground,
           title: Text(
             'Settings',
             style: theme.titleLarge, // style: AppTextStyles.appBarFont,
