@@ -6,6 +6,7 @@ import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/week.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class CityWidget extends StatelessWidget {
@@ -21,13 +22,7 @@ class CityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     final theme = Theme.of(context);
     return DecoratedBox(
-      decoration: const BoxDecoration(
-        gradient: LinearGradient(
-          colors: AppColors.gradientBackground,
-          begin: Alignment.topCenter,
-          end: Alignment.bottomCenter,
-        ),
-      ),
+      decoration: appDecoration,
       // вертикальный виджет с всей информации
       child: ListView(
         primary: true,

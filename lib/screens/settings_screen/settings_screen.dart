@@ -5,6 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/theme/app_decoration.dart';
 
 import 'widgets/tools_widget.dart';
 
@@ -49,13 +50,7 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
         body: DecoratedBox(
-          decoration: const BoxDecoration(
-            gradient: LinearGradient(
-              colors: AppColors.gradientBackground,
-              begin: Alignment.topCenter,
-              end: Alignment.bottomCenter,
-            ),
-          ),
+          decoration: appDecoration,
           child: ListView(
             primary: true,
             children: const [
