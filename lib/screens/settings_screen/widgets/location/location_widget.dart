@@ -1,6 +1,7 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/data_handling/directory/delete_cities.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/city/cities.dart';
 import 'package:weather_forecast_app/data_handling/network/serialisator/weather/weather_data.dart';
@@ -255,11 +256,4 @@ class _LocationWidgetState extends State<LocationWidget> {
       setState(() => getAllertScreen(context));
     }
   }
-}
-
-void deleteCity(int index) async {
-  savedCitiesData!.favouriteCities.removeAt(index);
-  weatherInSavedCities.removeAt(index);
-  // записываем в файл
-  await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
 }

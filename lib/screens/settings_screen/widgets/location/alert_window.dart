@@ -8,10 +8,11 @@ void getAllertScreen(BuildContext context) {
     builder: (BuildContext context) => AlertDialog(
       title: const Row(
         children: [
-          Icon(Icons.error_outline, color: AppColors.orange),
+          Icon(Icons.error_outline, color: Colors.black),
           Text(' ПРОБЛЕМОЧКА'),
         ],
       ),
+      backgroundColor: AppColors.orange,
       content: const Text('Не удалось найти город. \nПопробуй заново!'),
       actions: <Widget>[
         TextButton(
@@ -19,7 +20,7 @@ void getAllertScreen(BuildContext context) {
             shape: MaterialStatePropertyAll(
               CircleBorder(
                 side: BorderSide(
-                  color: AppColors.orange,
+                  color:  Colors.black,
                 ),
               ),
             ),

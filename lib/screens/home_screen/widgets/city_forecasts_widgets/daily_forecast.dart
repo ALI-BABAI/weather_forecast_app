@@ -6,9 +6,12 @@ import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
-class WeekForecastWidget extends StatelessWidget {
+class DailyForecastWidget extends StatelessWidget {
   final WeatherData weatherData;
-  const WeekForecastWidget({super.key, required this.weatherData});
+  const DailyForecastWidget({
+    super.key,
+    required this.weatherData,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -36,13 +39,14 @@ class WeekForecastWidget extends StatelessWidget {
                     // спред-оператор
                     weatherData.daily
                         .map(
-                          (e) => SizedBox(
+                          (element) => SizedBox(
                             height: 38,
                             child: InfoPerDay(
-                              date: e.date,
-                              temperatureDay: e.dailyTemperature.day.round(),
+                              date: element.date,
+                              temperatureDay:
+                                  element.dailyTemperature.day.round(),
                               temperatureEvening:
-                                  e.dailyTemperature.eve.round(),
+                                  element.dailyTemperature.eve.round(),
                               weatherImage: AppIconsMini.windWithSnow,
                             ),
                           ),

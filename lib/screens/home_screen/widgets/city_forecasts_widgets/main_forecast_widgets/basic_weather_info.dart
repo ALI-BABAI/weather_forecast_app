@@ -5,9 +5,9 @@ import 'package:weather_forecast_app/images.dart';
 
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
-class MainWeatherForecast extends StatelessWidget {
+class BasicWeatherInfoWidget extends StatelessWidget {
   final WeatherData weatherData;
-  const MainWeatherForecast({super.key, required this.weatherData});
+  const BasicWeatherInfoWidget({super.key, required this.weatherData});
 
   @override
   Widget build(BuildContext context) {
@@ -24,6 +24,7 @@ class MainWeatherForecast extends StatelessWidget {
             height: 160,
             child: Column(
               children: [
+                // Градиентный текст с текущей температурой
                 Expanded(
                   child: GradientText(
                       '${weatherData.current.temperature.round()}°',
@@ -34,11 +35,14 @@ class MainWeatherForecast extends StatelessWidget {
                       ),
                       colors: const [Color(0xFFA2A4B5), Color(0xFF757784)]),
                 ),
+                // Описание
                 Text(
                   weatherData.current.weather.first.description,
                   style: AppTextStyles.expandedMainFont,
                 ),
+                // Отступ
                 const SizedBox(height: 5),
+                // Доп.температурные параметры по текущему дню
                 Text(
                   '${weatherData.daily.first.dailyTemperature.max.round()}°/${weatherData.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherData.current.temperatureFillsLike.round()}°C',
                   style: AppTextStyles.secondaryFont,

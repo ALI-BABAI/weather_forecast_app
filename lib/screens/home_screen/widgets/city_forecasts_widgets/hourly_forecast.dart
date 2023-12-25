@@ -5,9 +5,9 @@ import 'package:weather_forecast_app/images.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
-class HoursForecastWidget extends StatelessWidget {
+class HourlyForecastWidget extends StatelessWidget {
   final WeatherData weatherData;
-  const HoursForecastWidget({
+  const HourlyForecastWidget({
     super.key,
     required this.weatherData,
   });
@@ -16,7 +16,7 @@ class HoursForecastWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return Center(
       child: Padding(
-        padding: const EdgeInsets.symmetric(vertical: 15),
+        padding: const EdgeInsets.only(bottom: 15),
         child: SizedBox(
           height: 115, // Высота элементов
           child: ListView.builder(

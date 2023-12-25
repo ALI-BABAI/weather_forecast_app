@@ -1,99 +1,12 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/screens/settings_screen/widgets/tools/setting_button_items.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
-final class SettingButtonItem {
-  final String buttonName;
-  final IconData iconType;
-  final void function;
-
-  SettingButtonItem({
-    required this.buttonName,
-    required this.iconType,
-    required this.function,
-  });
-}
-
-final List settingsItems = [
-  SettingButtonItem(
-    buttonName: 'Measurement units',
-    iconType: Icons.balance_rounded,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  SettingButtonItem(
-    buttonName: 'Notifications',
-    iconType: Icons.notifications,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  SettingButtonItem(
-    buttonName: 'Language',
-    iconType: Icons.language,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  SettingButtonItem(
-    buttonName: 'Seed fedback',
-    iconType: Icons.sms_outlined,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  SettingButtonItem(
-    buttonName: 'Rate this app',
-    iconType: Icons.star,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  SettingButtonItem(
-    buttonName: 'Share your weather',
-    iconType: Icons.share,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-];
-
-class ToolsWidget extends StatelessWidget {
-  const ToolsWidget({super.key});
-
-  @override
-  Widget build(BuildContext context) {
-    return Column(
-      crossAxisAlignment: CrossAxisAlignment.start,
-      children: [
-        const Padding(
-          padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
-          child: Text(
-            'Tools',
-            style: AppTextStyles.settingsScreenHeaderFont,
-          ),
-        ),
-        ListView.builder(
-          shrinkWrap: true,
-          primary: false, // убирает эффект скролла блока
-          itemCount: settingsItems.length,
-          itemBuilder: (context, index) {
-            final settingUnit = settingsItems[index];
-            return ToolsElementWidget(
-              setting: settingUnit,
-            );
-          },
-        ),
-      ],
-    );
-  }
-}
-
-class ToolsElementWidget extends StatelessWidget {
+class ToolElementWidget extends StatelessWidget {
   final SettingButtonItem setting;
 
-  const ToolsElementWidget({super.key, required this.setting});
+  const ToolElementWidget({super.key, required this.setting});
 
   @override
   Widget build(BuildContext context) {

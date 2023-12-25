@@ -6,9 +6,15 @@ class DottedDivederWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Padding(
-      padding: EdgeInsets.symmetric(horizontal: 20),
-      child: DottedDivider(height: 1, color: AppColors.gray),
+    return const Row(
+      children: [
+         Expanded(
+           child: Padding(
+            padding: EdgeInsets.symmetric(horizontal: 20),
+            child: DottedDivider(height: 1, color: AppColors.gray),
+                   ),
+         ),
+      ],
     );
   }
 }

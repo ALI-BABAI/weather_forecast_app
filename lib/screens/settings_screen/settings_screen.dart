@@ -7,24 +7,20 @@ import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 
-import 'widgets/tools_widget.dart';
+import 'widgets/tools/tools_widget.dart';
 
 class SettingsScreen extends StatelessWidget {
-  const SettingsScreen({
-    super.key,
-  });
+  const SettingsScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     return GestureDetector(
-      onTap: () {
-        // скрытие клавиатуры при нажатии на свободную область экрана
-        FocusScope.of(context).unfocus();
-      },
+      // скрытие клавиатуры при нажатии на свободную область экрана
+      onTap: () => FocusScope.of(context).unfocus(),
       child: Scaffold(
         appBar: AppBar(
-        backgroundColor: AppColors.mainBackground,
+          backgroundColor: AppColors.mainBackground,
           title: Text(
             'Settings',
             style: theme.titleLarge, // style: AppTextStyles.appBarFont,
