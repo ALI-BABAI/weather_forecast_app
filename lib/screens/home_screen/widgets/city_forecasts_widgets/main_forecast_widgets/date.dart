@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class DateWidget extends StatelessWidget {
-  final WeatherData weatherData;
+  final WeatherModel weatherData;
   const DateWidget({super.key, required this.weatherData});
 
   @override
@@ -13,7 +13,7 @@ class DateWidget extends StatelessWidget {
     // Преобразование Unix timestamp в объект DateTime
     // Из числа получаем текущее время
     final currentDate = DateTime.fromMillisecondsSinceEpoch(
-        (weatherData.timezoneOffset + weatherData.current.date) * 1000,
+        (weatherData.timezoneOffset + weatherData.date) * 1000,
         isUtc: true);
     return Row(
       mainAxisAlignment: MainAxisAlignment.center,

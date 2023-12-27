@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class HourlyForecastWidget extends StatelessWidget {
-  final WeatherData weatherData;
+  final WeatherModel weatherData;
   const HourlyForecastWidget({
     super.key,
     required this.weatherData,
@@ -41,7 +41,7 @@ class HourlyForecastWidget extends StatelessWidget {
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: HourItem(
                   hour: DateFormat.Hm().format(currentDate),
-                  image: 'assets/images/weather_conditions/${weatherData.hourly.elementAt(index).weather.first.id}.svg',
+                  image: 'assets/images/weather_conditions/${weatherData.hourly.elementAt(index).iconID}.svg',
                   weather: temperatureAtHour,
                 ),
               );

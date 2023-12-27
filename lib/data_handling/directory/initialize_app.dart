@@ -20,13 +20,13 @@ Future initializeApp() async {
   if (!await savedCitiesFile.exists()) {
     SavedCities initialData = SavedCities(
       citiesList: [
-        ApiCity(
+        ApiCityModel(
           name: "Samara",
           country: "RU",
           lon: 50.150002,
           lat: 53.200001,
         ),
-        ApiCity(
+        ApiCityModel(
           name: "Ulyanovsk",
           country: "RU",
           lon: 48.400002,
@@ -39,6 +39,6 @@ Future initializeApp() async {
   }
 
   // Подтягиваем инфу по выбранному и избранным городам в приложение
-  // Получаем объект == списку сохранённых городов (типа ApiCity)
+  // Получаем объект == списку сохранённых городов (типа ApiCityModel)
   savedCitiesData = await readSavedCitiesInfo(savedCitiesFile);
 }

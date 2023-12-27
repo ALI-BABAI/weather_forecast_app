@@ -2,14 +2,14 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 
 class ApiClient {
   final apiClient = HttpClient();
 
 // Возвращаем из метода объект типа WeatherData, хранящий информацию о погоде по переданным координатам
-  Future<WeatherData?> getWeatherInfoAsObject(
+  Future<WeatherModel?> getWeatherInfoAsObject(
       {double lat = 54.27028, double lon = 48.302364}) async {
     // Ручная сборка URI
     Uri url = Uri(
@@ -47,7 +47,7 @@ class ApiClient {
       // библиотечный метод преобразования строки типа json
       final jsonData = jsonDecode(responseString);
       // Вызываем метод класса WeatherInfo, и записываем результат  в переменную типа WeatherInfo
-      final weatherData = WeatherData.fromJson(jsonData);
+      final weatherData = WeatherModel.fromJson(jsonData);
       return weatherData;
     } catch (exeption) {
       debugPrint('Произошла ошибка: $exeption');
@@ -57,8 +57,8 @@ class ApiClient {
 
 // Возвращает список объектов типа WeatherData, хранящий информацию
 // по погоде во всех сохранённых городах
-  Future<List<WeatherData?>> getWeatherInfoForSavedCities() async {
-    List<WeatherData?> weatherDataList = [];
+  Future<List<WeatherModel?>> getWeatherInfoForSavedCities() async {
+    List<WeatherModel?> weatherDataList = [];
 
     for (final city in savedCitiesData!.citiesList) {
       final weatherData = await getWeatherInfoAsObject(

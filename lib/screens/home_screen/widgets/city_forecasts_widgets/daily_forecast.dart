@@ -1,13 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class DailyForecastWidget extends StatelessWidget {
-  final WeatherData weatherData;
+  final WeatherModel weatherData;
   const DailyForecastWidget({
     super.key,
     required this.weatherData,
@@ -37,11 +37,11 @@ class DailyForecastWidget extends StatelessWidget {
                           child: InfoPerDay(
                             date: element.date,
                             temperatureDay:
-                                element.dailyTemperature.day.round(),
+                                element.dayTemperature,
                             temperatureEvening:
-                                element.dailyTemperature.eve.round(),
+                                element.eveTemperature,
                             weatherImage:
-                                'assets/images/weather_conditions/${element.weather.first.id}.svg',
+                                'assets/images/weather_conditions/${element.iconID}.svg',
                           ),
                         ),
                       )

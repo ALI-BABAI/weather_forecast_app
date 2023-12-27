@@ -1,10 +1,10 @@
 // Давление, влажность, сила и направление ветра
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class ExtendedWeatherInfoWidget extends StatelessWidget {
-  final WeatherData weatherData;
+  final WeatherModel weatherData;
   const ExtendedWeatherInfoWidget({super.key, required this.weatherData});
 
   @override
@@ -19,12 +19,12 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             children: [
               WeatherParameter(
                 name: 'Wind: ',
-                info: ' ${weatherData.current.windSpeed}m/s',
+                info: ' ${weatherData.wind}m/s',
                 icon: Icons.air_rounded,
               ),
               WeatherParameter(
                 name: 'Pressure: ',
-                info: '${weatherData.current.pressure.toInt()}hPa',
+                info: '${weatherData.pressure}hPa',
                 icon: Icons.speed_rounded,
               ),
             ],
@@ -34,12 +34,12 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             children: [
               WeatherParameter(
                 name: 'Visibility: ',
-                info: '${weatherData.current.visibility / 1000}km',
+                info: '${weatherData.visibility}km',
                 icon: Icons.visibility_outlined,
               ),
               WeatherParameter(
                 name: 'Humidity: ',
-                info: '${weatherData.current.humidity}%',
+                info: '${weatherData.humidity}%',
                 icon: Icons.water_drop_outlined,
               ),
             ],

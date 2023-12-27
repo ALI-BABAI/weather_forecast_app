@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_widget.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/loading_widget.dart';
@@ -14,7 +14,7 @@ class HomeScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       // запускается асинхронный метод возвращающий список данных по сохранённым городам
-      body: FutureBuilder<List<WeatherData?>>(
+      body: FutureBuilder<List<WeatherModel?>>(
         future: ApiClient().getWeatherInfoForSavedCities(),
         builder: (context, snapshot) {
           // экран прогрузки/загрузки приложения

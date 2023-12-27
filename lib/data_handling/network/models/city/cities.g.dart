@@ -6,13 +6,13 @@
 // // JsonSerializableGenerator
 // // **************************************************************************
 
-// ApiCity _$ApiCityFromJson(Map<String, dynamic> json) => ApiCity(
+// ApiCityModel _$ApiCityFromJson(Map<String, dynamic> json) => ApiCityModel(
 //       name: json['name'] as String,
 //       country: json['country'] as String,
 //       location: Location.fromJson(json['coord'] as Map<String, dynamic>),
 //     );
 
-// Map<String, dynamic> _$ApiCityToJson(ApiCity instance) => <String, dynamic>{
+// Map<String, dynamic> _$ApiCityToJson(ApiCityModel instance) => <String, dynamic>{
 //       'name': instance.name,
 //       'country': instance.country,
 //       'coord': instance.location,
@@ -31,7 +31,7 @@
 // SavedCities _$SavedCitiesDataFromJson(Map<String, dynamic> json) =>
 //     SavedCities(
 //       citiesList: (json['citiesList'] as List<dynamic>)
-//           .map((e) => ApiCity.fromJson(e as Map<String, dynamic>))
+//           .map((e) => ApiCityModel.fromJson(e as Map<String, dynamic>))
 //           .toList(),
 //     );
 

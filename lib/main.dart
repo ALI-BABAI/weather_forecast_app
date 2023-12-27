@@ -2,7 +2,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/directory/initialize_app.dart';
 import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 
 import 'package:weather_forecast_app/routes/routes.dart';
 import 'package:weather_forecast_app/theme/app_main_themes.dart';
@@ -28,7 +28,7 @@ import 'package:weather_forecast_app/theme/app_main_themes.dart';
   ]
 }*/
 late SavedCities? savedCitiesData;
-late List<WeatherData?> weatherInSavedCities;
+late List<WeatherModel?> weatherInSavedCities;
 late File savedCitiesFile;
 
 void main() async {

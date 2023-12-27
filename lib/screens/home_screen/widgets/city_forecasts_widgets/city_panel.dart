@@ -4,7 +4,7 @@ import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 
 class CityPanelWidget extends StatelessWidget {
-  final ApiCity currentCity;
+  final ApiCityModel currentCity;
   const CityPanelWidget({super.key, required this.currentCity});
 
   @override

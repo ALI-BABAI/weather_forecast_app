@@ -1,12 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart'; //https://pub.dev/packages/simple_gradient_text
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
+
 
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class BasicWeatherInfoWidget extends StatelessWidget {
-  final WeatherData weatherData;
+  final WeatherModel weatherData;
   const BasicWeatherInfoWidget({super.key, required this.weatherData});
 
   @override
@@ -17,7 +18,7 @@ class BasicWeatherInfoWidget extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
           SvgPicture.asset(
-            'assets/images/weather_conditions/${weatherData.current.weather.first.id}.svg',
+            'assets/images/weather_conditions/${weatherData.iconID}.svg',
             semanticsLabel: 'Main weather icon',
             // не работает
             // fit: BoxFit.fill,
@@ -31,7 +32,7 @@ class BasicWeatherInfoWidget extends StatelessWidget {
                 // Градиентный текст с текущей температурой
                 Expanded(
                   child: GradientText(
-                      '${weatherData.current.temperature.round()}°',
+                      '${weatherData.temperature}°',
                       gradientDirection: GradientDirection.ttb,
                       style: const TextStyle(
                         fontSize: 100,
@@ -41,14 +42,14 @@ class BasicWeatherInfoWidget extends StatelessWidget {
                 ),
                 // Описание
                 Text(
-                  weatherData.current.weather.first.description,
+                  weatherData.description,
                   style: AppTextStyles.expandedMainFont,
                 ),
                 // Отступ
                 const SizedBox(height: 5),
                 // Доп.температурные параметры по текущему дню
                 Text(
-                  '${weatherData.daily.first.dailyTemperature.max.round()}°/${weatherData.daily.first.dailyTemperature.min.toInt()}° Feels like ${weatherData.current.temperatureFillsLike.round()}°C',
+                  '${weatherData.daily.first.maxTemperature}°/${weatherData.daily.first.minTemperature}° Feels like ${weatherData.temperatureFillsLike}°C',
                   style: AppTextStyles.secondaryFont,
                 ),
               ],

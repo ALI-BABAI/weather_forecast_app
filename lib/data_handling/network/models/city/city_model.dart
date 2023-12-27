@@ -1,18 +1,18 @@
-class ApiCity {
+class ApiCityModel {
   final String name;
   final String country;
   final double lon;
   final double lat;
 
-  ApiCity({
+  ApiCityModel({
     required this.name,
     required this.country,
     required this.lon,
     required this.lat,
   });
   // преобразование fromJson
-  factory ApiCity.fromJson(Map<String, dynamic> json) {
-    return ApiCity(
+  factory ApiCityModel.fromJson(Map<String, dynamic> json) {
+    return ApiCityModel(
       name: json['name'] as String,
       country: json['country'] as String,
       lon: json['coord']['lon'] as double,
@@ -33,7 +33,7 @@ class ApiCity {
 }
 
 class SavedCities {
-  final List<ApiCity> citiesList;
+  final List<ApiCityModel> citiesList;
 
   SavedCities({
     required this.citiesList,
@@ -42,7 +42,7 @@ class SavedCities {
   factory SavedCities.fromJson(Map<String, dynamic> json) {
     return SavedCities(
       citiesList: (json['citiesList'] as List<dynamic>)
-          .map((e) => ApiCity.fromJson(e as Map<String, dynamic>))
+          .map((e) => ApiCityModel.fromJson(e as Map<String, dynamic>))
           .toList(),
     );
   }

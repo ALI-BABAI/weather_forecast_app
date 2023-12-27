@@ -5,20 +5,20 @@
 // // dart run build_runner build   // dart run build_runner watch
 
 // @JsonSerializable()
-// class ApiCity {
+// class ApiCityModel {
 //   final String name;
 //   final String country;
 //   // Передача автосборщику инструкции о привязке данных из ключа('coord') в location
 //   @JsonKey(name: 'coord')
 //   final Location location;
 
-//   ApiCity({
+//   ApiCityModel({
 //     required this.name,
 //     required this.country,
 //     required this.location,
 //   });
-//   // преобразование json-ответа в объект типа ApiCity
-//   factory ApiCity.fromJson(Map<String, dynamic> json) =>
+//   // преобразование json-ответа в объект типа ApiCityModel
+//   factory ApiCityModel.fromJson(Map<String, dynamic> json) =>
 //       _$ApiCityFromJson(json);
 
 //   // Преобразование объекта в json формат
@@ -45,7 +45,7 @@
 // @JsonSerializable()
 // class SavedCities {
 //   @JsonKey(name: 'citiesList')
-//   final List<ApiCity> citiesList;
+//   final List<ApiCityModel> citiesList;
 
 //   SavedCities({
 //     required this.citiesList,

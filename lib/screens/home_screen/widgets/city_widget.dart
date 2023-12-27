@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/city_panel.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/hourly_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/main_forecast.dart';
@@ -10,8 +10,8 @@ import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class CityWidget extends StatelessWidget {
-  final WeatherData weatherData;
-  final ApiCity currentCity;
+  final WeatherModel weatherData;
+  final ApiCityModel currentCity;
   const CityWidget({
     super.key,
     required this.weatherData,
