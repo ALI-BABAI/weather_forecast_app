@@ -3,8 +3,8 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/directory/delete_cities.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
@@ -187,13 +187,13 @@ class _LocationWidgetState extends State<LocationWidget> {
       final List<dynamic> citiesData = json.decode(jsonString);
 
       // Преобразование данных в объекты City
-      final List<ApiCityModel> cityItem =
-          citiesData.map((json) => ApiCityModel.fromJson(json)).toList();
+      final List<CityModel> cityItem =
+          citiesData.map((json) => CityModel.fromJson(json)).toList();
 
       // Поиск введённого города из списка
-      final ApiCityModel selectedCity = cityItem.firstWhere(
+      final CityModel selectedCity = cityItem.firstWhere(
         (city) => city.name.toLowerCase() == userString.toLowerCase(),
-        orElse: () => ApiCityModel(
+        orElse: () => CityModel(
           name: '',
           country: '',
           lon: 0.0,
@@ -206,7 +206,7 @@ class _LocationWidgetState extends State<LocationWidget> {
       // Проверка на совпадение города +
       // вот тут нужно сохранять в файл.
       if (selectedCity.name != '') {
-        savedCitiesData!.citiesList.add(ApiCityModel(
+        savedCitiesData!.citiesList.add(CityModel(
           name: selectedCity.name,
           country: selectedCity.country,
           lon: selectedCity.lon,

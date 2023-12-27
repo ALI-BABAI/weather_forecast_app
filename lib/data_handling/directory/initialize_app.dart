@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_forecast_app/data_handling/directory/read_cities.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
 import 'package:weather_forecast_app/main.dart';
 
 Future initializeApp() async {
@@ -20,13 +20,13 @@ Future initializeApp() async {
   if (!await savedCitiesFile.exists()) {
     SavedCities initialData = SavedCities(
       citiesList: [
-        ApiCityModel(
+        CityModel(
           name: "Samara",
           country: "RU",
           lon: 50.150002,
           lat: 53.200001,
         ),
-        ApiCityModel(
+        CityModel(
           name: "Ulyanovsk",
           country: "RU",
           lon: 48.400002,
@@ -39,6 +39,6 @@ Future initializeApp() async {
   }
 
   // Подтягиваем инфу по выбранному и избранным городам в приложение
-  // Получаем объект == списку сохранённых городов (типа ApiCityModel)
+  // Получаем объект == списку сохранённых городов (типа CityModel)
   savedCitiesData = await readSavedCitiesInfo(savedCitiesFile);
 }

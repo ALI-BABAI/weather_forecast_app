@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather/weather_model.dart';
+import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_widget.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/loading_widget.dart';

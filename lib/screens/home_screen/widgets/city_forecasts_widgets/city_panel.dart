@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 
 class CityPanelWidget extends StatelessWidget {
-  final ApiCityModel currentCity;
+  final CityModel currentCity;
   const CityPanelWidget({super.key, required this.currentCity});
 
   @override
