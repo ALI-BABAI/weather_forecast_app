@@ -58,7 +58,6 @@ class _LocationWidgetState extends State<LocationWidget> {
               textCapitalization: TextCapitalization.words,
               style: AppTextStyles.expandedMainFont,
               cursorColor: Colors.cyan,
-              // стили
               decoration: InputDecoration(
                 hintText: 'Enter a city name',
                 hintStyle: AppTextStyles.secondaryFont,
@@ -68,6 +67,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                 enabledBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.orange),
                 ),
+                contentPadding: const EdgeInsets.only(left: 20),
                 // кнопки в текстовом поле
                 suffixIcon: Row(
                   mainAxisSize: MainAxisSize.min,
@@ -160,6 +160,7 @@ class _LocationWidgetState extends State<LocationWidget> {
                   title: Text(
                     '${savedCity.name}, ${savedCity.country}',
                     style: AppTextStyles.expandedMainFont,
+                    overflow: TextOverflow.ellipsis,
                   ),
                   // информация по текущему городу
                   subtitle: Text(
