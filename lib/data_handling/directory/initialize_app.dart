@@ -3,7 +3,7 @@ import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
 import 'package:weather_forecast_app/data_handling/directory/read_cities.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
 import 'package:weather_forecast_app/main.dart';
 
 Future initializeApp() async {
@@ -18,17 +18,19 @@ Future initializeApp() async {
 
   // если файла нет, он создаётся с дефолтным городом
   if (!await savedCitiesFile.exists()) {
-    SavedCitiesData initialData = SavedCitiesData(
-      favouriteCities: [
+    SavedCities initialData = SavedCities(
+      citiesList: [
         ApiCity(
           name: "Samara",
           country: "RU",
-          location: Location(lon: 50.150002, lat: 53.200001),
+          lon: 50.150002,
+          lat: 53.200001,
         ),
         ApiCity(
           name: "Ulyanovsk",
           country: "RU",
-          location: Location(lon: 48.400002, lat: 54.333332),
+          lon: 48.400002,
+          lat: 54.333332,
         ),
       ],
     );

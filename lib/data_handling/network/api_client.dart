@@ -60,10 +60,10 @@ class ApiClient {
   Future<List<WeatherData?>> getWeatherInfoForSavedCities() async {
     List<WeatherData?> weatherDataList = [];
 
-    for (final city in savedCitiesData!.favouriteCities) {
+    for (final city in savedCitiesData!.citiesList) {
       final weatherData = await getWeatherInfoAsObject(
-        lat: city.location.lat,
-        lon: city.location.lon,
+        lat: city.lat,
+        lon: city.lon,
       );
       weatherDataList.add(weatherData);
     }

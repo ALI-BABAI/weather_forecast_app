@@ -49,8 +49,7 @@ class HomeScreen extends StatelessWidget {
               itemBuilder: (context, index) {
                 // Загрузка на экран выбранного по индексу города
                 return CityWidget(
-                  currentCity:
-                      savedCitiesData!.favouriteCities.elementAt(index),
+                  currentCity: savedCitiesData!.citiesList.elementAt(index),
                   weatherData: weatherInSavedCities.elementAt(index)!,
                 );
               },

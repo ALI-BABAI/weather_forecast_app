@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 
@@ -17,18 +17,21 @@ class CityPanelWidget extends StatelessWidget {
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         children: [
-          Padding(
-            padding: const EdgeInsets.only(left: 20),
-            child: Text(
-              '${currentCity.name}, ${currentCity.country}',
-              style:
-                  theme.textTheme.titleLarge, // или AppTextStyles.appBarFont,
+          Flexible(
+            child: Padding(
+              padding: const EdgeInsets.only(left: 20),
+              child: Text(
+                '${currentCity.name}, ${currentCity.country}',
+                style:
+                    theme.textTheme.titleLarge, // или AppTextStyles.appBarFont,
+                overflow: TextOverflow.ellipsis,
+              ),
             ),
           ),
           // кнопка перехода на экран настроек
           SizedBox(
-            height: 50,
-            width: 50,
+            height: 55,
+            width: 55,
             child: IconButton(
               onPressed: () =>
                   Navigator.pushReplacementNamed(context, '/settings'),

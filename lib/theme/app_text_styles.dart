@@ -16,7 +16,6 @@ abstract class AppTextStyles {
   static const appBarFont = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 33,
-    height: 1,
     color: AppColors.white,
   );
   static const settingsScreenHeaderFont = TextStyle(

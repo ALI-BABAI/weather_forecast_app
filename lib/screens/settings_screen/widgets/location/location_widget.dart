@@ -3,7 +3,7 @@ import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/directory/delete_cities.dart';
 import 'package:weather_forecast_app/data_handling/network/api_client.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city/cities.dart';
+import 'package:weather_forecast_app/data_handling/network/models/city/city_model.dart';
 import 'package:weather_forecast_app/data_handling/network/models/weather/weather_data.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/alerts_windows/app_allert_window.dart';
@@ -127,9 +127,9 @@ class _LocationWidgetState extends State<LocationWidget> {
           ListView.builder(
             primary: false,
             shrinkWrap: true,
-            itemCount: savedCitiesData!.favouriteCities.length,
+            itemCount: savedCitiesData!.citiesList.length,
             itemBuilder: (context, index) {
-              final savedCity = savedCitiesData!.favouriteCities[index];
+              final savedCity = savedCitiesData!.citiesList[index];
               return Dismissible(
                 key: UniqueKey(),
                 onDismissed: (direction) {
@@ -196,7 +196,8 @@ class _LocationWidgetState extends State<LocationWidget> {
         orElse: () => ApiCity(
           name: '',
           country: '',
-          location: Location(lon: 0.0, lat: 0.0),
+          lon: 0.0,
+          lat: 0.0,
         ),
       );
 
@@ -205,18 +206,19 @@ class _LocationWidgetState extends State<LocationWidget> {
       // Проверка на совпадение города +
       // вот тут нужно сохранять в файл.
       if (selectedCity.name != '') {
-        savedCitiesData!.favouriteCities.add(ApiCity(
+        savedCitiesData!.citiesList.add(ApiCity(
           name: selectedCity.name,
           country: selectedCity.country,
-          location: selectedCity.location,
+          lon: selectedCity.lon,
+          lat: selectedCity.lat,
         ));
         // записываем в файл
         await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
 
-        cityName = savedCitiesData!.favouriteCities.last.name;
-        cityCountry = savedCitiesData!.favouriteCities.last.country;
-        cityLon = savedCitiesData!.favouriteCities.last.location.lon;
-        cityLat = savedCitiesData!.favouriteCities.last.location.lat;
+        cityName = savedCitiesData!.citiesList.last.name;
+        cityCountry = savedCitiesData!.citiesList.last.country;
+        cityLon = savedCitiesData!.citiesList.last.lon;
+        cityLat = savedCitiesData!.citiesList.last.lat;
         // + отправка запроса по выбранному городу.
         selectedCityWeatherData = await ApiClient()
             .getWeatherInfoAsObject(lat: cityLat!, lon: cityLon!);
