@@ -4,6 +4,7 @@ import 'package:weather_forecast_app/data_handling/network/models/weather_model.
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_widget.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
@@ -26,14 +27,14 @@ class HomeScreen extends StatelessWidget {
           // экран с ошибкой
           else if (snapshot.hasError) {
             return LoadingWidget(
-              infoWidget: () => Text('Ошибка: ${snapshot.error}'),
+              infoWidget: () =>
+                  Text('${AppTextConstants.error} ${snapshot.error}'),
             );
           } else if (snapshot.data!.any((element) => element == null)) {
             return LoadingWidget(
               infoWidget: () => const Padding(
                 padding: EdgeInsets.symmetric(horizontal: 40),
-                child: Text(
-                    'Превышено количество запросов к серверу: или еще что-то...'),
+                child: Text(AppTextConstants.errorToMuchRequestsOrSmth),
               ),
             );
           }
@@ -59,7 +60,7 @@ class HomeScreen extends StatelessWidget {
           else {
             return LoadingWidget(
               infoWidget: () =>
-                  const Text('Не удалось получить ответ с сервера'),
+                  const Text(AppTextConstants.errorCannotGetRequestFromAPI),
             );
           }
         },

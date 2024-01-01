@@ -6,6 +6,7 @@ import 'package:weather_forecast_app/data_handling/network/models/weather_model.
 
 import 'package:weather_forecast_app/routes/routes.dart';
 import 'package:weather_forecast_app/theme/app_main_themes.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 // глобавльная переменная, хранящая список сохранённых городов
 // может меняться внутри любого экрана и изменения будут актуальны везде.
@@ -40,9 +41,9 @@ void main() async {
   runApp(
     MaterialApp(
       theme: mainThemes,
-      title: 'Weather forecast',
-      initialRoute: '/home',
-      routes: routes,
+      title: AppTextConstants.materialAppTitle,
+      initialRoute: AppRoutes.homeRoute,
+      routes: AppRoutes.routes,
     ),
   );
 }

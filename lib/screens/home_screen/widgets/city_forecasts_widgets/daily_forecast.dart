@@ -5,6 +5,7 @@ import 'package:weather_forecast_app/data_handling/network/models/weather_model.
 
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class DailyForecastWidget extends StatelessWidget {
   final WeatherModel weatherData;
@@ -36,10 +37,8 @@ class DailyForecastWidget extends StatelessWidget {
                           height: 38,
                           child: InfoPerDay(
                             date: element.date,
-                            temperatureDay:
-                                element.dayTemperature,
-                            temperatureEvening:
-                                element.eveTemperature,
+                            temperatureDay: element.dayTemperature,
+                            temperatureEvening: element.eveTemperature,
                             weatherImage:
                                 'assets/images/weather_conditions/${element.iconID}.svg',
                           ),
@@ -72,8 +71,6 @@ class InfoPerDay extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    final currentDate =
-        DateTime.fromMillisecondsSinceEpoch(date * 1000, isUtc: true);
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 4),
       child: Table(
@@ -92,18 +89,18 @@ class InfoPerDay extends StatelessWidget {
                   style: AppTextStyles.mainFont),
               SvgPicture.asset(
                 weatherImage,
-                semanticsLabel: 'Main weather icon',
+                semanticsLabel: AppTextConstants.semanticLabelDayWeatherIcon,
                 // не работает
                 // fit: BoxFit.fill,
                 height: 30,
                 width: 30,
               ),
               Text(
-                '${temperatureDay.toString()}°',
+                '${temperatureDay.toString()}${AppTextConstants.symbolDegree}',
                 style: AppTextStyles.mainFont,
               ),
               Text(
-                '${temperatureEvening.toString()}°',
+                '${temperatureEvening.toString()}${AppTextConstants.symbolDegree}',
                 style: AppTextStyles.mainFont,
               ),
             ],

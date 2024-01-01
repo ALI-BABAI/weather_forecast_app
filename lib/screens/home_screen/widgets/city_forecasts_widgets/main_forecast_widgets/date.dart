@@ -3,6 +3,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class DateWidget extends StatelessWidget {
   final WeatherModel weatherData;

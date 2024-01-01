@@ -1,18 +1,23 @@
+// https://habr.com/ru/articles/690572/   // темы приложения
+// https://habr.com/ru/articles/776682/   // работа с шрифтами и виджетом Техт
+
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 
-TextStyle poppinsRegularExtended(
-    double fontSize, Color color, FontWeight fontWeight) {
-  return TextStyle(
-    // fontFamily: 'Poppins',
-    fontWeight: fontWeight,
-    fontSize: fontSize,
-    height: 1,
-    color: color,
-  );
-}
-
 abstract class AppTextStyles {
+  static TextStyle poppinsFont({
+    double fontSize = 22,
+    Color color = AppColors.darkBlue,
+    FontWeight fontWeight = FontWeight.bold,
+  }) {
+    return TextStyle(
+      fontWeight: fontWeight,
+      fontSize: fontSize,
+      height: 1,
+      color: color,
+    );
+  }
+
   static const appBarFont = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 33,

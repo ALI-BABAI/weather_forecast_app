@@ -21,7 +21,7 @@ class CityWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return DecoratedBox(
-      decoration: appDecoration,
+      decoration: AppDecorations.darkDecorationTheme,
       // вертикальный виджет с всей информации
       child: ListView(
         primary: true,

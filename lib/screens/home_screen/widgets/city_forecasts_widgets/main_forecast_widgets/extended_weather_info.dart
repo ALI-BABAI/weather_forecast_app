@@ -2,6 +2,7 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class ExtendedWeatherInfoWidget extends StatelessWidget {
   final WeatherModel weatherData;
@@ -18,13 +19,13 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WeatherParameter(
-                name: 'Wind: ',
-                info: ' ${weatherData.wind}m/s',
+                name: AppTextConstants.wind,
+                info: '${weatherData.wind}${AppTextConstants.unitMeterBySec}',
                 icon: Icons.air_rounded,
               ),
               WeatherParameter(
-                name: 'Pressure: ',
-                info: '${weatherData.pressure}hPa',
+                name: AppTextConstants.pressure,
+                info: '${weatherData.pressure}${AppTextConstants.unitHPa}',
                 icon: Icons.speed_rounded,
               ),
             ],
@@ -33,13 +34,13 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WeatherParameter(
-                name: 'Visibility: ',
-                info: '${weatherData.visibility}km',
+                name: AppTextConstants.visibility,
+                info: '${weatherData.visibility}${AppTextConstants.unitKm}',
                 icon: Icons.visibility_outlined,
               ),
               WeatherParameter(
-                name: 'Humidity: ',
-                info: '${weatherData.humidity}%',
+                name: AppTextConstants.humidity,
+                info: '${weatherData.humidity}${AppTextConstants.unitPercent}',
                 icon: Icons.water_drop_outlined,
               ),
             ],

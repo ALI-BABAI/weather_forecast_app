@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 final class SettingButtonItem {
   final String buttonName;
@@ -14,42 +15,42 @@ final class SettingButtonItem {
 
 final List settingsItems = [
   SettingButtonItem(
-    buttonName: 'Measurement units',
+    buttonName: AppTextConstants.measurementUnits,
     iconType: Icons.balance_rounded,
     function: () {
       debugPrint('handling...');
     },
   ),
   SettingButtonItem(
-    buttonName: 'Notifications',
+    buttonName: AppTextConstants.notifications,
     iconType: Icons.notifications,
     function: () {
       debugPrint('handling...');
     },
   ),
   SettingButtonItem(
-    buttonName: 'Language',
+    buttonName: AppTextConstants.language,
     iconType: Icons.language,
     function: () {
       debugPrint('handling...');
     },
   ),
   SettingButtonItem(
-    buttonName: 'Seed fedback',
+    buttonName: AppTextConstants.seedFedback,
     iconType: Icons.sms_outlined,
     function: () {
       debugPrint('handling...');
     },
   ),
   SettingButtonItem(
-    buttonName: 'Rate this app',
+    buttonName: AppTextConstants.rateThisApp,
     iconType: Icons.star,
     function: () {
       debugPrint('handling...');
     },
   ),
   SettingButtonItem(
-    buttonName: 'Share your weather',
+    buttonName: AppTextConstants.shareYourWeather,
     iconType: Icons.share,
     function: () {
       debugPrint('handling...');

@@ -2,10 +2,12 @@
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/routes/routes.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 import 'widgets/tools/tools_widget.dart';
 
@@ -22,7 +24,7 @@ class SettingsScreen extends StatelessWidget {
         appBar: AppBar(
           backgroundColor: AppColors.mainBackground,
           title: Text(
-            'Settings',
+            AppTextConstants.settings,
             style: theme.titleLarge, // style: AppTextStyles.appBarFont,
           ),
           actions: <Widget>[
@@ -32,9 +34,9 @@ class SettingsScreen extends StatelessWidget {
                 height: 50,
                 width: 50,
                 child: ElevatedButton(
-                  onPressed: () =>
-                      Navigator.pushReplacementNamed(context, '/home'),
-                  style: appBarButtonStyle,
+                  onPressed: () => Navigator.pushReplacementNamed(
+                      context, AppRoutes.homeRoute),
+                  style: AppButtonsStyle.navigationBtn,
                   child: const Icon(
                     Icons.close,
                     color: AppColors.white,
@@ -46,7 +48,7 @@ class SettingsScreen extends StatelessWidget {
           ],
         ),
         body: DecoratedBox(
-          decoration: appDecoration,
+          decoration: AppDecorations.darkDecorationTheme,
           child: ListView(
             primary: true,
             children: const [

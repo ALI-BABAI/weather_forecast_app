@@ -1,7 +1,11 @@
 import 'package:weather_forecast_app/screens/home_screen/home_screen.dart';
 import 'package:weather_forecast_app/screens/settings_screen/settings_screen.dart';
 
-final routes = {
-  '/home': (context) => const HomeScreen(),
-  '/settings': (context) => const SettingsScreen(),
-};
+abstract class AppRoutes {
+  static const homeRoute = '/home';
+  static const settingRoute = '/setting';
+  static final routes = {
+    homeRoute: (context) => const HomeScreen(),
+    settingRoute: (context) => const SettingsScreen(),
+  };
+}

@@ -1,12 +1,26 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 
-const appDecoration = BoxDecoration(
-  gradient: appGradientBackground,
-);
+abstract class AppDecorations {
+  static const darkDecorationTheme = BoxDecoration(
+    gradient: AppGradients.darkBackground,
+  );
 
-const appGradientBackground = LinearGradient(
-  colors: AppColors.gradientBackground,
-  begin: Alignment.topCenter,
-  end: Alignment.bottomCenter,
-);
+  static const lightDecorationTheme = BoxDecoration(
+    gradient: AppGradients.lightBackground,
+  );
+}
+
+abstract class AppGradients {
+  static const darkBackground = LinearGradient(
+    colors: AppColors.darkGradientBackground,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+
+  static const lightBackground = LinearGradient(
+    colors: AppColors.lightGradientBackground,
+    begin: Alignment.topCenter,
+    end: Alignment.bottomCenter,
+  );
+}

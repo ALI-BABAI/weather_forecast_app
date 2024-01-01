@@ -16,6 +16,7 @@ import 'package:weather_forecast_app/theme/app_text_styles.dart';
 // и использовать только необходимый класс или функцию.
 // Это полезно для оптимизации размера кода и избежания конфликтов имен*/
 import 'package:flutter/services.dart' show rootBundle;
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class LocationWidget extends StatefulWidget {
   const LocationWidget({super.key});
@@ -43,7 +44,7 @@ class _LocationWidgetState extends State<LocationWidget> {
           Padding(
             padding: const EdgeInsets.symmetric(vertical: 8.0, horizontal: 8),
             child: Text(
-              'Location',
+              AppTextConstants.location,
               // style: AppTextStyles.settingsScreenHeaderFont,
               style: theme.titleSmall,
             ),
@@ -59,7 +60,7 @@ class _LocationWidgetState extends State<LocationWidget> {
               style: AppTextStyles.expandedMainFont,
               cursorColor: Colors.cyan,
               decoration: InputDecoration(
-                hintText: 'Enter a city name',
+                hintText: AppTextConstants.enterCityName,
                 hintStyle: AppTextStyles.secondaryFont,
                 focusedBorder: const OutlineInputBorder(
                   borderSide: BorderSide(color: AppColors.orange),
@@ -109,12 +110,8 @@ class _LocationWidgetState extends State<LocationWidget> {
                           ),
                         ),
                         child: Text(
-                          'add',
-                          style: poppinsRegularExtended(
-                            22,
-                            Colors.black,
-                            FontWeight.bold,
-                          ),
+                          AppTextConstants.add,
+                          style: AppTextStyles.poppinsFont(),
                         ),
                       ),
                     ),
@@ -158,13 +155,15 @@ class _LocationWidgetState extends State<LocationWidget> {
                   ),
                   // город и страна
                   title: Text(
-                    '${savedCity.name}, ${savedCity.country}',
+                    '${savedCity.name}${AppTextConstants.symbolComma} ${savedCity.country}',
                     style: AppTextStyles.expandedMainFont,
                     overflow: TextOverflow.ellipsis,
                   ),
                   // информация по текущему городу
                   subtitle: Text(
-                    '${weatherInSavedCities.elementAt(index)!.temperature}°, ${weatherInSavedCities.elementAt(index)!.description}',
+                    '${weatherInSavedCities.elementAt(index)!.temperature}'
+                    '${AppTextConstants.symbolDegree}${AppTextConstants.symbolComma} '
+                    '${weatherInSavedCities.elementAt(index)!.description}',
                     style: AppTextStyles.secondaryFont,
                   ),
                 ),
@@ -183,77 +182,91 @@ class _LocationWidgetState extends State<LocationWidget> {
     late String jsonString;
 
     try {
-      // Загрузка данных из файла city_list.json
-      jsonString = await rootBundle.loadString('assets/city_list.json');
-      final List<dynamic> citiesData = json.decode(jsonString);
-
-      // Преобразование данных в объекты City
-      final List<CityModel> cityItem =
-          citiesData.map((json) => CityModel.fromJson(json)).toList();
-
-      // Поиск введённого города из списка
-      final CityModel selectedCity = cityItem.firstWhere(
+      // Проверка наличия города в списке
+      bool cityExists = savedCitiesData!.citiesList.any(
         (city) => city.name.toLowerCase() == userString.toLowerCase(),
-        orElse: () => CityModel(
-          name: '',
-          country: '',
-          lon: 0.0,
-          lat: 0.0,
-        ),
       );
 
-      WeatherModel? selectedCityWeatherData;
+      if (cityExists) {
+        debugPrint('Город уже существует в списке.');
+        setState(
+          () {
+            AppAllertWindow.warningCityAlreadyExist(context);
+          },
+        );
+      } else {
+        // Загрузка данных из файла city_list.json
+        jsonString = await rootBundle.loadString('assets/city_list.json');
+        final List<dynamic> citiesData = json.decode(jsonString);
 
-      // Проверка на совпадение города +
-      // вот тут нужно сохранять в файл.
-      if (selectedCity.name != '') {
-        savedCitiesData!.citiesList.add(CityModel(
-          name: selectedCity.name,
-          country: selectedCity.country,
-          lon: selectedCity.lon,
-          lat: selectedCity.lat,
-        ));
-        // записываем в файл
-        await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
+        // Преобразование данных в объекты City
+        final List<CityModel> cityItem =
+            citiesData.map((json) => CityModel.fromJson(json)).toList();
 
-        cityName = savedCitiesData!.citiesList.last.name;
-        cityCountry = savedCitiesData!.citiesList.last.country;
-        cityLon = savedCitiesData!.citiesList.last.lon;
-        cityLat = savedCitiesData!.citiesList.last.lat;
-        // + отправка запроса по выбранному городу.
-        selectedCityWeatherData = await ApiClient()
-            .getWeatherInfoAsObject(lat: cityLat!, lon: cityLon!);
+        // Поиск введённого города из списка
+        final CityModel selectedCity = cityItem.firstWhere(
+          (city) => city.name.toLowerCase() == userString.toLowerCase(),
+          orElse: () => CityModel(
+            name: '',
+            country: '',
+            lon: 0.0,
+            lat: 0.0,
+          ),
+        );
 
-        // добавляем в глобальную переменную инфу по добавленному городу
-        weatherInSavedCities.add(selectedCityWeatherData);
+        WeatherModel? selectedCityWeatherData;
+
+        // Проверка на совпадение города +
+        // вот тут нужно сохранять в файл.
+        if (selectedCity.name != '') {
+          savedCitiesData!.citiesList.add(CityModel(
+            name: selectedCity.name,
+            country: selectedCity.country,
+            lon: selectedCity.lon,
+            lat: selectedCity.lat,
+          ));
+          // записываем в файл
+          await savedCitiesFile.writeAsString(jsonEncode(savedCitiesData));
+
+          cityName = savedCitiesData!.citiesList.last.name;
+          cityCountry = savedCitiesData!.citiesList.last.country;
+          cityLon = savedCitiesData!.citiesList.last.lon;
+          cityLat = savedCitiesData!.citiesList.last.lat;
+          // + отправка запроса по выбранному городу.
+          selectedCityWeatherData = await ApiClient()
+              .getWeatherInfoAsObject(lat: cityLat!, lon: cityLon!);
+
+          // добавляем в глобальную переменную инфу по добавленному городу
+          weatherInSavedCities.add(selectedCityWeatherData);
+        }
+        // Обновление состояния виджета
+        setState(
+          () {
+            if (selectedCity.name != '') {
+              // Добавление города в список savedCities
+              savedCities.add(
+                Cities(
+                  city: cityName!,
+                  lon: cityLon!,
+                  lat: cityLat!,
+                  country: cityCountry!,
+                  weatherData: selectedCityWeatherData!,
+                ),
+              );
+              // Ляпота. но нет плавности...
+              _cityController.clear();
+              FocusScope.of(context).unfocus();
+            } else {
+              // всплывающее окно
+              AppAllertWindow.warningCityNotFound(context);
+              cityName = null;
+              cityCountry = null;
+              cityLon = null;
+              cityLat = null;
+            }
+          },
+        );
       }
-      // Обновление состояния виджета
-      setState(
-        () {
-          if (selectedCity.name != '') {
-            // Добавление города в список savedCities
-            savedCities.add(
-              Cities(
-                city: cityName!,
-                lon: cityLon!,
-                lat: cityLat!,
-                country: cityCountry!,
-                weatherData: selectedCityWeatherData!,
-              ),
-            );
-            // Ляпота. но нет плавности...
-            _cityController.clear();
-            FocusScope.of(context).unfocus();
-          } else {
-            // всплывающее окно
-            AppAllertWindow.warningCityNotFound(context);
-            cityName = null;
-            cityCountry = null;
-            cityLon = null;
-            cityLat = null;
-          }
-        },
-      );
     } catch (exeprion) {
       debugPrint('Ошибка при загрузке файла: $exeprion');
       setState(() => AppAllertWindow.warningCityNotFound(context));

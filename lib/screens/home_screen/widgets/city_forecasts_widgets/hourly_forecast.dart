@@ -4,6 +4,7 @@ import 'package:intl/intl.dart';
 import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class HourlyForecastWidget extends StatelessWidget {
   final WeatherModel weatherData;
@@ -83,17 +84,17 @@ class HourItem extends StatelessWidget {
               style: AppTextStyles.smallestSecondaryFont,
             ),
             const SizedBox(height: 5),
-          SvgPicture.asset(
-            image,
-            semanticsLabel: 'Main weather icon',
-            // не работает
-            // fit: BoxFit.fill,
-            height: 25,
-            width: 25,
-          ),
+            SvgPicture.asset(
+              image,
+              semanticsLabel: AppTextConstants.semanticLabelHourWeatherIcon,
+              // не работает
+              // fit: BoxFit.fill,
+              height: 25,
+              width: 25,
+            ),
             const SizedBox(height: 5),
             Text(
-              '$weather°',
+              '$weather${AppTextConstants.symbolDegree}',
               style: AppTextStyles.mainFont,
             ),
           ],
