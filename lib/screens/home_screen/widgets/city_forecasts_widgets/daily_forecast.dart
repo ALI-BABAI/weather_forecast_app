@@ -57,7 +57,7 @@ class DailyForecastWidget extends StatelessWidget {
 }
 
 class InfoPerDay extends StatelessWidget {
-  final int date;
+  final DateTime date;
   final int temperatureDay;
   final int temperatureEvening;
   final String weatherImage;
@@ -88,7 +88,7 @@ class InfoPerDay extends StatelessWidget {
           TableRow(
             children: [
               Text(
-                  '${DateFormat.d().format(currentDate)} ${DateFormat.MMMM().format(currentDate)}',
+                  '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
                   style: AppTextStyles.mainFont),
               SvgPicture.asset(
                 weatherImage,

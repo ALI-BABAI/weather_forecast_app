@@ -1,5 +1,5 @@
 class Daily {
-  final int date;
+  final DateTime date;
   final int pressure;
   final int humidity;
 
@@ -34,9 +34,11 @@ class Daily {
     required this.iconID,
   });
 
-  factory Daily.fromJSON(Map<String, dynamic> json) {
+  factory Daily.fromJSON(Map<String, dynamic> json, int timezoneOffset) {
+    int date = json['dt'] + timezoneOffset;
+    final day = DateTime.fromMillisecondsSinceEpoch(date * 1000, isUtc: true);
     return Daily(
-      date: json['dt'],
+      date: day,
       pressure: json['pressure'],
       humidity: json['humidity'],
       dayTemperature: json['temp']['day'].round().toInt(),

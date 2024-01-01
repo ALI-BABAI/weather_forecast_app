@@ -3,7 +3,7 @@ import 'package:weather_forecast_app/data_handling/network/models/build_in_model
 
 class WeatherModel {
   final int timezoneOffset;
-  final int date;
+  final DateTime date;
   final int temperature;
   final int temperatureFillsLike;
   final int pressure;
@@ -32,9 +32,12 @@ class WeatherModel {
   });
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
+    DateTime currentDay = DateTime.fromMillisecondsSinceEpoch(
+        (json['current']['dt'].toInt() + json['timezone_offset']) * 1000,
+        isUtc: true);
     return WeatherModel(
       timezoneOffset: json['timezone_offset'],
-      date: json['current']['dt'].toInt(),
+      date: currentDay,
       temperature: json['current']['temp'].round().toInt(),
       temperatureFillsLike: json['current']['feels_like'].round().toInt(),
       pressure: json['current']['pressure'],
@@ -44,10 +47,12 @@ class WeatherModel {
       description: json['current']['weather'][0]['description'],
       iconID: json['current']['weather'][0]['id'],
       hourly: (json['hourly'] as List<dynamic>)
-          .map((e) => Hourly.fromJSON(e as Map<String, dynamic>))
+          .map((e) => Hourly.fromJSON(
+              e as Map<String, dynamic>, json['timezone_offset']))
           .toList(),
       daily: (json['daily'] as List<dynamic>)
-          .map((e) => Daily.fromJSON(e as Map<String, dynamic>))
+          .map((e) => Daily.fromJSON(
+              e as Map<String, dynamic>, json['timezone_offset']))
           .toList(),
     );
   }

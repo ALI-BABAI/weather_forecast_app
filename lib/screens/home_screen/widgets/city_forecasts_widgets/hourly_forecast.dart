@@ -26,11 +26,6 @@ class HourlyForecastWidget extends StatelessWidget {
             itemCount: 24, // Количество элементов
             itemBuilder: (BuildContext context, int index) {
               // Выводим для каждого следующего часа информацию по погоде
-              DateTime currentDate = DateTime.fromMillisecondsSinceEpoch(
-                  (weatherData.timezoneOffset +
-                          weatherData.hourly.elementAt(index).date) *
-                      1000,
-                  isUtc: true);
               String temperatureAtHour = weatherData.hourly
                   .elementAt(index)
                   .temperature
@@ -40,8 +35,9 @@ class HourlyForecastWidget extends StatelessWidget {
                 // отступ между элементами
                 padding: const EdgeInsets.symmetric(horizontal: 10),
                 child: HourItem(
-                  hour: DateFormat.Hm().format(currentDate),
-                  image: 'assets/images/weather_conditions/${weatherData.hourly.elementAt(index).iconID}.svg',
+                  hour: DateFormat.Hm().format(weatherData.hourly.elementAt(index).date),
+                  image:
+                      'assets/images/weather_conditions/${weatherData.hourly.elementAt(index).iconID}.svg',
                   weather: temperatureAtHour,
                 ),
               );

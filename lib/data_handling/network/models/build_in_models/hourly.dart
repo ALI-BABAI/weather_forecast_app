@@ -1,12 +1,7 @@
 class Hourly {
-  final int date;
+  final DateTime date;
   final int temperature;
   final int iconID;
-
-  /*
-  @JsonKey(name: 'temp')
-  final List<Weather> weather;
-  */
 
   Hourly({
     required this.date,
@@ -14,9 +9,12 @@ class Hourly {
     required this.iconID,
   });
 
-  factory Hourly.fromJSON(Map<String, dynamic> json) {
+  factory Hourly.fromJSON(Map<String, dynamic> json, int timezoneOfset) {
+    int date = json['dt'] + timezoneOfset;
+    DateTime currentHour =
+        DateTime.fromMillisecondsSinceEpoch(date * 1000, isUtc: true);
     return Hourly(
-      date: json['dt'],
+      date: currentHour,
       temperature: json['temp'].round().toInt(),
       iconID: json['weather'][0]['id'],
     );
