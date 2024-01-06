@@ -1,12 +1,11 @@
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/directory/initialize_app.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
+import 'package:weather_forecast_app/repositories/directory/initialize_app.dart';
+import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
+import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
 
-import 'package:weather_forecast_app/routes/routes.dart';
-import 'package:weather_forecast_app/theme/app_main_themes.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
+import 'package:weather_forecast_app/weather_app.dart';
+
 
 // глобавльная переменная, хранящая список сохранённых городов
 // может меняться внутри любого экрана и изменения будут актуальны везде.
@@ -35,17 +34,11 @@ late File savedCitiesFile;
 void main() async {
   // ошибка без строки
   WidgetsFlutterBinding.ensureInitialized();
-
+  
   // Получение/создание списка сохранённых городов на устройстве пользователя
   await initializeApp();
-  runApp(
-    MaterialApp(
-      theme: mainThemes,
-      title: AppTextConstants.materialAppTitle,
-      initialRoute: AppRoutes.homeRoute,
-      routes: AppRoutes.routes,
-    ),
-  );
+  
+  runApp(const WeatherApp());
 }
 
 // https://api.flutter.dev/flutter/intl/DateFormat-class.html

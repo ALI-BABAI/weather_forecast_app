@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:path_provider/path_provider.dart';
-import 'package:weather_forecast_app/data_handling/directory/read_cities.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
+import 'package:weather_forecast_app/repositories/directory/read_cities.dart';
+import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 import 'package:weather_forecast_app/main.dart';
 
 Future initializeApp() async {

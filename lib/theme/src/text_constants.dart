@@ -5,7 +5,7 @@ abstract class AppTextConstants {
   static const error = 'Ошибка:';
   static const errorToMuchRequestsOrSmth =
       'The number of requests to the server has been exceeded: or something else...';
-  static const errorCannotGetRequestFromAPI =
+  static const errorCannotGetResponseFromAPI =
       'Couldn\'t get a response from the server';
   static const semanticLabelCurrentWeatherIcon = 'Main weather icon';
   static const semanticLabelHourWeatherIcon = 'Hour weather icon';
@@ -37,8 +37,8 @@ abstract class AppTextConstants {
 
   static const allertMessageCantFindCity =
       'Couldn\'t find the city.\nTry again!';
-      
-       static const allertMessageCityAlreadyExiset =
+
+  static const allertMessageCityAlreadyExiset =
       'The city has already been saved!';
 
   static const settings = 'Settings';
@@ -52,4 +52,9 @@ abstract class AppTextConstants {
   static const seedFedback = 'Seed fedback';
   static const rateThisApp = 'Rate this app';
   static const shareYourWeather = 'Share your weather';
+
+  static const apiOverlimitErr = 'Error: The limit of requests to the server has been exceeded';
+  static const apiNetworkErr = 'Error: There is no network connection';
+
+  static const apiOtherErr = 'An error has occurred. Please try again later!';
 }

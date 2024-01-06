@@ -1,5 +1,5 @@
-import 'package:weather_forecast_app/data_handling/network/models/build_in_models/daily.dart';
-import 'package:weather_forecast_app/data_handling/network/models/build_in_models/hourly.dart';
+import 'package:weather_forecast_app/repositories/network/models/build_in_models/daily.dart';
+import 'package:weather_forecast_app/repositories/network/models/build_in_models/hourly.dart';
 
 class WeatherModel {
   final int timezoneOffset;

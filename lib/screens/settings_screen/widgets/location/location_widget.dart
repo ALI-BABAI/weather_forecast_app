@@ -1,10 +1,10 @@
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/directory/delete_cities.dart';
-import 'package:weather_forecast_app/data_handling/network/api_client.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
-import 'package:weather_forecast_app/data_handling/network/models/weather_model.dart';
+import 'package:weather_forecast_app/repositories/directory/delete_cities.dart';
+import 'package:weather_forecast_app/repositories/network/api_client.dart';
+import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
+import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/screens/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/screens/settings_screen/widgets/location/location_items.dart';
@@ -180,11 +180,11 @@ class _LocationWidgetState extends State<LocationWidget> {
   void _checkCity(String userString) async {
     // Future _checkCity(String userString) async {
     late String jsonString;
-
+    userString = userString.toLowerCase().replaceAll(' ', '');
     try {
       // Проверка наличия города в списке
       bool cityExists = savedCitiesData!.citiesList.any(
-        (city) => city.name.toLowerCase() == userString.toLowerCase(),
+        (city) => city.name.toLowerCase().replaceAll(' ', '') == userString,
       );
 
       if (cityExists) {
@@ -205,7 +205,7 @@ class _LocationWidgetState extends State<LocationWidget> {
 
         // Поиск введённого города из списка
         final CityModel selectedCity = cityItem.firstWhere(
-          (city) => city.name.toLowerCase() == userString.toLowerCase(),
+          (city) => city.name.toLowerCase().replaceAll(' ', '') == userString,
           orElse: () => CityModel(
             name: '',
             country: '',

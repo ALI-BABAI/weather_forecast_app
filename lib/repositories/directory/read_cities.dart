@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/data_handling/network/models/city_model.dart';
+import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 
 // Считывание файла и сохранение считанных городов в переменную типа SavedCities
 Future<SavedCities?> readSavedCitiesInfo(File savedCitiesFile) async {
