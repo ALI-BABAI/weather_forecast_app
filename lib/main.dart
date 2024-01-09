@@ -1,11 +1,8 @@
-import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/repositories/directory/initialize_app.dart';
-import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/repositories/preferency_manager.dart';
 
 import 'package:weather_forecast_app/weather_app.dart';
-
 
 // глобавльная переменная, хранящая список сохранённых городов
 // может меняться внутри любого экрана и изменения будут актуальны везде.
@@ -27,17 +24,15 @@ import 'package:weather_forecast_app/weather_app.dart';
     }
   ]
 }*/
-late SavedCities? savedCitiesData;
 late List<WeatherModel?> weatherInSavedCities;
-late File savedCitiesFile;
 
 void main() async {
   // ошибка без строки
   WidgetsFlutterBinding.ensureInitialized();
-  
+
   // Получение/создание списка сохранённых городов на устройстве пользователя
-  await initializeApp();
-  
+  await PreferencesManager().initData();
+
   runApp(const WeatherApp());
 }
 

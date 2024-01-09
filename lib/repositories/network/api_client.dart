@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
-import 'package:weather_forecast_app/main.dart';
 
 enum ApiExeptionType {
   network, // отсутствие интернета у пользователя
@@ -67,10 +67,11 @@ class ApiClient {
 
 // Возвращает список объектов типа WeatherData, хранящий информацию
 // по погоде во всех сохранённых городах
-  Future<List<WeatherModel?>?> getWeatherInfoForSavedCities() async {
+  Future<List<WeatherModel?>?> getWeatherInfoForSavedCities(
+      {required SavedCities savedCities}) async {
     List<WeatherModel?> weatherDataList = [];
     try {
-      for (final city in savedCitiesData!.citiesList) {
+      for (final city in savedCities.citiesList) {
         final weatherData = await getWeatherInfoAsObject(
           lat: city.lat,
           lon: city.lon,
