@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 import 'package:weather_forecast_app/repositories/network/api_client.dart';
-import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/repositories/preferency_manager.dart';
@@ -8,61 +8,35 @@ import 'package:weather_forecast_app/screens/home_screen/widgets/city_widget.dar
 import 'package:weather_forecast_app/screens/home_screen/widgets/loading_widget.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
+// Инициализация происходит каждый раз при перезаходе на главный экран.
+// По идее, инициализация SharedPreferences в классе(репозитория?)
 class HomeScreen extends StatelessWidget {
   const HomeScreen({
     super.key,
   });
   @override
   Widget build(BuildContext context) {
-    return FutureBuilder(
-      future: PreferencesManager().getListSavedCities(),
-      builder: (context, snapshot) {
-        switch (snapshot.connectionState) {
-          case ConnectionState.waiting:
-            {
-              return LoadingWidget(
-                  infoWidget: () => const CircularProgressIndicator());
-            }
-          case ConnectionState.done:
-            {
-              // экран с данными по сохранённым городам
-              if ((snapshot.hasData) &&
-                  (snapshot.data!.citiesList.isNotEmpty)) {
-                // копируем считанные ответы с сервера в глобальную переменную
-                final SavedCities savedCitiesList = snapshot.data!;
-                return FutureGetWeatherInfo(savedCities: savedCitiesList);
-              } else {
-                debugPrint(
-                    'Что-то пошло не так, а что??? citiesList = ${snapshot.data}');
-                return LoadingWidget(
-                  infoWidget: () =>
-                      Text('${AppTextConstants.error} ${snapshot.error}'),
-                );
-              }
-            }
-          default:
-            {
-              return LoadingWidget(
-                infoWidget: () => const CircularProgressIndicator(),
-              );
-            }
-        }
-      },
-    );
+    final state = context.read<PreferencesManager>();
+    // Костыль, ещё и не рабочий...
+    // savedListOfCities: <not initialized>)
+    // if (state.savedListOfCities.citiesList.isEmpty) {
+    //   state.initData();
+    // }
+    // В синглтон обернуть метод класса?? Это вообще легально?)
+    state.initData();
+    return const FutureGetWeatherInfo();
   }
 }
 
 class FutureGetWeatherInfo extends StatelessWidget {
-  final SavedCities savedCities;
-  const FutureGetWeatherInfo({
-    super.key,
-    required this.savedCities,
-  });
+  const FutureGetWeatherInfo({super.key});
 
   @override
   Widget build(BuildContext context) {
+    final savedCities = context.select(
+        (PreferencesManager preferencesManager) =>
+            preferencesManager.savedListOfCities);
     return Scaffold(
-      // запускается асинхронный метод возвращающий список данных по сохранённым городам
       body: FutureBuilder<List<WeatherModel?>?>(
         future:
             ApiClient().getWeatherInfoForSavedCities(savedCities: savedCities),
@@ -127,7 +101,7 @@ class FutureGetWeatherInfo extends StatelessWidget {
             default:
               {
                 return LoadingWidget(
-                  infoWidget: () => const CircularProgressIndicator(),
+                  infoWidget: () => const CircularProgressIndicator()
                 );
               }
           }
