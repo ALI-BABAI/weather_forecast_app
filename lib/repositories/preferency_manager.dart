@@ -1,3 +1,4 @@
+import 'dart:async';
 import 'dart:convert';
 
 import 'package:flutter/material.dart';
@@ -7,6 +8,11 @@ import 'package:weather_forecast_app/main.dart';
 import 'package:weather_forecast_app/repositories/network/api_client.dart';
 import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
 import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+
+enum SearchState {
+  loaded,
+  loading,
+}
 
 class PreferencesManager extends ChangeNotifier {
   final SharedPreferences prefs;
@@ -45,7 +51,7 @@ class PreferencesManager extends ChangeNotifier {
           lon: 48.400002,
           lat: 54.333332,
         ),
-              CityModel(
+        CityModel(
           name: "Рандомный город с длинным названием",
           country: "US",
           lon: -82.348056,
@@ -73,7 +79,6 @@ class PreferencesManager extends ChangeNotifier {
   // обработка добавления пользователем города
   Future<void> addCityToDB({required String userString}) async {
     String jsonString;
-
     try {
       userString = userString.toLowerCase().replaceAll(' ', '');
       bool isExist = savedListOfCities.citiesList.any(
@@ -131,9 +136,14 @@ class PreferencesManager extends ChangeNotifier {
 
   // обработка удаления города
   void removeCityInDB(int index) {
+    if (index == 0) {
+      prefs.remove(_citiesKey);
+    }
     savedListOfCities.citiesList.removeAt(index);
     weatherInSavedCities.removeAt(index);
     _saveCitiesList(savedCities: savedListOfCities);
     notifyListeners();
   }
+
+  //
 }

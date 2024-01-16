@@ -1,3 +1,5 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_forecast_app/main.dart';
@@ -7,8 +9,9 @@ import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class LocationWidget extends StatelessWidget {
-  const LocationWidget({super.key});
-
+  LocationWidget({super.key});
+  final StreamController<SearchState> _searchController =
+      StreamController<SearchState>();
   @override
   Widget build(BuildContext context) {
     // final Widget citiesList =
@@ -27,8 +30,8 @@ class LocationWidget extends StatelessWidget {
             style: theme.titleSmall,
             // style: AppTextStyles.settingsScreenHeaderFont,
           ),
-          const SearchBarWidget(),
-          const SavedLocationsWidget(),
+          SearchBarWidget(searchController: _searchController),
+          SavedLocationsWidget(searchController: _searchController),
         ],
       ),
     );
@@ -36,14 +39,25 @@ class LocationWidget extends StatelessWidget {
 }
 
 class SearchBarWidget extends StatefulWidget {
-  const SearchBarWidget({super.key});
+  final StreamController<SearchState> searchController;
+  const SearchBarWidget({super.key, required this.searchController});
 
   @override
-  State<SearchBarWidget> createState() => _SearchBarWidgetState();
+  State<SearchBarWidget> createState() =>
+      _SearchBarWidgetState(searchController: searchController);
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
   final TextEditingController _cityController = TextEditingController();
+  final StreamController<SearchState> searchController;
+
+  _SearchBarWidgetState({required this.searchController});
+
+  @override
+  void dispose() {
+    searchController.close();
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -53,9 +67,13 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         height: 46,
         child: TextField(
           controller: _cityController,
-          // onSubmitted: (value) => _checkCity(value, savedCities),
-          onSubmitted: (value) =>
-              context.read<PreferencesManager>().addCityToDB(userString: value),
+          onSubmitted: (value) async {
+            searchController.add(SearchState.loading);
+            await context
+                .read<PreferencesManager>()
+                .addCityToDB(userString: value);
+            searchController.add(SearchState.loaded);
+          },
           keyboardAppearance: Brightness.dark,
           textCapitalization: TextCapitalization.words,
           style: AppTextStyles.expandedMainFont,
@@ -89,20 +107,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   child: TextButton(
                     // https://www.youtube.com/watch?v=f3mI0thSNOs
                     onPressed: () async {
-                      BuildContext thisContext = context;
-                      showDialog(
-                        context: thisContext,
-                        builder: (context) {
-                          return const Center(child: CircularProgressIndicator());
-                        },
-                      );
-                      context
+                      searchController.add(SearchState.loading);
+                      await context
                           .read<PreferencesManager>()
                           .addCityToDB(userString: _cityController.text);
-                      // _checkCity(_cityController.text, savedCities);
-      
-                      // await Future.delayed(Duration(seconds: 1));
-                      Navigator.of(thisContext).pop();
+                      searchController.add(SearchState.loaded);
                     },
                     style: ButtonStyle(
                       backgroundColor:
@@ -128,67 +137,147 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   }
 }
 
-class SavedLocationsWidget extends StatelessWidget {
-  const SavedLocationsWidget({super.key});
+class SavedLocationsWidget extends StatefulWidget {
+  final StreamController<SearchState> searchController;
+  const SavedLocationsWidget({super.key, required this.searchController});
+
+  @override
+  State<SavedLocationsWidget> createState() =>
+      _SavedLocationsWidgetState(searchController: searchController);
+}
+
+class _SavedLocationsWidgetState extends State<SavedLocationsWidget> {
+  final StreamController<SearchState> searchController;
+
+  _SavedLocationsWidgetState({required this.searchController});
+  @override
+  void dispose() {
+    searchController.close();
+    debugPrint(searchController.isClosed.toString());
+    debugPrint(searchController.isPaused.toString());
+    debugPrint(searchController.hasListener.toString());
+    super.dispose();
+  }
 
   @override
   Widget build(BuildContext context) {
     final state = context.read<PreferencesManager>();
     final valueList = context.watch<PreferencesManager>().savedListOfCities;
-    return Column(
-      children: [
-        ListView.builder(
-          primary: false,
-          shrinkWrap: true,
-          itemCount: valueList.citiesList.length,
-          itemBuilder: (context, index) {
-            final savedCity = valueList.citiesList[index];
-            return Dismissible(
-              key: UniqueKey(),
-              onDismissed: (direction) {
-                state.removeCityInDB(index);
-                // _deleteCity(savedCities: savedCities, index: index);
-                // setState(() => {});
-              },
-              child: ListTile(
-                contentPadding: const EdgeInsets.symmetric(horizontal: 3),
-                // константная иконка геопозиции
-                leading: const Icon(
-                  Icons.location_on,
-                  size: 40,
-                  color: AppColors.white,
-                ),
-                // кнопка удаления
-                trailing: IconButton(
-                  onPressed: () {
-                    state.removeCityInDB(index);
-                    // _deleteCity(savedCities: savedCities, index: index);
-                    // setState(() => {});
-                  },
-                  icon: const Icon(
-                    Icons.delete_forever,
-                    color: AppColors.orange,
-                    size: 35,
+    debugPrint(searchController.isClosed.toString());
+    debugPrint(searchController.isPaused.toString());
+    debugPrint(searchController.hasListener.toString());
+    return StreamBuilder(
+      stream: searchController.stream,
+      initialData: SearchState.loaded,
+      builder: (context, snapshot) {
+        if (snapshot.data == SearchState.loading) {
+          return const Center(child: CircularProgressIndicator());
+        } else {
+          return ListView.builder(
+            primary: false,
+            shrinkWrap: true,
+            itemCount: valueList.citiesList.length,
+            itemBuilder: (context, index) {
+              final savedCity = valueList.citiesList[index];
+              return Dismissible(
+                key: UniqueKey(),
+                onDismissed: (direction) => state.removeCityInDB(index),
+                child: ListTile(
+                  contentPadding: const EdgeInsets.symmetric(horizontal: 3),
+                  // константная иконка геопозиции
+                  leading: const Icon(
+                    Icons.location_on,
+                    size: 40,
+                    color: AppColors.white,
+                  ),
+                  // кнопка удаления
+                  trailing: IconButton(
+                    onPressed: () => state.removeCityInDB(index),
+                    icon: const Icon(
+                      Icons.delete_forever,
+                      color: AppColors.orange,
+                      size: 35,
+                    ),
+                  ),
+                  // город и страна
+                  title: Text(
+                    '${savedCity.name}${AppTextConstants.symbolComma} ${savedCity.country}',
+                    style: AppTextStyles.expandedMainFont,
+                    overflow: TextOverflow.ellipsis,
+                  ),
+                  // информация по текущему городу
+                  subtitle: Text(
+                    '${weatherInSavedCities.elementAt(index)!.temperature}'
+                    '${AppTextConstants.symbolDegree}${AppTextConstants.symbolComma} '
+                    '${weatherInSavedCities.elementAt(index)!.description}',
+                    style: AppTextStyles.secondaryFont,
                   ),
                 ),
-                // город и страна
-                title: Text(
-                  '${savedCity.name}${AppTextConstants.symbolComma} ${savedCity.country}',
-                  style: AppTextStyles.expandedMainFont,
-                  overflow: TextOverflow.ellipsis,
-                ),
-                // информация по текущему городу
-                subtitle: Text(
-                  '${weatherInSavedCities.elementAt(index)!.temperature}'
-                  '${AppTextConstants.symbolDegree}${AppTextConstants.symbolComma} '
-                  '${weatherInSavedCities.elementAt(index)!.description}',
-                  style: AppTextStyles.secondaryFont,
-                ),
-              ),
-            );
-          },
-        )
-      ],
+              );
+            },
+          );
+        }
+      },
     );
+    /*
+    // Column(
+    //   children: [
+    //     if (searchState == SearchState.loading)
+    //       const Center(child: CircularProgressIndicator())
+    //     else
+    //       ListView.builder(
+    //         primary: false,
+    //         shrinkWrap: true,
+    //         itemCount: valueList.citiesList.length,
+    //         itemBuilder: (context, index) {
+    //           final savedCity = valueList.citiesList[index];
+    //           return Dismissible(
+    //             key: UniqueKey(),
+    //             onDismissed: (direction) {
+    //               state.removeCityInDB(index);
+    //               // _deleteCity(savedCities: savedCities, index: index);
+    //               // setState(() => {});
+    //             },
+    //             child: ListTile(
+    //               contentPadding: const EdgeInsets.symmetric(horizontal: 3),
+    //               // константная иконка геопозиции
+    //               leading: const Icon(
+    //                 Icons.location_on,
+    //                 size: 40,
+    //                 color: AppColors.white,
+    //               ),
+    //               // кнопка удаления
+    //               trailing: IconButton(
+    //                 onPressed: () {
+    //                   state.removeCityInDB(index);
+    //                   // _deleteCity(savedCities: savedCities, index: index);
+    //                   // setState(() => {});
+    //                 },
+    //                 icon: const Icon(
+    //                   Icons.delete_forever,
+    //                   color: AppColors.orange,
+    //                   size: 35,
+    //                 ),
+    //               ),
+    //               // город и страна
+    //               title: Text(
+    //                 '${savedCity.name}${AppTextConstants.symbolComma} ${savedCity.country}',
+    //                 style: AppTextStyles.expandedMainFont,
+    //                 overflow: TextOverflow.ellipsis,
+    //               ),
+    //               // информация по текущему городу
+    //               subtitle: Text(
+    //                 '${weatherInSavedCities.elementAt(index)!.temperature}'
+    //                 '${AppTextConstants.symbolDegree}${AppTextConstants.symbolComma} '
+    //                 '${weatherInSavedCities.elementAt(index)!.description}',
+    //                 style: AppTextStyles.secondaryFont,
+    //               ),
+    //             ),
+    //           );
+    //         },
+    //       )
+    //   ],
+    // );
+    */
   }
 }

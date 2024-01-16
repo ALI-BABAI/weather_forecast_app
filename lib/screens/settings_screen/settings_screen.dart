@@ -51,9 +51,9 @@ class SettingsScreen extends StatelessWidget {
           decoration: AppDecorations.darkDecorationTheme,
           child: ListView(
             primary: true,
-            children: const [
+            children:  [
               LocationWidget(),
-              ToolsWidget(),
+              const ToolsWidget(),
             ],
           ),
         ),
