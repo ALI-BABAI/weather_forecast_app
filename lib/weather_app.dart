@@ -13,7 +13,6 @@ class WeatherApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-     
       create: (context) => PreferencesManager(prefs),
       child: MaterialApp(
         theme: mainThemes,

@@ -1,5 +1,3 @@
-import 'dart:async';
-
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_forecast_app/main.dart';
@@ -9,9 +7,8 @@ import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class LocationWidget extends StatelessWidget {
-  LocationWidget({super.key});
-  final StreamController<SearchState> _searchController =
-      StreamController<SearchState>();
+  const LocationWidget({super.key});
+
   @override
   Widget build(BuildContext context) {
     // final Widget citiesList =
@@ -30,8 +27,8 @@ class LocationWidget extends StatelessWidget {
             style: theme.titleSmall,
             // style: AppTextStyles.settingsScreenHeaderFont,
           ),
-          SearchBarWidget(searchController: _searchController),
-          SavedLocationsWidget(searchController: _searchController),
+          const SearchBarWidget(),
+          const SavedLocationsWidget(),
         ],
       ),
     );
@@ -39,28 +36,18 @@ class LocationWidget extends StatelessWidget {
 }
 
 class SearchBarWidget extends StatefulWidget {
-  final StreamController<SearchState> searchController;
-  const SearchBarWidget({super.key, required this.searchController});
+  const SearchBarWidget({super.key});
 
   @override
-  State<SearchBarWidget> createState() =>
-      _SearchBarWidgetState(searchController: searchController);
+  State<SearchBarWidget> createState() => _SearchBarWidgetState();
 }
 
 class _SearchBarWidgetState extends State<SearchBarWidget> {
   final TextEditingController _cityController = TextEditingController();
-  final StreamController<SearchState> searchController;
-
-  _SearchBarWidgetState({required this.searchController});
-
-  @override
-  void dispose() {
-    searchController.close();
-    super.dispose();
-  }
 
   @override
   Widget build(BuildContext context) {
+    final state = context.read<PreferencesManager>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: SizedBox(
@@ -68,11 +55,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         child: TextField(
           controller: _cityController,
           onSubmitted: (value) async {
-            searchController.add(SearchState.loading);
+            state.setSearchingState(SearchState.loading);
             await context
                 .read<PreferencesManager>()
                 .addCityToDB(userString: value);
-            searchController.add(SearchState.loaded);
+            state.setSearchingState(SearchState.loaded);
           },
           keyboardAppearance: Brightness.dark,
           textCapitalization: TextCapitalization.words,
@@ -107,11 +94,11 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   child: TextButton(
                     // https://www.youtube.com/watch?v=f3mI0thSNOs
                     onPressed: () async {
-                      searchController.add(SearchState.loading);
+                      // searchController.add(SearchState.loading);
                       await context
                           .read<PreferencesManager>()
                           .addCityToDB(userString: _cityController.text);
-                      searchController.add(SearchState.loaded);
+                      // searchController.add(SearchState.loaded);
                     },
                     style: ButtonStyle(
                       backgroundColor:
@@ -137,43 +124,20 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   }
 }
 
-class SavedLocationsWidget extends StatefulWidget {
-  final StreamController<SearchState> searchController;
-  const SavedLocationsWidget({super.key, required this.searchController});
-
-  @override
-  State<SavedLocationsWidget> createState() =>
-      _SavedLocationsWidgetState(searchController: searchController);
-}
-
-class _SavedLocationsWidgetState extends State<SavedLocationsWidget> {
-  final StreamController<SearchState> searchController;
-
-  _SavedLocationsWidgetState({required this.searchController});
-  @override
-  void dispose() {
-    searchController.close();
-    debugPrint(searchController.isClosed.toString());
-    debugPrint(searchController.isPaused.toString());
-    debugPrint(searchController.hasListener.toString());
-    super.dispose();
-  }
+class SavedLocationsWidget extends StatelessWidget {
+  const SavedLocationsWidget({super.key});
 
   @override
   Widget build(BuildContext context) {
     final state = context.read<PreferencesManager>();
     final valueList = context.watch<PreferencesManager>().savedListOfCities;
-    debugPrint(searchController.isClosed.toString());
-    debugPrint(searchController.isPaused.toString());
-    debugPrint(searchController.hasListener.toString());
-    return StreamBuilder(
-      stream: searchController.stream,
-      initialData: SearchState.loaded,
-      builder: (context, snapshot) {
-        if (snapshot.data == SearchState.loading) {
-          return const Center(child: CircularProgressIndicator());
-        } else {
-          return ListView.builder(
+    var searchState = state.getSearchingState();
+    return Column(
+      children: [
+        if (searchState == SearchState.loading)
+          const Center(child: CircularProgressIndicator())
+        else
+          ListView.builder(
             primary: false,
             shrinkWrap: true,
             itemCount: valueList.citiesList.length,
@@ -215,69 +179,8 @@ class _SavedLocationsWidgetState extends State<SavedLocationsWidget> {
                 ),
               );
             },
-          );
-        }
-      },
+          )
+      ],
     );
-    /*
-    // Column(
-    //   children: [
-    //     if (searchState == SearchState.loading)
-    //       const Center(child: CircularProgressIndicator())
-    //     else
-    //       ListView.builder(
-    //         primary: false,
-    //         shrinkWrap: true,
-    //         itemCount: valueList.citiesList.length,
-    //         itemBuilder: (context, index) {
-    //           final savedCity = valueList.citiesList[index];
-    //           return Dismissible(
-    //             key: UniqueKey(),
-    //             onDismissed: (direction) {
-    //               state.removeCityInDB(index);
-    //               // _deleteCity(savedCities: savedCities, index: index);
-    //               // setState(() => {});
-    //             },
-    //             child: ListTile(
-    //               contentPadding: const EdgeInsets.symmetric(horizontal: 3),
-    //               // константная иконка геопозиции
-    //               leading: const Icon(
-    //                 Icons.location_on,
-    //                 size: 40,
-    //                 color: AppColors.white,
-    //               ),
-    //               // кнопка удаления
-    //               trailing: IconButton(
-    //                 onPressed: () {
-    //                   state.removeCityInDB(index);
-    //                   // _deleteCity(savedCities: savedCities, index: index);
-    //                   // setState(() => {});
-    //                 },
-    //                 icon: const Icon(
-    //                   Icons.delete_forever,
-    //                   color: AppColors.orange,
-    //                   size: 35,
-    //                 ),
-    //               ),
-    //               // город и страна
-    //               title: Text(
-    //                 '${savedCity.name}${AppTextConstants.symbolComma} ${savedCity.country}',
-    //                 style: AppTextStyles.expandedMainFont,
-    //                 overflow: TextOverflow.ellipsis,
-    //               ),
-    //               // информация по текущему городу
-    //               subtitle: Text(
-    //                 '${weatherInSavedCities.elementAt(index)!.temperature}'
-    //                 '${AppTextConstants.symbolDegree}${AppTextConstants.symbolComma} '
-    //                 '${weatherInSavedCities.elementAt(index)!.description}',
-    //                 style: AppTextStyles.secondaryFont,
-    //               ),
-    //             ),
-    //           );
-    //         },
-    //       )
-    //   ],
-    // );
-    */
   }
 }

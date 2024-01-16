@@ -25,6 +25,17 @@ class PreferencesManager extends ChangeNotifier {
   static const String _citiesKey = 'citiesKey';
   late SavedCities savedListOfCities;
 
+  var _searchState = SearchState.loaded;
+
+  SearchState getSearchingState() {
+    return _searchState;
+  }
+
+  setSearchingState(SearchState state) {
+    _searchState = state;
+    notifyListeners();
+  }
+
   // проверка наличия списка сохранённых городов : создание дефолтного
   Future<void> initData() async {
     bool hasData = false;
