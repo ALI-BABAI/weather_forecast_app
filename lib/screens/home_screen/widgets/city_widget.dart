@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
-import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/domain/models/city_model.dart';
+import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/city_panel.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/hourly_forecast.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/main_forecast.dart';

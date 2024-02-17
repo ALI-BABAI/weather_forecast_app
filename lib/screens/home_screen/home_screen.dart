@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:weather_forecast_app/repositories/network/api_client.dart';
-import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/domain/models/weather_model.dart';
+import 'package:weather_forecast_app/data/services/api_service.dart';
 import 'package:weather_forecast_app/main.dart';
-import 'package:weather_forecast_app/repositories/preferency_manager.dart';
+import 'package:weather_forecast_app/data/services/preferency_manager.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/city_widget.dart';
 import 'package:weather_forecast_app/screens/home_screen/widgets/loading_widget.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
@@ -101,8 +101,7 @@ class FutureGetWeatherInfo extends StatelessWidget {
             default:
               {
                 return LoadingWidget(
-                  infoWidget: () => const CircularProgressIndicator()
-                );
+                    infoWidget: () => const CircularProgressIndicator());
               }
           }
         },

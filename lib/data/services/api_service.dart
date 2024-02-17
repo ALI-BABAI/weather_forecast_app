@@ -2,8 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
-import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/domain/models/city_model.dart';
+import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
 enum ApiExeptionType {
   network, // отсутствие интернета у пользователя
@@ -100,4 +100,3 @@ class ApiClient {
     }
   }
 }
-// await Future.delayed(const Duration(seconds: 0));

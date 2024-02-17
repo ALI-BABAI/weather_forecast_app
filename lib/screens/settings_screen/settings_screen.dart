@@ -54,6 +54,8 @@ class SettingsScreen extends StatelessWidget {
             children: const [
               LocationWidget(),
               ToolsWidget(),
+              SizedBox(height: 20),
+              Placeholder(fallbackHeight: 400, fallbackWidth: 400)
             ],
           ),
         ),

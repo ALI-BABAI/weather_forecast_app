@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:weather_forecast_app/main.dart';
-import 'package:weather_forecast_app/repositories/preferency_manager.dart';
+import 'package:weather_forecast_app/data/services/preferency_manager.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
@@ -47,7 +47,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
 
   @override
   Widget build(BuildContext context) {
-    final state = context.read<PreferencesManager>();
     return Padding(
       padding: const EdgeInsets.symmetric(vertical: 10),
       child: SizedBox(
@@ -55,11 +54,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
         child: TextField(
           controller: _cityController,
           onSubmitted: (value) async {
-            state.setSearchingState(SearchState.loading);
             await context
                 .read<PreferencesManager>()
                 .addCityToDB(userString: value);
-            state.setSearchingState(SearchState.loaded);
           },
           keyboardAppearance: Brightness.dark,
           textCapitalization: TextCapitalization.words,
@@ -94,11 +91,9 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                   child: TextButton(
                     // https://www.youtube.com/watch?v=f3mI0thSNOs
                     onPressed: () async {
-                      // searchController.add(SearchState.loading);
                       await context
                           .read<PreferencesManager>()
                           .addCityToDB(userString: _cityController.text);
-                      // searchController.add(SearchState.loaded);
                     },
                     style: ButtonStyle(
                       backgroundColor:

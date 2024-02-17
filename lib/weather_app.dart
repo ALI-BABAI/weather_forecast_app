@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_forecast_app/repositories/preferency_manager.dart';
+import 'package:weather_forecast_app/data/services/preferency_manager.dart';
 import 'package:weather_forecast_app/routes/routes.dart';
 import 'package:weather_forecast_app/theme/app_main_themes.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';

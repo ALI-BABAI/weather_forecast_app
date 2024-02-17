@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
 import 'package:weather_forecast_app/weather_app.dart';
 

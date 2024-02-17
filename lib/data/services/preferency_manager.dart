@@ -1,13 +1,13 @@
 import 'dart:async';
 import 'dart:convert';
 
-import 'package:flutter/material.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart' show rootBundle;
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:weather_forecast_app/domain/models/city_model.dart';
+import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/main.dart';
-import 'package:weather_forecast_app/repositories/network/api_client.dart';
-import 'package:weather_forecast_app/repositories/network/models/city_model.dart';
-import 'package:weather_forecast_app/repositories/network/models/weather_model.dart';
+import 'package:weather_forecast_app/data/services/api_service.dart';
 
 enum SearchState {
   loaded,
@@ -89,7 +89,7 @@ class PreferencesManager extends ChangeNotifier {
 
   // обработка добавления пользователем города
   Future<void> addCityToDB({required String userString}) async {
-    String jsonString;
+    setSearchingState(SearchState.loading);
     try {
       userString = userString.toLowerCase().replaceAll(' ', '');
       bool isExist = savedListOfCities.citiesList.any(
@@ -101,35 +101,22 @@ class PreferencesManager extends ChangeNotifier {
         //     AppAllertWindow.warningCityAlreadyExist(context);
         //   },
       } else {
-        jsonString = await rootBundle.loadString('assets/city_list.json');
-        final List<dynamic> citiesData = json.decode(jsonString);
-
-        // Преобразование данных в объекты City
-        final List<CityModel> cityItem =
-            citiesData.map((json) => CityModel.fromJson(json)).toList();
-        // Поиск введённого города из списка
-        final CityModel selectedCity = cityItem.firstWhere(
-          (city) => city.name.toLowerCase().replaceAll(' ', '') == userString,
-          orElse: () => CityModel(
-            name: '',
-            country: '',
-            lon: 0.0,
-            lat: 0.0,
-          ),
-        );
-        if (selectedCity.name != '') {
+        String jsonString =
+            await rootBundle.loadString('assets/city_list.json');
+        final appendedCity =
+            await compute(getMatchedCity, [jsonString, userString]);
+        if (appendedCity.name != '') {
           savedListOfCities.citiesList.add(
             CityModel(
-              name: selectedCity.name,
-              country: selectedCity.country,
-              lon: selectedCity.lon,
-              lat: selectedCity.lat,
+              name: appendedCity.name,
+              country: appendedCity.country,
+              lon: appendedCity.lon,
+              lat: appendedCity.lat,
             ),
           );
           await _saveCitiesList(savedCities: savedListOfCities);
           WeatherModel? weatherModel = await ApiClient().getWeatherInfoAsObject(
-              lat: selectedCity.lat, lon: selectedCity.lon);
-
+              lat: appendedCity.lat, lon: appendedCity.lon);
           // добавляем в глобальную переменную инфу по добавленному городу
           weatherInSavedCities.add(weatherModel);
         }
@@ -140,6 +127,7 @@ class PreferencesManager extends ChangeNotifier {
     } catch (error) {
       debugPrint(error.toString());
     }
+    setSearchingState(SearchState.loaded);
     notifyListeners();
     // _cityController.clear();
     // FocusScope.of(context).unfocus();
@@ -157,4 +145,26 @@ class PreferencesManager extends ChangeNotifier {
   }
 
   //
+}
+
+// Метод выполняемый в отдельном изоляте
+CityModel getMatchedCity(List<String> element) {
+  String jsonString = element[0];
+  String userInput = element[1];
+  final List<dynamic> citiesData = json.decode(jsonString);
+
+  // Преобразование данных в объекты City
+  final List<CityModel> cityItem =
+      citiesData.map((json) => CityModel.fromJson(json)).toList();
+  // Поиск введённого города из списка
+  final CityModel matchedCity = cityItem.firstWhere(
+    (city) => city.name.toLowerCase().replaceAll(' ', '') == userInput,
+    orElse: () => CityModel(
+      name: '',
+      country: '',
+      lon: 0.0,
+      lat: 0.0,
+    ),
+  );
+  return matchedCity;
 }
