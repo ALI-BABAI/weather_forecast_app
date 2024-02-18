@@ -29,24 +29,3 @@ class CityModel {
     };
   }
 }
-
-// @todo - заменить на SavedCitiesModel или удалить вовсе
-class SavedCities {
-  final List<CityModel> citiesList;
-
-  SavedCities({
-    required this.citiesList,
-  });
-  factory SavedCities.fromJson(Map<String, dynamic> json) {
-    return SavedCities(
-      citiesList: (json['citiesList'] as List<dynamic>)
-          .map((e) => CityModel.fromJson(e as Map<String, dynamic>))
-          .toList(),
-    );
-  }
-  Map<String, dynamic> toJson() {
-    return {
-      'citiesList': citiesList.map((city) => city.toJson()).toList(),
-    };
-  }
-}

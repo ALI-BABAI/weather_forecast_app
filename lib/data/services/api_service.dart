@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
 enum ApiExeptionType {
@@ -20,10 +19,8 @@ class ApiClientExeption implements Exception {
 class ApiClient {
   final _apiClient = HttpClient();
 
-// Возвращаем из метода объект типа WeatherData, хранящий информацию о погоде по переданным координатам
-  Future<WeatherModel?> getWeatherInfoAsObject(
+  Future<WeatherModel> getWeather(
       {double lat = 54.27028, double lon = 48.302364}) async {
-    // Ручная сборка URI
     Uri url = Uri(
       scheme: "https",
       host: "api.openweathermap.org",
@@ -37,8 +34,8 @@ class ApiClient {
       },
     );
     try {
-      final request = await _apiClient.getUrl(url); // отправка запроса
-      final response = await request.close(); // ожидание ответа
+      final request = await _apiClient.getUrl(url);
+      final response = await request.close();
       if (response.statusCode == 429) {
         debugPrint(
             'Ошибка: Превышен лимит запросов к серверу. statusCode = ${response.statusCode}');
@@ -49,12 +46,9 @@ class ApiClient {
             'Ошибка при работе с сервером. statusCode = ${response.statusCode}');
         throw ApiClientExeption(type: ApiExeptionType.other);
       }
-      // Приведение к формату UTF8
       final responseString =
           await response.transform(const Utf8Decoder()).join();
-      // библиотечный метод преобразования строки типа json
       final jsonData = jsonDecode(responseString);
-      // Вызываем метод класса WeatherInfo, и записываем результат  в переменную типа WeatherInfo
       final weatherData = WeatherModel.fromJson(jsonData);
       return weatherData;
     } on SocketException {
@@ -65,38 +59,38 @@ class ApiClient {
     }
   }
 
-// Возвращает список объектов типа WeatherData, хранящий информацию
-// по погоде во всех сохранённых городах
-  Future<List<WeatherModel?>?> getWeatherInfoForSavedCities(
-      {required SavedCities savedCities}) async {
-    List<WeatherModel?> weatherDataList = [];
-    try {
-      for (final city in savedCities.citiesList) {
-        final weatherData = await getWeatherInfoAsObject(
-          lat: city.lat,
-          lon: city.lon,
-        );
-        weatherDataList.add(weatherData);
-      }
-      return weatherDataList;
-    } catch (error) {
-      if (error is ApiClientExeption) {
-        switch (error.type) {
-          case ApiExeptionType.network:
-            debugPrint('Ошибка: Отсутствует подключение к сети');
-            throw ApiClientExeption(type: ApiExeptionType.network);
-          case ApiExeptionType.overlimit:
-            debugPrint('Ошибка: Превышен лимит запросов к серверу');
-            throw ApiClientExeption(type: ApiExeptionType.overlimit);
-          case ApiExeptionType.other:
-            debugPrint('Произошла ошибка: $error');
-            throw ApiClientExeption(type: ApiExeptionType.other);
-        }
-      } else {
-        // Обработка других ошибок
-        debugPrint('Произошла ошибка: $error');
-        throw ApiClientExeption(type: ApiExeptionType.other);
-      }
-    }
-  }
+// // Возвращает список объектов типа WeatherData, хранящий информацию
+// // по погоде во всех сохранённых городах
+//   Future<List<WeatherModel>> getWeatherInfoForSavedCities(
+//       {required SavedCities savedCities}) async {
+//     List<WeatherModel> weatherDataList = [];
+//     try {
+//       for (final city in savedCities.citiesList) {
+//         final weatherData = await getWeatherInfoAsObject(
+//           lat: city.lat,
+//           lon: city.lon,
+//         );
+//         weatherDataList.add(weatherData!);
+//       }
+//       return weatherDataList;
+//     } catch (error) {
+//       if (error is ApiClientExeption) {
+//         switch (error.type) {
+//           case ApiExeptionType.network:
+//             debugPrint('Ошибка: Отсутствует подключение к сети');
+//             throw ApiClientExeption(type: ApiExeptionType.network);
+//           case ApiExeptionType.overlimit:
+//             debugPrint('Ошибка: Превышен лимит запросов к серверу');
+//             throw ApiClientExeption(type: ApiExeptionType.overlimit);
+//           case ApiExeptionType.other:
+//             debugPrint('Произошла ошибка: $error');
+//             throw ApiClientExeption(type: ApiExeptionType.other);
+//         }
+//       } else {
+//         // Обработка других ошибок
+//         debugPrint('Произошла ошибка: $error');
+//         throw ApiClientExeption(type: ApiExeptionType.other);
+//       }
+//     }
+//   }
 }
