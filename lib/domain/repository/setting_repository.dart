@@ -4,8 +4,8 @@ import 'package:weather_forecast_app/domain/models/weather_model.dart';
 abstract class SettingRepository {
   Future<List<WeatherModel>> getWeatherInfo(List<CityModel> cities);
   List<CityModel> getFavouriteCities();
-  void addCityInFavourite();
-  void deleteCityFromFavourite();
+  Future<void> addCityInFavourite(String sity);
+  Future<void> deleteCityFromFavourite(int index);
   // void changeMeasurementUnits();
   // void manageNotifications();
   // void changeLanguage();

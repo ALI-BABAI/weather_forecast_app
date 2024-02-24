@@ -9,7 +9,7 @@ import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_state.
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final AppRepository appRepository;
   WeatherBloc(this.appRepository) : super(LoadingState()) {
-    on<LoadingWeatherInfoEvent>((event, emit) async {
+    on<LoadingWeatherScreenEvent>((event, emit) async {
       try {
         List<CityModel> savedCities = appRepository.getFavouriteCities();
         List<WeatherModel> weatherData =
@@ -29,7 +29,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
     });
 
     on<MoveToSettingScreenEvent>((event, emit) {
-      debugPrint('jej');
+      debugPrint('Переход на экран настроек');
     });
   }
 }

@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/city_panel.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/hourly_forecast.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/main_forecast.dart';
-import 'package:weather_forecast_app/screens/home_screen/widgets/city_forecasts_widgets/daily_forecast.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_forecasts_widgets/city_panel.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_forecasts_widgets/daily_forecast.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_forecasts_widgets/hourly_forecast.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_forecasts_widgets/main_forecast_widgets/main_forecast.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';

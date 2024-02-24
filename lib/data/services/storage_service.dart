@@ -28,7 +28,7 @@ class StorageService {
     await prefs.setString(key, defaultCityJson);
   }
 
-  void saveData(String key, String data) async {
+  Future<void> saveData(String key, String data) async {
     await prefs.setString(key, data);
   }
 }
