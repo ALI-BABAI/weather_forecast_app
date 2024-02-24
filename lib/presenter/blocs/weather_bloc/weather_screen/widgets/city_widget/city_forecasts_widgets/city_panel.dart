@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/settings_screen.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
@@ -25,7 +24,7 @@ class CityPanelWidget extends StatelessWidget {
               child: Text(
                 '${currentCity.name}${AppTextConstants.symbolComma} ${currentCity.country}',
                 style:
-                    theme.textTheme.titleLarge, // или AppTextStyles.appBarFont,
+                    theme.textTheme.titleLarge,
                 overflow: TextOverflow.ellipsis,
               ),
             ),
@@ -36,12 +35,8 @@ class CityPanelWidget extends StatelessWidget {
             width: 55,
             child: IconButton(
               onPressed: () => {
-                Navigator.pushReplacement(
-                  context,
-                  MaterialPageRoute(
-                    builder: (context) => const SettingsScreen(),
-                  ),
-                ),
+                Navigator.pushNamed(context, '/settings')
+                // BlocProvider.of<WeatherBloc>(context).add(MoveToSettingScreenEvent())
               },
               icon: const Center(
                 child: Icon(

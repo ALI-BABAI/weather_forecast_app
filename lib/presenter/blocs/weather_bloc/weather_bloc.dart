@@ -27,9 +27,19 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
             '${e.toString()}\nНе удалось загрузить данные о погоде'));
       }
     });
-
-    on<MoveToSettingScreenEvent>((event, emit) {
-      debugPrint('Переход на экран настроек');
-    });
+    // on<MoveToSettingScreenEvent>((event, emit) {
+    //   debugPrint('Переход на экран настроек');
+    //   emit(OpenSettingScreenState());
+    // });
   }
 }
+
+    // on<WeatherEvents>(
+    //   (event, emit) {
+    //     if (event == WeatherEvents.loadingWeatherScreen) {
+    //       // do smth
+    //     } else if (event == WeatherEvents.moveToSettingScreen) {
+    //       // do smth
+    //     }
+    //   },
+    // );

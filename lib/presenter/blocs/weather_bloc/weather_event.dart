@@ -5,6 +5,6 @@ final class LoadingWeatherScreenEvent extends WeatherEvent {}
 final class MoveToSettingScreenEvent extends WeatherEvent {}
 
 // enum WeatherEvents {
-//   switchCity,
+//   loadingWeatherScreen,
 //   moveToSettingScreen,
 // }

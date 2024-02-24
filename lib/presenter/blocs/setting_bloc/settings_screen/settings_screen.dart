@@ -9,6 +9,8 @@ import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_state.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/widgets/location/location_widget.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_event.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
@@ -22,15 +24,15 @@ class SettingsScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
-    // final settingBloc = context.read<SettingBloc>();
     return GestureDetector(
         onTap: () => FocusScope.of(context).unfocus(),
         child: Scaffold(
           appBar: AppBar(
+            automaticallyImplyLeading: false,
             backgroundColor: AppColors.mainBackground,
             title: Text(
               AppTextConstants.settings,
-              style: theme.titleLarge, // style: AppTextStyles.appBarFont,
+              style: theme.titleLarge,
             ),
             actions: <Widget>[
               Padding(
@@ -40,7 +42,10 @@ class SettingsScreen extends StatelessWidget {
                   width: 50,
                   child: ElevatedButton(
                     onPressed: () {
-                      // settingBloc.add(LoadingSettingScreenEvent());
+                      // переход на экран погоды
+                      BlocProvider.of<WeatherBloc>(context)
+                          .add(LoadingWeatherScreenEvent());
+                      Navigator.popAndPushNamed(context, '/weather');
                     },
                     style: AppButtonsStyle.navigationBtn,
                     child: const Icon(
@@ -82,7 +87,6 @@ class SettingsScreen extends StatelessWidget {
                       Center(
                         child: CircularProgressIndicator(),
                       ),
-                      // LocationWidget(),
                       ToolsWidget(),
                       SizedBox(height: 20),
                       Placeholder(fallbackHeight: 400, fallbackWidth: 400)

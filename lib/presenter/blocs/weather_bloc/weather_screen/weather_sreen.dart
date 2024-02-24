@@ -32,7 +32,11 @@ class WeatherScreen extends StatelessWidget {
             return LoadingWidget(
               widget: Text(state.errorMessage),
             );
-          } else {
+          }
+          // else if (state is OpenSettingScreenState) {
+          //   return const SettingsScreen();
+          // } 
+          else {
             return const LoadingWidget(
               widget: Text('Cannot open'),
             );
@@ -42,4 +46,3 @@ class WeatherScreen extends StatelessWidget {
     );
   }
 }
-

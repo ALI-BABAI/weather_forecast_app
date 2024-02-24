@@ -51,9 +51,6 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
         add(LoadingSettingScreenEvent());
       }
     });
-    on<MoveToWeatherScreenEvent>((event, emit) {
-      emit(ErrorState());
-    });
     on<TollTapEvent>((event, emit) {
       emit(LoadingState());
       // emit(LoadedState());
