@@ -4,9 +4,9 @@ import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 
 class StorageService {
-  final SharedPreferences prefs;
-
   StorageService(this.prefs);
+  
+  final SharedPreferences prefs;
 
   String getStoragedData(String key) {
     return prefs.getString(key) ?? '';

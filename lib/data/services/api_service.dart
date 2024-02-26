@@ -16,7 +16,7 @@ class ApiClientExeption implements Exception {
   ApiClientExeption({required this.type});
 }
 
-class ApiClient {
+class ApiService {
   final _apiClient = HttpClient();
 
   Future<WeatherModel> getWeather(

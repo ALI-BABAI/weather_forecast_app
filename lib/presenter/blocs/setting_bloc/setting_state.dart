@@ -20,3 +20,5 @@ final class SearchingCityState extends SettingState {}
 final class DeleteCityState extends SettingState {}
 
 final class ErrorState extends SettingState {}
+
+final class OpenWeatherScreenState extends SettingState {}

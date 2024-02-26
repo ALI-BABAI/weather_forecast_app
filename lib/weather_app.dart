@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_forecast_app/data/repository/app_repository.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_event.dart';
@@ -12,12 +11,12 @@ import 'package:weather_forecast_app/theme/app_main_themes.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class WeatherApp extends StatelessWidget {
-  final SharedPreferences prefs;
-  const WeatherApp(this.prefs, {super.key});
+  const WeatherApp(this.appRepository, {super.key});
+
+  final AppRepositoryImpl appRepository;
 
   @override
   Widget build(BuildContext context) {
-    final AppRepository appRepository = AppRepository(prefs);
     return MultiBlocProvider(
       providers: [
         BlocProvider<WeatherBloc>(
@@ -32,10 +31,6 @@ class WeatherApp extends StatelessWidget {
       child: MaterialApp(
         theme: mainThemes,
         title: AppTextConstants.materialAppTitle,
-        // пробовал через добавление ивентов в блок
-        // BlocProvider.of<WeatherBloc>(context).add(MoveToSettingScreenEvent())
-        // с первого экрана на второй переключался подобным образом, 
-        // но падал на ошибках при возврате с экрана настроек на экран погоды
         routes: {
           '/weather': (context) => const WeatherScreen(),
           '/settings': (context) => const SettingsScreen(),

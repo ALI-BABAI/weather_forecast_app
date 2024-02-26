@@ -2,7 +2,6 @@ import 'dart:convert';
 
 import 'package:flutter/foundation.dart';
 import 'package:flutter/services.dart';
-import 'package:shared_preferences/shared_preferences.dart';
 import 'package:weather_forecast_app/data/services/api_service.dart';
 import 'package:weather_forecast_app/data/services/storage_service.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
@@ -16,16 +15,15 @@ import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 // У фокса был видос,  описывающий степень сложности перехода/поиска элемента по дереву виджетов
 // пробрасывать подобно 21 строке он говорил что максимально затратная вещь
 // видел подобное там<findAncestorWidgetOfExactType>, но не понял как юзать
-class AppRepository implements WeatherRepository, SettingRepository {
-  final SharedPreferences prefs;
-  static const String _citiesKey = 'citiesKey2';
+class AppRepositoryImpl implements WeatherRepository, SettingRepository {
+  AppRepositoryImpl(this.storageService);
 
-  AppRepository(this.prefs);
+  final StorageService storageService;
+  static const String _citiesKey = 'citiesKey2';
 
   @override
   List<CityModel> getFavouriteCities() {
     try {
-      final StorageService storageService = StorageService(prefs);
       String storedData = storageService.getStoragedData(_citiesKey);
 
       if (storedData.isEmpty) {
@@ -48,7 +46,7 @@ class AppRepository implements WeatherRepository, SettingRepository {
   @override
   Future<List<WeatherModel>> getWeatherInfo(List<CityModel> cities) async {
     try {
-      final ApiClient apiClient = ApiClient();
+      final ApiService apiClient = ApiService();
       List<WeatherModel> weatherDataList = [];
 
       for (final city in cities) {
@@ -73,7 +71,6 @@ class AppRepository implements WeatherRepository, SettingRepository {
       // преобразуем введенный текст "добавляемый город" для дальнейшей обработки
       cityToAdding = cityToAdding.toLowerCase().replaceAll(' ', '');
       // проверка наличия "добавляемого города" в списке избранных
-      final StorageService storageService = StorageService(prefs);
       bool isAddedCityAlreadyExist = existedCities.any((element) =>
           element.name.toLowerCase().replaceAll(' ', '') == cityToAdding);
       if (isAddedCityAlreadyExist) {
@@ -110,7 +107,6 @@ class AppRepository implements WeatherRepository, SettingRepository {
   Future<void> deleteCityFromFavourite(int index) async {
     try {
       debugPrint("Удаление города из списка избранных");
-      final StorageService storageService = StorageService(prefs);
       // получаем список сохранённых городов
       List<CityModel> existedCities = getFavouriteCities();
       existedCities.removeAt(index);

@@ -15,8 +15,7 @@ final class LoadedState extends WeatherState {
   });
 }
 
-// final class OpenSettingScreenState extends WeatherState {
-// }
+final class OpenSettingScreenState extends WeatherState {}
 
 final class ErrorState extends WeatherState {
   final String errorMessage;
