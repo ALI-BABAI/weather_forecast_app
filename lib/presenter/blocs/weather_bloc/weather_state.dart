@@ -1,15 +1,17 @@
-import 'package:weather_forecast_app/domain/models/city_model.dart';
-import 'package:weather_forecast_app/domain/models/weather_model.dart';
+// import 'package:weather_forecast_app/domain/models/city_model.dart';
+// import 'package:weather_forecast_app/domain/models/weather_model.dart';
+
+part of 'weather_bloc.dart';
 
 abstract class WeatherState {}
 
-final class LoadingState extends WeatherState {}
+final class LoadingWeatherState extends WeatherState {}
 
-final class LoadedState extends WeatherState {
+final class LoadedWeatherState extends WeatherState {
   final List<CityModel> cities;
   final List<WeatherModel> weatherData;
 
-  LoadedState({
+  LoadedWeatherState({
     required this.cities,
     required this.weatherData,
   });
@@ -17,8 +19,8 @@ final class LoadedState extends WeatherState {
 
 final class OpenSettingScreenState extends WeatherState {}
 
-final class ErrorState extends WeatherState {
+final class ErrorWeatherState extends WeatherState {
   final String errorMessage;
 
-  ErrorState(this.errorMessage);
+  ErrorWeatherState(this.errorMessage);
 }

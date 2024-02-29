@@ -1,3 +1,5 @@
+part of 'setting_bloc.dart';
+
 abstract class SettingEvent {} // sealed or abstract
 
 final class LoadingSettingScreenEvent extends SettingEvent {}

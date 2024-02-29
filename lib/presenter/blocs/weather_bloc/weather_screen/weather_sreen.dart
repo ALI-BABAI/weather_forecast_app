@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_event.dart';
 
 import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/loading_widget.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_state.dart';
 import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_widget.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 
@@ -26,9 +24,9 @@ class WeatherScreen extends StatelessWidget {
         builder: (context, state) {
           return BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
-              if (state is LoadingState) {
+              if (state is LoadingWeatherState) {
                 return const LoadingWidget();
-              } else if (state is LoadedState) {
+              } else if (state is LoadedWeatherState) {
                 return PageView.builder(
                   controller: PageController(),
                   itemCount: state.weatherData.length,
@@ -40,7 +38,7 @@ class WeatherScreen extends StatelessWidget {
                     );
                   },
                 );
-              } else if (state is ErrorState) {
+              } else if (state is ErrorWeatherState) {
                 return LoadingWidget(
                   widget: Text(state.errorMessage),
                 );

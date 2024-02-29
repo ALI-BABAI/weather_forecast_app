@@ -3,13 +3,14 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/setting_repository.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_event.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_state.dart';
+
+part 'setting_event.dart';
+part 'setting_state.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
   final SettingRepository appRepository;
 
-  SettingBloc(this.appRepository) : super(LoadingState()) {
+  SettingBloc(this.appRepository) : super(LoadingSettingState()) {
     on<LoadingSettingScreenEvent>(_onLoadingSettingScreenEvent);
     on<AddCityEvent>(_onAddCityEvent);
     on<DeleteCityEvent>(_onDeleteCityEvent);
@@ -25,7 +26,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
           await appRepository.getWeatherInfo(savedCities);
 
       emit(
-        LoadedState(
+        LoadedSettingState(
           cities: savedCities,
           weatherData: weatherData,
         ),
@@ -38,7 +39,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }
 
   void _onAddCityEvent(AddCityEvent event, Emitter<SettingState> emit) async {
-    emit(LoadingState());
+    emit(LoadingSettingState());
     try {
       await appRepository.addCityInFavourite(event.cityName);
       add(LoadingSettingScreenEvent());
@@ -50,7 +51,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
 
   void _onDeleteCityEvent(
       DeleteCityEvent event, Emitter<SettingState> emit) async {
-    emit(LoadingState());
+    emit(LoadingSettingState());
     try {
       await appRepository.deleteCityFromFavourite(event.index);
       add(LoadingSettingScreenEvent());
@@ -61,7 +62,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }
 
   void onTollTapEvent(TollTapEvent event, Emitter<SettingState> emit) {
-    emit(LoadingState());
+    emit(LoadingSettingState());
     // emit(LoadedState());
   }
 

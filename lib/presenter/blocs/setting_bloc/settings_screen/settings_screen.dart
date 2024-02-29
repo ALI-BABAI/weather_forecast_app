@@ -7,11 +7,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_event.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_state.dart';
 import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/widgets/location/location_widget.dart';
 import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_event.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
@@ -35,7 +32,7 @@ class SettingsScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is LoadedState) {
+        if (state is LoadedSettingState) {
           final List<CityModel> savedCities = state.cities;
           final List<WeatherModel> weatherData = state.weatherData;
           // 0.49- pizdec
@@ -103,7 +100,7 @@ class SettingsScreen extends StatelessWidget {
               ),
             ),
           );
-        } else if (state is ErrorState) {
+        } else if (state is ErrorSettingState) {
           return GestureDetector(
             onTap: () => FocusScope.of(context).unfocus(),
             onTapCancel: () {
