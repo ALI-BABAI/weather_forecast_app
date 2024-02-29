@@ -21,14 +21,14 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   void _onLoadingSettingScreenEvent(
       LoadingSettingScreenEvent event, Emitter<SettingState> emit) async {
     try {
-      List<CityModel> savedCities = appRepository.getFavouriteCities();
-      List<WeatherModel> weatherData =
-          await appRepository.getWeatherInfo(savedCities);
-
+      if (appRepository.favouriteCities.isEmpty) {
+        appRepository.getFavouriteCities();
+        await appRepository.getWeatherInfo(appRepository.favouriteCities);
+      }
       emit(
         LoadedSettingState(
-          cities: savedCities,
-          weatherData: weatherData,
+          cities: appRepository.favouriteCities,
+          weatherData: appRepository.weatherDataList,
         ),
       );
     } catch (e) {
@@ -42,7 +42,12 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     emit(LoadingSettingState());
     try {
       await appRepository.addCityInFavourite(event.cityName);
-      add(LoadingSettingScreenEvent());
+      emit(
+        LoadedSettingState(
+          cities: appRepository.favouriteCities,
+          weatherData: appRepository.weatherDataList,
+        ),
+      );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось загрузить данные о городе.');
       add(LoadingSettingScreenEvent());
@@ -54,7 +59,12 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     emit(LoadingSettingState());
     try {
       await appRepository.deleteCityFromFavourite(event.index);
-      add(LoadingSettingScreenEvent());
+      emit(
+        LoadedSettingState(
+          cities: appRepository.favouriteCities,
+          weatherData: appRepository.weatherDataList,
+        ),
+      );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось удалить город из избранного');
       add(LoadingSettingScreenEvent());

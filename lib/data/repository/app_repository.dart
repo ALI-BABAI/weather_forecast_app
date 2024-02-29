@@ -20,6 +20,10 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
 
   final StorageService storageService;
   static const String _citiesKey = 'citiesKey2';
+  @override
+  List<CityModel> favouriteCities = [];
+  @override
+  List<WeatherModel> weatherDataList = [];
 
   @override
   List<CityModel> getFavouriteCities() {
@@ -32,7 +36,7 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
       }
 
       final List<dynamic> cityJsonList = jsonDecode(storedData);
-      final List<CityModel> favouriteCities =
+      favouriteCities =
           cityJsonList.map((cityJson) => CityModel.fromJson(cityJson)).toList();
 
       return favouriteCities;
@@ -47,7 +51,6 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
   Future<List<WeatherModel>> getWeatherInfo(List<CityModel> cities) async {
     try {
       final ApiService apiClient = ApiService();
-      List<WeatherModel> weatherDataList = [];
 
       for (final city in cities) {
         WeatherModel weatherData = await apiClient.getWeather(
@@ -66,12 +69,10 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
   @override
   Future<void> addCityInFavourite(String cityToAdding) async {
     try {
-      // получаем список сохранённых городов
-      List<CityModel> existedCities = getFavouriteCities();
       // преобразуем введенный текст "добавляемый город" для дальнейшей обработки
       cityToAdding = cityToAdding.toLowerCase().replaceAll(' ', '');
       // проверка наличия "добавляемого города" в списке избранных
-      bool isAddedCityAlreadyExist = existedCities.any((element) =>
+      bool isAddedCityAlreadyExist = favouriteCities.any((element) =>
           element.name.toLowerCase().replaceAll(' ', '') == cityToAdding);
       if (isAddedCityAlreadyExist) {
         debugPrint("Город уже в списке избранных");
@@ -84,7 +85,7 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
         final appendedCity = await compute(
             getMatchedCity, [assetsJsonCitiesString, cityToAdding]);
         if (appendedCity.name != '') {
-          existedCities.add(
+          favouriteCities.add(
             CityModel(
               name: appendedCity.name,
               country: appendedCity.country,
@@ -92,7 +93,11 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
               lat: appendedCity.lat,
             ),
           );
-          await storageService.saveData(_citiesKey, jsonEncode(existedCities));
+          // сохранение списка избранных в хранилище
+          await storageService.saveData(
+              _citiesKey, jsonEncode(favouriteCities));
+          // подгрузка актуальных данных по городам
+          await getWeatherInfo(favouriteCities);
         } else {
           throw UnimplementedError("Не удалось найти добавляемый город.");
         }
@@ -107,10 +112,9 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
   Future<void> deleteCityFromFavourite(int index) async {
     try {
       debugPrint("Удаление города из списка избранных");
-      // получаем список сохранённых городов
-      List<CityModel> existedCities = getFavouriteCities();
-      existedCities.removeAt(index);
-      await storageService.saveData(_citiesKey, jsonEncode(existedCities));
+      favouriteCities.removeAt(index);
+      weatherDataList.removeAt(index);
+      await storageService.saveData(_citiesKey, jsonEncode(favouriteCities));
     } catch (e) {
       debugPrint("Ошибка удаления города из списка избранных");
       rethrow;

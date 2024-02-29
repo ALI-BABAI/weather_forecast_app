@@ -18,19 +18,20 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   void _onLoadingWeatherScreenEvent(
       LoadingWeatherScreenEvent event, Emitter<WeatherState> emit) async {
     try {
-      List<CityModel> savedCities = appRepository.getFavouriteCities();
-      List<WeatherModel> weatherData =
-          await appRepository.getWeatherInfo(savedCities);
-
+      if (appRepository.favouriteCities.isEmpty) {
+        appRepository.getFavouriteCities();
+        await appRepository.getWeatherInfo(appRepository.favouriteCities);
+      }
       emit(
         LoadedWeatherState(
-          cities: savedCities,
-          weatherData: weatherData,
+          cities: appRepository.favouriteCities,
+          weatherData: appRepository.weatherDataList,
         ),
       );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось загрузить данные о погоде');
-      emit(ErrorWeatherState('${e.toString()}\nНе удалось загрузить данные о погоде'));
+      emit(ErrorWeatherState(
+          '${e.toString()}\nНе удалось загрузить данные о погоде'));
     }
   }
 
