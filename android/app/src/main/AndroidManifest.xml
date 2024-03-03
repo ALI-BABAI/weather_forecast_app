@@ -3,8 +3,8 @@
     <application
         android:label="weather forecast"
         android:name="${applicationName}"
-        android:icon="@mipmap/app_icon"
-        android:roundIcon="@mipmap/round_app_icon">
+        android:icon="@mipmap/new_logo"
+        android:roundIcon="@mipmap/new_logo">
         <activity
             android:name=".MainActivity"
             android:exported="true"
