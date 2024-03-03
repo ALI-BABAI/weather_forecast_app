@@ -59,6 +59,20 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
     }
   }
 
+  Future<List<WeatherModel>> getWeatherInfoAtCity(CityModel city) async {
+    try {
+      final ApiService apiClient = ApiService();
+      WeatherModel weatherData = await apiClient.getWeather(
+        lat: city.lat,
+        lon: city.lon,
+      );
+      weatherDataList.add(weatherData);
+      return weatherDataList;
+    } catch (e) {
+      throw UnimplementedError("Не удалось получить информацию о погоде:/n$e");
+    }
+  }
+
   // для записи нового города нужно знать список уже сохранённый городов
   @override
   Future<void> addCityInFavourite(String cityToAdding) async {
@@ -91,7 +105,7 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
           await storageService.saveData(
               _citiesKey, jsonEncode(favouriteCities));
           // подгрузка актуальных данных по городам
-          await getWeatherInfo(favouriteCities);
+          await getWeatherInfoAtCity(favouriteCities.last);
         } else {
           throw UnimplementedError("Не удалось найти добавляемый город.");
         }

@@ -29,7 +29,7 @@ class WeatherScreen extends StatelessWidget {
               } else if (state is LoadedWeatherState) {
                 return PageView.builder(
                   controller: PageController(),
-                  itemCount: state.weatherData.length,
+                  itemCount: state.cities.length,
                   itemBuilder: (context, index) {
                     // Загрузка на экран выбранного по индексу города
                     return CityWidget(
@@ -42,8 +42,7 @@ class WeatherScreen extends StatelessWidget {
                 return LoadingWidget(
                   widget: Text(state.errorMessage),
                 );
-              }
-              else {
+              } else {
                 // return const LoadingWidget(
                 //   widget: Text('Cannot open'),
                 // );
