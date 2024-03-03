@@ -13,6 +13,7 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
   AppRepositoryImpl(this.storageService);
 
   final StorageService storageService;
+
   static const String _citiesKey = 'citiesKey';
   @override
   List<CityModel> favouriteCities = [];

@@ -15,7 +15,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<AddCityEvent>(_onAddCityEvent);
     on<DeleteCityEvent>(_onDeleteCityEvent);
     on<ChangeCityIndexEvent>(_onChangeCityIndexEvent);
-    on<TollTapEvent>(onTollTapEvent);
+    on<TollTapEvent>(_onTollTapEvent);
     on<MoveToWeatherScreenEvent>(_onMoveToWeatherScreenEvent);
   }
 
@@ -84,7 +84,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     }
   }
 
-  void onTollTapEvent(TollTapEvent event, Emitter<SettingState> emit) {
+  void _onTollTapEvent(TollTapEvent event, Emitter<SettingState> emit) {
     emit(LoadingSettingState());
     // emit(LoadedState());
   }

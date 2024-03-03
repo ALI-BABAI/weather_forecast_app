@@ -11,7 +11,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   final WeatherRepository appRepository;
   WeatherBloc(this.appRepository) : super(LoadingWeatherState()) {
     on<LoadingWeatherScreenEvent>(_onLoadingWeatherScreenEvent);
-
     on<MoveToSettingScreenEvent>(_onMoveToSettingScreenEvent);
   }
 

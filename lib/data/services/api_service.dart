@@ -2,6 +2,8 @@ import 'dart:convert';
 import 'dart:io';
 
 import 'package:flutter/material.dart';
+
+import 'package:http/http.dart' as http;
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
 enum ApiExeptionType {
@@ -17,10 +19,11 @@ class ApiClientExeption implements Exception {
 }
 
 class ApiService {
-  final _apiClient = HttpClient();
-
-  Future<WeatherModel> getWeather(
-      {double lat = 54.27028, double lon = 48.302364}) async {
+  Future<WeatherModel> getWeather({
+    double lat = 54.27028,
+    double lon = 48.302364,
+  }) async {
+    final apiClient = http.Client();
     Uri url = Uri(
       scheme: "https",
       host: "api.openweathermap.org",
@@ -34,8 +37,7 @@ class ApiService {
       },
     );
     try {
-      final request = await _apiClient.getUrl(url);
-      final response = await request.close();
+      final response = await apiClient.get(url);
       if (response.statusCode == 429) {
         debugPrint(
             'Ошибка: Превышен лимит запросов к серверу. statusCode = ${response.statusCode}');
@@ -46,9 +48,7 @@ class ApiService {
             'Ошибка при работе с сервером. statusCode = ${response.statusCode}');
         throw ApiClientExeption(type: ApiExeptionType.other);
       }
-      final responseString =
-          await response.transform(const Utf8Decoder()).join();
-      final jsonData = jsonDecode(responseString);
+      final jsonData = jsonDecode(response.body);
       final weatherData = WeatherModel.fromJson(jsonData);
       return weatherData;
     } on SocketException {
@@ -56,6 +56,8 @@ class ApiService {
     } catch (error) {
       debugPrint('Произошла ошибка: $error');
       rethrow;
+    } finally {
+      apiClient.close();
     }
   }
 
