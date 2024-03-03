@@ -22,4 +22,9 @@ final mainThemes = ThemeData(
     color: AppColors.white,
     size: 25,
   ),
+  colorScheme: const ColorScheme.dark(
+    primary: AppColors.mainBackground,
+    // фон при перетаскивании виджета
+    background: AppColors.mainBackground,
+  ),
 );

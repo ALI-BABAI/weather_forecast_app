@@ -9,17 +9,11 @@ import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/setting_repository.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
-// пробрасывать StorageService подобно prefs по всему приложению
-// или же создавать в нужных местах его?
-
-// У фокса был видос,  описывающий степень сложности перехода/поиска элемента по дереву виджетов
-// пробрасывать подобно 21 строке он говорил что максимально затратная вещь
-// видел подобное там<findAncestorWidgetOfExactType>, но не понял как юзать
 class AppRepositoryImpl implements WeatherRepository, SettingRepository {
   AppRepositoryImpl(this.storageService);
 
   final StorageService storageService;
-  static const String _citiesKey = 'citiesKey2';
+  static const String _citiesKey = 'citiesKey';
   @override
   List<CityModel> favouriteCities = [];
   @override
@@ -119,6 +113,21 @@ class AppRepositoryImpl implements WeatherRepository, SettingRepository {
       debugPrint("Ошибка удаления города из списка избранных");
       rethrow;
     }
+  }
+
+  @override
+  Future<void> changeCityIndex(int newIndex, int oldIndex) async {
+    if (oldIndex < newIndex) {
+      newIndex -= 1;
+    }
+    // rearrangement cities
+    final itemCities = favouriteCities.removeAt(oldIndex);
+    favouriteCities.insert(newIndex, itemCities);
+    // rearrangement weather
+    final itemWeather = weatherDataList.removeAt(oldIndex);
+    weatherDataList.insert(newIndex, itemWeather);
+    // rewrite data in storageData
+    await storageService.saveData(_citiesKey, jsonEncode(favouriteCities));
   }
 }
 

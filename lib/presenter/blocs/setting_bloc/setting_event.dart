@@ -16,6 +16,16 @@ final class DeleteCityEvent extends SettingEvent {
   DeleteCityEvent(this.index);
 }
 
+final class ChangeCityIndexEvent extends SettingEvent {
+  final int indexNew;
+  final int indexOld;
+
+  ChangeCityIndexEvent(
+    this.indexNew,
+    this.indexOld,
+  );
+}
+
 final class TollTapEvent extends SettingEvent {}
 
 final class MoveToWeatherScreenEvent extends SettingEvent {}

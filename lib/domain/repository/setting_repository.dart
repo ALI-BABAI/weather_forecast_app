@@ -9,6 +9,7 @@ abstract interface class SettingRepository {
   List<CityModel> getFavouriteCities();
   Future<void> addCityInFavourite(String sity);
   Future<void> deleteCityFromFavourite(int index);
+  Future<void> changeCityIndex(int indexNew, int indexOld);
   // void changeMeasurementUnits();
   // void manageNotifications();
   // void changeLanguage();

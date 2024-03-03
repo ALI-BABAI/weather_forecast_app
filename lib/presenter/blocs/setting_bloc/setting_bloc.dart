@@ -14,6 +14,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<LoadingSettingScreenEvent>(_onLoadingSettingScreenEvent);
     on<AddCityEvent>(_onAddCityEvent);
     on<DeleteCityEvent>(_onDeleteCityEvent);
+    on<ChangeCityIndexEvent>(_onChangeCityIndexEvent);
     on<TollTapEvent>(onTollTapEvent);
     on<MoveToWeatherScreenEvent>(_onMoveToWeatherScreenEvent);
   }
@@ -49,7 +50,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
         ),
       );
     } catch (e) {
-      debugPrint('${e.toString()}\nНе удалось загрузить данные о городе.');
+      debugPrint('${e.toString()}\nНе удалось добавить город в избранное.');
       add(LoadingSettingScreenEvent());
     }
   }
@@ -67,6 +68,18 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось удалить город из избранного');
+      add(LoadingSettingScreenEvent());
+    }
+  }
+
+  Future<void> _onChangeCityIndexEvent(
+      ChangeCityIndexEvent event, Emitter<SettingState> emit) async {
+    try {
+      if (event.indexOld == event.indexNew) return;
+      await appRepository.changeCityIndex(event.indexNew, event.indexOld);
+    } catch (e) {
+      debugPrint('''${e.toString()}\n
+          Не удалось изменить положение города в списке избранных городов''');
       add(LoadingSettingScreenEvent());
     }
   }

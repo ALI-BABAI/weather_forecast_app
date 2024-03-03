@@ -9,7 +9,7 @@ abstract class AppButtonsStyle {
     backgroundColor: const MaterialStatePropertyAll(AppColors.mainBackground),
     shape: MaterialStatePropertyAll(
       RoundedRectangleBorder(
-        // side: const BorderSide(color: AppColors.orange),
+        side: const BorderSide(color: AppColors.mainBackground),
         borderRadius: BorderRadius.circular(5),
       ),
     ),
