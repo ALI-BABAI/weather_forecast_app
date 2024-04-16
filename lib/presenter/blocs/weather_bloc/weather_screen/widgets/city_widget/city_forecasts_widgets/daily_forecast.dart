@@ -34,12 +34,12 @@ class DailyForecastWidget extends StatelessWidget {
                   Expanded(child: Center(child: SizedBox.shrink())),
                   Expanded(
                     child: Center(
-                      child: Text('Day', style: AppTextStyles.mainFont),
+                      child: Text('day', style: AppTextStyles.mainFont),
                     ),
                   ),
                   Expanded(
                     child: Center(
-                      child: Text('Night', style: AppTextStyles.mainFont),
+                      child: Text('night', style: AppTextStyles.mainFont),
                     ),
                   ),
                 ],
@@ -103,8 +103,6 @@ class InfoPerDay extends StatelessWidget {
                     weatherImage,
                     semanticsLabel:
                         AppTextConstants.semanticLabelDayWeatherIcon,
-                    height: 30,
-                    width: 30,
                   ),
                 ),
               ),

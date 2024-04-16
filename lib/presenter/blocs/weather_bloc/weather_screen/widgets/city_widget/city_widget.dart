@@ -21,7 +21,6 @@ class CityWidget extends StatelessWidget {
   Widget build(BuildContext context) {
     return DecoratedBox(
       decoration: AppDecorations.darkDecorationTheme,
-      // вертикальный виджет с всей информации
       child: ListView(
         primary: true,
         children: [
@@ -36,7 +35,7 @@ class CityWidget extends StatelessWidget {
           // Для доп. дальнейшего функционала
           const Divider(color: AppColors.gray, thickness: 1),
           const SizedBox(height: 20),
-          const Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+          const Placeholder(fallbackHeight: 400, fallbackWidth: 400),
         ],
       ),
     );
