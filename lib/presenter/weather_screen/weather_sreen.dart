@@ -1,10 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/blocs/setting_bloc/setting_bloc.dart';
 
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/loading_widget.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_widget.dart';
+import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_forecast_app/presenter/weather_screen/widgets/loading_widget.dart';
+import 'package:weather_forecast_app/presenter/weather_screen/widgets/city_widget/city_widget.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 
 class WeatherScreen extends StatelessWidget {

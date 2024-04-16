@@ -6,11 +6,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/widgets/custom_app_bar.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/widgets/favourite_city_panel.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/widgets/search_bar.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_forecast_app/blocs/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/presenter/settings_screen/widgets/custom_app_bar.dart';
+import 'package:weather_forecast_app/presenter/settings_screen/widgets/favourite_city_panel.dart';
+import 'package:weather_forecast_app/presenter/settings_screen/widgets/search_bar.dart';
+import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 

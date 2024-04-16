@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/data/repository/app_repository.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/setting_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/setting_bloc/settings_screen/settings_screen.dart';
-import 'package:weather_forecast_app/presenter/blocs/test_screen.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/weather_sreen.dart';
+import 'package:weather_forecast_app/blocs/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/presenter/settings_screen/settings_screen.dart';
+import 'package:weather_forecast_app/presenter/test_screen.dart';
+import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_forecast_app/presenter/weather_screen/weather_sreen.dart';
 import 'package:weather_forecast_app/theme/app_main_themes.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 

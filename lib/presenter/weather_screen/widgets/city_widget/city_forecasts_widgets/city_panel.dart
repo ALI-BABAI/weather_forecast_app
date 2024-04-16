@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
-import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_bloc.dart';
+import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
