@@ -7,7 +7,6 @@ import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen
 import 'package:weather_forecast_app/presenter/blocs/weather_bloc/weather_screen/widgets/city_widget/city_forecasts_widgets/main_forecast_widgets/main_forecast.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
-import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class CityWidget extends StatelessWidget {
   final WeatherModel weatherData;
@@ -32,16 +31,6 @@ class CityWidget extends StatelessWidget {
           MainForecastWidget(weatherData: weatherData),
           // Почасовая информация о погоде (24ч, учитывая текущий)
           HourlyForecastWidget(weatherData: weatherData),
-          // Костыль для следующего виджета
-          const Padding(
-            padding: EdgeInsets.only(right: 45),
-            child: Row(
-              mainAxisAlignment: MainAxisAlignment.end,
-              children: [
-                Text('DAY / NIGHT', style: AppTextStyles.mainFont),
-              ],
-            ),
-          ),
           // Погода на 8 дней, учитывая текущий
           DailyForecastWidget(weatherData: weatherData),
           // Для доп. дальнейшего функционала
