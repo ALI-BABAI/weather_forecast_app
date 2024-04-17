@@ -90,36 +90,28 @@ class InfoPerDay extends StatelessWidget {
         children: [
           TableRow(
             children: [
-              Expanded(
-                child: Center(
-                  child: Text(
-                      '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
-                      style: AppTextStyles.mainFont),
+              Center(
+                child: Text(
+                    '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
+                    style: AppTextStyles.mainFont),
+              ),
+              Center(
+                child: SvgPicture.asset(
+                  weatherImage,
+                  semanticsLabel:
+                      AppTextConstants.semanticLabelDayWeatherIcon,
                 ),
               ),
-              Expanded(
-                child: Center(
-                  child: SvgPicture.asset(
-                    weatherImage,
-                    semanticsLabel:
-                        AppTextConstants.semanticLabelDayWeatherIcon,
-                  ),
+              Center(
+                child: Text(
+                  '${temperatureDay.toString()}${AppTextConstants.symbolDegree}',
+                  style: AppTextStyles.mainFont,
                 ),
               ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    '${temperatureDay.toString()}${AppTextConstants.symbolDegree}',
-                    style: AppTextStyles.mainFont,
-                  ),
-                ),
-              ),
-              Expanded(
-                child: Center(
-                  child: Text(
-                    '${temperatureEvening.toString()}${AppTextConstants.symbolDegree}',
-                    style: AppTextStyles.mainFont,
-                  ),
+              Center(
+                child: Text(
+                  '${temperatureEvening.toString()}${AppTextConstants.symbolDegree}',
+                  style: AppTextStyles.mainFont,
                 ),
               ),
             ],
