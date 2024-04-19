@@ -2,7 +2,9 @@
 // панель настроек вызывается слева или справа в экране
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
@@ -100,59 +102,48 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     int indexOld = 0;
-    return Column(
+    return ListView(
       children: [
-        SizedBox(
-          height: 260,
-          child: ReorderableListView(
-            // три палки для перетаскивания в браузерной версииц  ц
-            buildDefaultDragHandles: false,
-            primary: false,
-            padding: const EdgeInsets.symmetric(
-              vertical: 10,
-              horizontal: 22,
-            ),
-            onReorder: (oldIndex, newIndex) {
-              setState(() => {});
-            },
-            onReorderEnd: (index) {
-              BlocProvider.of<SettingBloc>(context)
-                  .add(ChangeCityIndexEvent(index, indexOld));
-            },
-            onReorderStart: (index) {
-              indexOld = index;
-            },
-            header: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                Text(AppTextConstants.location, style: theme.titleSmall),
-                const SearchBarWidget(),
-              ],
-            ),
-            footer: const Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
-              children: [
-                SizedBox(height: 20),
-                ToolsWidget(),
-                SizedBox(height: 20),
-                Placeholder(fallbackHeight: 400, fallbackWidth: 400)
-              ],
-            ),
-            // favourite cities reordable list
-            children: <Widget>[
-              for (int index = 0; index < widget.savedCities.length; index++)
-                ReorderableDragStartListener(
-                  key: Key(index.toString()),
-                  index: index,
-                  child: FavouriteCityPanel(
-                    key: Key(index.toString()),
-                    panelIndex: index,
-                    savedCities: widget.savedCities,
-                    weatherData: widget.weatherData,
-                  ),
-                ),
+        ReorderableListView(
+          // три палки для перетаскивания в браузерной версии
+          buildDefaultDragHandles: false,
+          primary: false,
+          shrinkWrap: true,
+          padding: const EdgeInsets.symmetric(
+            vertical: 10,
+            horizontal: 22,
+          ),
+          onReorder: (oldIndex, newIndex) {
+            setState(() => {});
+          },
+          onReorderEnd: (index) {
+            BlocProvider.of<SettingBloc>(context)
+                .add(ChangeCityIndexEvent(index, indexOld));
+          },
+          onReorderStart: (index) {
+            indexOld = index;
+          },
+          header: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(AppTextConstants.location, style: theme.titleSmall),
+              const SearchBarWidget(),
             ],
           ),
+          // favourite cities reordable list
+          children: <Widget>[
+            for (int index = 0; index < widget.savedCities.length; index++)
+              ReorderableDragStartListener(
+                key: Key(index.toString()),
+                index: index,
+                child: FavouriteCityPanel(
+                  key: Key(index.toString()),
+                  panelIndex: index,
+                  savedCities: widget.savedCities,
+                  weatherData: widget.weatherData,
+                ),
+              ),
+          ],
         ),
         const SizedBox(height: 20),
         const ToolsWidget(),
