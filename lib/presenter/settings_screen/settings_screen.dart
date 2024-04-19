@@ -100,46 +100,63 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     int indexOld = 0;
-    return ReorderableListView(
-      padding: const EdgeInsets.symmetric(
-        vertical: 10,
-        horizontal: 22,
-      ),
-      onReorder: (oldIndex, newIndex) {
-        setState(() => {});
-      },
-      onReorderEnd: (index) {
-        BlocProvider.of<SettingBloc>(context)
-            .add(ChangeCityIndexEvent(index, indexOld));
-      },
-      onReorderStart: (index) {
-        indexOld = index;
-      },
-      header: Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          Text(AppTextConstants.location, style: theme.titleSmall),
-          const SearchBarWidget(),
-        ],
-      ),
-      footer: const Column(
-        crossAxisAlignment: CrossAxisAlignment.start,
-        children: [
-          SizedBox(height: 20),
-          ToolsWidget(),
-          SizedBox(height: 20),
-          Placeholder(fallbackHeight: 400, fallbackWidth: 400)
-        ],
-      ),
-      // favourite cities reordable list
-      children: <Widget>[
-        for (int index = 0; index < widget.savedCities.length; index++)
-          FavouriteCityPanel(
-            key: UniqueKey(),
-            panelIndex: index,
-            savedCities: widget.savedCities,
-            weatherData: widget.weatherData,
+    return Column(
+      children: [
+        SizedBox(
+          height: 260,
+          child: ReorderableListView(
+            // три палки для перетаскивания в браузерной версииц  ц
+            buildDefaultDragHandles: false,
+            primary: false,
+            padding: const EdgeInsets.symmetric(
+              vertical: 10,
+              horizontal: 22,
+            ),
+            onReorder: (oldIndex, newIndex) {
+              setState(() => {});
+            },
+            onReorderEnd: (index) {
+              BlocProvider.of<SettingBloc>(context)
+                  .add(ChangeCityIndexEvent(index, indexOld));
+            },
+            onReorderStart: (index) {
+              indexOld = index;
+            },
+            header: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(AppTextConstants.location, style: theme.titleSmall),
+                const SearchBarWidget(),
+              ],
+            ),
+            footer: const Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                SizedBox(height: 20),
+                ToolsWidget(),
+                SizedBox(height: 20),
+                Placeholder(fallbackHeight: 400, fallbackWidth: 400)
+              ],
+            ),
+            // favourite cities reordable list
+            children: <Widget>[
+              for (int index = 0; index < widget.savedCities.length; index++)
+                ReorderableDragStartListener(
+                  key: Key(index.toString()),
+                  index: index,
+                  child: FavouriteCityPanel(
+                    key: Key(index.toString()),
+                    panelIndex: index,
+                    savedCities: widget.savedCities,
+                    weatherData: widget.weatherData,
+                  ),
+                ),
+            ],
           ),
+        ),
+        const SizedBox(height: 20),
+        const ToolsWidget(),
+        const SizedBox(height: 20),
       ],
     );
   }
