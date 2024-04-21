@@ -124,7 +124,7 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
           header: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              Text(AppTextConstants.location, style: theme.titleSmall),
+              Text(TextConstants.location, style: theme.titleSmall),
               const SearchBarWidget(),
             ],
           ),

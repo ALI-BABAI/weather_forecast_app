@@ -31,7 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           style: AppTextStyles.expandedMainFont,
           cursorColor: Colors.cyan,
           decoration: InputDecoration(
-            hintText: AppTextConstants.enterCityName,
+            hintText: TextConstants.enterCityName,
             hintStyle: AppTextStyles.secondaryFont,
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.orange),
@@ -69,7 +69,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                       ),
                     ),
                     child: Text(
-                      AppTextConstants.add,
+                      TextConstants.add,
                       style: AppTextStyles.poppinsFont(),
                     ),
                   ),

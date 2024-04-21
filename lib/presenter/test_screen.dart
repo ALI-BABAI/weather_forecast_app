@@ -21,7 +21,7 @@ class _ReordableDataState extends State<ReordableData> {
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.mainBackground,
         title: const Text(
-          AppTextConstants.settings,
+          TextConstants.settings,
           style: AppTextStyles.mainFont,
         ),
         actions: <Widget>[

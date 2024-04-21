@@ -4,11 +4,12 @@ import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
+/// Город и кнопка перехода на экран настроек
 class CityPanelWidget extends StatelessWidget {
+  const CityPanelWidget(this.currentCity, {super.key});
+
   final CityModel currentCity;
-  const CityPanelWidget({super.key, required this.currentCity});
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +25,7 @@ class CityPanelWidget extends StatelessWidget {
             child: Padding(
               padding: const EdgeInsets.only(left: 20),
               child: Text(
-                '${currentCity.name}${AppTextConstants.symbolComma} ${currentCity.country}',
+                '${currentCity.name}, ${currentCity.country}',
                 style: theme.textTheme.titleLarge,
                 overflow: TextOverflow.ellipsis,
               ),
@@ -35,10 +36,8 @@ class CityPanelWidget extends StatelessWidget {
             height: 55,
             width: 55,
             child: IconButton(
-              onPressed: () => {
-                // Navigator.pushNamed(context, '/settings')
-                BlocProvider.of<WeatherBloc>(context).add(MoveToSettingScreenEvent())
-              },
+              onPressed: () => BlocProvider.of<WeatherBloc>(context)
+                  .add(MoveToSettingScreenEvent()),
               icon: const Center(
                 child: Icon(
                   Icons.settings,

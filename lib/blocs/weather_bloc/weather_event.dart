@@ -1,6 +1,6 @@
 part of 'weather_bloc.dart';
 
-abstract class WeatherEvent {} // sealed or abstract
+abstract class WeatherEvent {}
 
 final class LoadingWeatherScreenEvent extends WeatherEvent {}
 

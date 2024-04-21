@@ -14,7 +14,7 @@ class ToolsWidget extends StatelessWidget {
       children: [
         // label
         const Text(
-          AppTextConstants.tools,
+          TextConstants.tools,
           style: AppTextStyles.settingsScreenHeaderFont,
         ),
         // Toll-items
@@ -64,8 +64,6 @@ class ToolItemWidget extends StatelessWidget {
   }
 }
 
-
-
 final class ToolButtonItem {
   final String buttonName;
   final IconData iconType;
@@ -80,42 +78,42 @@ final class ToolButtonItem {
 
 final List toolsItemsList = [
   ToolButtonItem(
-    buttonName: AppTextConstants.measurementUnits,
+    buttonName: TextConstants.measurementUnits,
     iconType: Icons.balance_rounded,
     function: () {
       debugPrint('handling...');
     },
   ),
   ToolButtonItem(
-    buttonName: AppTextConstants.notifications,
+    buttonName: TextConstants.notifications,
     iconType: Icons.notifications,
     function: () {
       debugPrint('handling...');
     },
   ),
   ToolButtonItem(
-    buttonName: AppTextConstants.language,
+    buttonName: TextConstants.language,
     iconType: Icons.language,
     function: () {
       debugPrint('handling...');
     },
   ),
   ToolButtonItem(
-    buttonName: AppTextConstants.seedFedback,
+    buttonName: TextConstants.seedFedback,
     iconType: Icons.sms_outlined,
     function: () {
       debugPrint('handling...');
     },
   ),
   ToolButtonItem(
-    buttonName: AppTextConstants.rateThisApp,
+    buttonName: TextConstants.rateThisApp,
     iconType: Icons.star,
     function: () {
       debugPrint('handling...');
     },
   ),
   ToolButtonItem(
-    buttonName: AppTextConstants.shareYourWeather,
+    buttonName: TextConstants.shareYourWeather,
     iconType: Icons.share,
     function: () {
       debugPrint('handling...');

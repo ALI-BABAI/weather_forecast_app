@@ -18,7 +18,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Divider(color: Colors.grey, thickness: 0.1),
       ),
       title: Text(
-        AppTextConstants.settings,
+        TextConstants.settings,
         style: theme.titleLarge,
       ),
       actions: <Widget>[

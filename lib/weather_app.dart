@@ -29,7 +29,7 @@ class WeatherApp extends StatelessWidget {
       ],
       child: MaterialApp(
         theme: mainThemes,
-        title: AppTextConstants.materialAppTitle,
+        title: TextConstants.materialAppTitle,
         routes: {
           '/weather': (context) => const WeatherScreen(),
           '/settings': (context) => const SettingsScreen(),

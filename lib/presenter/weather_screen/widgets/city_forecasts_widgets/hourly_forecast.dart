@@ -6,12 +6,11 @@ import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
+/// Почасовая информация о погоде (24ч, учитывая текущий)
 class HourlyForecastWidget extends StatelessWidget {
+  const HourlyForecastWidget(this.weatherData, {super.key});
+
   final WeatherModel weatherData;
-  const HourlyForecastWidget({
-    super.key,
-    required this.weatherData,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -80,14 +79,14 @@ class HourItem extends StatelessWidget {
             children: [
               Text(
                 hour,
-                style: AppTextStyles.smallestSecondaryFont,
+                style: AppTextStyles.smallestSecondaryFont
               ),
               SvgPicture.asset(
                 image,
-                semanticsLabel: AppTextConstants.semanticLabelHourWeatherIcon,
+                semanticsLabel: TextConstants.semanticLabelHourWeatherIcon,
               ),
               Text(
-                '$weather${AppTextConstants.symbolDegree}',
+                '$weather°',
                 style: AppTextStyles.mainFont,
               ),
             ],

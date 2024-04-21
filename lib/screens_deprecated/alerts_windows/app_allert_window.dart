@@ -3,16 +3,14 @@ import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
-// Всплывающие окна приложения
 abstract class AppAllertWindow {
-  // Переключение единиц измерения
   static changeMeasurementUnits(BuildContext context) {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
         backgroundColor: AppColors.mainBackground,
         title: const Text(
-          AppTextConstants.allertTitleAppUnits,
+          TextConstants.allertTitleAppUnits,
           style: AppTextStyles.settingsScreenHeaderFont,
         ),
         actionsAlignment: MainAxisAlignment.spaceAround,
@@ -20,49 +18,53 @@ abstract class AppAllertWindow {
           Row(
             children: [
               const Expanded(
-                child: Text(AppTextConstants.allertPointTemperature,
-                    style: AppTextStyles.expandedMainFont),
+                child: Text(
+                  TextConstants.allertPointTemperature,
+                  style: AppTextStyles.expandedMainFont,
+                ),
               ),
               TextButton(
                 style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(AppColors.orange)),
+                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
+                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppTextConstants.celsiumDegree,
-                    style: AppTextStyles.expandedMainFont),
+                child: const Text('°C', style: AppTextStyles.expandedMainFont),
               ),
               const SizedBox(width: 15),
               TextButton(
                 style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(AppColors.orange)),
+                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
+                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppTextConstants.fahrenheitDegree,
-                    style: AppTextStyles.expandedMainFont),
+                child: const Text('°F', style: AppTextStyles.expandedMainFont),
               ),
             ],
           ),
           Row(
             children: [
               const Expanded(
-                  child: Text(AppTextConstants.allertPointPressure,
+                  child: Text(TextConstants.allertPointPressure,
                       style: AppTextStyles.expandedMainFont)),
               TextButton(
                 style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(AppColors.orange)),
+                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
+                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppTextConstants.unitHPa,
-                    style: AppTextStyles.expandedMainFont),
+                child: const Text(
+                  TextConstants.unitHPa,
+                  style: AppTextStyles.expandedMainFont,
+                ),
               ),
               const SizedBox(width: 15),
               TextButton(
                 style: const ButtonStyle(
-                    backgroundColor:
-                        MaterialStatePropertyAll(AppColors.orange)),
+                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
+                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(AppTextConstants.unitMmHg,
-                    style: AppTextStyles.expandedMainFont),
+                child: const Text(
+                  TextConstants.unitMmHg,
+                  style: AppTextStyles.expandedMainFont,
+                ),
               ),
             ],
           ),
@@ -71,7 +73,6 @@ abstract class AppAllertWindow {
     );
   }
 
-  // Нет соответсвия введённого города пользователем с списком сервера
   static warningCityNotFound(BuildContext context) {
     showDialog<String>(
       context: context,
@@ -79,11 +80,11 @@ abstract class AppAllertWindow {
         title: const Row(
           children: [
             Icon(Icons.error_outline, color: Colors.black),
-            Text(AppTextConstants.allertTitleProblem),
+            Text(TextConstants.allertTitleProblem),
           ],
         ),
         backgroundColor: AppColors.orange,
-        content: const Text(AppTextConstants.allertMessageCantFindCity),
+        content: const Text(TextConstants.allertMessageCantFindCity),
         actions: <Widget>[
           TextButton(
             style: const ButtonStyle(
@@ -96,13 +97,13 @@ abstract class AppAllertWindow {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppTextConstants.ok),
+            child: const Text(TextConstants.ok),
           ),
         ],
       ),
     );
   }
-  // Город уже существует в списке сохранённых
+
   static warningCityAlreadyExist(BuildContext context) {
     showDialog<String>(
       context: context,
@@ -110,11 +111,11 @@ abstract class AppAllertWindow {
         title: const Row(
           children: [
             Icon(Icons.error_outline, color: Colors.black),
-            Text(AppTextConstants.allertTitleProblem),
+            Text(TextConstants.allertTitleProblem),
           ],
         ),
         backgroundColor: AppColors.orange,
-        content: const Text(AppTextConstants.allertMessageCityAlreadyExiset),
+        content: const Text(TextConstants.allertMessageCityAlreadyExiset),
         actions: <Widget>[
           TextButton(
             style: const ButtonStyle(
@@ -127,7 +128,7 @@ abstract class AppAllertWindow {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text(AppTextConstants.ok),
+            child: const Text(TextConstants.ok),
           ),
         ],
       ),

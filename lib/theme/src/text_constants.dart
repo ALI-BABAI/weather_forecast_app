@@ -1,8 +1,10 @@
-abstract class AppTextConstants {
+abstract class TextConstants {
   static const materialAppTitle = 'Weather forecast';
   static const weather = 'Weather';
   static const forecast = 'Forecast';
   static const error = 'Ошибка:';
+  static const errorOnOpenApp = 'Cannot open app';
+  static const errOnGettingWeatherInfo = 'Не удалось загрузить данные о погоде';
   static const errorToMuchRequestsOrSmth =
       'The number of requests to the server has been exceeded: or something else...';
   static const errorCannotGetResponseFromAPI =
@@ -11,11 +13,6 @@ abstract class AppTextConstants {
   static const semanticLabelHourWeatherIcon = 'Hour weather icon';
   static const semanticLabelDayWeatherIcon = 'Day weather icon';
 
-  static const symbolDegree = '°';
-  static const symbolComma = ',';
-  static const symbolSlash = '/';
-  static const celsiumDegree = '°C';
-  static const fahrenheitDegree = '°F';
   static const feelsLike = 'Feels like';
 
   static const wind = 'Wind: ';
@@ -23,7 +20,6 @@ abstract class AppTextConstants {
   static const visibility = 'Visibility: ';
   static const humidity = 'Humidity: ';
   static const unitKm = 'km';
-  static const unitPercent = '%';
   static const unitHPa = 'hPa';
   static const unitMmHg = 'mmHg';
   static const unitMeterBySec = 'm/s';
@@ -53,7 +49,8 @@ abstract class AppTextConstants {
   static const rateThisApp = 'Rate this app';
   static const shareYourWeather = 'Share your weather';
 
-  static const apiOverlimitErr = 'Error: The limit of requests to the server has been exceeded';
+  static const apiOverlimitErr =
+      'Error: The limit of requests to the server has been exceeded';
   static const apiNetworkErr = 'Error: There is no network connection';
 
   static const apiOtherErr = 'An error has occurred. Please try again later!';

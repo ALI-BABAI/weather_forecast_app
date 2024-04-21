@@ -8,12 +8,11 @@ import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
+/// Погода на 8 дней, учитывая текущий
 class DailyForecastWidget extends StatelessWidget {
+  const DailyForecastWidget(this.weatherData, {super.key});
+
   final WeatherModel weatherData;
-  const DailyForecastWidget({
-    super.key,
-    required this.weatherData,
-  });
 
   @override
   Widget build(BuildContext context) {
@@ -31,15 +30,26 @@ class DailyForecastWidget extends StatelessWidget {
               const Row(
                 children: [
                   Expanded(child: Center(child: SizedBox.shrink())),
-                  Expanded(child: Center(child: SizedBox.shrink())),
                   Expanded(
-                    child: Center(
-                      child: Text('day', style: AppTextStyles.mainFont),
-                    ),
-                  ),
-                  Expanded(
-                    child: Center(
-                      child: Text('night', style: AppTextStyles.mainFont),
+                    child: Row(
+                      children: [
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              'day',
+                              style: AppTextStyles.mainFont,
+                            ),
+                          ),
+                        ),
+                        Expanded(
+                          child: Center(
+                            child: Text(
+                              'night',
+                              style: AppTextStyles.mainFont,
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
                   ),
                 ],
@@ -49,7 +59,7 @@ class DailyForecastWidget extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.start,
                 children: weatherData.daily
                     .map(
-                      (element) => InfoPerDay(
+                      (element) => InfoAtDay(
                         date: element.date,
                         temperatureDay: element.dayTemperature,
                         temperatureEvening: element.eveTemperature,
@@ -67,13 +77,13 @@ class DailyForecastWidget extends StatelessWidget {
   }
 }
 
-class InfoPerDay extends StatelessWidget {
+class InfoAtDay extends StatelessWidget {
   final DateTime date;
   final int temperatureDay;
   final int temperatureEvening;
   final String weatherImage;
 
-  const InfoPerDay({
+  const InfoAtDay({
     super.key,
     required this.date,
     required this.temperatureDay,
@@ -92,25 +102,25 @@ class InfoPerDay extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                    '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
-                    style: AppTextStyles.mainFont),
+                  '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
+                  style: AppTextStyles.mainFont,
+                ),
               ),
               Center(
                 child: SvgPicture.asset(
                   weatherImage,
-                  semanticsLabel:
-                      AppTextConstants.semanticLabelDayWeatherIcon,
+                  semanticsLabel: TextConstants.semanticLabelDayWeatherIcon,
                 ),
               ),
               Center(
                 child: Text(
-                  '${temperatureDay.toString()}${AppTextConstants.symbolDegree}',
+                  '${temperatureDay.toString()}°',
                   style: AppTextStyles.mainFont,
                 ),
               ),
               Center(
                 child: Text(
-                  '${temperatureEvening.toString()}${AppTextConstants.symbolDegree}',
+                  '${temperatureEvening.toString()}°',
                   style: AppTextStyles.mainFont,
                 ),
               ),

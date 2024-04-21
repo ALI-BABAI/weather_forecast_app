@@ -4,10 +4,11 @@ import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
-// Иконка приложения + название + опциональный виджет
-class LoadingWidget extends StatelessWidget {
+/// Экран заставки приложения
+class LoadingScreen extends StatelessWidget {
+  const LoadingScreen({super.key, this.widget});
+
   final Widget? widget;
-  const LoadingWidget({super.key, this.widget});
 
   @override
   Widget build(BuildContext context) {
@@ -25,14 +26,14 @@ class LoadingWidget extends StatelessWidget {
               width: 275,
             ),
             const SizedBox(height: 5),
-            Text(AppTextConstants.weather,
+            Text(TextConstants.weather,
                 style: AppTextStyles.poppinsFont(
                   fontSize: 40,
                   color: AppColors.darkBlue,
                   fontWeight: FontWeight.w600,
                 )),
             const SizedBox(height: 5),
-            Text(AppTextConstants.forecast,
+            Text(TextConstants.forecast,
                 style: AppTextStyles.poppinsFont(
                   fontSize: 33,
                   color: AppColors.gray,
