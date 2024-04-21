@@ -22,10 +22,13 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
   ) async {
     try {
       if (weatherRepository.favouriteCities.isEmpty) {
-        await weatherRepository.addCityInFavourite('Moscow');
+        weatherRepository.getFavouriteCities();
+        if (weatherRepository.favouriteCities.isEmpty) {
+          await weatherRepository.addCityInFavourite('Moscow');
+        }
+        await weatherRepository
+            .getWeatherInfo(weatherRepository.favouriteCities);
       }
-      weatherRepository.getFavouriteCities();
-      await weatherRepository.getWeatherInfo(weatherRepository.favouriteCities);
 
       emit(
         LoadedWeatherState(

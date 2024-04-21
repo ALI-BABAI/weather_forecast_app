@@ -77,10 +77,7 @@ class HourItem extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Text(
-                hour,
-                style: AppTextStyles.smallestSecondaryFont
-              ),
+              Text(hour, style: AppTextStyles.smallestSecondaryFont),
               SvgPicture.asset(
                 image,
                 semanticsLabel: TextConstants.semanticLabelHourWeatherIcon,

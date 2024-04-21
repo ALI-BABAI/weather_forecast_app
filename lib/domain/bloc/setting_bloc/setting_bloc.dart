@@ -45,7 +45,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     AddCityEvent event,
     Emitter<SettingState> emit,
   ) async {
-    emit(LoadingSettingState());
+    emit((state as LoadedSettingState).copyWith(isSearching: true));
     try {
       await repository.addCityInFavourite(event.cityName);
       emit(

@@ -68,9 +68,18 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                         ),
                       ),
                     ),
-                    child: Text(
-                      TextConstants.add,
-                      style: AppTextStyles.poppinsFont(),
+                    child: BlocBuilder<SettingBloc, SettingState>(
+                      builder: (context, state) {
+                        return (state as LoadedSettingState).isSearching ??
+                                false
+                            ? const Center(
+                                child: CircularProgressIndicator(),
+                              )
+                            : Text(
+                                TextConstants.add,
+                                style: AppTextStyles.poppinsFont(),
+                              );
+                      },
                     ),
                   ),
                 ),
