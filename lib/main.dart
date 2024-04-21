@@ -8,7 +8,7 @@ import 'package:weather_forecast_app/weather_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  final AppRepositoryImpl appRepository =
-      AppRepositoryImpl(StorageService(prefs));
-  runApp(WeatherApp(appRepository));
+  final WeatherRepositoryImpl weatherRepository =
+      WeatherRepositoryImpl(StorageService(prefs));
+  runApp(WeatherApp(weatherRepository));
 }

@@ -2,9 +2,7 @@
 // панель настроек вызывается слева или справа в экране
 // https://api.flutter.dev/flutter/material/Drawer-class.html
 
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/widgets.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';

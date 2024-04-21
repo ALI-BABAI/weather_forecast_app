@@ -2,15 +2,15 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/domain/repository/setting_repository.dart';
+import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
 part 'setting_event.dart';
 part 'setting_state.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
-  final SettingRepository appRepository;
+  final WeatherRepository repository ;
 
-  SettingBloc(this.appRepository) : super(LoadingSettingState()) {
+  SettingBloc(this.repository) : super(LoadingSettingState()) {
     on<LoadingSettingScreenEvent>(_onLoadingSettingScreenEvent);
     on<AddCityEvent>(_onAddCityEvent);
     on<DeleteCityEvent>(_onDeleteCityEvent);
@@ -22,14 +22,14 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   void _onLoadingSettingScreenEvent(
       LoadingSettingScreenEvent event, Emitter<SettingState> emit) async {
     try {
-      if (appRepository.favouriteCities.isEmpty) {
-        appRepository.getFavouriteCities();
-        await appRepository.getWeatherInfo(appRepository.favouriteCities);
+      if (repository.favouriteCities.isEmpty) {
+        repository.getFavouriteCities();
+        await repository.getWeatherInfo(repository.favouriteCities);
       }
       emit(
         LoadedSettingState(
-          cities: appRepository.favouriteCities,
-          weatherData: appRepository.weatherDataList,
+          cities: repository.favouriteCities,
+          weatherData: repository.weatherDataList,
         ),
       );
     } catch (e) {
@@ -42,11 +42,11 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   void _onAddCityEvent(AddCityEvent event, Emitter<SettingState> emit) async {
     emit(LoadingSettingState());
     try {
-      await appRepository.addCityInFavourite(event.cityName);
+      await repository.addCityInFavourite(event.cityName);
       emit(
         LoadedSettingState(
-          cities: appRepository.favouriteCities,
-          weatherData: appRepository.weatherDataList,
+          cities: repository.favouriteCities,
+          weatherData: repository.weatherDataList,
         ),
       );
     } catch (e) {
@@ -59,11 +59,11 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       DeleteCityEvent event, Emitter<SettingState> emit) async {
     emit(LoadingSettingState());
     try {
-      await appRepository.deleteCityFromFavourite(event.index);
+      await repository.deleteCityFromFavourite(event.index);
       emit(
         LoadedSettingState(
-          cities: appRepository.favouriteCities,
-          weatherData: appRepository.weatherDataList,
+          cities: repository.favouriteCities,
+          weatherData: repository.weatherDataList,
         ),
       );
     } catch (e) {
@@ -76,7 +76,7 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
       ChangeCityIndexEvent event, Emitter<SettingState> emit) async {
     try {
       if (event.indexOld == event.indexNew) return;
-      await appRepository.changeCityIndex(event.indexNew, event.indexOld);
+      await repository.changeCityIndex(event.indexNew, event.indexOld);
     } catch (e) {
       debugPrint('''${e.toString()}\n
           Не удалось изменить положение города в списке избранных городов''');

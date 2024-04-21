@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecast_app/data/repository/app_repository.dart';
 import 'package:weather_forecast_app/blocs/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 import 'package:weather_forecast_app/presenter/settings_screen/settings_screen.dart';
 import 'package:weather_forecast_app/presenter/test_screen.dart';
 import 'package:weather_forecast_app/blocs/weather_bloc/weather_bloc.dart';
@@ -10,9 +10,9 @@ import 'package:weather_forecast_app/theme/app_main_themes.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class WeatherApp extends StatelessWidget {
-  const WeatherApp(this.appRepository, {super.key});
+  const WeatherApp(this.repository, {super.key});
 
-  final AppRepositoryImpl appRepository;
+  final WeatherRepository repository;
 
   @override
   Widget build(BuildContext context) {
@@ -20,11 +20,11 @@ class WeatherApp extends StatelessWidget {
       providers: [
         BlocProvider<WeatherBloc>(
           create: (BuildContext context) =>
-              WeatherBloc(appRepository)..add(LoadingWeatherScreenEvent()),
+              WeatherBloc(repository)..add(LoadingWeatherScreenEvent()),
         ),
         BlocProvider<SettingBloc>(
           create: (BuildContext context) =>
-              SettingBloc(appRepository)..add(LoadingSettingScreenEvent()),
+              SettingBloc(repository)..add(LoadingSettingScreenEvent()),
         ),
       ],
       child: MaterialApp(

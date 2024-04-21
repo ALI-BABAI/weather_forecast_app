@@ -6,11 +6,10 @@ import 'package:weather_forecast_app/data/services/api_service.dart';
 import 'package:weather_forecast_app/data/services/storage_service.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/domain/repository/setting_repository.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
-class AppRepositoryImpl implements WeatherRepository, SettingRepository {
-  AppRepositoryImpl(this.storageService);
+class WeatherRepositoryImpl implements WeatherRepository {
+  WeatherRepositoryImpl(this.storageService);
 
   final StorageService storageService;
 
