@@ -1,7 +1,3 @@
-// можно сделать через DRAWER виджет
-// панель настроек вызывается слева или справа в экране
-// https://api.flutter.dev/flutter/material/Drawer-class.html
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
@@ -34,13 +30,22 @@ class SettingsScreen extends StatelessWidget {
           final List<CityModel> savedCities = state.cities;
           final List<WeatherModel> weatherData = state.weatherData;
           return ScreenFrame(
-            widget: ReordableSettingWidget(
-              savedCities: savedCities,
-              weatherData: weatherData,
+            widget: ListView(
+              children: [
+                ReordableSettingWidget(
+                  savedCities: savedCities,
+                  weatherData: weatherData,
+                ),
+                const SizedBox(height: 20),
+                const ToolsWidget(),
+                const SizedBox(height: 20),
+              ],
             ),
           );
         } else if (state is ErrorSettingState) {
-          return const ScreenFrame(widget: CircularProgressIndicator());
+          return const ScreenFrame(
+            widget: CircularProgressIndicator(),
+          );
         } else {
           return const DecoratedBox(
             decoration: AppDecorations.darkDecorationTheme,
@@ -59,21 +64,27 @@ class ScreenFrame extends StatelessWidget {
   final Widget widget;
   @override
   Widget build(BuildContext context) {
-    return PopScope(
-      canPop: false,
-      onPopInvoked: (didPop) {
-        if (didPop) {
-          return;
-        }
-        BlocProvider.of<SettingBloc>(context).add(MoveToWeatherScreenEvent());
-      },
-      child: GestureDetector(
-        onTap: () => FocusScope.of(context).unfocus(),
-        child: Scaffold(
-          appBar: const CustomAppBar(),
-          body: DecoratedBox(
+    return Scaffold(
+      appBar: const CustomAppBar(),
+      body: PopScope(
+        canPop: false,
+        onPopInvoked: (didPop) {
+          if (didPop) {
+            return;
+          }
+          BlocProvider.of<SettingBloc>(context).add(MoveToWeatherScreenEvent());
+        },
+        child: GestureDetector(
+          onTap: () => FocusScope.of(context).unfocus(),
+          child: DecoratedBox(
             decoration: AppDecorations.darkDecorationTheme,
-            child: widget,
+            child: Padding(
+              padding: const EdgeInsets.symmetric(
+                vertical: 10,
+                horizontal: 22,
+              ),
+              child: widget,
+            ),
           ),
         ),
       ),
@@ -100,52 +111,41 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
   Widget build(BuildContext context) {
     final theme = Theme.of(context).textTheme;
     int indexOld = 0;
-    return ListView(
-      children: [
-        ReorderableListView(
-          // три палки для перетаскивания в браузерной версии
-          buildDefaultDragHandles: false,
-          primary: false,
-          shrinkWrap: true,
-          padding: const EdgeInsets.symmetric(
-            vertical: 10,
-            horizontal: 22,
+    return ReorderableListView(
+      // три палки для перетаскивания в браузерной версии
+      buildDefaultDragHandles: false,
+      primary: false,
+      shrinkWrap: true,
+      onReorder: (oldIndex, newIndex) {
+        setState(() => {});
+      },
+      onReorderEnd: (index) {
+        BlocProvider.of<SettingBloc>(context)
+            .add(ChangeCityIndexEvent(index, indexOld));
+      },
+      onReorderStart: (index) {
+        indexOld = index;
+      },
+      header: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Text(TextConstants.location, style: theme.titleSmall),
+          const SearchBarWidget(),
+        ],
+      ),
+      // favourite cities reordable list
+      children: <Widget>[
+        for (int index = 0; index < widget.savedCities.length; index++)
+          ReorderableDragStartListener(
+            key: Key(index.toString()),
+            index: index,
+            child: FavouriteCityPanel(
+              key: Key(index.toString()),
+              panelIndex: index,
+              savedCities: widget.savedCities,
+              weatherData: widget.weatherData,
+            ),
           ),
-          onReorder: (oldIndex, newIndex) {
-            setState(() => {});
-          },
-          onReorderEnd: (index) {
-            BlocProvider.of<SettingBloc>(context)
-                .add(ChangeCityIndexEvent(index, indexOld));
-          },
-          onReorderStart: (index) {
-            indexOld = index;
-          },
-          header: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              Text(TextConstants.location, style: theme.titleSmall),
-              const SearchBarWidget(),
-            ],
-          ),
-          // favourite cities reordable list
-          children: <Widget>[
-            for (int index = 0; index < widget.savedCities.length; index++)
-              ReorderableDragStartListener(
-                key: Key(index.toString()),
-                index: index,
-                child: FavouriteCityPanel(
-                  key: Key(index.toString()),
-                  panelIndex: index,
-                  savedCities: widget.savedCities,
-                  weatherData: widget.weatherData,
-                ),
-              ),
-          ],
-        ),
-        const SizedBox(height: 20),
-        const ToolsWidget(),
-        const SizedBox(height: 20),
       ],
     );
   }

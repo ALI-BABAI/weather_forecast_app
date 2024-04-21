@@ -22,6 +22,71 @@ class FavouriteCityPanel extends StatelessWidget {
   Widget build(BuildContext context) {
     return Dismissible(
       key: Key(panelIndex.toString()),
+      direction: DismissDirection.endToStart,
+      confirmDismiss: (DismissDirection direction) async {
+        if (direction == DismissDirection.endToStart) {
+          return await showDialog(
+            context: context,
+            builder: (BuildContext context) {
+              return AlertDialog(
+                title: Text(
+                  'Удалить ${savedCities.elementAt(panelIndex).name.toString()} из списка избранных?',
+                  style: AppTextStyles.expandedMainFont,
+                ),
+                actions: <Widget>[
+                  TextButton(
+                      onPressed: () => Navigator.of(context).pop(true),
+                      child: const Text(
+                        "Да",
+                        style: AppTextStyles.expandedMainFont,
+                      )),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(false),
+                    child: const Text(
+                      "Нет",
+                      style: AppTextStyles.expandedMainFont,
+                    ),
+                  ),
+                ],
+              );
+            },
+          );
+        }
+        return null;
+      },
+      secondaryBackground: Container(
+        color: Colors.red,
+        alignment: Alignment.centerRight,
+        padding: const EdgeInsets.only(right: 20),
+        child: const Row(
+          mainAxisAlignment: MainAxisAlignment.spaceAround,
+          children: [
+            Expanded(
+              child: Text(
+                'Удалить',
+                style: AppTextStyles.mainFont,
+                textAlign: TextAlign.end,
+              ),
+            ),
+            SizedBox(width: 50),
+            Icon(
+              Icons.delete,
+              color: Colors.white,
+              size: 36,
+            ),
+          ],
+        ),
+      ),
+      background: Container(
+        color: Colors.red, // Background color when swiping
+        alignment: Alignment.centerLeft,
+        padding: const EdgeInsets.only(right: 20),
+        child: const Icon(
+          Icons.delete,
+          color: Colors.white,
+          size: 36,
+        ),
+      ),
       onDismissed: (direction) {
         BlocProvider.of<SettingBloc>(context).add(DeleteCityEvent(panelIndex));
       },

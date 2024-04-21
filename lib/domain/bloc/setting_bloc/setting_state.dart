@@ -14,7 +14,7 @@ final class LoadedSettingState extends SettingState {
   });
 }
 
-final class SearchingCityState extends SettingState {}
+final class SearchCityState extends SettingState {}
 
 final class DeleteCityState extends SettingState {}
 

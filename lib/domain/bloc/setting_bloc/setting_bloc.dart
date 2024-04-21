@@ -8,8 +8,6 @@ part 'setting_event.dart';
 part 'setting_state.dart';
 
 class SettingBloc extends Bloc<SettingEvent, SettingState> {
-  final WeatherRepository repository ;
-
   SettingBloc(this.repository) : super(LoadingSettingState()) {
     on<LoadingSettingScreenEvent>(_onLoadingSettingScreenEvent);
     on<AddCityEvent>(_onAddCityEvent);
@@ -19,8 +17,12 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     on<MoveToWeatherScreenEvent>(_onMoveToWeatherScreenEvent);
   }
 
+  final WeatherRepository repository;
+
   void _onLoadingSettingScreenEvent(
-      LoadingSettingScreenEvent event, Emitter<SettingState> emit) async {
+    LoadingSettingScreenEvent event,
+    Emitter<SettingState> emit,
+  ) async {
     try {
       if (repository.favouriteCities.isEmpty) {
         repository.getFavouriteCities();
@@ -39,7 +41,10 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     }
   }
 
-  void _onAddCityEvent(AddCityEvent event, Emitter<SettingState> emit) async {
+  void _onAddCityEvent(
+    AddCityEvent event,
+    Emitter<SettingState> emit,
+  ) async {
     emit(LoadingSettingState());
     try {
       await repository.addCityInFavourite(event.cityName);
@@ -56,7 +61,9 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }
 
   void _onDeleteCityEvent(
-      DeleteCityEvent event, Emitter<SettingState> emit) async {
+    DeleteCityEvent event,
+    Emitter<SettingState> emit,
+  ) async {
     emit(LoadingSettingState());
     try {
       await repository.deleteCityFromFavourite(event.index);
@@ -73,7 +80,9 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
   }
 
   Future<void> _onChangeCityIndexEvent(
-      ChangeCityIndexEvent event, Emitter<SettingState> emit) async {
+    ChangeCityIndexEvent event,
+    Emitter<SettingState> emit,
+  ) async {
     try {
       if (event.indexOld == event.indexNew) return;
       await repository.changeCityIndex(event.indexNew, event.indexOld);
@@ -84,13 +93,17 @@ class SettingBloc extends Bloc<SettingEvent, SettingState> {
     }
   }
 
-  void _onTollTapEvent(TollTapEvent event, Emitter<SettingState> emit) {
+  void _onTollTapEvent(
+    TollTapEvent event,
+    Emitter<SettingState> emit,
+  ) {
     emit(LoadingSettingState());
-    // emit(LoadedState());
   }
 
   void _onMoveToWeatherScreenEvent(
-      MoveToWeatherScreenEvent event, Emitter<SettingState> emit) {
+    MoveToWeatherScreenEvent event,
+    Emitter<SettingState> emit,
+  ) {
     debugPrint('Переход на экран погоды');
     emit(OpenWeatherScreenState());
   }
