@@ -36,15 +36,16 @@ class FavouriteCityPanel extends StatelessWidget {
                 actions: <Widget>[
                   TextButton(
                       onPressed: () => Navigator.of(context).pop(true),
-                      child: const Text(
-                        "Да",
-                        style: AppTextStyles.expandedMainFont,
+                      child: Text(
+                        "Удалить",
+                        style:
+                            AppTextStyles.mainFont.copyWith(color: Colors.red),
                       )),
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(false),
                     child: const Text(
-                      "Нет",
-                      style: AppTextStyles.expandedMainFont,
+                      "Отмена",
+                      style: AppTextStyles.mainFont,
                     ),
                   ),
                 ],
@@ -54,37 +55,31 @@ class FavouriteCityPanel extends StatelessWidget {
         }
         return null;
       },
-      secondaryBackground: Container(
+      background: const ColoredBox(
         color: Colors.red,
-        alignment: Alignment.centerRight,
-        padding: const EdgeInsets.only(right: 20),
-        child: const Row(
-          mainAxisAlignment: MainAxisAlignment.spaceAround,
-          children: [
-            Expanded(
-              child: Text(
-                'Удалить',
-                style: AppTextStyles.mainFont,
-                textAlign: TextAlign.end,
+        child: Align(
+          alignment: Alignment.centerRight,
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.end,
+            children: <Widget>[
+              Text(
+                "Delete",
+                style: AppTextStyles.expandedMainFont,
+                textAlign: TextAlign.right,
               ),
-            ),
-            SizedBox(width: 50),
-            Icon(
-              Icons.delete,
-              color: Colors.white,
-              size: 36,
-            ),
-          ],
-        ),
-      ),
-      background: Container(
-        color: Colors.red, // Background color when swiping
-        alignment: Alignment.centerLeft,
-        padding: const EdgeInsets.only(right: 20),
-        child: const Icon(
-          Icons.delete,
-          color: Colors.white,
-          size: 36,
+              SizedBox(
+                width: 20,
+              ),
+              Icon(
+                Icons.delete_forever,
+                color: Colors.white,
+                size: 35,
+              ),
+              SizedBox(
+                width: 20,
+              ),
+            ],
+          ),
         ),
       ),
       onDismissed: (direction) {
