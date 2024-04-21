@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecast_app/blocs/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 import 'package:weather_forecast_app/theme/src/text_constants.dart';
