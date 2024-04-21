@@ -9,26 +9,28 @@ part 'weather_event.dart';
 part 'weather_state.dart';
 
 class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
-  WeatherBloc(this.appRepository) : super(LoadingWeatherState()) {
+  WeatherBloc(this.weatherRepository) : super(LoadingWeatherState()) {
     on<LoadingWeatherScreenEvent>(_onLoadingWeatherScreenEvent);
     on<MoveToSettingScreenEvent>(_onMoveToSettingScreenEvent);
   }
 
-  final WeatherRepository appRepository;
+  final WeatherRepository weatherRepository;
 
   void _onLoadingWeatherScreenEvent(
     LoadingWeatherScreenEvent event,
     Emitter<WeatherState> emit,
   ) async {
     try {
-      if (appRepository.favouriteCities.isEmpty) {
-        appRepository.getFavouriteCities();
-        await appRepository.getWeatherInfo(appRepository.favouriteCities);
+      if (weatherRepository.favouriteCities.isEmpty) {
+        await weatherRepository.addCityInFavourite('Moscow');
       }
+      weatherRepository.getFavouriteCities();
+      await weatherRepository.getWeatherInfo(weatherRepository.favouriteCities);
+
       emit(
         LoadedWeatherState(
-          cities: appRepository.favouriteCities,
-          weatherData: appRepository.weatherDataList,
+          cities: weatherRepository.favouriteCities,
+          weatherData: weatherRepository.weatherDataList,
         ),
       );
     } catch (e) {
