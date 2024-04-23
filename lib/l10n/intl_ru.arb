@@ -1,0 +1,9 @@
+{
+  "Hello": "Привет",
+  "World": "Мир",
+  "weatherForecast": "Weather forecast",
+  "Weather": "Weather",
+  "Forecast": "Forecast",
+  "Error": "Error:",
+  "FailedToLoadWeatherData": "Failed to load weather data"
+}

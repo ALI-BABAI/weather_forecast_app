@@ -3,7 +3,6 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 part 'weather_event.dart';
 part 'weather_state.dart';
@@ -37,8 +36,7 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         ),
       );
     } catch (e) {
-      final message =
-          '${e.toString()}\n${TextConstants.errOnGettingWeatherInfo}';
+      final message = e.toString();
       debugPrint(message);
       emit(ErrorWeatherState(message));
     }

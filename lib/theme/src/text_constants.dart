@@ -1,10 +1,4 @@
 abstract class TextConstants {
-  static const materialAppTitle = 'Weather forecast';
-  static const weather = 'Weather';
-  static const forecast = 'Forecast';
-  static const error = 'Ошибка:';
-  static const errorOnOpenApp = 'Cannot open app';
-  static const errOnGettingWeatherInfo = 'Не удалось загрузить данные о погоде';
   static const errorToMuchRequestsOrSmth =
       'The number of requests to the server has been exceeded: or something else...';
   static const errorCannotGetResponseFromAPI =

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 /// Экран заставки приложения
 class LoadingScreen extends StatelessWidget {
@@ -26,14 +26,14 @@ class LoadingScreen extends StatelessWidget {
               width: 275,
             ),
             const SizedBox(height: 5),
-            Text(TextConstants.weather,
+            Text(S.of(context).Weather,
                 style: AppTextStyles.poppinsFont(
                   fontSize: 40,
                   color: AppColors.darkBlue,
                   fontWeight: FontWeight.w600,
                 )),
             const SizedBox(height: 5),
-            Text(TextConstants.forecast,
+            Text(S.of(context).Forecast,
                 style: AppTextStyles.poppinsFont(
                   fontSize: 33,
                   color: AppColors.gray,
