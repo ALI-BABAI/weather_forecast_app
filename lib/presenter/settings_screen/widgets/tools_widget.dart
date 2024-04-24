@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/screens_deprecated/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
@@ -12,19 +13,22 @@ class ToolsWidget extends StatelessWidget {
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
-        // label
-        const Text(
-          TextConstants.tools,
+        Text(
+          S.of(context).tools,
           style: AppTextStyles.settingsScreenHeaderFont,
         ),
+        const SizedBox(height: 10),
         // Toll-items
         ListView.builder(
           shrinkWrap: true,
           primary: false,
-          itemCount: toolsItemsList.length,
+          itemCount: _toolsItems.length,
           itemBuilder: (context, index) {
-            final toolItem = toolsItemsList[index];
-            return ToolItemWidget(toolButtonItem: toolItem);
+            final toolItem = _toolsItems[index];
+            return ToolItemWidget(
+              toolButtonItem: toolItem,
+              context: context,
+            );
           },
         ),
       ],
@@ -34,8 +38,13 @@ class ToolsWidget extends StatelessWidget {
 
 class ToolItemWidget extends StatelessWidget {
   final ToolButtonItem toolButtonItem;
+  final BuildContext context;
 
-  const ToolItemWidget({super.key, required this.toolButtonItem});
+  const ToolItemWidget({
+    super.key,
+    required this.toolButtonItem,
+    required this.context,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -43,7 +52,6 @@ class ToolItemWidget extends StatelessWidget {
       height: 50,
       child: TextButton(
         onPressed: () => AppAllertWindow.changeMeasurementUnits(context),
-        // иконка и название итема
         child: Row(
           children: [
             Icon(
@@ -51,11 +59,9 @@ class ToolItemWidget extends StatelessWidget {
               color: AppColors.white,
             ),
             const SizedBox(width: 10),
-            Expanded(
-              child: Text(
-                toolButtonItem.buttonName,
-                style: AppTextStyles.expandedMainFont,
-              ),
+            Text(
+              toolButtonItem.buttonName,
+              style: AppTextStyles.expandedMainFont,
             ),
           ],
         ),
@@ -67,7 +73,7 @@ class ToolItemWidget extends StatelessWidget {
 final class ToolButtonItem {
   final String buttonName;
   final IconData iconType;
-  final void function;
+  final VoidCallback function;
 
   ToolButtonItem({
     required this.buttonName,
@@ -76,7 +82,7 @@ final class ToolButtonItem {
   });
 }
 
-final List toolsItemsList = [
+final List _toolsItems = [
   ToolButtonItem(
     buttonName: TextConstants.measurementUnits,
     iconType: Icons.balance_rounded,
@@ -94,27 +100,6 @@ final List toolsItemsList = [
   ToolButtonItem(
     buttonName: TextConstants.language,
     iconType: Icons.language,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  ToolButtonItem(
-    buttonName: TextConstants.seedFedback,
-    iconType: Icons.sms_outlined,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  ToolButtonItem(
-    buttonName: TextConstants.rateThisApp,
-    iconType: Icons.star,
-    function: () {
-      debugPrint('handling...');
-    },
-  ),
-  ToolButtonItem(
-    buttonName: TextConstants.shareYourWeather,
-    iconType: Icons.share,
     function: () {
       debugPrint('handling...');
     },

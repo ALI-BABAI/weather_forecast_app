@@ -3,10 +3,10 @@ import 'package:flutter/widgets.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 /// Погода на 8 дней, учитывая текущий
 class DailyForecastWidget extends StatelessWidget {
@@ -27,16 +27,16 @@ class DailyForecastWidget extends StatelessWidget {
           padding: const EdgeInsets.all(10),
           child: Column(
             children: [
-              const Row(
+              Row(
                 children: [
-                  Expanded(child: Center(child: SizedBox.shrink())),
+                  const Expanded(child: Center(child: SizedBox.shrink())),
                   Expanded(
                     child: Row(
                       children: [
                         Expanded(
                           child: Center(
                             child: Text(
-                              'day',
+                              S.of(context).day,
                               style: AppTextStyles.mainFont,
                             ),
                           ),
@@ -44,7 +44,7 @@ class DailyForecastWidget extends StatelessWidget {
                         Expanded(
                           child: Center(
                             child: Text(
-                              'night',
+                              S.of(context).night,
                               style: AppTextStyles.mainFont,
                             ),
                           ),
@@ -102,14 +102,17 @@ class InfoAtDay extends StatelessWidget {
             children: [
               Center(
                 child: Text(
-                  '${DateFormat.d().format(date)} ${DateFormat.MMMM().format(date)}',
+                  DateFormat(
+                    'd MMMM',
+                    Localizations.localeOf(context).languageCode,
+                  ).format(date),
                   style: AppTextStyles.mainFont,
                 ),
               ),
               Center(
                 child: SvgPicture.asset(
                   weatherImage,
-                  semanticsLabel: TextConstants.semanticLabelDayWeatherIcon,
+                  semanticsLabel: S.of(context).dayWeatherIcon,
                 ),
               ),
               Center(

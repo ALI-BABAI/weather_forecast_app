@@ -1,9 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
+
 
 class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
   const CustomAppBar({super.key});
@@ -18,7 +19,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
         child: Divider(color: Colors.grey, thickness: 0.1),
       ),
       title: Text(
-        TextConstants.settings,
+        S.of(context).settings,
         style: theme.titleLarge,
       ),
       actions: <Widget>[

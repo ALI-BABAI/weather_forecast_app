@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 abstract class AppAllertWindow {
   static changeMeasurementUnits(BuildContext context) {
@@ -9,61 +9,56 @@ abstract class AppAllertWindow {
       context: context,
       builder: (BuildContext context) => AlertDialog(
         backgroundColor: AppColors.mainBackground,
-        title: const Text(
-          TextConstants.allertTitleAppUnits,
+        title: Text(
+          S.of(context).appUnits,
           style: AppTextStyles.settingsScreenHeaderFont,
         ),
         actionsAlignment: MainAxisAlignment.spaceAround,
         actions: <Widget>[
           Row(
             children: [
-              const Expanded(
-                child: Text(
-                  TextConstants.allertPointTemperature,
-                  style: AppTextStyles.expandedMainFont,
-                ),
+              Text(
+                S.of(context).temperatureUnit,
+                style: AppTextStyles.expandedMainFont,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
+              TextButton(
+                onPressed: () => Navigator.pop(context),
+                child: const Text('°C', style: AppTextStyles.mainFont),
               ),
               TextButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
-                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text('°C', style: AppTextStyles.expandedMainFont),
-              ),
-              const SizedBox(width: 15),
-              TextButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
-                ),
-                onPressed: () => Navigator.pop(context),
-                child: const Text('°F', style: AppTextStyles.expandedMainFont),
+                child: const Text('°F', style: AppTextStyles.mainFont),
               ),
             ],
           ),
           Row(
             children: [
-              const Expanded(
-                  child: Text(TextConstants.allertPointPressure,
-                      style: AppTextStyles.expandedMainFont)),
+              Text(
+                S.of(context).pressureUnit,
+                style: AppTextStyles.expandedMainFont,
+              ),
+            ],
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            children: [
               TextButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
-                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  TextConstants.unitHPa,
-                  style: AppTextStyles.expandedMainFont,
+                child: Text(
+                  S.of(context).hpaUnit,
+                  style: AppTextStyles.mainFont,
                 ),
               ),
-              const SizedBox(width: 15),
               TextButton(
-                style: const ButtonStyle(
-                  backgroundColor: MaterialStatePropertyAll(AppColors.orange),
-                ),
                 onPressed: () => Navigator.pop(context),
-                child: const Text(
-                  TextConstants.unitMmHg,
-                  style: AppTextStyles.expandedMainFont,
+                child: Text(
+                  S.of(context).mmhgUnit,
+                  style: AppTextStyles.mainFont,
                 ),
               ),
             ],
@@ -77,14 +72,14 @@ abstract class AppAllertWindow {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.error_outline, color: Colors.black),
-            Text(TextConstants.allertTitleProblem),
+            const Icon(Icons.error_outline, color: Colors.black),
+            Text(S.of(context).haveProblem),
           ],
         ),
         backgroundColor: AppColors.orange,
-        content: const Text(TextConstants.allertMessageCantFindCity),
+        content: Text(S.of(context).notFoundCityPleaseCheckInputAndTryAgain),
         actions: <Widget>[
           TextButton(
             style: const ButtonStyle(
@@ -97,7 +92,7 @@ abstract class AppAllertWindow {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text(TextConstants.ok),
+            child: Text(S.of(context).ok),
           ),
         ],
       ),
@@ -108,14 +103,14 @@ abstract class AppAllertWindow {
     showDialog<String>(
       context: context,
       builder: (BuildContext context) => AlertDialog(
-        title: const Row(
+        title: Row(
           children: [
-            Icon(Icons.error_outline, color: Colors.black),
-            Text(TextConstants.allertTitleProblem),
+            const Icon(Icons.error_outline, color: Colors.black),
+            Text(S.of(context).haveProblem),
           ],
         ),
         backgroundColor: AppColors.orange,
-        content: const Text(TextConstants.allertMessageCityAlreadyExiset),
+        content: Text(S.of(context).theCityHasAlreadyBeenSaved),
         actions: <Widget>[
           TextButton(
             style: const ButtonStyle(
@@ -128,7 +123,7 @@ abstract class AppAllertWindow {
               ),
             ),
             onPressed: () => Navigator.pop(context),
-            child: const Text(TextConstants.ok),
+            child: Text(S.of(context).ok),
           ),
         ],
       ),

@@ -3,10 +3,10 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/common_widgets/dotted_divider.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 /// Иконка погоды, текущая погода + доп.параметры
 class MainForecastWidget extends StatelessWidget {
@@ -47,8 +47,10 @@ class DateWidget extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 10),
             child: Text(
-              '${DateFormat.EEEE().format(weatherData.date)}, '
-              '${DateFormat.d().format(weatherData.date)} ${DateFormat.MMMM().format(weatherData.date)}',
+              DateFormat(
+                'EEEE, d MMMM',
+                Localizations.localeOf(context).languageCode,
+              ).format(weatherData.date),
               style: AppTextStyles.smallestSecondaryFont,
             ),
           ),
@@ -66,31 +68,39 @@ class BasicWeatherInfoWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final day = weatherData.daily.first;
     return Padding(
       padding: const EdgeInsets.only(bottom: 15),
       child: Row(
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: [
-          SvgPicture.asset(
-            'assets/images/weather_conditions/${weatherData.iconID}.svg',
-            semanticsLabel: TextConstants.semanticLabelCurrentWeatherIcon,
-            height: 125,
-            width: 125,
+          Flexible(
+            flex: 1,
+            child: Center(
+              child: SizedBox(
+                height: 125,
+                width: 125,
+                child: SvgPicture.asset(
+                  'assets/images/weather_conditions/${weatherData.iconID}.svg',
+                  semanticsLabel: S.of(context).currentWeatherIcon,
+                ),
+              ),
+            ),
           ),
-          SizedBox(
-            height: 160,
+          Flexible(
+            flex: 2,
             child: Column(
               children: [
-                Expanded(
-                  child: GradientText(
-                    '${weatherData.temperature}°',
-                    gradientDirection: GradientDirection.ttb,
-                    style: const TextStyle(
-                      fontSize: 100,
-                      fontWeight: FontWeight.w500,
-                    ),
-                    colors: AppColors.grayGradientText,
+                GradientText(
+                  '${weatherData.temperature}°',
+                  gradientDirection: GradientDirection.ttb,
+                  textScaleFactor: 1,
+                  style: const TextStyle(
+                    fontSize: 100,
+                    fontWeight: FontWeight.w500,
+                    height: 1,
                   ),
+                  colors: AppColors.grayGradientText,
                 ),
                 Text(
                   weatherData.description,
@@ -99,9 +109,11 @@ class BasicWeatherInfoWidget extends StatelessWidget {
                 const SizedBox(height: 5),
                 // Доп.температурные параметры по текущему дню
                 Text(
-                  '${weatherData.daily.first.maxTemperature}°/'
-                  '${weatherData.daily.first.minTemperature}° '
-                  '${TextConstants.feelsLike} ${weatherData.temperatureFillsLike}°C',
+                  S.of(context).feelsLike(
+                        day.maxTemperature,
+                        day.minTemperature,
+                        weatherData.temperatureFillsLike,
+                      ),
                   style: AppTextStyles.secondaryFont,
                 ),
               ],
@@ -130,13 +142,13 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WeatherParameter(
-                name: TextConstants.wind,
-                info: '${weatherData.wind}${TextConstants.unitMeterBySec}',
+                name: S.of(context).wind,
+                info: S.of(context).xMetersBySecond(weatherData.wind),
                 icon: Icons.air_rounded,
               ),
               WeatherParameter(
-                name: TextConstants.pressure,
-                info: '${weatherData.pressure}${TextConstants.unitHPa}',
+                name: S.of(context).pressure,
+                info: '${weatherData.pressure}${S.of(context).hpaUnit}',
                 icon: Icons.speed_rounded,
               ),
             ],
@@ -145,12 +157,12 @@ class ExtendedWeatherInfoWidget extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               WeatherParameter(
-                name: TextConstants.visibility,
-                info: '${weatherData.visibility}${TextConstants.unitKm}',
+                name: S.of(context).visibility,
+                info: S.of(context).xKm(weatherData.visibility),
                 icon: Icons.visibility_outlined,
               ),
               WeatherParameter(
-                name: TextConstants.humidity,
+                name: S.of(context).humidity,
                 info: '${weatherData.humidity}%',
                 icon: Icons.water_drop_outlined,
               ),

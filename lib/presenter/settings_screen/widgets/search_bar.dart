@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
@@ -31,7 +31,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
           style: AppTextStyles.expandedMainFont,
           cursorColor: Colors.cyan,
           decoration: InputDecoration(
-            hintText: TextConstants.enterCityName,
+            hintText: S.of(context).enterCityName,
             hintStyle: AppTextStyles.secondaryFont,
             focusedBorder: const OutlineInputBorder(
               borderSide: BorderSide(color: AppColors.orange),
@@ -75,10 +75,16 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                             ? const Center(
                                 child: CircularProgressIndicator(),
                               )
-                            : Text(
-                                TextConstants.add,
-                                style: AppTextStyles.poppinsFont(),
-                              );
+                            : Localizations.localeOf(context).languageCode ==
+                                    'en'
+                                ? Text(
+                                    S.of(context).add,
+                                    style: AppTextStyles.poppinsFont(),
+                                  )
+                                : const Icon(
+                                    Icons.add_task_rounded, //add_task_rounded
+                                    size: 30,
+                                  );
                       },
                     ),
                   ),

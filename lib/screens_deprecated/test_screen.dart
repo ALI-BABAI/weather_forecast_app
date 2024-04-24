@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/theme/app_colors.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/theme/src/text_constants.dart';
 
 class ReordableData extends StatefulWidget {
   const ReordableData({super.key});
@@ -20,8 +20,8 @@ class _ReordableDataState extends State<ReordableData> {
       appBar: AppBar(
         automaticallyImplyLeading: false,
         backgroundColor: AppColors.mainBackground,
-        title: const Text(
-          TextConstants.settings,
+        title:  Text(
+         S.of(context).settings,
           style: AppTextStyles.mainFont,
         ),
         actions: <Widget>[
