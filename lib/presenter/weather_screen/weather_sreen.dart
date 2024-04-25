@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:loop_page_view/loop_page_view.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 
 import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
@@ -9,9 +10,7 @@ import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class WeatherScreen extends StatelessWidget {
-  WeatherScreen({super.key});
-
-  final PageController _pageController = PageController();
+  const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -31,13 +30,12 @@ class WeatherScreen extends StatelessWidget {
                 return const LoadingScreen();
               } else if (state is LoadedWeatherState) {
                 final itemCount = state.cities.length;
-                return PageView.builder(
-                  controller: _pageController,
-                  itemBuilder: (context, index) {
+                return LoopPageView.builder(
+                  itemCount: itemCount,
+                  itemBuilder: (_, index) {
                     return CityWidget(
-                      currentCity: state.cities.elementAt((index % itemCount)),
-                      weatherData:
-                          state.weatherData.elementAt((index % itemCount)),
+                      currentCity: state.cities.elementAt(index),
+                      weatherData: state.weatherData.elementAt(index),
                     );
                   },
                 );
