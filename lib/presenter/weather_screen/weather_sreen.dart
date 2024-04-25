@@ -9,7 +9,9 @@ import 'package:weather_forecast_app/theme/app_decoration.dart';
 import 'package:weather_forecast_app/theme/app_text_styles.dart';
 
 class WeatherScreen extends StatelessWidget {
-  const WeatherScreen({super.key});
+  WeatherScreen({super.key});
+
+  final PageController _pageController = PageController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,9 +31,8 @@ class WeatherScreen extends StatelessWidget {
                 return const LoadingScreen();
               } else if (state is LoadedWeatherState) {
                 final itemCount = state.cities.length;
-                final pageViewController = PageController();
                 return PageView.builder(
-                  controller: pageViewController,
+                  controller: _pageController,
                   itemBuilder: (context, index) {
                     return CityWidget(
                       currentCity: state.cities.elementAt((index % itemCount)),

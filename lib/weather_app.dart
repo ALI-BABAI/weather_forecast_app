@@ -42,7 +42,7 @@ class WeatherApp extends StatelessWidget {
         theme: mainThemes,
         title: 'Weather forecast',
         routes: {
-          '/weather': (context) => const WeatherScreen(),
+          '/weather': (context) => WeatherScreen(),
           '/settings': (context) => const SettingsScreen(),
           '/test': (context) => const ReordableData(),
         },
