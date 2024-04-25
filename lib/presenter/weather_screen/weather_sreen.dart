@@ -28,13 +28,15 @@ class WeatherScreen extends StatelessWidget {
               if (state is LoadingWeatherState) {
                 return const LoadingScreen();
               } else if (state is LoadedWeatherState) {
+                final itemCount = state.cities.length;
+                final pageViewController = PageController();
                 return PageView.builder(
-                  controller: PageController(),
-                  itemCount: state.cities.length,
+                  controller: pageViewController,
                   itemBuilder: (context, index) {
                     return CityWidget(
-                      currentCity: state.cities.elementAt(index),
-                      weatherData: state.weatherData.elementAt(index),
+                      currentCity: state.cities.elementAt((index % itemCount)),
+                      weatherData:
+                          state.weatherData.elementAt((index % itemCount)),
                     );
                   },
                 );
