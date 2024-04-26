@@ -58,14 +58,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "hpaUnit": MessageLookupByLibrary.simpleMessage("гПа"),
         "humidity": MessageLookupByLibrary.simpleMessage("Влажность: "),
         "kmUnit": MessageLookupByLibrary.simpleMessage("км"),
+        "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
         "measurementUnits":
-            MessageLookupByLibrary.simpleMessage("Measurement units"),
+            MessageLookupByLibrary.simpleMessage("Единицы измерения"),
         "mmhgUnit": MessageLookupByLibrary.simpleMessage("мм.рт.ст."),
         "night": MessageLookupByLibrary.simpleMessage("ночь"),
         "notFoundCityPleaseCheckInputAndTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Не удалось найти город. Пожалуйста, проверьте ввод и повторите попытку!"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "pressure": MessageLookupByLibrary.simpleMessage("Давление: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Давление:"),

@@ -2,7 +2,7 @@
 // https://habr.com/ru/articles/776682/   // работа с шрифтами и виджетом Техт
 
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 
 abstract class AppTextStyles {
   static TextStyle poppinsFont({

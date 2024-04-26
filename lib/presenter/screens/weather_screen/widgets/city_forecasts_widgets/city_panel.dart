@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
-import 'package:weather_forecast_app/theme/app_bar_button.dart';
-import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/presenter/theme/app_bar_button.dart';
+import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 
 /// Город и кнопка перехода на экран настроек
 class CityPanelWidget extends StatelessWidget {

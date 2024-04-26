@@ -3,8 +3,8 @@ import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
-import 'package:weather_forecast_app/theme/app_colors.dart';
-import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
+import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
 /// Почасовая информация о погоде (24ч, учитывая текущий)
 class HourlyForecastWidget extends StatelessWidget {

@@ -57,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "hpaUnit": MessageLookupByLibrary.simpleMessage("hPa"),
         "humidity": MessageLookupByLibrary.simpleMessage("Humidity: "),
         "kmUnit": MessageLookupByLibrary.simpleMessage("km"),
+        "language": MessageLookupByLibrary.simpleMessage("Language"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Measurement units"),
@@ -65,6 +66,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "notFoundCityPleaseCheckInputAndTryAgain":
             MessageLookupByLibrary.simpleMessage(
                 "Not found city. Please, check the input and try again!"),
+        "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "pressure": MessageLookupByLibrary.simpleMessage("Pressure: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Pressure:"),

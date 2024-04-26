@@ -250,16 +250,6 @@ class S {
     );
   }
 
-  /// `Measurement units`
-  String get measurementUnits {
-    return Intl.message(
-      'Measurement units',
-      name: 'measurementUnits',
-      desc: '',
-      args: [],
-    );
-  }
-
   /// `The city has already been saved!`
   String get theCityHasAlreadyBeenSaved {
     return Intl.message(
@@ -428,6 +418,36 @@ class S {
       name: 'feelsLike',
       desc: '',
       args: [maxTemperature, minTemperature, temperature],
+    );
+  }
+
+  /// `Measurement units`
+  String get measurementUnits {
+    return Intl.message(
+      'Measurement units',
+      name: 'measurementUnits',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Notifications`
+  String get notifications {
+    return Intl.message(
+      'Notifications',
+      name: 'notifications',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Language`
+  String get language {
+    return Intl.message(
+      'Language',
+      name: 'language',
+      desc: '',
+      args: [],
     );
   }
 }

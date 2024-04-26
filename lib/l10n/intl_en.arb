@@ -19,7 +19,6 @@
   "tools": "Tools",
   "settings": "Settings",
   "location": "Location",
-  "measurementUnits": "Measurement units",
   "theCityHasAlreadyBeenSaved": "The city has already been saved!",
   "enterCityName": "Enter a city name",
   "notFoundCityPleaseCheckInputAndTryAgain": "Not found city. Please, check the input and try again!",
@@ -36,5 +35,8 @@
   "wind": "Wind: ",
   "pressure": "Pressure: ",
   "visibility": "Visibility: ",
-  "feelsLike": "{maxTemperature}°/{minTemperature}°, feels like {temperature}°C"
+  "feelsLike": "{maxTemperature}°/{minTemperature}°, feels like {temperature}°C",
+  "measurementUnits": "Measurement units",
+  "notifications": "Notifications",
+  "language": "Language"
 }

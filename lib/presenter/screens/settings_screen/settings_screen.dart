@@ -4,11 +4,11 @@ import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
-import 'package:weather_forecast_app/presenter/settings_screen/widgets/custom_app_bar.dart';
-import 'package:weather_forecast_app/presenter/settings_screen/widgets/favourite_city_panel.dart';
-import 'package:weather_forecast_app/presenter/settings_screen/widgets/search_bar.dart';
+import 'package:weather_forecast_app/presenter/screens/settings_screen/widgets/custom_app_bar.dart';
+import 'package:weather_forecast_app/presenter/screens/settings_screen/widgets/favourite_city_panel.dart';
+import 'package:weather_forecast_app/presenter/screens/settings_screen/widgets/search_bar.dart';
 import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
-import 'package:weather_forecast_app/theme/app_decoration.dart';
+import 'package:weather_forecast_app/presenter/theme/app_decoration.dart';
 
 import 'widgets/tools_widget.dart';
 

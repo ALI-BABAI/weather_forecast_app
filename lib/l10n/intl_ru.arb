@@ -19,7 +19,7 @@
   "tools": "Персонализация",
   "settings": "Настройки",
   "location": "Локация",
-  "measurementUnits": "Measurement units",
+  
   "theCityHasAlreadyBeenSaved": "Город уже добавлен в избранные!",
   "enterCityName": "Введите название города",
   "notFoundCityPleaseCheckInputAndTryAgain": "Не удалось найти город. Пожалуйста, проверьте ввод и повторите попытку!",
@@ -36,5 +36,8 @@
   "wind": "Сила ветра: ",
   "pressure": "Давление: ",
   "visibility": "Видимость: ",
-  "feelsLike": "{maxTemperature}°/{minTemperature}°, ощущается как {temperature}°C"
+  "feelsLike": "{maxTemperature}°/{minTemperature}°, ощущается как {temperature}°C",
+  "measurementUnits": "Единицы измерения",
+  "notifications": "Уведомления",
+  "language": "Язык"
 }

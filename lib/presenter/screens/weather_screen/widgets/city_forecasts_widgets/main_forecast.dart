@@ -5,8 +5,8 @@ import 'package:simple_gradient_text/simple_gradient_text.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/common_widgets/dotted_divider.dart';
-import 'package:weather_forecast_app/theme/app_colors.dart';
-import 'package:weather_forecast_app/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
+import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
 /// Иконка погоды, текущая погода + доп.параметры
 class MainForecastWidget extends StatelessWidget {

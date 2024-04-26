@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/theme/app_colors.dart';
+import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 
 class DottedDivederWidget extends StatelessWidget {
   const DottedDivederWidget({super.key});
