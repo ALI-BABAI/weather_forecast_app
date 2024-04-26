@@ -38,11 +38,11 @@ class WeatherApp extends StatelessWidget {
           GlobalCupertinoLocalizations.delegate,
         ],
         supportedLocales: S.delegate.supportedLocales,
-        locale: const Locale('en'),
+        // locale: const Locale('en'),
         theme: mainThemes,
         title: 'Weather forecast',
         routes: {
-          '/weather': (context) => WeatherScreen(),
+          '/weather': (context) => const WeatherScreen(),
           '/settings': (context) => const SettingsScreen(),
           '/test': (context) => const ReordableData(),
         },

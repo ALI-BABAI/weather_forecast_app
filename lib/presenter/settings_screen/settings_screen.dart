@@ -112,7 +112,6 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
     final theme = Theme.of(context).textTheme;
     int indexOld = 0;
     return ReorderableListView(
-      // три палки для перетаскивания в браузерной версии
       buildDefaultDragHandles: false,
       primary: false,
       shrinkWrap: true,
