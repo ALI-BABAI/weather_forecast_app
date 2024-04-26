@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "day": MessageLookupByLibrary.simpleMessage("день"),
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
+        "defaultLanguage": MessageLookupByLibrary.simpleMessage("en"),
+        "en": MessageLookupByLibrary.simpleMessage("Английский"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),
         "feelsLike": m0,
@@ -71,6 +73,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "pressure": MessageLookupByLibrary.simpleMessage("Давление: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Давление:"),
+        "ru": MessageLookupByLibrary.simpleMessage("Русский"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Температура:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(

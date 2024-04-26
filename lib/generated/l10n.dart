@@ -450,6 +450,36 @@ class S {
       args: [],
     );
   }
+
+  /// `en`
+  String get defaultLanguage {
+    return Intl.message(
+      'en',
+      name: 'defaultLanguage',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `en`
+  String get en {
+    return Intl.message(
+      'en',
+      name: 'en',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `ru`
+  String get ru {
+    return Intl.message(
+      'ru',
+      name: 'ru',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

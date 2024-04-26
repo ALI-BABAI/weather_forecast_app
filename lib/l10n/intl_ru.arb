@@ -19,7 +19,6 @@
   "tools": "Персонализация",
   "settings": "Настройки",
   "location": "Локация",
-  
   "theCityHasAlreadyBeenSaved": "Город уже добавлен в избранные!",
   "enterCityName": "Введите название города",
   "notFoundCityPleaseCheckInputAndTryAgain": "Не удалось найти город. Пожалуйста, проверьте ввод и повторите попытку!",
@@ -39,5 +38,8 @@
   "feelsLike": "{maxTemperature}°/{minTemperature}°, ощущается как {temperature}°C",
   "measurementUnits": "Единицы измерения",
   "notifications": "Уведомления",
-  "language": "Язык"
+  "language": "Язык",
+  "defaultLanguage": "en",
+  "en": "Английский",
+  "ru": "Русский"
 }

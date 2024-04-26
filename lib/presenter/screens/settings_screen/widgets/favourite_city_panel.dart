@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/location_bloc/bloc/location_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
@@ -83,7 +83,7 @@ class FavouriteCityPanel extends StatelessWidget {
         ),
       ),
       onDismissed: (direction) {
-        BlocProvider.of<SettingBloc>(context).add(DeleteCityEvent(panelIndex));
+        BlocProvider.of<LocationBloc>(context).add(DeleteCityEvent(panelIndex));
       },
       child: ListTile(
         contentPadding: const EdgeInsets.symmetric(horizontal: 4),
@@ -93,7 +93,7 @@ class FavouriteCityPanel extends StatelessWidget {
           size: 40,
         ),
         trailing: IconButton(
-          onPressed: () => BlocProvider.of<SettingBloc>(context)
+          onPressed: () => BlocProvider.of<LocationBloc>(context)
               .add(DeleteCityEvent(panelIndex)),
           icon: const Icon(
             Icons.delete_forever,

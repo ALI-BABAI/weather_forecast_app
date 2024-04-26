@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:loop_page_view/loop_page_view.dart';
-import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/location_bloc/bloc/location_bloc.dart';
 
 import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/presenter/screens/loading_screen.dart';
@@ -18,7 +18,7 @@ class WeatherScreen extends StatelessWidget {
       body: BlocConsumer<WeatherBloc, WeatherState>(
         listener: (context, state) {
           if (state is OpenSettingScreenState) {
-            BlocProvider.of<SettingBloc>(context)
+            BlocProvider.of<LocationBloc>(context)
                 .add(LoadingSettingScreenEvent());
             Navigator.pushNamed(context, '/settings');
           }

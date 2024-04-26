@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/domain/enums/tool_items.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
-import 'package:weather_forecast_app/screens_deprecated/alerts_windows/app_allert_window.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
+import 'package:weather_forecast_app/screens_deprecated/dialog_windows/dialog_window.dart';
 
 class ToolsWidget extends StatelessWidget {
   const ToolsWidget({super.key});
@@ -24,15 +26,29 @@ class ToolsWidget extends StatelessWidget {
           children: [
             ToolItemWidget(
               toolItemType: ToolItem.measurementUnits,
-              function: () => AppAllertWindow.changeMeasurementUnits(context),
+              function: () => {
+                DialogWindow.showDialogScreen(
+                  context: context,
+                  title: S.of(context).appUnits,
+                  selectedValue: listTemperatureUnit.first,
+                ),
+              },
             ),
             ToolItemWidget(
               toolItemType: ToolItem.notifications,
-              function: () => AppAllertWindow.changeMeasurementUnits(context),
+              function: () {
+                context
+                    .read<SettingBloc>()
+                    .add(SetLanguageEvent(S.of(context).ru));
+              },
             ),
             ToolItemWidget(
               toolItemType: ToolItem.language,
-              function: () => AppAllertWindow.changeMeasurementUnits(context),
+              function: () {
+                context
+                    .read<SettingBloc>()
+                    .add(SetLanguageEvent(S.of(context).en));
+              },
             ),
           ],
         ),

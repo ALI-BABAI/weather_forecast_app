@@ -2,30 +2,12 @@ part of 'setting_bloc.dart';
 
 sealed class SettingEvent {}
 
-final class LoadingSettingScreenEvent extends SettingEvent {}
+class LoadSettingsEvent extends SettingEvent {}
 
-final class AddCityEvent extends SettingEvent {
-  AddCityEvent(this.cityName);
+class SetLanguageEvent extends SettingEvent {
+  SetLanguageEvent(this.language);
 
-  final String cityName;
+  final String language;
 }
 
-final class DeleteCityEvent extends SettingEvent {
-  DeleteCityEvent(this.index);
-
-  final int index;
-}
-
-final class ChangeCityIndexEvent extends SettingEvent {
-  ChangeCityIndexEvent(
-    this.indexNew,
-    this.indexOld,
-  );
-
-  final int indexNew;
-  final int indexOld;
-}
-
-final class TollTapEvent extends SettingEvent {}
-
-final class MoveToWeatherScreenEvent extends SettingEvent {}
+class SetMeasurementUnitEvent extends SettingEvent {}

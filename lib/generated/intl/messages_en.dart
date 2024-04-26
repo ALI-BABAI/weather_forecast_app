@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "day": MessageLookupByLibrary.simpleMessage("day"),
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
+        "defaultLanguage": MessageLookupByLibrary.simpleMessage("en"),
+        "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
         "feelsLike": m0,
@@ -70,6 +72,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
         "pressure": MessageLookupByLibrary.simpleMessage("Pressure: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Pressure:"),
+        "ru": MessageLookupByLibrary.simpleMessage("ru"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Temperature:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(

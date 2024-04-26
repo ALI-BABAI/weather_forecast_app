@@ -38,5 +38,8 @@
   "feelsLike": "{maxTemperature}°/{minTemperature}°, feels like {temperature}°C",
   "measurementUnits": "Measurement units",
   "notifications": "Notifications",
-  "language": "Language"
+  "language": "Language",
+  "defaultLanguage": "en",
+  "en": "en",
+  "ru": "ru"
 }

@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/location_bloc/bloc/location_bloc.dart';
 import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
-import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/screens/settings_screen/widgets/custom_app_bar.dart';
 import 'package:weather_forecast_app/presenter/screens/settings_screen/widgets/favourite_city_panel.dart';
@@ -17,7 +17,7 @@ class SettingsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocConsumer<SettingBloc, SettingState>(
+    return BlocConsumer<LocationBloc, LocationState>(
       listener: (context, state) {
         if (state is OpenWeatherScreenState) {
           BlocProvider.of<WeatherBloc>(context)
@@ -26,7 +26,7 @@ class SettingsScreen extends StatelessWidget {
         }
       },
       builder: (context, state) {
-        if (state is LoadedSettingState) {
+        if (state is LoadedLocationState) {
           final List<CityModel> savedCities = state.cities;
           final List<WeatherModel> weatherData = state.weatherData;
           return ScreenFrame(
@@ -72,7 +72,7 @@ class ScreenFrame extends StatelessWidget {
           if (didPop) {
             return;
           }
-          BlocProvider.of<SettingBloc>(context).add(MoveToWeatherScreenEvent());
+          BlocProvider.of<LocationBloc>(context).add(MoveToWeatherScreenEvent());
         },
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),
@@ -119,7 +119,7 @@ class _ReordableSettingWidget extends State<ReordableSettingWidget> {
         setState(() => {});
       },
       onReorderEnd: (index) {
-        BlocProvider.of<SettingBloc>(context)
+        BlocProvider.of<LocationBloc>(context)
             .add(ChangeCityIndexEvent(index, indexOld));
       },
       onReorderStart: (index) {

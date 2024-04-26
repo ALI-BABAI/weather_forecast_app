@@ -10,10 +10,4 @@ abstract interface class WeatherRepository {
   Future<void> addCityInFavourite(String sity);
   Future<void> deleteCityFromFavourite(int index);
   Future<void> changeCityIndex(int indexNew, int indexOld);
-  // void changeMeasurementUnits();
-  // void manageNotifications();
-  // void changeLanguage();
-  // void handleFeedback();
-  // void rateApp();
-  // void shareApp();
 }

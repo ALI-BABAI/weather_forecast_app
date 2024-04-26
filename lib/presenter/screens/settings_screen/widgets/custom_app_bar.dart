@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/location_bloc/bloc/location_bloc.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/theme/app_bar_button.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
@@ -30,7 +30,7 @@ class CustomAppBar extends StatelessWidget implements PreferredSizeWidget {
             width: 50,
             child: ElevatedButton(
               onPressed: () {
-                BlocProvider.of<SettingBloc>(context)
+                BlocProvider.of<LocationBloc>(context)
                     .add(MoveToWeatherScreenEvent());
               },
               style: AppButtonsStyle.navigationBtn,
