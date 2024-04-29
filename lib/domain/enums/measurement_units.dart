@@ -19,4 +19,15 @@ extension TemperatureUnitType on TemperatureUnit {
         return tr.kelvin;
     }
   }
+
+  String get unitType {
+    switch (this) {
+      case TemperatureUnit.celsius:
+        return 'metric';
+      case TemperatureUnit.fahrenheit:
+        return 'imperial';
+      case TemperatureUnit.kelvin:
+        return 'standart';
+    }
+  }
 }

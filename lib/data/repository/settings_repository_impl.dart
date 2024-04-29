@@ -12,28 +12,16 @@ final class SettingsRepositoryImpl implements SettingsRepository {
   static const String _temperatureUnit = 'temperature';
 
   @override
-  AppLanguages defaultLanguage = AppLanguages.en;
-  @override
-  TemperatureUnit defaultTemperatureUnit = TemperatureUnit.celsius;
-
-  @override
   AppLanguages getLanguage() {
     try {
       String? storedData = storageService.getStoragedData(_language);
 
-      if (storedData != null) {
-        switch (storedData) {
-          case 'en':
-          case 'Английский':
-            return AppLanguages.en;
-          case 'ru':
-          case 'Русский':
-            return AppLanguages.ru;
-          default:
-            return defaultLanguage;
-        }
-      } else {
-        return defaultLanguage;
+      switch (storedData) {
+        case 'ru':
+        case 'Русский':
+          return AppLanguages.ru;
+        default:
+          return AppLanguages.en;
       }
     } catch (e) {
       debugPrint("Не удалось получить установленный язык:\n error: $e");
@@ -46,23 +34,15 @@ final class SettingsRepositoryImpl implements SettingsRepository {
   TemperatureUnit getMeasurementUnit() {
     try {
       String? storedData = storageService.getStoragedData(_temperatureUnit);
-
-      if (storedData != null) {
-        switch (storedData) {
-          case 'Celsius':
-          case 'Цельсий':
-            return TemperatureUnit.celsius;
-          case 'Fahrenheit':
-          case 'Фаренгейт':
-            return TemperatureUnit.fahrenheit;
-          case 'Kelvin':
-          case 'Кельвин':
-            return TemperatureUnit.kelvin;
-          default:
-            return defaultTemperatureUnit;
-        }
-      } else {
-        return defaultTemperatureUnit;
+      switch (storedData) {
+        case 'Fahrenheit':
+        case 'Фаренгейт':
+          return TemperatureUnit.fahrenheit;
+        case 'Kelvin':
+        case 'Кельвин':
+          return TemperatureUnit.kelvin;
+        default:
+          return TemperatureUnit.celsius;
       }
     } catch (e) {
       debugPrint(

@@ -20,12 +20,14 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(maxTemperature, minTemperature, temperature) =>
+  static String m0(city) => "Remove ${city} from your favorites list?";
+
+  static String m1(maxTemperature, minTemperature, temperature) =>
       "${maxTemperature}°/${minTemperature}°, feels like ${temperature}°C";
 
-  static String m1(visibility) => "${visibility}km";
+  static String m2(visibility) => "${visibility}km";
 
-  static String m2(wind) => "${wind}m/s";
+  static String m3(wind) => "${wind}m/s";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
@@ -50,12 +52,13 @@ class MessageLookup extends MessageLookupByLibrary {
         "day": MessageLookupByLibrary.simpleMessage("day"),
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
-        "defaultLanguage": MessageLookupByLibrary.simpleMessage("en"),
+        "delete": MessageLookupByLibrary.simpleMessage("remove"),
+        "deleteConfirmNotification": m0,
         "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Fahrenheit"),
-        "feelsLike": m0,
+        "feelsLike": m1,
         "haveProblem": MessageLookupByLibrary.simpleMessage("OH, THE PROBLEM"),
         "hourWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
@@ -87,7 +90,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weatherForecast":
             MessageLookupByLibrary.simpleMessage("Weather forecast"),
         "wind": MessageLookupByLibrary.simpleMessage("Wind: "),
-        "xKm": m1,
-        "xMetersBySecond": m2
+        "xKm": m2,
+        "xMetersBySecond": m3
       };
 }

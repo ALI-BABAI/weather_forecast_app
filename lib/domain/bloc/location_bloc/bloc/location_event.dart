@@ -26,4 +26,6 @@ final class ChangeCityIndexEvent extends LocationEvent {
 
 final class LoadingSettingScreenEvent extends LocationEvent {}
 
+final class UpdateWeatherInfoEvent extends LocationEvent {}
+
 final class MoveToWeatherScreenEvent extends LocationEvent {}

@@ -8,6 +8,8 @@ import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
+import '../../domain/enums/measurement_units.dart';
+
 class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(this.storageService);
 
@@ -45,13 +47,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<List<WeatherModel>> getWeatherInfo(List<CityModel> cities) async {
     try {
-      final ApiService apiClient = ApiService(
-        language: storageService.getStoragedData('language'),
-        temperatureUnit: storageService.getStoragedData('temperature'),
-      );
-
+      weatherDataList.clear();
+      final ApiService apiService = _getApiService();
       for (final city in cities) {
-        WeatherModel weatherData = await apiClient.getWeather(
+        WeatherModel weatherData = await apiService.getWeather(
           lat: city.lat,
           lon: city.lon,
         );
@@ -65,11 +64,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   Future<List<WeatherModel>> getWeatherInfoAtCity(CityModel city) async {
     try {
-      final ApiService apiClient = ApiService(
-        language: storageService.getStoragedData('language'),
-        temperatureUnit: storageService.getStoragedData('temperature'),
-      );
-      WeatherModel weatherData = await apiClient.getWeather(
+      final ApiService apiService = _getApiService();
+      WeatherModel weatherData = await apiService.getWeather(
         lat: city.lat,
         lon: city.lon,
       );
@@ -149,6 +145,26 @@ class WeatherRepositoryImpl implements WeatherRepository {
     weatherDataList.insert(newIndex, itemWeather);
     // rewrite data in storageData
     await storageService.saveData(_citiesKey, jsonEncode(favouriteCities));
+  }
+
+  ApiService _getApiService() {
+    final TemperatureUnit storageTemperatureUnit;
+
+    switch (storageService.getStoragedData('temperature')) {
+      case 'Fahrenheit':
+      case 'Фаренгейт':
+        storageTemperatureUnit = TemperatureUnit.fahrenheit;
+      case 'Kelvin':
+      case 'Кельвин':
+        storageTemperatureUnit = TemperatureUnit.kelvin;
+      default:
+        storageTemperatureUnit = TemperatureUnit.celsius;
+    }
+
+    return ApiService(
+      language: storageService.getStoragedData('language'),
+      temperatureUnit: storageTemperatureUnit,
+    );
   }
 }
 

@@ -10,6 +10,7 @@ part 'location_state.dart';
 class LocationBloc extends Bloc<LocationEvent, LocationState> {
   LocationBloc(this.repository) : super(LoadingSettingState()) {
     on<LoadingSettingScreenEvent>(_onLoadingSettingScreenEvent);
+    on<UpdateWeatherInfoEvent>(_onUpdateWeatherInfoEvent);
     on<AddCityEvent>(_onAddCityEvent);
     on<DeleteCityEvent>(_onDeleteCityEvent);
     on<ChangeCityIndexEvent>(_onChangeCityIndexEvent);
@@ -37,6 +38,23 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       debugPrint('${e.toString()}\nНе удалось загрузить данные о погоде');
       // emit(ErrorState(
       //     '${e.toString()}\nНе удалось загрузить данные о погоде'));
+    }
+  }
+
+  Future<void> _onUpdateWeatherInfoEvent(
+    UpdateWeatherInfoEvent event,
+    Emitter<LocationState> emit,
+  ) async {
+    try {
+      await repository.getWeatherInfo(repository.favouriteCities);
+      emit(
+        LoadedLocationState(
+          cities: repository.favouriteCities,
+          weatherData: repository.weatherDataList,
+        ),
+      );
+    } catch (e) {
+      debugPrint('${e.toString()}\nНе удалось обновить данные о погоде');
     }
   }
 

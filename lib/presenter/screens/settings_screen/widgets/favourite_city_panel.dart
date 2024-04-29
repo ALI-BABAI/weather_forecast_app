@@ -6,6 +6,8 @@ import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
+import '../../../../generated/l10n.dart';
+
 class FavouriteCityPanel extends StatelessWidget {
   const FavouriteCityPanel({
     super.key,
@@ -30,22 +32,26 @@ class FavouriteCityPanel extends StatelessWidget {
             builder: (BuildContext context) {
               return AlertDialog(
                 title: Text(
-                  'Удалить ${savedCities.elementAt(panelIndex).name.toString()} из списка избранных?',
-                  style: AppTextStyles.expandedMainFont,
+                  S.of(context).deleteConfirmNotification(
+                      savedCities.elementAt(panelIndex).name.toString()),
+                  style: AppTextStyles.settingsScreenHeaderFont
+                      .copyWith(fontSize: 20),
                 ),
-                actions: <Widget>[
-                  TextButton(
-                      onPressed: () => Navigator.of(context).pop(true),
-                      child: Text(
-                        "Удалить",
-                        style:
-                            AppTextStyles.mainFont.copyWith(color: Colors.red),
-                      )),
+                actionsAlignment: MainAxisAlignment.spaceAround,
+                actions: [
                   TextButton(
                     onPressed: () => Navigator.of(context).pop(false),
-                    child: const Text(
-                      "Отмена",
+                    child: Text(
+                      S.of(context).cancel,
                       style: AppTextStyles.mainFont,
+                    ),
+                  ),
+                  TextButton(
+                    onPressed: () => Navigator.of(context).pop(true),
+                    child: Text(
+                      S.of(context).delete,
+                      style: AppTextStyles.mainFont
+                          .copyWith(color: Colors.redAccent),
                     ),
                   ),
                 ],
@@ -56,7 +62,7 @@ class FavouriteCityPanel extends StatelessWidget {
         return null;
       },
       background: const ColoredBox(
-        color: Colors.red,
+        color: Colors.redAccent,
         child: Align(
           alignment: Alignment.centerRight,
           child: Row(

@@ -72,7 +72,8 @@ class ScreenFrame extends StatelessWidget {
           if (didPop) {
             return;
           }
-          BlocProvider.of<LocationBloc>(context).add(MoveToWeatherScreenEvent());
+          BlocProvider.of<LocationBloc>(context)
+              .add(MoveToWeatherScreenEvent());
         },
         child: GestureDetector(
           onTap: () => FocusScope.of(context).unfocus(),

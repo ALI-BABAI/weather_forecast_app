@@ -8,7 +8,7 @@ extension LanguagesType on AppLanguages {
       case AppLanguages.en:
         return tr.en;
       case AppLanguages.ru:
-        return tr.en;
+        return tr.ru;
     }
   }
 }

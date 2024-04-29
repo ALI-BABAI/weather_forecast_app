@@ -452,16 +452,6 @@ class S {
   }
 
   /// `en`
-  String get defaultLanguage {
-    return Intl.message(
-      'en',
-      name: 'defaultLanguage',
-      desc: '',
-      args: [],
-    );
-  }
-
-  /// `en`
   String get en {
     return Intl.message(
       'en',
@@ -528,6 +518,26 @@ class S {
       name: 'kelvin',
       desc: '',
       args: [],
+    );
+  }
+
+  /// `remove`
+  String get delete {
+    return Intl.message(
+      'remove',
+      name: 'delete',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Remove {city} from your favorites list?`
+  String deleteConfirmNotification(Object city) {
+    return Intl.message(
+      'Remove $city from your favorites list?',
+      name: 'deleteConfirmNotification',
+      desc: '',
+      args: [city],
     );
   }
 }

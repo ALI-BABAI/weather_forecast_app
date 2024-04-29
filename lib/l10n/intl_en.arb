@@ -39,12 +39,13 @@
   "measurementUnits": "Measurement units",
   "notifications": "Notifications",
   "language": "Language",
-  "defaultLanguage": "en",
   "en": "en",
   "ru": "ru",
   "save": "save",
   "cancel": "cancel",
   "celsius": "Celsius",
   "fahrenheit": "Fahrenheit",
-  "kelvin": "Kelvin"
+  "kelvin": "Kelvin",
+  "delete": "remove",
+  "deleteConfirmNotification": "Remove {city} from your favorites list?"
 }
