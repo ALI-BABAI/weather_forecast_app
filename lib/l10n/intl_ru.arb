@@ -40,6 +40,11 @@
   "notifications": "Уведомления",
   "language": "Язык",
   "defaultLanguage": "en",
-  "en": "Английский",
-  "ru": "Русский"
+  "en": "en",
+  "ru": "ru",
+  "save": "Сохранить",
+  "cancel": "Отмена",
+  "celsius": "Цельсий",
+  "fahrenheit": "Фаренгейт",
+  "kelvin": "Кельвин"
 }

@@ -41,5 +41,10 @@
   "language": "Language",
   "defaultLanguage": "en",
   "en": "en",
-  "ru": "ru"
+  "ru": "ru",
+  "save": "save",
+  "cancel": "cancel",
+  "celsius": "Celsius",
+  "fahrenheit": "Fahrenheit",
+  "kelvin": "Kelvin"
 }

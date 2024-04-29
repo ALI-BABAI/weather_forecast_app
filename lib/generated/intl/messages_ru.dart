@@ -43,15 +43,18 @@ class MessageLookup extends MessageLookupByLibrary {
         "World": MessageLookupByLibrary.simpleMessage("Мир"),
         "add": MessageLookupByLibrary.simpleMessage("+"),
         "appUnits": MessageLookupByLibrary.simpleMessage("Единицы измерения:"),
+        "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
+        "celsius": MessageLookupByLibrary.simpleMessage("Цельсий"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Текущая иконка погоды"),
         "day": MessageLookupByLibrary.simpleMessage("день"),
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "defaultLanguage": MessageLookupByLibrary.simpleMessage("en"),
-        "en": MessageLookupByLibrary.simpleMessage("Английский"),
+        "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),
+        "fahrenheit": MessageLookupByLibrary.simpleMessage("Фаренгейт"),
         "feelsLike": m0,
         "haveProblem":
             MessageLookupByLibrary.simpleMessage("Оупс, проблема..."),
@@ -59,6 +62,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
         "hpaUnit": MessageLookupByLibrary.simpleMessage("гПа"),
         "humidity": MessageLookupByLibrary.simpleMessage("Влажность: "),
+        "kelvin": MessageLookupByLibrary.simpleMessage("Кельвин"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("км"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
@@ -73,7 +77,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "pressure": MessageLookupByLibrary.simpleMessage("Давление: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Давление:"),
-        "ru": MessageLookupByLibrary.simpleMessage("Русский"),
+        "ru": MessageLookupByLibrary.simpleMessage("ru"),
+        "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Температура:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(

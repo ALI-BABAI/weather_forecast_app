@@ -480,6 +480,56 @@ class S {
       args: [],
     );
   }
+
+  /// `save`
+  String get save {
+    return Intl.message(
+      'save',
+      name: 'save',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `cancel`
+  String get cancel {
+    return Intl.message(
+      'cancel',
+      name: 'cancel',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Celsius`
+  String get celsius {
+    return Intl.message(
+      'Celsius',
+      name: 'celsius',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Fahrenheit`
+  String get fahrenheit {
+    return Intl.message(
+      'Fahrenheit',
+      name: 'fahrenheit',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Kelvin`
+  String get kelvin {
+    return Intl.message(
+      'Kelvin',
+      name: 'kelvin',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

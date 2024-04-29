@@ -23,14 +23,14 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   List<CityModel> getFavouriteCities() {
     try {
-      String storedData = storageService.getStoragedData(_citiesKey);
+      String? storedData = storageService.getStoragedData(_citiesKey);
 
-      if (storedData.isEmpty) {
+      if (storedData == null) {
         storageService.createDefaultCity(_citiesKey);
         storedData = storageService.getStoragedData(_citiesKey);
       }
 
-      final List<dynamic> cityJsonList = jsonDecode(storedData);
+      final List<dynamic> cityJsonList = jsonDecode(storedData!);
       favouriteCities =
           cityJsonList.map((cityJson) => CityModel.fromJson(cityJson)).toList();
 
@@ -45,7 +45,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<List<WeatherModel>> getWeatherInfo(List<CityModel> cities) async {
     try {
-      final ApiService apiClient = ApiService();
+      final ApiService apiClient = ApiService(
+        language: storageService.getStoragedData('language'),
+        temperatureUnit: storageService.getStoragedData('temperature'),
+      );
 
       for (final city in cities) {
         WeatherModel weatherData = await apiClient.getWeather(
@@ -62,7 +65,10 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   Future<List<WeatherModel>> getWeatherInfoAtCity(CityModel city) async {
     try {
-      final ApiService apiClient = ApiService();
+      final ApiService apiClient = ApiService(
+        language: storageService.getStoragedData('language'),
+        temperatureUnit: storageService.getStoragedData('temperature'),
+      );
       WeatherModel weatherData = await apiClient.getWeather(
         lat: city.lat,
         lon: city.lon,

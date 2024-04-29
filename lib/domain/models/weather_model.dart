@@ -29,8 +29,9 @@ class WeatherModel {
 
   factory WeatherModel.fromJson(Map<String, dynamic> json) {
     DateTime currentDay = DateTime.fromMillisecondsSinceEpoch(
-        (json['current']['dt'].toInt() + json['timezone_offset']) * 1000,
-        isUtc: true);
+      (json['current']['dt'].toInt() + json['timezone_offset']) * 1000,
+      isUtc: true,
+    );
     return WeatherModel(
       timezoneOffset: json['timezone_offset'],
       date: currentDay,

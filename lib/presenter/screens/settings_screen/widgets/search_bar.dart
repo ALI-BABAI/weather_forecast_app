@@ -5,6 +5,8 @@ import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
+import '../../../../domain/enums/app_languages.dart';
+
 class SearchBarWidget extends StatefulWidget {
   const SearchBarWidget({super.key});
 
@@ -76,7 +78,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                                 child: CircularProgressIndicator(),
                               )
                             : Localizations.localeOf(context).languageCode ==
-                                    'en'
+                                    AppLanguages.en.name
                                 ? Text(
                                     S.of(context).add,
                                     style: AppTextStyles.poppinsFont(),

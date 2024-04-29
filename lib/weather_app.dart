@@ -14,8 +14,6 @@ import 'package:weather_forecast_app/presenter/theme/app_main_themes.dart';
 
 import 'generated/l10n.dart';
 
-// Locale(settingsRepository.getLanguage() ?? 'en'),
-
 class WeatherApp extends StatelessWidget {
   const WeatherApp({
     super.key,
@@ -54,7 +52,7 @@ class WeatherApp extends StatelessWidget {
                 GlobalCupertinoLocalizations.delegate,
               ],
               supportedLocales: S.delegate.supportedLocales,
-              locale: Locale(state.language),
+              locale: Locale(state.language.name),
               theme: mainThemes,
               title: 'Weather forecast',
               routes: {

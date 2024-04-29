@@ -43,6 +43,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "World": MessageLookupByLibrary.simpleMessage("World"),
         "add": MessageLookupByLibrary.simpleMessage("add"),
         "appUnits": MessageLookupByLibrary.simpleMessage("App unit\'s:"),
+        "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
+        "celsius": MessageLookupByLibrary.simpleMessage("Celsius"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Current weather icon"),
         "day": MessageLookupByLibrary.simpleMessage("day"),
@@ -52,12 +54,14 @@ class MessageLookup extends MessageLookupByLibrary {
         "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
+        "fahrenheit": MessageLookupByLibrary.simpleMessage("Fahrenheit"),
         "feelsLike": m0,
         "haveProblem": MessageLookupByLibrary.simpleMessage("OH, THE PROBLEM"),
         "hourWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
         "hpaUnit": MessageLookupByLibrary.simpleMessage("hPa"),
         "humidity": MessageLookupByLibrary.simpleMessage("Humidity: "),
+        "kelvin": MessageLookupByLibrary.simpleMessage("Kelvin"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("km"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
@@ -73,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "pressure": MessageLookupByLibrary.simpleMessage("Pressure: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Pressure:"),
         "ru": MessageLookupByLibrary.simpleMessage("ru"),
+        "save": MessageLookupByLibrary.simpleMessage("save"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Temperature:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(

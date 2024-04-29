@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/enums/app_languages.dart';
 import 'package:weather_forecast_app/domain/enums/tool_items.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
@@ -12,6 +13,7 @@ class ToolsWidget extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    final settings = context.watch<SettingBloc>().state;
     return Column(
       crossAxisAlignment: CrossAxisAlignment.start,
       children: [
@@ -30,7 +32,7 @@ class ToolsWidget extends StatelessWidget {
                 DialogWindow.showDialogScreen(
                   context: context,
                   title: S.of(context).appUnits,
-                  selectedValue: listTemperatureUnit.first,
+                  selectedValue: settings.temperatureUnit,
                 ),
               },
             ),
@@ -39,7 +41,7 @@ class ToolsWidget extends StatelessWidget {
               function: () {
                 context
                     .read<SettingBloc>()
-                    .add(SetLanguageEvent(S.of(context).ru));
+                    .add(SetLanguageEvent(AppLanguages.ru)); //S.of(context).ru
               },
             ),
             ToolItemWidget(
@@ -47,7 +49,7 @@ class ToolsWidget extends StatelessWidget {
               function: () {
                 context
                     .read<SettingBloc>()
-                    .add(SetLanguageEvent(S.of(context).en));
+                    .add(SetLanguageEvent(AppLanguages.en));
               },
             ),
           ],

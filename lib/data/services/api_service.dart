@@ -6,6 +6,8 @@ import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
+import '../../domain/enums/app_languages.dart';
+
 enum ApiExeptionType {
   network, // отсутствие интернета у пользователя
   overlimit,
@@ -19,6 +21,13 @@ class ApiClientExeption implements Exception {
 }
 
 class ApiService {
+  ApiService({
+    required this.language,
+    required this.temperatureUnit,
+  });
+  final String? language;
+  final String? temperatureUnit;
+
   Future<WeatherModel> getWeather({
     double lat = 54.27028,
     double lon = 48.302364,
@@ -34,6 +43,7 @@ class ApiService {
         'units': 'metric',
         'exclude': 'alerts,minutely',
         'appid': '6f6f192517f2b62b4364d19778420b76',
+        'lang': language ?? AppLanguages.en.name,
       },
     );
     try {
@@ -60,6 +70,8 @@ class ApiService {
       apiClient.close();
     }
   }
+}
+
 
 // // Возвращает список объектов типа WeatherData, хранящий информацию
 // // по погоде во всех сохранённых городах
@@ -95,4 +107,3 @@ class ApiService {
 //       }
 //     }
 //   }
-}

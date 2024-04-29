@@ -1,13 +1,17 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
+
+import '../../domain/enums/measurement_units.dart';
 
 abstract class DialogWindow {
   static showDialogScreen({
     required BuildContext context,
     required String title,
-    required String selectedValue,
+    required TemperatureUnit selectedValue,
   }) {
     showDialog(
       context: context,
@@ -17,15 +21,6 @@ abstract class DialogWindow {
       ),
     );
   }
-
-  // static changeMeasurementUnits(BuildContext context) {
-  //   showDialog<String>(
-  //     context: context,
-  //     builder: (context) => AppAlertDialog(
-  //       title: S.of(context).appUnits,
-  //     ),
-  //   );
-  // }
 
   static warningCityNotFound(BuildContext context) {
     showDialog<String>(
@@ -98,14 +93,14 @@ class AppAlertDialog extends StatefulWidget {
   });
 
   final String title;
-  final String selectedValue;
+  final TemperatureUnit selectedValue;
 
   @override
   State<AppAlertDialog> createState() => _AppAlertDialogState();
 }
 
 class _AppAlertDialogState extends State<AppAlertDialog> {
-  late String dropdownValue;
+  late TemperatureUnit dropdownValue;
 
   @override
   void initState() {
@@ -114,7 +109,6 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
   }
 
   @override
-  // String dropdownValue = widget.selectedValue;
   Widget build(BuildContext context) {
     return AlertDialog(
       backgroundColor: AppColors.mainBackground,
@@ -135,35 +129,28 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
           Expanded(
             child: Padding(
               padding: const EdgeInsets.only(left: 30),
-              child: DropdownButton<String>(
-                // underline: const SizedBox.shrink(),
+              child: DropdownButton<TemperatureUnit>(
+                borderRadius: BorderRadius.circular(25),
+                focusColor: Colors.amber,
+                underline: const SizedBox.shrink(),
                 value: dropdownValue,
-                onChanged: (String? value) {
-                  // This is called when the user selects an item.
+                onChanged: (TemperatureUnit? value) {
                   setState(() {
                     dropdownValue = value!;
                   });
                 },
-                items: listTemperatureUnit
-                    .map<DropdownMenuItem<String>>((String value) {
-                  return DropdownMenuItem<String>(
-                    value: value,
-                    child: Text(
-                      value,
-                      style: AppTextStyles.mainFont,
-                    ),
-                  );
-                }).toList(),
-                // items: const [
-                //   DropdownMenuItem(
-                //     value: 'celsius',
-                //     child: Text('Цельсий'),
-                //   ),
-                //   DropdownMenuItem(
-                //     value: 'fahrenheit',
-                //     child: Text('Фаренгейт'),
-                //   ),
-                // ],
+                items: TemperatureUnit.values
+                    .map<DropdownMenuItem<TemperatureUnit>>(
+                  (TemperatureUnit unit) {
+                    return DropdownMenuItem<TemperatureUnit>(
+                      value: unit,
+                      child: Text(
+                        unit.name,
+                        style: AppTextStyles.mainFont,
+                      ),
+                    );
+                  },
+                ).toList(),
               ),
             ),
           ),
@@ -178,20 +165,23 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
                 debugPrint('cancel $dropdownValue');
                 Navigator.of(context).pop();
               },
-              child: const Text(
-                'Отмена',
+              child: Text(
+                S.of(context).cancel,
                 style: AppTextStyles.mainFont,
               ),
             ),
             TextButton(
               onPressed: () {
-                debugPrint(
-                  'Сохранить $dropdownValue',
-                );
+                debugPrint('Сохранить $dropdownValue');
+                if (widget.selectedValue != dropdownValue) {
+                  context
+                      .read<SettingBloc>()
+                      .add(SetTemperatureUnitEvent(dropdownValue));
+                }
                 Navigator.of(context).pop();
               },
               child: Text(
-                'Сохранить',
+                S.of(context).save,
                 style: AppTextStyles.mainFont.copyWith(color: AppColors.orange),
               ),
             ),
@@ -201,8 +191,6 @@ class _AppAlertDialogState extends State<AppAlertDialog> {
     );
   }
 }
-
-const List<String> listTemperatureUnit = <String>['celsius', 'fahrenheit'];
 
 // actions: <Widget>[
 //   Row(

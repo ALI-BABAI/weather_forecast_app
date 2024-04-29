@@ -8,8 +8,8 @@ class StorageService {
   
   final SharedPreferences prefs;
 
-  String getStoragedData(String key) {
-    return prefs.getString(key) ?? '';
+  String? getStoragedData(String key) {
+    return prefs.getString(key);
   }
 
   void createDefaultCity(String key) async {
