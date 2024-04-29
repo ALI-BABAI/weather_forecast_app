@@ -45,6 +45,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
     UpdateWeatherInfoEvent event,
     Emitter<LocationState> emit,
   ) async {
+    emit(LoadingSettingState());
     try {
       await repository.getWeatherInfo(repository.favouriteCities);
       emit(

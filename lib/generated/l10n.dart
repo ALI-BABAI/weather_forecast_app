@@ -540,6 +540,16 @@ class S {
       args: [city],
     );
   }
+
+  /// `Language setting`
+  String get languageSetting {
+    return Intl.message(
+      'Language setting',
+      name: 'languageSetting',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

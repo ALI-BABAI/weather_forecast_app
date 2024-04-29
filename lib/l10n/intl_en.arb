@@ -47,5 +47,6 @@
   "fahrenheit": "Fahrenheit",
   "kelvin": "Kelvin",
   "delete": "remove",
-  "deleteConfirmNotification": "Remove {city} from your favorites list?"
+  "deleteConfirmNotification": "Remove {city} from your favorites list?",
+  "languageSetting": "Language setting"
 }

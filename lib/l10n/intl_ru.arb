@@ -39,13 +39,14 @@
   "measurementUnits": "Единицы измерения",
   "notifications": "Уведомления",
   "language": "Язык",
-  "en": "en",
-  "ru": "ru",
+  "en": "Английский",
+  "ru": "Русский",
   "save": "Сохранить",
   "cancel": "Отмена",
   "celsius": "Цельсий",
   "fahrenheit": "Фаренгейт",
   "kelvin": "Кельвин",
   "delete": "Удалить",
-  "deleteConfirmNotification": "Удалить {city} из списка избранных?"
+  "deleteConfirmNotification": "Удалить {city} из списка избранных?",
+  "languageSetting": "Выбор языка"
 }

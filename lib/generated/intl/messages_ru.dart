@@ -54,7 +54,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "deleteConfirmNotification": m0,
-        "en": MessageLookupByLibrary.simpleMessage("en"),
+        "en": MessageLookupByLibrary.simpleMessage("Английский"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Фаренгейт"),
@@ -68,6 +68,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "kelvin": MessageLookupByLibrary.simpleMessage("Кельвин"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("км"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
+        "languageSetting": MessageLookupByLibrary.simpleMessage("Выбор языка"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Единицы измерения"),
@@ -80,7 +81,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
         "pressure": MessageLookupByLibrary.simpleMessage("Давление: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Давление:"),
-        "ru": MessageLookupByLibrary.simpleMessage("ru"),
+        "ru": MessageLookupByLibrary.simpleMessage("Русский"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Температура:"),

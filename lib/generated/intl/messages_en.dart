@@ -67,6 +67,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "kelvin": MessageLookupByLibrary.simpleMessage("Kelvin"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("km"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
+        "languageSetting":
+            MessageLookupByLibrary.simpleMessage("Language setting"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Measurement units"),
