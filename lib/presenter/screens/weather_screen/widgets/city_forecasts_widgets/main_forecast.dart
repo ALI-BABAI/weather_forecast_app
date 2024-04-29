@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_svg/svg.dart';
 import 'package:intl/intl.dart';
 import 'package:simple_gradient_text/simple_gradient_text.dart';
+import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/enums/measurement_units.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/common_widgets/dotted_divider.dart';
@@ -113,6 +116,11 @@ class BasicWeatherInfoWidget extends StatelessWidget {
                         day.maxTemperature,
                         day.minTemperature,
                         weatherData.temperatureFillsLike,
+                        context
+                            .watch<SettingBloc>()
+                            .state
+                            .temperatureUnit
+                            .unitDegree,
                       ),
                   style: AppTextStyles.secondaryFont,
                 ),

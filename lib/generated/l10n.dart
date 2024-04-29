@@ -410,14 +410,14 @@ class S {
     );
   }
 
-  /// `{maxTemperature}°/{minTemperature}°, feels like {temperature}°C`
-  String feelsLike(
-      Object maxTemperature, Object minTemperature, Object temperature) {
+  /// `{maxTemperature}°/{minTemperature}°, feels like {temperature}{unitDegree}`
+  String feelsLike(Object maxTemperature, Object minTemperature,
+      Object temperature, Object unitDegree) {
     return Intl.message(
-      '$maxTemperature°/$minTemperature°, feels like $temperature°C',
+      '$maxTemperature°/$minTemperature°, feels like $temperature$unitDegree',
       name: 'feelsLike',
       desc: '',
-      args: [maxTemperature, minTemperature, temperature],
+      args: [maxTemperature, minTemperature, temperature, unitDegree],
     );
   }
 
@@ -491,6 +491,36 @@ class S {
     );
   }
 
+  /// `°C`
+  String get celsiusDegree {
+    return Intl.message(
+      '°C',
+      name: 'celsiusDegree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `°F`
+  String get fahrenheitDegree {
+    return Intl.message(
+      '°F',
+      name: 'fahrenheitDegree',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `°K`
+  String get kelvinDegree {
+    return Intl.message(
+      '°K',
+      name: 'kelvinDegree',
+      desc: '',
+      args: [],
+    );
+  }
+
   /// `Celsius`
   String get celsius {
     return Intl.message(
@@ -546,6 +576,36 @@ class S {
     return Intl.message(
       'Language setting',
       name: 'languageSetting',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `metric`
+  String get metricUnitSystem {
+    return Intl.message(
+      'metric',
+      name: 'metricUnitSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `imperial`
+  String get imperialUnitSystem {
+    return Intl.message(
+      'imperial',
+      name: 'imperialUnitSystem',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `standart`
+  String get standartUnitSystem {
+    return Intl.message(
+      'standart',
+      name: 'standartUnitSystem',
       desc: '',
       args: [],
     );

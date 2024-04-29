@@ -23,11 +23,22 @@ extension TemperatureUnitType on TemperatureUnit {
   String get unitType {
     switch (this) {
       case TemperatureUnit.celsius:
-        return 'metric';
+        return tr.metricUnitSystem;
       case TemperatureUnit.fahrenheit:
-        return 'imperial';
+        return tr.imperialUnitSystem;
       case TemperatureUnit.kelvin:
-        return 'standart';
+        return tr.standartUnitSystem;
+    }
+  }
+
+  String get unitDegree {
+    switch (this) {
+      case TemperatureUnit.celsius:
+        return tr.celsiusDegree;
+      case TemperatureUnit.fahrenheit:
+        return tr.fahrenheitDegree;
+      case TemperatureUnit.kelvin:
+        return tr.kelvinDegree;
     }
   }
 }

@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(city) => "Remove ${city} from your favorites list?";
 
-  static String m1(maxTemperature, minTemperature, temperature) =>
-      "${maxTemperature}°/${minTemperature}°, feels like ${temperature}°C";
+  static String m1(maxTemperature, minTemperature, temperature, unitDegree) =>
+      "${maxTemperature}°/${minTemperature}°, feels like ${temperature}${unitDegree}";
 
   static String m2(visibility) => "${visibility}km";
 
@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "appUnits": MessageLookupByLibrary.simpleMessage("App unit\'s:"),
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "celsius": MessageLookupByLibrary.simpleMessage("Celsius"),
+        "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Current weather icon"),
         "day": MessageLookupByLibrary.simpleMessage("day"),
@@ -58,13 +59,16 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Fahrenheit"),
+        "fahrenheitDegree": MessageLookupByLibrary.simpleMessage("°F"),
         "feelsLike": m1,
         "haveProblem": MessageLookupByLibrary.simpleMessage("OH, THE PROBLEM"),
         "hourWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
         "hpaUnit": MessageLookupByLibrary.simpleMessage("hPa"),
         "humidity": MessageLookupByLibrary.simpleMessage("Humidity: "),
+        "imperialUnitSystem": MessageLookupByLibrary.simpleMessage("imperial"),
         "kelvin": MessageLookupByLibrary.simpleMessage("Kelvin"),
+        "kelvinDegree": MessageLookupByLibrary.simpleMessage("°K"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("km"),
         "language": MessageLookupByLibrary.simpleMessage("Language"),
         "languageSetting":
@@ -72,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Location"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Measurement units"),
+        "metricUnitSystem": MessageLookupByLibrary.simpleMessage("metric"),
         "mmhgUnit": MessageLookupByLibrary.simpleMessage("mmHg"),
         "night": MessageLookupByLibrary.simpleMessage("night"),
         "notFoundCityPleaseCheckInputAndTryAgain":
@@ -84,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ru": MessageLookupByLibrary.simpleMessage("ru"),
         "save": MessageLookupByLibrary.simpleMessage("save"),
         "settings": MessageLookupByLibrary.simpleMessage("Settings"),
+        "standartUnitSystem": MessageLookupByLibrary.simpleMessage("standart"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Temperature:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(
             "The city has already been saved!"),

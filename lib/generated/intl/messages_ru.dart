@@ -22,8 +22,8 @@ class MessageLookup extends MessageLookupByLibrary {
 
   static String m0(city) => "Удалить ${city} из списка избранных?";
 
-  static String m1(maxTemperature, minTemperature, temperature) =>
-      "${maxTemperature}°/${minTemperature}°, ощущается как ${temperature}°C";
+  static String m1(maxTemperature, minTemperature, temperature, unitDegree) =>
+      "${maxTemperature}°/${minTemperature}°, ощущается как ${temperature}${unitDegree}";
 
   static String m2(visibility) => "${visibility}км";
 
@@ -47,6 +47,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "appUnits": MessageLookupByLibrary.simpleMessage("Единицы измерения:"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "celsius": MessageLookupByLibrary.simpleMessage("Цельсий"),
+        "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Текущая иконка погоды"),
         "day": MessageLookupByLibrary.simpleMessage("день"),
@@ -58,6 +59,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Фаренгейт"),
+        "fahrenheitDegree": MessageLookupByLibrary.simpleMessage("°F"),
         "feelsLike": m1,
         "haveProblem":
             MessageLookupByLibrary.simpleMessage("Оупс, проблема..."),
@@ -65,13 +67,16 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
         "hpaUnit": MessageLookupByLibrary.simpleMessage("гПа"),
         "humidity": MessageLookupByLibrary.simpleMessage("Влажность: "),
+        "imperialUnitSystem": MessageLookupByLibrary.simpleMessage("imperial"),
         "kelvin": MessageLookupByLibrary.simpleMessage("Кельвин"),
+        "kelvinDegree": MessageLookupByLibrary.simpleMessage("°K"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("км"),
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "languageSetting": MessageLookupByLibrary.simpleMessage("Выбор языка"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Единицы измерения"),
+        "metricUnitSystem": MessageLookupByLibrary.simpleMessage("metric"),
         "mmhgUnit": MessageLookupByLibrary.simpleMessage("мм.рт.ст."),
         "night": MessageLookupByLibrary.simpleMessage("ночь"),
         "notFoundCityPleaseCheckInputAndTryAgain":
@@ -84,6 +89,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "ru": MessageLookupByLibrary.simpleMessage("Русский"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
+        "standartUnitSystem": MessageLookupByLibrary.simpleMessage("standart"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Температура:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(
             "Город уже добавлен в избранные!"),

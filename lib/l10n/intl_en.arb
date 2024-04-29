@@ -35,7 +35,7 @@
   "wind": "Wind: ",
   "pressure": "Pressure: ",
   "visibility": "Visibility: ",
-  "feelsLike": "{maxTemperature}°/{minTemperature}°, feels like {temperature}°C",
+  "feelsLike": "{maxTemperature}°/{minTemperature}°, feels like {temperature}{unitDegree}",
   "measurementUnits": "Measurement units",
   "notifications": "Notifications",
   "language": "Language",
@@ -43,10 +43,16 @@
   "ru": "ru",
   "save": "save",
   "cancel": "cancel",
+  "celsiusDegree": "°C",
+  "fahrenheitDegree": "°F",
+  "kelvinDegree": "°K",
   "celsius": "Celsius",
   "fahrenheit": "Fahrenheit",
   "kelvin": "Kelvin",
   "delete": "remove",
   "deleteConfirmNotification": "Remove {city} from your favorites list?",
-  "languageSetting": "Language setting"
+  "languageSetting": "Language setting",
+  "metricUnitSystem": "metric",
+  "imperialUnitSystem": "imperial",
+  "standartUnitSystem": "standart"
 }

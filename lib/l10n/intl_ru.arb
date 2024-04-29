@@ -35,7 +35,7 @@
   "wind": "Сила ветра: ",
   "pressure": "Давление: ",
   "visibility": "Видимость: ",
-  "feelsLike": "{maxTemperature}°/{minTemperature}°, ощущается как {temperature}°C",
+  "feelsLike": "{maxTemperature}°/{minTemperature}°, ощущается как {temperature}{unitDegree}",
   "measurementUnits": "Единицы измерения",
   "notifications": "Уведомления",
   "language": "Язык",
@@ -44,9 +44,15 @@
   "save": "Сохранить",
   "cancel": "Отмена",
   "celsius": "Цельсий",
+  "celsiusDegree": "°C",
+  "fahrenheitDegree": "°F",
+  "kelvinDegree": "°K",
   "fahrenheit": "Фаренгейт",
   "kelvin": "Кельвин",
   "delete": "Удалить",
   "deleteConfirmNotification": "Удалить {city} из списка избранных?",
-  "languageSetting": "Выбор языка"
+  "languageSetting": "Выбор языка",
+  "metricUnitSystem": "metric",
+  "imperialUnitSystem": "imperial",
+  "standartUnitSystem": "standart"
 }
