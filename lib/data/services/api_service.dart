@@ -4,6 +4,7 @@ import 'dart:io';
 import 'package:flutter/material.dart';
 
 import 'package:http/http.dart' as http;
+import 'package:weather_forecast_app/domain/enums/measurement_units.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 
 import '../../domain/enums/app_languages.dart';
@@ -26,7 +27,7 @@ class ApiService {
     required this.temperatureUnit,
   });
   final String? language;
-  final String? temperatureUnit;
+  final TemperatureUnit temperatureUnit;
 
   Future<WeatherModel> getWeather({
     double lat = 54.27028,
@@ -40,7 +41,7 @@ class ApiService {
       queryParameters: {
         'lat': lat.toString(),
         'lon': lon.toString(),
-        'units': 'metric',
+        'units': temperatureUnit.unitType,
         'exclude': 'alerts,minutely',
         'appid': '6f6f192517f2b62b4364d19778420b76',
         'lang': language ?? AppLanguages.en.name,
