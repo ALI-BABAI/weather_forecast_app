@@ -38,8 +38,8 @@ class WeatherApp extends StatelessWidget {
           return MultiBlocProvider(
             providers: [
               BlocProvider<WeatherBloc>(
-                create: (BuildContext context) => WeatherBloc(weatherRepository)
-                  ..add(LoadingWeatherScreenEvent()),
+                create: (BuildContext context) =>
+                    WeatherBloc(weatherRepository),
               ),
               BlocProvider<LocationBloc>(
                 create: (BuildContext context) =>
@@ -63,8 +63,9 @@ class WeatherApp extends StatelessWidget {
                 '/weather': (context) => const WeatherScreen(),
                 '/settings': (context) => const SettingsScreen(),
                 '/test': (context) => const ReordableData(),
+                '/': (context) => PreloadWidget(loginRepository),
               },
-              home: PreloadWidget(loginRepository),
+              initialRoute: '/',
             ),
           );
         },

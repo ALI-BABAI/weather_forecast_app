@@ -5,6 +5,7 @@ enum ToolItem {
   measurementUnits,
   notifications,
   language,
+  auth,
 }
 
 extension ToolItemTypeExtension on ToolItem {
@@ -16,6 +17,8 @@ extension ToolItemTypeExtension on ToolItem {
         return tr.notifications;
       case ToolItem.language:
         return tr.language;
+      case ToolItem.auth:
+        return tr.logout;
     }
   }
 
@@ -27,6 +30,8 @@ extension ToolItemTypeExtension on ToolItem {
         return Icons.notifications;
       case ToolItem.language:
         return Icons.language;
+      case ToolItem.auth:
+        return Icons.autorenew_sharp;
     }
   }
 }

@@ -80,6 +80,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languageSetting": MessageLookupByLibrary.simpleMessage("Выбор языка"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
         "login": MessageLookupByLibrary.simpleMessage("Войти"),
+        "logout": MessageLookupByLibrary.simpleMessage("Выйти"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Единицы измерения"),
         "metricUnitSystem": MessageLookupByLibrary.simpleMessage("metric"),

@@ -49,6 +49,13 @@ class ToolsWidget extends StatelessWidget {
                 );
               },
             ),
+            ToolItemWidget(
+              toolItemType: ToolItem.auth,
+              function: () {
+                Navigator.pushNamedAndRemoveUntil(
+                    context, '/', (route) => false);
+              },
+            ),
           ],
         ),
       ],

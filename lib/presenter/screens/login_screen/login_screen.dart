@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:weather_forecast_app/domain/bloc/login_bloc/bloc/login_bloc.dart';
+import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/domain/repository/login_repository.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 
@@ -27,6 +28,7 @@ class LoginScreen extends StatelessWidget {
               child: BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
+                    context.read<WeatherBloc>().add(LoadingWeatherScreenEvent());
                     Navigator.pushReplacementNamed(context, '/weather');
                   }
                   if (state is LoginFailureState) {
