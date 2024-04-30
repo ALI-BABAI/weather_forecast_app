@@ -52,7 +52,7 @@
   "delete": "Удалить",
   "deleteConfirmNotification": "Удалить {city} из списка избранных?",
   "languageSetting": "Выбор языка",
-  "metricUnitSystem": "metric",
-  "imperialUnitSystem": "imperial",
-  "standartUnitSystem": "standart"
+  "metricUnitSystem": "Метрическая",
+  "imperialUnitSystem": "Имперская",
+  "standartUnitSystem": "Стандартная"
 }

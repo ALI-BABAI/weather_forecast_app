@@ -67,7 +67,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
         "hpaUnit": MessageLookupByLibrary.simpleMessage("гПа"),
         "humidity": MessageLookupByLibrary.simpleMessage("Влажность: "),
-        "imperialUnitSystem": MessageLookupByLibrary.simpleMessage("imperial"),
+        "imperialUnitSystem": MessageLookupByLibrary.simpleMessage("Имперская"),
         "kelvin": MessageLookupByLibrary.simpleMessage("Кельвин"),
         "kelvinDegree": MessageLookupByLibrary.simpleMessage("°K"),
         "kmUnit": MessageLookupByLibrary.simpleMessage("км"),
@@ -76,7 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Единицы измерения"),
-        "metricUnitSystem": MessageLookupByLibrary.simpleMessage("metric"),
+        "metricUnitSystem": MessageLookupByLibrary.simpleMessage("Метрическая"),
         "mmhgUnit": MessageLookupByLibrary.simpleMessage("мм.рт.ст."),
         "night": MessageLookupByLibrary.simpleMessage("ночь"),
         "notFoundCityPleaseCheckInputAndTryAgain":
@@ -89,7 +89,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "ru": MessageLookupByLibrary.simpleMessage("Русский"),
         "save": MessageLookupByLibrary.simpleMessage("Сохранить"),
         "settings": MessageLookupByLibrary.simpleMessage("Настройки"),
-        "standartUnitSystem": MessageLookupByLibrary.simpleMessage("standart"),
+        "standartUnitSystem":
+            MessageLookupByLibrary.simpleMessage("Стандартная"),
         "temperatureUnit": MessageLookupByLibrary.simpleMessage("Температура:"),
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(
             "Город уже добавлен в избранные!"),

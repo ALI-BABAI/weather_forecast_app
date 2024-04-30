@@ -32,6 +32,10 @@ final class SearchCityState extends LocationState {}
 
 final class DeleteCityState extends LocationState {}
 
-final class ErrorSettingState extends LocationState {}
+final class ErrorSettingState extends LocationState {
+  ErrorSettingState(this.errorMessage);
+
+  final String errorMessage;
+}
 
 final class OpenWeatherScreenState extends LocationState {}

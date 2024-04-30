@@ -87,7 +87,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
           element.name.toLowerCase().replaceAll(' ', '') == cityToAdding);
       if (isAddedCityAlreadyExist) {
         debugPrint("Город уже в списке избранных");
-        throw Exception('Сity already exist in favourite');
+        throw ('Сity already exist in favourite');
       } else {
         String assetsJsonCitiesString =
             await rootBundle.loadString('assets/city_list.json');
@@ -110,7 +110,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
           // подгрузка актуальных данных по городам
           await getWeatherInfoAtCity(favouriteCities.last);
         } else {
-          throw UnimplementedError("Не удалось найти добавляемый город.");
+          throw Exception("\nНе удалось найти добавляемый город.");
         }
       }
     } catch (e) {

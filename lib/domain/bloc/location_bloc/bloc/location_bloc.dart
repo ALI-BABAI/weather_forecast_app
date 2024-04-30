@@ -56,6 +56,11 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось обновить данные о погоде');
+      emit(
+        ErrorSettingState(
+            'Не удалось обновить данные о погоде.\n${e.toString()}'),
+      );
+      add(LoadingSettingScreenEvent());
     }
   }
 
@@ -74,6 +79,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       );
     } catch (e) {
       debugPrint('${e.toString()}\nНе удалось добавить город в избранное.');
+      emit(ErrorSettingState(e.toString()));
       add(LoadingSettingScreenEvent());
     }
   }

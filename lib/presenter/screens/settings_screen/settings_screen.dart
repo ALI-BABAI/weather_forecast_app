@@ -24,22 +24,46 @@ class SettingsScreen extends StatelessWidget {
               .add(LoadingWeatherScreenEvent());
           Navigator.pop(context, '/weather');
         }
+        if (state is ErrorSettingState) {
+          ScaffoldMessenger.of(context).showSnackBar(
+            SnackBar(
+              content: Text(state.errorMessage),
+              backgroundColor: Colors.amber,
+            ),
+          );
+        }
       },
       builder: (context, state) {
         if (state is LoadedLocationState) {
           final List<CityModel> savedCities = state.cities;
           final List<WeatherModel> weatherData = state.weatherData;
           return ScreenFrame(
-            widget: ListView(
-              children: [
-                ReordableSettingWidget(
-                  savedCities: savedCities,
-                  weatherData: weatherData,
-                ),
-                const SizedBox(height: 20),
-                const ToolsWidget(),
-                const SizedBox(height: 20),
-              ],
+            widget: RefreshIndicator(
+              backgroundColor: Colors.amber,
+              onRefresh: () {
+                return Future(
+                  () {
+                    context.read<LocationBloc>().add(UpdateWeatherInfoEvent());
+                    ScaffoldMessenger.of(context).showSnackBar(
+                      const SnackBar(
+                        content: Text('screen updated'),
+                        backgroundColor: Colors.amber,
+                      ),
+                    );
+                  },
+                );
+              },
+              child: ListView(
+                children: [
+                  ReordableSettingWidget(
+                    savedCities: savedCities,
+                    weatherData: weatherData,
+                  ),
+                  const SizedBox(height: 20),
+                  const ToolsWidget(),
+                  const SizedBox(height: 20),
+                ],
+              ),
             ),
           );
         } else if (state is ErrorSettingState) {
