@@ -14,16 +14,17 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final LoginRepository loginRepository;
 
-  void _checkLogin(
+  Future<void> _checkLogin(
     CheckLoginEvent event,
     Emitter<LoginState> emit,
-  ) {
+  ) async {
     emit(LoadingState());
     if (event.email.isEmpty || event.password.isEmpty) {
       emit(LoginFailureState(tr.emptyAccountFields));
       return;
     }
-    final isCorrect = loginRepository.checkLogin(event.email, event.password);
+    final isCorrect =
+        await loginRepository.checkLogin(event.email, event.password);
     isCorrect
         ? emit(LoginSuccessState())
         : emit(LoginFailureState(tr.authFailureMessage));

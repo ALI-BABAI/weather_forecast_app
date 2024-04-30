@@ -1,17 +1,18 @@
+import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:weather_forecast_app/l10n/localization_without_context.dart';
 
 import '../../domain/repository/login_repository.dart';
-import '../services/storage_service.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
-  LoginRepositoryImpl(this.storageService);
+  LoginRepositoryImpl(this.storage);
 
-  final StorageService storageService;
+  final FlutterSecureStorage storage;
 
   @override
-  bool checkLogin(String login, String password) {
-    if (storageService.isContainKey(login)) {
-      final pswd = storageService.getStoragedData(login);
+  Future<bool> checkLogin(String login, String password) async {
+    final isContainKey = await storage.containsKey(key: login);
+    if (isContainKey) {
+      final pswd = await storage.read(key: login);
       return (pswd == password);
     }
     return false;
@@ -20,10 +21,11 @@ class LoginRepositoryImpl implements LoginRepository {
   @override
   Future<void> createAccount(String login, String password) async {
     try {
-      if (storageService.isContainKey(login)) {
+      final isContainKey = await storage.containsKey(key: login);
+      if (isContainKey) {
         throw (tr.LoginErrorAccountAlreadyExists);
       }
-      await storageService.saveData(login, password);
+      await storage.write(key: login, value: password);
     } catch (e) {
       rethrow;
     }
