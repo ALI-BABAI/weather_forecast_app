@@ -60,5 +60,7 @@
   "password": "Password",
   "email": "Email",
   "authFailureMessage": "Authentication error.\nPlease make sure that the username and password are entered correctly and try again!",
-  "logout": "Logout"
+  "logout": "Logout",
+  "emptyAccountFields": "Fill in all the fields!",
+  "LoginErrorAccountAlreadyExists": "An account with that name already exists!"
 }

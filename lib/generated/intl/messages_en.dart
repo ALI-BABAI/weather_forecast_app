@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Failed to load weather data"),
         "Forecast": MessageLookupByLibrary.simpleMessage("Forecast"),
         "Hello": MessageLookupByLibrary.simpleMessage("Hello"),
+        "LoginErrorAccountAlreadyExists": MessageLookupByLibrary.simpleMessage(
+            "An account with that name already exists!"),
         "MetersBySecUnit": MessageLookupByLibrary.simpleMessage("m/s"),
         "Weather": MessageLookupByLibrary.simpleMessage("Weather"),
         "World": MessageLookupByLibrary.simpleMessage("World"),
@@ -59,6 +61,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("remove"),
         "deleteConfirmNotification": m0,
         "email": MessageLookupByLibrary.simpleMessage("Email"),
+        "emptyAccountFields":
+            MessageLookupByLibrary.simpleMessage("Fill in all the fields!"),
         "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),

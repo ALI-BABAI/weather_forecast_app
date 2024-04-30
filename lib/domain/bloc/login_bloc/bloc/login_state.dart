@@ -8,4 +8,8 @@ final class LoadingState extends LoginState {}
 
 final class LoginSuccessState extends LoginState {}
 
-final class LoginFailureState extends LoginState {}
+final class LoginFailureState extends LoginState {
+  LoginFailureState(this.errorMessage);
+
+  final String errorMessage;
+}

@@ -1,3 +1,5 @@
+import 'package:weather_forecast_app/l10n/localization_without_context.dart';
+
 import '../../domain/repository/login_repository.dart';
 import '../services/storage_service.dart';
 
@@ -7,12 +9,23 @@ class LoginRepositoryImpl implements LoginRepository {
   final StorageService storageService;
 
   @override
-  String checkLogin(String login, String password) {
-    return '';
+  bool checkLogin(String login, String password) {
+    if (storageService.isContainKey(login)) {
+      final pswd = storageService.getStoragedData(login);
+      return (pswd == password);
+    }
+    return false;
   }
 
   @override
-  String createAccount(String login, String password) {
-    return '';
+  Future<void> createAccount(String login, String password) async {
+    try {
+      if (storageService.isContainKey(login)) {
+        throw (tr.LoginErrorAccountAlreadyExists);
+      }
+      await storageService.saveData(login, password);
+    } catch (e) {
+      rethrow;
+    }
   }
 }

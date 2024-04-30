@@ -28,13 +28,15 @@ class LoginScreen extends StatelessWidget {
               child: BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
-                    context.read<WeatherBloc>().add(LoadingWeatherScreenEvent());
+                    context
+                        .read<WeatherBloc>()
+                        .add(LoadingWeatherScreenEvent());
                     Navigator.pushReplacementNamed(context, '/weather');
                   }
                   if (state is LoginFailureState) {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
-                        content: Text(S.of(context).authFailureMessage),
+                        content: Text(state.errorMessage),
                         backgroundColor: Colors.red.shade400,
                         duration: const Duration(seconds: 5),
                         showCloseIcon: true,
@@ -43,6 +45,7 @@ class LoginScreen extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
+                  final loginBloc = context.read<LoginBloc>();
                   return LoadingScreen(
                     widget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
@@ -81,7 +84,14 @@ class LoginScreen extends StatelessWidget {
                             SizedBox(
                               width: 150,
                               child: ElevatedButton(
-                                onPressed: () {},
+                                onPressed: () {
+                                  loginBloc.add(
+                                    CreateLoginEvent(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
+                                },
                                 style: ButtonStyle(
                                   backgroundColor:
                                       MaterialStateProperty.all(Colors.amber),
@@ -96,12 +106,12 @@ class LoginScreen extends StatelessWidget {
                               width: 150,
                               child: ElevatedButton(
                                 onPressed: () {
-                                  context.read<LoginBloc>().add(
-                                        CheckLoginEvent(
-                                          email: _emailController.text,
-                                          password: _passwordController.text,
-                                        ),
-                                      );
+                                  loginBloc.add(
+                                    CheckLoginEvent(
+                                      email: _emailController.text,
+                                      password: _passwordController.text,
+                                    ),
+                                  );
                                 },
                                 style: ButtonStyle(
                                   backgroundColor:

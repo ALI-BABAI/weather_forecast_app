@@ -670,6 +670,26 @@ class S {
       args: [],
     );
   }
+
+  /// `Fill in all the fields!`
+  String get emptyAccountFields {
+    return Intl.message(
+      'Fill in all the fields!',
+      name: 'emptyAccountFields',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `An account with that name already exists!`
+  String get LoginErrorAccountAlreadyExists {
+    return Intl.message(
+      'An account with that name already exists!',
+      name: 'LoginErrorAccountAlreadyExists',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

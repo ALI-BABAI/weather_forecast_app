@@ -40,6 +40,8 @@ class MessageLookup extends MessageLookupByLibrary {
             "Не удалось загрузить данные о погоде"),
         "Forecast": MessageLookupByLibrary.simpleMessage("Forecast"),
         "Hello": MessageLookupByLibrary.simpleMessage("Привет"),
+        "LoginErrorAccountAlreadyExists": MessageLookupByLibrary.simpleMessage(
+            "Аккаунт с таким именем уже существует!"),
         "MetersBySecUnit": MessageLookupByLibrary.simpleMessage("м/с"),
         "Weather": MessageLookupByLibrary.simpleMessage("Weather"),
         "World": MessageLookupByLibrary.simpleMessage("Мир"),
@@ -60,6 +62,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "deleteConfirmNotification": m0,
         "email": MessageLookupByLibrary.simpleMessage("Электронная почта"),
+        "emptyAccountFields":
+            MessageLookupByLibrary.simpleMessage("Заполните все поля!"),
         "en": MessageLookupByLibrary.simpleMessage("Английский"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),

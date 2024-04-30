@@ -5,11 +5,15 @@ import 'package:weather_forecast_app/domain/models/city_model.dart';
 
 class StorageService {
   StorageService(this.prefs);
-  
+
   final SharedPreferences prefs;
 
   String? getStoragedData(String key) {
     return prefs.getString(key);
+  }
+  
+  bool isContainKey(String key) {
+    return prefs.containsKey(key);
   }
 
   void createDefaultCity(String key) async {

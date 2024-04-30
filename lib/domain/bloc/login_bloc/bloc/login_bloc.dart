@@ -1,4 +1,5 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:weather_forecast_app/l10n/localization_without_context.dart';
 
 import '../../../repository/login_repository.dart';
 
@@ -14,17 +15,29 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   final LoginRepository loginRepository;
 
   void _checkLogin(CheckLoginEvent event, Emitter<LoginState> emit) {
-    emit(LoadingState());
-
-    if (event.email == 'lol') {
-      emit(LoginSuccessState());
-    } else {
-      emit(LoginFailureState());
+    if (event.email.isEmpty || event.password.isEmpty) {
+      emit(LoginFailureState(tr.emptyAccountFields));
+      emit(LoadingState());
+      return;
     }
+    final isCorrect = loginRepository.checkLogin(event.email, event.password);
+    isCorrect
+        ? emit(LoginSuccessState())
+        : emit(LoginFailureState(tr.authFailureMessage));
   }
 
-  void _createLogin(CreateLoginEvent event, Emitter<LoginState> emit) {
-    emit(LoadingState());
-    //  save userAccount  to secureStorage
+  Future<void> _createLogin(
+      CreateLoginEvent event, Emitter<LoginState> emit) async {
+    if (event.email.isEmpty || event.password.isEmpty) {
+      emit(LoginFailureState(tr.emptyAccountFields));
+      emit(LoadingState());
+      return;
+    }
+    try {
+      await loginRepository.createAccount(event.email, event.password);
+      emit(LoginSuccessState());
+    } catch (e) {
+      emit(LoginFailureState(e.toString()));
+    }
   }
 }

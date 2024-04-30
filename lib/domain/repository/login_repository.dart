@@ -1,4 +1,4 @@
 abstract interface class LoginRepository {
-  String checkLogin(String login, String password);
-  String createAccount(String login, String password);
+  bool checkLogin(String login, String password);
+  Future<void> createAccount(String login, String password);
 }
