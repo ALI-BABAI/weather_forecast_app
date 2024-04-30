@@ -28,6 +28,7 @@ class LoginScreen extends StatelessWidget {
               child: BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
+                    FocusScope.of(context).unfocus();
                     context
                         .read<WeatherBloc>()
                         .add(LoadingWeatherScreenEvent());
@@ -37,7 +38,7 @@ class LoginScreen extends StatelessWidget {
                     ScaffoldMessenger.of(context).showSnackBar(
                       SnackBar(
                         content: Text(state.errorMessage),
-                        backgroundColor: Colors.red.shade400,
+                        backgroundColor: Colors.amber,
                         duration: const Duration(seconds: 5),
                         showCloseIcon: true,
                       ),
@@ -45,83 +46,29 @@ class LoginScreen extends StatelessWidget {
                   }
                 },
                 builder: (context, state) {
-                  final loginBloc = context.read<LoginBloc>();
+                  final inProcessing =
+                      (state is LoginSuccessState) || (state is LoadingState);
                   return LoadingScreen(
                     widget: Column(
                       mainAxisAlignment: MainAxisAlignment.center,
                       children: [
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: TextField(
-                            controller: _emailController,
-                            maxLength: 32,
-                            style: const TextStyle(color: Colors.black),
-                            decoration: InputDecoration(
-                              labelText: S.of(context).email,
-                              labelStyle: const TextStyle(color: Colors.black),
-                            ),
-                          ),
+                        LoginTextFieldWidget(
+                          controller: _emailController,
+                          label: S.of(context).email,
                         ),
                         const SizedBox(height: 16),
-                        Padding(
-                          padding: const EdgeInsets.symmetric(horizontal: 24),
-                          child: TextField(
-                            controller: _passwordController,
-                            maxLength: 32,
-                            obscureText: true,
-                            style: const TextStyle(color: Colors.amber),
-                            decoration: InputDecoration(
-                                labelText: S.of(context).password,
-                                labelStyle:
-                                    const TextStyle(color: Colors.black),
-                                fillColor: Colors.amber),
-                          ),
+                        LoginTextFieldWidget(
+                          controller: _passwordController,
+                          label: S.of(context).password,
+                          isVisible: true,
                         ),
                         const SizedBox(height: 50),
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceAround,
-                          children: [
-                            SizedBox(
-                              width: 150,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  loginBloc.add(
-                                    CreateLoginEvent(
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                    ),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.amber),
-                                ),
-                                child: Text(
-                                  S.of(context).createAccount,
-                                  textAlign: TextAlign.center,
-                                ),
+                        inProcessing
+                            ? const Center(child: CircularProgressIndicator())
+                            : ButtonPanelWidget(
+                                emailController: _emailController,
+                                passwordController: _passwordController,
                               ),
-                            ),
-                            SizedBox(
-                              width: 150,
-                              child: ElevatedButton(
-                                onPressed: () {
-                                  loginBloc.add(
-                                    CheckLoginEvent(
-                                      email: _emailController.text,
-                                      password: _passwordController.text,
-                                    ),
-                                  );
-                                },
-                                style: ButtonStyle(
-                                  backgroundColor:
-                                      MaterialStateProperty.all(Colors.amber),
-                                ),
-                                child: Text(S.of(context).login),
-                              ),
-                            ),
-                          ],
-                        ),
                       ],
                     ),
                   );
@@ -131,6 +78,94 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
+    );
+  }
+}
+
+class LoginTextFieldWidget extends StatelessWidget {
+  const LoginTextFieldWidget({
+    super.key,
+    required this.controller,
+    required this.label,
+    this.isVisible = false,
+  });
+
+  final TextEditingController controller;
+  final String label;
+  final bool isVisible;
+
+  @override
+  Widget build(BuildContext context) {
+    return Padding(
+      padding: const EdgeInsets.symmetric(horizontal: 24),
+      child: TextField(
+        controller: controller,
+        maxLength: 32,
+        obscureText: isVisible,
+        style: const TextStyle(color: Colors.black),
+        decoration: InputDecoration(
+            labelText: label,
+            labelStyle: const TextStyle(color: Colors.black),
+            fillColor: Colors.amber),
+      ),
+    );
+  }
+}
+
+class ButtonPanelWidget extends StatelessWidget {
+  const ButtonPanelWidget({
+    super.key,
+    required this.emailController,
+    required this.passwordController,
+  });
+
+  final TextEditingController emailController;
+  final TextEditingController passwordController;
+
+  @override
+  Widget build(BuildContext context) {
+    final loginBloc = context.read<LoginBloc>();
+    return Row(
+      mainAxisAlignment: MainAxisAlignment.spaceAround,
+      children: [
+        SizedBox(
+          width: 150,
+          child: ElevatedButton(
+            onPressed: () {
+              loginBloc.add(
+                CreateLoginEvent(
+                  email: emailController.text,
+                  password: passwordController.text,
+                ),
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.amber),
+            ),
+            child: Text(
+              S.of(context).createAccount,
+              textAlign: TextAlign.center,
+            ),
+          ),
+        ),
+        SizedBox(
+          width: 150,
+          child: ElevatedButton(
+            onPressed: () {
+              loginBloc.add(
+                CheckLoginEvent(
+                  email: emailController.text,
+                  password: passwordController.text,
+                ),
+              );
+            },
+            style: ButtonStyle(
+              backgroundColor: MaterialStateProperty.all(Colors.amber),
+            ),
+            child: Text(S.of(context).login),
+          ),
+        ),
+      ],
     );
   }
 }

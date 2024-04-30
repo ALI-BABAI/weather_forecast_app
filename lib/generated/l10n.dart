@@ -690,6 +690,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Uploading the data...`
+  String get uploadingTheData {
+    return Intl.message(
+      'Uploading the data...',
+      name: 'uploadingTheData',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

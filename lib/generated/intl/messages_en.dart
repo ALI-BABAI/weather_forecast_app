@@ -105,6 +105,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(
             "The city has already been saved!"),
         "tools": MessageLookupByLibrary.simpleMessage("Tools"),
+        "uploadingTheData":
+            MessageLookupByLibrary.simpleMessage("Uploading the data..."),
         "visibility": MessageLookupByLibrary.simpleMessage("Visibility: "),
         "weatherForecast":
             MessageLookupByLibrary.simpleMessage("Weather forecast"),

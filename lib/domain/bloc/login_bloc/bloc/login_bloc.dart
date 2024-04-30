@@ -14,10 +14,13 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
 
   final LoginRepository loginRepository;
 
-  void _checkLogin(CheckLoginEvent event, Emitter<LoginState> emit) {
+  void _checkLogin(
+    CheckLoginEvent event,
+    Emitter<LoginState> emit,
+  ) {
+    emit(LoadingState());
     if (event.email.isEmpty || event.password.isEmpty) {
       emit(LoginFailureState(tr.emptyAccountFields));
-      emit(LoadingState());
       return;
     }
     final isCorrect = loginRepository.checkLogin(event.email, event.password);
@@ -27,10 +30,12 @@ class LoginBloc extends Bloc<LoginEvent, LoginState> {
   }
 
   Future<void> _createLogin(
-      CreateLoginEvent event, Emitter<LoginState> emit) async {
+    CreateLoginEvent event,
+    Emitter<LoginState> emit,
+  ) async {
+    emit(LoadingState());
     if (event.email.isEmpty || event.password.isEmpty) {
       emit(LoginFailureState(tr.emptyAccountFields));
-      emit(LoadingState());
       return;
     }
     try {

@@ -9,6 +9,8 @@ import 'package:weather_forecast_app/presenter/screens/weather_screen/widgets/ci
 import 'package:weather_forecast_app/presenter/theme/app_decoration.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
 
+import '../../../generated/l10n.dart';
+
 class WeatherScreen extends StatelessWidget {
   const WeatherScreen({super.key});
 
@@ -27,7 +29,18 @@ class WeatherScreen extends StatelessWidget {
           return BlocBuilder<WeatherBloc, WeatherState>(
             builder: (context, state) {
               if (state is LoadingWeatherState) {
-                return const LoadingScreen();
+                return LoadingScreen(
+                  widget: Column(
+                    children: [
+                      Text(
+                        S.of(context).uploadingTheData,
+                        style: AppTextStyles.settingsScreenHeaderFont,
+                      ),
+                      const SizedBox(height: 50),
+                      const CircularProgressIndicator(color: Colors.amber),
+                    ],
+                  ),
+                );
               } else if (state is LoadedWeatherState) {
                 final itemCount = state.cities.length;
                 return LoopPageView.builder(

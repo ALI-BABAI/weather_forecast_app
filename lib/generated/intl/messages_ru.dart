@@ -106,6 +106,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "theCityHasAlreadyBeenSaved": MessageLookupByLibrary.simpleMessage(
             "Город уже добавлен в избранные!"),
         "tools": MessageLookupByLibrary.simpleMessage("Персонализация"),
+        "uploadingTheData":
+            MessageLookupByLibrary.simpleMessage("Загружаем данные..."),
         "visibility": MessageLookupByLibrary.simpleMessage("Видимость: "),
         "weatherForecast":
             MessageLookupByLibrary.simpleMessage("Weather forecast"),

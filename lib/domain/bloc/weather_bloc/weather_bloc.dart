@@ -28,7 +28,6 @@ class WeatherBloc extends Bloc<WeatherEvent, WeatherState> {
         await weatherRepository
             .getWeatherInfo(weatherRepository.favouriteCities);
       }
-
       emit(
         LoadedWeatherState(
           cities: weatherRepository.favouriteCities,

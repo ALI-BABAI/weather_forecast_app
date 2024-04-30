@@ -62,5 +62,6 @@
   "authFailureMessage": "Ошибка авторизации.\nПожалуйста, убедитесь, что логин и пароль введены правильно и повторите попытку!",
   "logout": "Выйти",
   "emptyAccountFields": "Заполните все поля!",
-  "LoginErrorAccountAlreadyExists": "Аккаунт с таким именем уже существует!"
+  "LoginErrorAccountAlreadyExists": "Аккаунт с таким именем уже существует!",
+  "uploadingTheData": "Загружаем данные..."
 }
