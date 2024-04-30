@@ -13,6 +13,8 @@ import 'package:weather_forecast_app/presenter/screens/weather_screen/weather_sr
 import 'package:weather_forecast_app/presenter/theme/app_main_themes.dart';
 
 import 'generated/l10n.dart';
+import 'presenter/screens/loading_screen.dart';
+import 'presenter/screens/login_screen/login_screen.dart';
 
 class WeatherApp extends StatelessWidget {
   const WeatherApp({
@@ -77,6 +79,6 @@ class PreloadWidget extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     AppTranslations.init(context);
-    return const WeatherScreen();
+    return const LoginScreen();
   }
 }
