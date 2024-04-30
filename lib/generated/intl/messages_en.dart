@@ -48,6 +48,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "celsius": MessageLookupByLibrary.simpleMessage("Celsius"),
         "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),
+        "createAccount": MessageLookupByLibrary.simpleMessage("create account"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Current weather icon"),
         "day": MessageLookupByLibrary.simpleMessage("day"),
@@ -55,6 +56,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "delete": MessageLookupByLibrary.simpleMessage("remove"),
         "deleteConfirmNotification": m0,
+        "email": MessageLookupByLibrary.simpleMessage("Email"),
         "en": MessageLookupByLibrary.simpleMessage("en"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
@@ -74,6 +76,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "languageSetting":
             MessageLookupByLibrary.simpleMessage("Language setting"),
         "location": MessageLookupByLibrary.simpleMessage("Location"),
+        "login": MessageLookupByLibrary.simpleMessage("login"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Measurement units"),
         "metricUnitSystem": MessageLookupByLibrary.simpleMessage("metric"),
@@ -84,6 +87,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Not found city. Please, check the input and try again!"),
         "notifications": MessageLookupByLibrary.simpleMessage("Notifications"),
         "ok": MessageLookupByLibrary.simpleMessage("OK"),
+        "password": MessageLookupByLibrary.simpleMessage("Password"),
         "pressure": MessageLookupByLibrary.simpleMessage("Pressure: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Pressure:"),
         "ru": MessageLookupByLibrary.simpleMessage("ru"),

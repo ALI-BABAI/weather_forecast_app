@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:weather_forecast_app/generated/l10n.dart';
 
 import '../loading_screen.dart';
 
@@ -11,27 +12,27 @@ class LoginScreen extends StatelessWidget {
       widget: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: TextField(
               maxLength: 32,
-              style: TextStyle(color: Colors.black),
+              style: const TextStyle(color: Colors.black),
               decoration: InputDecoration(
-                labelText: 'Email',
-                labelStyle: TextStyle(color: Colors.black),
+                labelText: S.of(context).email,
+                labelStyle: const TextStyle(color: Colors.black),
               ),
             ),
           ),
           const SizedBox(height: 16),
-          const Padding(
-            padding: EdgeInsets.symmetric(horizontal: 24),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: 24),
             child: TextField(
               maxLength: 32,
               obscureText: true,
-              style: TextStyle(color: Colors.amber),
+              style: const TextStyle(color: Colors.amber),
               decoration: InputDecoration(
-                  labelText: 'Password',
-                  labelStyle: TextStyle(color: Colors.black),
+                  labelText: S.of(context).password,
+                  labelStyle: const TextStyle(color: Colors.black),
                   fillColor: Colors.amber),
             ),
           ),
@@ -46,8 +47,8 @@ class LoginScreen extends StatelessWidget {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.amber),
                   ),
-                  child: const Text(
-                    'create account',
+                  child: Text(
+                    S.of(context).createAccount,
                     textAlign: TextAlign.center,
                   ),
                 ),
@@ -61,7 +62,7 @@ class LoginScreen extends StatelessWidget {
                   style: ButtonStyle(
                     backgroundColor: MaterialStateProperty.all(Colors.amber),
                   ),
-                  child: const Text('login'),
+                  child: Text(S.of(context).login),
                 ),
               ),
             ],

@@ -54,5 +54,9 @@
   "languageSetting": "Выбор языка",
   "metricUnitSystem": "Метрическая",
   "imperialUnitSystem": "Имперская",
-  "standartUnitSystem": "Стандартная"
+  "standartUnitSystem": "Стандартная",
+  "createAccount": "Создать аккаунт",
+  "login": "Войти",
+  "password": "Пароль",
+  "email": "Электронная почта"
 }

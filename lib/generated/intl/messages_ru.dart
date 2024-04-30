@@ -48,6 +48,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "celsius": MessageLookupByLibrary.simpleMessage("Цельсий"),
         "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),
+        "createAccount":
+            MessageLookupByLibrary.simpleMessage("Создать аккаунт"),
         "currentWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Текущая иконка погоды"),
         "day": MessageLookupByLibrary.simpleMessage("день"),
@@ -55,6 +57,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
         "deleteConfirmNotification": m0,
+        "email": MessageLookupByLibrary.simpleMessage("Электронная почта"),
         "en": MessageLookupByLibrary.simpleMessage("Английский"),
         "enterCityName":
             MessageLookupByLibrary.simpleMessage("Введите название города"),
@@ -74,6 +77,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "language": MessageLookupByLibrary.simpleMessage("Язык"),
         "languageSetting": MessageLookupByLibrary.simpleMessage("Выбор языка"),
         "location": MessageLookupByLibrary.simpleMessage("Локация"),
+        "login": MessageLookupByLibrary.simpleMessage("Войти"),
         "measurementUnits":
             MessageLookupByLibrary.simpleMessage("Единицы измерения"),
         "metricUnitSystem": MessageLookupByLibrary.simpleMessage("Метрическая"),
@@ -84,6 +88,7 @@ class MessageLookup extends MessageLookupByLibrary {
                 "Не удалось найти город. Пожалуйста, проверьте ввод и повторите попытку!"),
         "notifications": MessageLookupByLibrary.simpleMessage("Уведомления"),
         "ok": MessageLookupByLibrary.simpleMessage("Ок"),
+        "password": MessageLookupByLibrary.simpleMessage("Пароль"),
         "pressure": MessageLookupByLibrary.simpleMessage("Давление: "),
         "pressureUnit": MessageLookupByLibrary.simpleMessage("Давление:"),
         "ru": MessageLookupByLibrary.simpleMessage("Русский"),

@@ -54,5 +54,9 @@
   "languageSetting": "Language setting",
   "metricUnitSystem": "metric",
   "imperialUnitSystem": "imperial",
-  "standartUnitSystem": "standart"
+  "standartUnitSystem": "standart",
+  "createAccount": "create account",
+  "login": "login",
+  "password": "Password",
+  "email": "Email"
 }
