@@ -58,5 +58,6 @@
   "createAccount": "create account",
   "login": "login",
   "password": "Password",
-  "email": "Email"
+  "email": "Email",
+  "authFailureMessage": "Authentication error.\nPlease make sure that the username and password are entered correctly and try again!"
 }

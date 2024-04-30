@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "World": MessageLookupByLibrary.simpleMessage("Мир"),
         "add": MessageLookupByLibrary.simpleMessage("+"),
         "appUnits": MessageLookupByLibrary.simpleMessage("Единицы измерения:"),
+        "authFailureMessage": MessageLookupByLibrary.simpleMessage(
+            "Ошибка авторизации.\nПожалуйста, убедитесь, что логин и пароль введены правильно и повторите попытку!"),
         "cancel": MessageLookupByLibrary.simpleMessage("Отмена"),
         "celsius": MessageLookupByLibrary.simpleMessage("Цельсий"),
         "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),

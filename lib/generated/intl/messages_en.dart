@@ -45,6 +45,8 @@ class MessageLookup extends MessageLookupByLibrary {
         "World": MessageLookupByLibrary.simpleMessage("World"),
         "add": MessageLookupByLibrary.simpleMessage("add"),
         "appUnits": MessageLookupByLibrary.simpleMessage("App unit\'s:"),
+        "authFailureMessage": MessageLookupByLibrary.simpleMessage(
+            "Authentication error.\nPlease make sure that the username and password are entered correctly and try again!"),
         "cancel": MessageLookupByLibrary.simpleMessage("cancel"),
         "celsius": MessageLookupByLibrary.simpleMessage("Celsius"),
         "celsiusDegree": MessageLookupByLibrary.simpleMessage("°C"),

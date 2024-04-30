@@ -650,6 +650,16 @@ class S {
       args: [],
     );
   }
+
+  /// `Authentication error.\nPlease make sure that the username and password are entered correctly and try again!`
+  String get authFailureMessage {
+    return Intl.message(
+      'Authentication error.\nPlease make sure that the username and password are entered correctly and try again!',
+      name: 'authFailureMessage',
+      desc: '',
+      args: [],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {
