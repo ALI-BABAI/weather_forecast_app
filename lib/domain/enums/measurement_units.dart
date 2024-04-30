@@ -30,7 +30,7 @@ extension TemperatureUnitType on TemperatureUnit {
         return tr.standartUnitSystem;
     }
   }
-
+  
   String get unitDegree {
     switch (this) {
       case TemperatureUnit.celsius:

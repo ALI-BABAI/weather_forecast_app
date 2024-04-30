@@ -1,20 +1,23 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
 
+import '../../../repository/login_repository.dart';
+
 part 'login_event.dart';
 part 'login_state.dart';
 
 class LoginBloc extends Bloc<LoginEvent, LoginState> {
-  LoginBloc() : super(LoginInitialState()) {
+  LoginBloc(this.loginRepository) : super(LoginInitialState()) {
     on<CheckLoginEvent>(_checkLogin);
     on<CreateLoginEvent>(_createLogin);
   }
 
-  final bool isCorrect = true;
+  final LoginRepository loginRepository;
 
-  void _checkLogin(LoginEvent event, Emitter<LoginState> emit) {
+  void _checkLogin(CheckLoginEvent event, Emitter<LoginState> emit) {
     emit(LoadingState());
-    //  check authData with secureStorageData
-    if (isCorrect) {
+
+    if (event.email == 'lol') {
+      emit(LoginSuccessState());
     } else {
       emit(LoginFailureState());
     }

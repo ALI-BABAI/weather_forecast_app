@@ -149,8 +149,8 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
   ApiService _getApiService() {
     final TemperatureUnit storageTemperatureUnit;
-
-    switch (storageService.getStoragedData('temperature')) {
+    final storagedData = storageService.getStoragedData('temperature');
+    switch (storagedData) {
       case 'Fahrenheit':
       case 'Фаренгейт':
         storageTemperatureUnit = TemperatureUnit.fahrenheit;

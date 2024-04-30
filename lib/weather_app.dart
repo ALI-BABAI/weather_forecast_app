@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:weather_forecast_app/domain/bloc/location_bloc/bloc/location_bloc.dart';
 import 'package:weather_forecast_app/domain/bloc/setting_bloc/setting_bloc.dart';
+import 'package:weather_forecast_app/domain/repository/login_repository.dart';
 import 'package:weather_forecast_app/domain/repository/settings_repository.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 import 'package:weather_forecast_app/l10n/localization_without_context.dart';
@@ -13,7 +14,6 @@ import 'package:weather_forecast_app/presenter/screens/weather_screen/weather_sr
 import 'package:weather_forecast_app/presenter/theme/app_main_themes.dart';
 
 import 'generated/l10n.dart';
-import 'presenter/screens/loading_screen.dart';
 import 'presenter/screens/login_screen/login_screen.dart';
 
 class WeatherApp extends StatelessWidget {
@@ -21,10 +21,12 @@ class WeatherApp extends StatelessWidget {
     super.key,
     required this.weatherRepository,
     required this.settingsRepository,
+    required this.loginRepository,
   });
 
   final WeatherRepository weatherRepository;
   final SettingsRepository settingsRepository;
+  final LoginRepository loginRepository;
 
   @override
   Widget build(BuildContext context) {
@@ -62,7 +64,7 @@ class WeatherApp extends StatelessWidget {
                 '/settings': (context) => const SettingsScreen(),
                 '/test': (context) => const ReordableData(),
               },
-              home: PreloadWidget(weatherRepository),
+              home: PreloadWidget(loginRepository),
             ),
           );
         },
@@ -72,13 +74,13 @@ class WeatherApp extends StatelessWidget {
 }
 
 class PreloadWidget extends StatelessWidget {
-  const PreloadWidget(this.repository, {super.key});
+  const PreloadWidget(this.loginRepository, {super.key});
 
-  final WeatherRepository repository;
+  final LoginRepository loginRepository;
 
   @override
   Widget build(BuildContext context) {
     AppTranslations.init(context);
-    return const LoginScreen();
+    return LoginScreen(loginRepository);
   }
 }
