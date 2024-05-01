@@ -56,7 +56,7 @@ class WeatherScreen extends StatelessWidget {
                 return LoadingScreen(
                   widget: Text(
                     state.errorMessage,
-                    style: AppTextStyles.poppinsFont(),
+                    style: AppTextStyles.loadingScreenFont,
                   ),
                 );
               } else {

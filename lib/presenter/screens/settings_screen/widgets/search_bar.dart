@@ -18,6 +18,12 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
   final TextEditingController _cityController = TextEditingController();
 
   @override
+  void dispose() {
+    _cityController.dispose();
+    super.dispose();
+  }
+
+  @override
   Widget build(BuildContext context) {
     final locationBloc = context.read<LocationBloc>();
     return Padding(
@@ -72,7 +78,7 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
                                     AppLanguages.en.name
                                 ? Text(
                                     S.of(context).add,
-                                    style: AppTextStyles.poppinsFont(),
+                                    style: AppTextStyles.loadingScreenFont,
                                   )
                                 : const Icon(
                                     Icons.add_task_rounded, //add_task_rounded

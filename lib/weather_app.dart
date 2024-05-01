@@ -29,41 +29,38 @@ class WeatherApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return BlocProvider(
-      create: (context) =>
-          SettingBloc(settingsRepository)..add(LoadSettingsEvent()),
+    return MultiBlocProvider(
+      providers: [
+        BlocProvider<SettingBloc>(
+          create: (context) =>
+              SettingBloc(settingsRepository)..add(LoadSettingsEvent()),
+        ),
+        BlocProvider<WeatherBloc>(
+          create: (BuildContext context) => WeatherBloc(weatherRepository),
+        ),
+        BlocProvider<LocationBloc>(
+          create: (BuildContext context) => LocationBloc(weatherRepository),
+        ),
+      ],
       child: BlocBuilder<SettingBloc, SettingState>(
         builder: (context, state) {
-          return MultiBlocProvider(
-            providers: [
-              BlocProvider<WeatherBloc>(
-                create: (BuildContext context) =>
-                    WeatherBloc(weatherRepository),
-              ),
-              BlocProvider<LocationBloc>(
-                create: (BuildContext context) =>
-                    LocationBloc(weatherRepository),
-              ),
+          return MaterialApp(
+            debugShowCheckedModeBanner: false,
+            localizationsDelegates: const [
+              S.delegate,
+              GlobalMaterialLocalizations.delegate,
+              GlobalWidgetsLocalizations.delegate,
+              GlobalCupertinoLocalizations.delegate,
             ],
-            child: MaterialApp(
-              debugShowCheckedModeBanner: false,
-              localizationsDelegates: const [
-                S.delegate,
-                GlobalMaterialLocalizations.delegate,
-                GlobalWidgetsLocalizations.delegate,
-                GlobalCupertinoLocalizations.delegate,
-              ],
-              supportedLocales: S.delegate.supportedLocales,
-              locale: Locale(state.language.name),
-              theme: mainThemes,
-              title: 'Weather forecast',
-              routes: {
-                '/weather': (context) => const WeatherScreen(),
-                '/settings': (context) => const SettingsScreen(),
-                '/': (context) => PreloadWidget(loginRepository),
-              },
-              initialRoute: '/',
-            ),
+            supportedLocales: S.delegate.supportedLocales,
+            locale: Locale(state.language.name),
+            theme: mainThemes,
+            routes: {
+              '/weather': (context) => const WeatherScreen(),
+              '/settings': (context) => const SettingsScreen(),
+              '/': (context) => PreloadWidget(loginRepository),
+            },
+            initialRoute: '/',
           );
         },
       ),

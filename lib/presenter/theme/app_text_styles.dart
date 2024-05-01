@@ -5,19 +5,12 @@ import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 
 abstract class AppTextStyles {
-  static TextStyle poppinsFont({
-    double fontSize = 22,
-    Color color = AppColors.darkBlue,
-    FontWeight fontWeight = FontWeight.bold,
-  }) {
-    return TextStyle(
-      fontWeight: fontWeight,
-      fontSize: fontSize,
-      height: 1,
-      color: color,
-    );
-  }
-
+  static const loadingScreenFont = TextStyle(
+    fontWeight: FontWeight.bold,
+    fontSize: 22,
+    color: AppColors.darkBlue,
+    height: 1,
+  );
   static const appBarFont = TextStyle(
     fontWeight: FontWeight.bold,
     fontSize: 33,

@@ -23,14 +23,13 @@ class LoadingScreen extends StatelessWidget {
           ),
           const SizedBox(height: 5),
           Text(S.of(context).Weather,
-              style: AppTextStyles.poppinsFont(
+              style: AppTextStyles.loadingScreenFont.copyWith(
                 fontSize: 40,
-                color: AppColors.darkBlue,
                 fontWeight: FontWeight.w600,
               )),
           const SizedBox(height: 5),
           Text(S.of(context).Forecast,
-              style: AppTextStyles.poppinsFont(
+              style: AppTextStyles.loadingScreenFont.copyWith(
                 fontSize: 33,
                 color: AppColors.gray,
                 fontWeight: FontWeight.w400,

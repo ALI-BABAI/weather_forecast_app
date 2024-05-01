@@ -4,14 +4,28 @@ import 'package:weather_forecast_app/domain/bloc/login_bloc/bloc/login_bloc.dart
 import 'package:weather_forecast_app/domain/bloc/weather_bloc/weather_bloc.dart';
 import 'package:weather_forecast_app/domain/repository/login_repository.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
+import 'package:weather_forecast_app/presenter/screens/login_screen/widgets/buttons_panel_widget.dart';
+import 'package:weather_forecast_app/presenter/screens/login_screen/widgets/login_textfield_widget.dart';
 
 import '../../theme/app_decoration.dart';
 import '../loading_screen.dart';
 
-class LoginScreen extends StatelessWidget {
-  LoginScreen(this.loginRepository, {super.key});
+class LoginScreen extends StatefulWidget {
+  const LoginScreen(this.loginRepository, {super.key});
 
   final LoginRepository loginRepository;
+
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
+  @override
+  void dispose() {
+    _emailController.dispose();
+    _passwordController.dispose();
+    super.dispose();
+  }
 
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
@@ -24,7 +38,7 @@ class LoginScreen extends StatelessWidget {
         child: ListView(
           children: [
             BlocProvider<LoginBloc>(
-              create: (context) => LoginBloc(loginRepository),
+              create: (context) => LoginBloc(widget.loginRepository),
               child: BlocConsumer<LoginBloc, LoginState>(
                 listener: (context, state) {
                   if (state is LoginSuccessState) {
@@ -78,96 +92,6 @@ class LoginScreen extends StatelessWidget {
           ],
         ),
       ),
-    );
-  }
-}
-
-class LoginTextFieldWidget extends StatelessWidget {
-  const LoginTextFieldWidget({
-    super.key,
-    required this.controller,
-    required this.label,
-    this.isVisible = false,
-  });
-
-  final TextEditingController controller;
-  final String label;
-  final bool isVisible;
-
-  @override
-  Widget build(BuildContext context) {
-    return Padding(
-      padding: const EdgeInsets.symmetric(horizontal: 24),
-      child: TextField(
-        controller: controller,
-        maxLength: 32,
-        obscureText: isVisible,
-        style: const TextStyle(color: Colors.black),
-        decoration: InputDecoration(
-            labelText: label,
-            labelStyle: const TextStyle(color: Colors.black),
-            fillColor: Colors.amber),
-      ),
-    );
-  }
-}
-
-class ButtonPanelWidget extends StatelessWidget {
-  const ButtonPanelWidget({
-    super.key,
-    required this.emailController,
-    required this.passwordController,
-  });
-
-  final TextEditingController emailController;
-  final TextEditingController passwordController;
-
-  @override
-  Widget build(BuildContext context) {
-    final loginBloc = context.read<LoginBloc>();
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.spaceAround,
-      children: [
-        SizedBox(
-          width: 150,
-          child: ElevatedButton(
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-              loginBloc.add(
-                CreateLoginEvent(
-                  email: emailController.text,
-                  password: passwordController.text,
-                ),
-              );
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.amber),
-            ),
-            child: Text(
-              S.of(context).createAccount,
-              textAlign: TextAlign.center,
-            ),
-          ),
-        ),
-        SizedBox(
-          width: 150,
-          child: ElevatedButton(
-            onPressed: () {
-              FocusScope.of(context).unfocus();
-              loginBloc.add(
-                CheckLoginEvent(
-                  email: emailController.text,
-                  password: passwordController.text,
-                ),
-              );
-            },
-            style: ButtonStyle(
-              backgroundColor: MaterialStateProperty.all(Colors.amber),
-            ),
-            child: Text(S.of(context).login),
-          ),
-        ),
-      ],
     );
   }
 }
