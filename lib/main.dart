@@ -1,12 +1,12 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-import 'package:weather_forecast_app/data/repository/login_repository_impl.dart';
-import 'package:weather_forecast_app/data/repository/settings_repository_impl.dart';
-import 'package:weather_forecast_app/data/repository/weather_repository_impl.dart';
-import 'package:weather_forecast_app/data/services/storage_service.dart';
+import 'package:weather_forecast_app/src/data/repository/login_repository_impl.dart';
+import 'package:weather_forecast_app/src/data/repository/settings_repository_impl.dart';
+import 'package:weather_forecast_app/src/data/repository/weather_repository_impl.dart';
+import 'package:weather_forecast_app/src/data/services/storage_service.dart';
 
-import 'package:weather_forecast_app/weather_app.dart';
+import 'package:weather_forecast_app/src/weather_app.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
