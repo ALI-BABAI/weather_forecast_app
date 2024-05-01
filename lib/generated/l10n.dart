@@ -700,6 +700,156 @@ class S {
       args: [],
     );
   }
+
+  /// `Can't get saved cities list\nError: {error}`
+  String ErrorCantGetSavedCities(Object error) {
+    return Intl.message(
+      'Can\'t get saved cities list\nError: $error',
+      name: 'ErrorCantGetSavedCities',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't get weather info\nError: {error}`
+  String ErrorCantGetWeatherInfo(Object error) {
+    return Intl.message(
+      'Can\'t get weather info\nError: $error',
+      name: 'ErrorCantGetWeatherInfo',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `City already exist in favorite`
+  String get ErrorCityAlreadyExistInFavourites {
+    return Intl.message(
+      'City already exist in favorite',
+      name: 'ErrorCityAlreadyExistInFavourites',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't find city`
+  String get ErrorCityNotFound {
+    return Intl.message(
+      'Can\'t find city',
+      name: 'ErrorCityNotFound',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't add city in favorite\nError: {error}`
+  String ErrorAddingCityInFavourite(Object error) {
+    return Intl.message(
+      'Can\'t add city in favorite\nError: $error',
+      name: 'ErrorAddingCityInFavourite',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't  delete city from favorite\nError: {error}`
+  String ErrorCantDeleteCityFromFavourite(Object error) {
+    return Intl.message(
+      'Can\'t  delete city from favorite\nError: $error',
+      name: 'ErrorCantDeleteCityFromFavourite',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't get saved language\nError: {error}`
+  String ErrorCantGetSavedLanguage(Object error) {
+    return Intl.message(
+      'Can\'t get saved language\nError: $error',
+      name: 'ErrorCantGetSavedLanguage',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't get saved temperature unit\nError: {error}`
+  String ErrorCantGetTemperatureMeasurementUnit(Object error) {
+    return Intl.message(
+      'Can\'t get saved temperature unit\nError: $error',
+      name: 'ErrorCantGetTemperatureMeasurementUnit',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't set language\nError: {error}`
+  String ErrorOnSettingLanguage(Object error) {
+    return Intl.message(
+      'Can\'t set language\nError: $error',
+      name: 'ErrorOnSettingLanguage',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't set temperature unit\nError: {error}`
+  String ErrorOnSettingTemperatureUnit(Object error) {
+    return Intl.message(
+      'Can\'t set temperature unit\nError: $error',
+      name: 'ErrorOnSettingTemperatureUnit',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `The maximum number of requests per day has been exceeded`
+  String get ErrorToMuchRequestAtDay {
+    return Intl.message(
+      'The maximum number of requests per day has been exceeded',
+      name: 'ErrorToMuchRequestAtDay',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't load weathe information. Please, check internet available`
+  String get ErrorInternetNotAvailable {
+    return Intl.message(
+      'Can\'t load weathe information. Please, check internet available',
+      name: 'ErrorInternetNotAvailable',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Something went wrong...\nPlease, try later`
+  String get ErrorUnexpectedApiError {
+    return Intl.message(
+      'Something went wrong...\nPlease, try later',
+      name: 'ErrorUnexpectedApiError',
+      desc: '',
+      args: [],
+    );
+  }
+
+  /// `Can't update weather data\n.Error: {error}`
+  String ErrorCantUpdateWeatherData(Object error) {
+    return Intl.message(
+      'Can\'t update weather data\n.Error: $error',
+      name: 'ErrorCantUpdateWeatherData',
+      desc: '',
+      args: [error],
+    );
+  }
+
+  /// `Can't change city pozition in favorite list\nError: {error}`
+  String ErrorCantChangePozitionOnFavourite(Object error) {
+    return Intl.message(
+      'Can\'t change city pozition in favorite list\nError: $error',
+      name: 'ErrorCantChangePozitionOnFavourite',
+      desc: '',
+      args: [error],
+    );
+  }
 }
 
 class AppLocalizationDelegate extends LocalizationsDelegate<S> {

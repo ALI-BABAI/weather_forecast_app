@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:weather_forecast_app/l10n/localization_without_context.dart';
+
+import '../../l10n/localization_without_context.dart';
 
 enum ToolItem {
   measurementUnits,

@@ -132,6 +132,7 @@ class ButtonPanelWidget extends StatelessWidget {
           width: 150,
           child: ElevatedButton(
             onPressed: () {
+              FocusScope.of(context).unfocus();
               loginBloc.add(
                 CreateLoginEvent(
                   email: emailController.text,
@@ -152,6 +153,7 @@ class ButtonPanelWidget extends StatelessWidget {
           width: 150,
           child: ElevatedButton(
             onPressed: () {
+              FocusScope.of(context).unfocus();
               loginBloc.add(
                 CheckLoginEvent(
                   email: emailController.text,

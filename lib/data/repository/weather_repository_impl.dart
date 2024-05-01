@@ -9,13 +9,13 @@ import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
 import '../../domain/enums/measurement_units.dart';
+import '../../l10n/localization_without_context.dart';
+import '../app_keys.dart';
 
 class WeatherRepositoryImpl implements WeatherRepository {
   WeatherRepositoryImpl(this.storageService);
 
   final StorageService storageService;
-
-  static const String _citiesKey = 'citiesKey';
 
   @override
   List<CityModel> favouriteCities = [];
@@ -23,13 +23,13 @@ class WeatherRepositoryImpl implements WeatherRepository {
   List<WeatherModel> weatherDataList = [];
 
   @override
-  List<CityModel> getFavouriteCities() {
+  Future<List<CityModel>> getFavouriteCities() async {
     try {
-      String? storedData = storageService.getStoragedData(_citiesKey);
+      String? storedData = storageService.getStoragedData(AppKeys.citiesKey);
 
       if (storedData == null) {
-        storageService.createDefaultCity(_citiesKey);
-        storedData = storageService.getStoragedData(_citiesKey);
+        await _createDefaultCity();
+        storedData = storageService.getStoragedData(AppKeys.citiesKey);
       }
 
       final List<dynamic> cityJsonList = jsonDecode(storedData!);
@@ -38,9 +38,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
 
       return favouriteCities;
     } catch (e) {
-      debugPrint("Не удалось получить список сохранённых городов:\n error: $e");
-      throw UnimplementedError(
-          "Не удалось получить список сохранённых городов:\n error: $e");
+      throw (tr.ErrorCantGetSavedCities(e));
     }
   }
 
@@ -58,7 +56,7 @@ class WeatherRepositoryImpl implements WeatherRepository {
       }
       return weatherDataList;
     } catch (e) {
-      throw UnimplementedError("Не удалось получить информацию о погоде:/n$e");
+      throw (tr.ErrorCantGetWeatherInfo(e));
     }
   }
 
@@ -72,27 +70,24 @@ class WeatherRepositoryImpl implements WeatherRepository {
       weatherDataList.add(weatherData);
       return weatherDataList;
     } catch (e) {
-      throw UnimplementedError("Не удалось получить информацию о погоде:/n$e");
+      throw (tr.ErrorCantGetWeatherInfo(e));
     }
   }
 
-  // для записи нового города нужно знать список уже сохранённый городов
   @override
   Future<void> addCityInFavourite(String cityToAdding) async {
     try {
-      // преобразуем введенный текст "добавляемый город" для дальнейшей обработки
       cityToAdding = cityToAdding.toLowerCase().replaceAll(' ', '');
-      // проверка наличия "добавляемого города" в списке избранных
+      // checking the presence of the "city" in the favorites list
       bool isAddedCityAlreadyExist = favouriteCities.any((element) =>
           element.name.toLowerCase().replaceAll(' ', '') == cityToAdding);
       if (isAddedCityAlreadyExist) {
-        debugPrint("Город уже в списке избранных");
-        throw ('Сity already exist in favourite');
+        throw (tr.ErrorCityAlreadyExistInFavourites);
       } else {
         String assetsJsonCitiesString =
             await rootBundle.loadString('assets/city_list.json');
-        // поиск совпадения "добавляемого города" с общим списком городов
-        // выполняемый в отдельном изоляте с помощью метода "getMatchedCity"
+        // search for a match of the "added city" with the general list of cities
+        // is performed in a separate isolate using the "getMatchedCity" method
         final appendedCity = await compute(
             getMatchedCity, [assetsJsonCitiesString, cityToAdding]);
         if (appendedCity.name != '') {
@@ -104,17 +99,17 @@ class WeatherRepositoryImpl implements WeatherRepository {
               lat: appendedCity.lat,
             ),
           );
-          // сохранение списка избранных в хранилище
+          // saving a list of favorites to the storage
           await storageService.saveData(
-              _citiesKey, jsonEncode(favouriteCities));
-          // подгрузка актуальных данных по городам
+              AppKeys.citiesKey, jsonEncode(favouriteCities));
+          // uploading up-to-date city data
           await getWeatherInfoAtCity(favouriteCities.last);
         } else {
-          throw Exception("\nНе удалось найти добавляемый город.");
+          throw (tr.ErrorCityNotFound);
         }
       }
     } catch (e) {
-      debugPrint("Добавление города в список избранных: $_citiesKey");
+      debugPrint(tr.ErrorAddingCityInFavourite(e));
       rethrow;
     }
   }
@@ -122,13 +117,12 @@ class WeatherRepositoryImpl implements WeatherRepository {
   @override
   Future<void> deleteCityFromFavourite(int index) async {
     try {
-      debugPrint("Удаление города из списка избранных");
       favouriteCities.removeAt(index);
       weatherDataList.removeAt(index);
-      await storageService.saveData(_citiesKey, jsonEncode(favouriteCities));
+      final cities = jsonEncode(favouriteCities);
+      await storageService.saveData(AppKeys.citiesKey, cities);
     } catch (e) {
-      debugPrint("Ошибка удаления города из списка избранных");
-      rethrow;
+      throw (tr.ErrorCantDeleteCityFromFavourite(e));
     }
   }
 
@@ -144,12 +138,27 @@ class WeatherRepositoryImpl implements WeatherRepository {
     final itemWeather = weatherDataList.removeAt(oldIndex);
     weatherDataList.insert(newIndex, itemWeather);
     // rewrite data in storageData
-    await storageService.saveData(_citiesKey, jsonEncode(favouriteCities));
+    final cities = jsonEncode(favouriteCities);
+    await storageService.saveData(AppKeys.citiesKey, cities);
+  }
+
+  Future<void> _createDefaultCity() async {
+    final defaultCity = [
+      CityModel(
+        name: "Ulyanovsk",
+        country: "RU",
+        lon: 48.400002,
+        lat: 54.333332,
+      )
+    ];
+    final defaultCityJson =
+        jsonEncode(defaultCity.map((e) => e.toJson()).toList());
+    await storageService.saveData(AppKeys.citiesKey, defaultCityJson);
   }
 
   ApiService _getApiService() {
     final TemperatureUnit storageTemperatureUnit;
-    final storagedData = storageService.getStoragedData('temperature');
+    final storagedData = storageService.getStoragedData(AppKeys.temperatureKey);
     switch (storagedData) {
       case 'Fahrenheit':
       case 'Фаренгейт':
@@ -162,23 +171,22 @@ class WeatherRepositoryImpl implements WeatherRepository {
     }
 
     return ApiService(
-      language: storageService.getStoragedData('language'),
+      language: storageService.getStoragedData(AppKeys.temperatureKey),
       temperatureUnit: storageTemperatureUnit,
     );
   }
 }
 
-// Поиск совпадения "добавляемого города" с общим списком городов
+// compute method for search city in global cities file
 CityModel getMatchedCity(List<String> cities) {
   String assetsCitiesString = cities[0];
   String userAddedCity = cities[1];
   final List<dynamic> assetsCities = json.decode(assetsCitiesString);
 
-  // Преобразование данных из общего файла с городами в объекты CityModel
+  // Converting data from global file with cities to CityModel objects
   final List<CityModel> assetCityItem =
       assetsCities.map((json) => CityModel.fromJson(json)).toList();
-  // Поиск совпадения "добавляемого города" с общим списком городов
-  // возврат готовой или пустой модели города
+  // Checking for a match
   CityModel matchedCity = assetCityItem.firstWhere(
     (city) => city.name.toLowerCase().replaceAll(' ', '') == userAddedCity,
     orElse: () => CityModel(

@@ -63,5 +63,20 @@
   "logout": "Logout",
   "emptyAccountFields": "Fill in all the fields!",
   "LoginErrorAccountAlreadyExists": "An account with that name already exists!",
-  "uploadingTheData": "Uploading the data..."
+  "uploadingTheData": "Uploading the data...",
+  "ErrorCantGetSavedCities": "Can't get saved cities list\nError: {error}",
+  "ErrorCantGetWeatherInfo": "Can't get weather info\nError: {error}",
+  "ErrorCityAlreadyExistInFavourites": "City already exist in favorite",
+  "ErrorCityNotFound": "Can't find city",
+  "ErrorAddingCityInFavourite": "Can't add city in favorite\nError: {error}",
+  "ErrorCantDeleteCityFromFavourite": "Can't  delete city from favorite\nError: {error}",
+  "ErrorCantGetSavedLanguage": "Can't get saved language\nError: {error}",
+  "ErrorCantGetTemperatureMeasurementUnit": "Can't get saved temperature unit\nError: {error}",
+  "ErrorOnSettingLanguage": "Can't set language\nError: {error}",
+  "ErrorOnSettingTemperatureUnit": "Can't set temperature unit\nError: {error}",
+  "ErrorToMuchRequestAtDay": "The maximum number of requests per day has been exceeded",
+  "ErrorInternetNotAvailable": "Can't load weathe information. Please, check internet available",
+  "ErrorUnexpectedApiError": "Something went wrong...\nPlease, try later",
+  "ErrorCantUpdateWeatherData": "Can't update weather data\n.Error: {error}",
+  "ErrorCantChangePozitionOnFavourite": "Can't change city pozition in favorite list\nError: {error}"
 }

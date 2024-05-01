@@ -1,20 +1,20 @@
-import 'package:flutter/material.dart';
 import 'package:weather_forecast_app/data/services/storage_service.dart';
 import 'package:weather_forecast_app/domain/enums/app_languages.dart';
 import 'package:weather_forecast_app/domain/enums/measurement_units.dart';
 import 'package:weather_forecast_app/domain/repository/settings_repository.dart';
 
+import '../../l10n/localization_without_context.dart';
+import '../app_keys.dart';
+
 final class SettingsRepositoryImpl implements SettingsRepository {
   SettingsRepositoryImpl(this.storageService);
 
   final StorageService storageService;
-  static const String _language = 'language';
-  static const String _temperatureUnit = 'temperature';
 
   @override
   AppLanguages getLanguage() {
     try {
-      String? storedData = storageService.getStoragedData(_language);
+      String? storedData = storageService.getStoragedData(AppKeys.languageKey);
 
       switch (storedData) {
         case 'ru':
@@ -24,16 +24,15 @@ final class SettingsRepositoryImpl implements SettingsRepository {
           return AppLanguages.en;
       }
     } catch (e) {
-      debugPrint("Не удалось получить установленный язык:\n error: $e");
-      throw UnimplementedError(
-          "Не удалось получить установленный язык:\n error: $e");
+      throw (tr.ErrorCantGetSavedLanguage(e));
     }
   }
 
   @override
   TemperatureUnit getMeasurementUnit() {
     try {
-      String? storedData = storageService.getStoragedData(_temperatureUnit);
+      String? storedData =
+          storageService.getStoragedData(AppKeys.temperatureKey);
       switch (storedData) {
         case 'Fahrenheit':
         case 'Фаренгейт':
@@ -45,10 +44,7 @@ final class SettingsRepositoryImpl implements SettingsRepository {
           return TemperatureUnit.celsius;
       }
     } catch (e) {
-      debugPrint(
-          "Не удалось получить единицу измерения для температуры:\n error: $e");
-      throw UnimplementedError(
-          "Не удалось получить единицу измерения для температуры:\n error: $e");
+      throw (tr.ErrorCantGetTemperatureMeasurementUnit(e));
     }
   }
 
@@ -57,25 +53,22 @@ final class SettingsRepositoryImpl implements SettingsRepository {
     try {
       final previousLanguage = getLanguage();
       if (previousLanguage != language) {
-        await storageService.saveData(_language, language.name);
+        await storageService.saveData(AppKeys.languageKey, language.name);
       }
     } catch (e) {
-      debugPrint("Ошибка при добавление города в список избранных: $_language");
-      rethrow;
+      throw (tr.ErrorOnSettingLanguage(e));
     }
   }
 
   @override
-  Future<void> setTemperatureUnit(TemperatureUnit temperatureUnit) async {
+  Future<void> setTemperatureUnit(TemperatureUnit unit) async {
     try {
       final previousUnit = getMeasurementUnit();
-      if (previousUnit != temperatureUnit) {
-        await storageService.saveData(_temperatureUnit, temperatureUnit.name);
+      if (previousUnit != unit) {
+        await storageService.saveData(AppKeys.temperatureKey, unit.name);
       }
     } catch (e) {
-      debugPrint(
-          "Ошибка при сохранении единицы измерения температуры: $_temperatureUnit");
-      rethrow;
+      throw (tr.ErrorOnSettingTemperatureUnit(e));
     }
   }
 }

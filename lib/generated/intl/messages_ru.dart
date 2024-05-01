@@ -20,22 +20,72 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'ru';
 
-  static String m0(city) => "Удалить ${city} из списка избранных?";
+  static String m0(error) =>
+      "Не удалось добавить город в список избранных.\nError: ${error}";
 
-  static String m1(maxTemperature, minTemperature, temperature, unitDegree) =>
+  static String m1(error) =>
+      "Не удалось изменить позицию города в списке избранных\nError: ${error}";
+
+  static String m2(error) =>
+      "Не удалось удалить город из списка избранных.\nError: ${error}";
+
+  static String m3(error) =>
+      "Не удалось получить список сохранённых городов:\nError: ${error}";
+
+  static String m4(error) =>
+      "Не удалось получить информацию по выбранному языку:\nError: ${error}";
+
+  static String m5(error) =>
+      "Не удалось получить единицу измерения температуры:\nError: ${error}";
+
+  static String m6(error) =>
+      "Не удалось получить информацию о погоде:\nError: ${error}";
+
+  static String m7(error) =>
+      "Не удалось обновить данные о погоде.\n.Error: ${error}";
+
+  static String m8(error) => "Ошибка при установке языка\nError: ${error}";
+
+  static String m9(error) =>
+      "Ошибка при установке единиц измерения температуры\nError: ${error}";
+
+  static String m10(city) => "Удалить ${city} из списка избранных?";
+
+  static String m11(maxTemperature, minTemperature, temperature, unitDegree) =>
       "${maxTemperature}°/${minTemperature}°, ощущается как ${temperature}${unitDegree}";
 
-  static String m2(visibility) => "${visibility}км";
+  static String m12(visibility) => "${visibility}км";
 
-  static String m3(wind) => "${wind}м/с";
+  static String m13(wind) => "${wind}м/с";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Error": MessageLookupByLibrary.simpleMessage("Ошибка:"),
+        "ErrorAddingCityInFavourite": m0,
+        "ErrorCantChangePozitionOnFavourite": m1,
+        "ErrorCantDeleteCityFromFavourite": m2,
+        "ErrorCantGetSavedCities": m3,
+        "ErrorCantGetSavedLanguage": m4,
+        "ErrorCantGetTemperatureMeasurementUnit": m5,
+        "ErrorCantGetWeatherInfo": m6,
+        "ErrorCantUpdateWeatherData": m7,
+        "ErrorCityAlreadyExistInFavourites":
+            MessageLookupByLibrary.simpleMessage(
+                "Город уже в списке избранных"),
+        "ErrorCityNotFound": MessageLookupByLibrary.simpleMessage(
+            "Не удалось найти добавляемый город."),
         "ErrorExceedRequestToServer": MessageLookupByLibrary.simpleMessage(
             "Было превышено количество запросов к серверу: или что-то еще..."),
+        "ErrorInternetNotAvailable": MessageLookupByLibrary.simpleMessage(
+            "Не удалось получить информацию о погоде. Пожалуйста, проверьте наличие интернета"),
+        "ErrorOnSettingLanguage": m8,
+        "ErrorOnSettingTemperatureUnit": m9,
         "ErrorServerDontRespond":
             MessageLookupByLibrary.simpleMessage("Сервер не отвечает"),
+        "ErrorToMuchRequestAtDay": MessageLookupByLibrary.simpleMessage(
+            "Превышено максимальное количество запросов в день"),
+        "ErrorUnexpectedApiError": MessageLookupByLibrary.simpleMessage(
+            "Что то пошло не так...\nПожалуйста, попробуйте войти позже"),
         "FailedToLoadWeatherData": MessageLookupByLibrary.simpleMessage(
             "Не удалось загрузить данные о погоде"),
         "Forecast": MessageLookupByLibrary.simpleMessage("Forecast"),
@@ -60,7 +110,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "delete": MessageLookupByLibrary.simpleMessage("Удалить"),
-        "deleteConfirmNotification": m0,
+        "deleteConfirmNotification": m10,
         "email": MessageLookupByLibrary.simpleMessage("Электронная почта"),
         "emptyAccountFields":
             MessageLookupByLibrary.simpleMessage("Заполните все поля!"),
@@ -69,7 +119,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Введите название города"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Фаренгейт"),
         "fahrenheitDegree": MessageLookupByLibrary.simpleMessage("°F"),
-        "feelsLike": m1,
+        "feelsLike": m11,
         "haveProblem":
             MessageLookupByLibrary.simpleMessage("Оупс, проблема..."),
         "hourWeatherIcon":
@@ -112,7 +162,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weatherForecast":
             MessageLookupByLibrary.simpleMessage("Weather forecast"),
         "wind": MessageLookupByLibrary.simpleMessage("Сила ветра: "),
-        "xKm": m2,
-        "xMetersBySecond": m3
+        "xKm": m12,
+        "xMetersBySecond": m13
       };
 }

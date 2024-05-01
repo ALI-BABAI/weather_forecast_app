@@ -5,7 +5,8 @@ import 'package:weather_forecast_app/domain/enums/tool_items.dart';
 import 'package:weather_forecast_app/generated/l10n.dart';
 import 'package:weather_forecast_app/presenter/theme/app_colors.dart';
 import 'package:weather_forecast_app/presenter/theme/app_text_styles.dart';
-import 'package:weather_forecast_app/screens_deprecated/dialog_windows/dialog_window.dart';
+
+import '../../dialog_windows/dialog_window.dart';
 
 class ToolsWidget extends StatelessWidget {
   const ToolsWidget({super.key});
@@ -34,10 +35,6 @@ class ToolsWidget extends StatelessWidget {
                   selectedValue: settings.temperatureUnit,
                 ),
               },
-            ),
-            ToolItemWidget(
-              toolItemType: ToolItem.notifications,
-              function: () {},
             ),
             ToolItemWidget(
               toolItemType: ToolItem.language,

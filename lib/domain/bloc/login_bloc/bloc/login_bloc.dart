@@ -1,6 +1,6 @@
 import 'package:flutter_bloc/flutter_bloc.dart';
-import 'package:weather_forecast_app/l10n/localization_without_context.dart';
 
+import '../../../../l10n/localization_without_context.dart';
 import '../../../repository/login_repository.dart';
 
 part 'login_event.dart';

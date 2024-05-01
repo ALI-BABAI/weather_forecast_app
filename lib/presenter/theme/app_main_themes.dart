@@ -14,17 +14,16 @@ final mainThemes = ThemeData(
   appBarTheme: const AppBarTheme(
     backgroundColor: AppColors.mainBackground,
     toolbarHeight: 50,
-    titleSpacing: 30, // отступ
-    elevation: 4, // тень
+    titleSpacing: 30, // offset
+    elevation: 4, // shadow
   ),
-  // для некоторых иконок свойство color не отрабатывает
   iconTheme: const IconThemeData(
     color: AppColors.white,
     size: 25,
   ),
   colorScheme: const ColorScheme.dark(
     primary: AppColors.mainBackground,
-    // фон при перетаскивании виджета
+    // background when dragging the widget
     background: AppColors.mainBackground,
   ),
 );

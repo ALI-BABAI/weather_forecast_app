@@ -1,7 +1,7 @@
 import 'package:flutter_secure_storage/flutter_secure_storage.dart';
-import 'package:weather_forecast_app/l10n/localization_without_context.dart';
 
 import '../../domain/repository/login_repository.dart';
+import '../../l10n/localization_without_context.dart';
 
 class LoginRepositoryImpl implements LoginRepository {
   LoginRepositoryImpl(this.storage);

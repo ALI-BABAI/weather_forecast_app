@@ -11,14 +11,11 @@ import 'package:weather_forecast_app/weather_app.dart';
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   final prefs = await SharedPreferences.getInstance();
-  const secureStorage = FlutterSecureStorage();
   final storageService = StorageService(prefs);
-  final WeatherRepositoryImpl weatherRepository =
-      WeatherRepositoryImpl(storageService);
-  final SettingsRepositoryImpl settingsRepository =
-      SettingsRepositoryImpl(storageService);
-  final LoginRepositoryImpl loginRepository =
-      LoginRepositoryImpl(secureStorage);
+  const secureStorage = FlutterSecureStorage();
+  final weatherRepository = WeatherRepositoryImpl(storageService);
+  final settingsRepository = SettingsRepositoryImpl(storageService);
+  final loginRepository = LoginRepositoryImpl(secureStorage);
   runApp(
     WeatherApp(
       weatherRepository: weatherRepository,

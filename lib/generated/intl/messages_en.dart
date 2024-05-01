@@ -20,22 +20,66 @@ typedef String MessageIfAbsent(String messageStr, List<dynamic> args);
 class MessageLookup extends MessageLookupByLibrary {
   String get localeName => 'en';
 
-  static String m0(city) => "Remove ${city} from your favorites list?";
+  static String m0(error) => "Can\'t add city in favorite\nError: ${error}";
 
-  static String m1(maxTemperature, minTemperature, temperature, unitDegree) =>
+  static String m1(error) =>
+      "Can\'t change city pozition in favorite list\nError: ${error}";
+
+  static String m2(error) =>
+      "Can\'t  delete city from favorite\nError: ${error}";
+
+  static String m3(error) => "Can\'t get saved cities list\nError: ${error}";
+
+  static String m4(error) => "Can\'t get saved language\nError: ${error}";
+
+  static String m5(error) =>
+      "Can\'t get saved temperature unit\nError: ${error}";
+
+  static String m6(error) => "Can\'t get weather info\nError: ${error}";
+
+  static String m7(error) => "Can\'t update weather data\n.Error: ${error}";
+
+  static String m8(error) => "Can\'t set language\nError: ${error}";
+
+  static String m9(error) => "Can\'t set temperature unit\nError: ${error}";
+
+  static String m10(city) => "Remove ${city} from your favorites list?";
+
+  static String m11(maxTemperature, minTemperature, temperature, unitDegree) =>
       "${maxTemperature}°/${minTemperature}°, feels like ${temperature}${unitDegree}";
 
-  static String m2(visibility) => "${visibility}km";
+  static String m12(visibility) => "${visibility}km";
 
-  static String m3(wind) => "${wind}m/s";
+  static String m13(wind) => "${wind}m/s";
 
   final messages = _notInlinedMessages(_notInlinedMessages);
   static Map<String, Function> _notInlinedMessages(_) => <String, Function>{
         "Error": MessageLookupByLibrary.simpleMessage("Error:"),
+        "ErrorAddingCityInFavourite": m0,
+        "ErrorCantChangePozitionOnFavourite": m1,
+        "ErrorCantDeleteCityFromFavourite": m2,
+        "ErrorCantGetSavedCities": m3,
+        "ErrorCantGetSavedLanguage": m4,
+        "ErrorCantGetTemperatureMeasurementUnit": m5,
+        "ErrorCantGetWeatherInfo": m6,
+        "ErrorCantUpdateWeatherData": m7,
+        "ErrorCityAlreadyExistInFavourites":
+            MessageLookupByLibrary.simpleMessage(
+                "City already exist in favorite"),
+        "ErrorCityNotFound":
+            MessageLookupByLibrary.simpleMessage("Can\'t find city"),
         "ErrorExceedRequestToServer": MessageLookupByLibrary.simpleMessage(
             "The number of requests to the server has been exceeded: or something else..."),
+        "ErrorInternetNotAvailable": MessageLookupByLibrary.simpleMessage(
+            "Can\'t load weathe information. Please, check internet available"),
+        "ErrorOnSettingLanguage": m8,
+        "ErrorOnSettingTemperatureUnit": m9,
         "ErrorServerDontRespond": MessageLookupByLibrary.simpleMessage(
             "Couldn\'t get a response from the server"),
+        "ErrorToMuchRequestAtDay": MessageLookupByLibrary.simpleMessage(
+            "The maximum number of requests per day has been exceeded"),
+        "ErrorUnexpectedApiError": MessageLookupByLibrary.simpleMessage(
+            "Something went wrong...\nPlease, try later"),
         "FailedToLoadWeatherData":
             MessageLookupByLibrary.simpleMessage("Failed to load weather data"),
         "Forecast": MessageLookupByLibrary.simpleMessage("Forecast"),
@@ -59,7 +103,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "dayWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Day weather icon"),
         "delete": MessageLookupByLibrary.simpleMessage("remove"),
-        "deleteConfirmNotification": m0,
+        "deleteConfirmNotification": m10,
         "email": MessageLookupByLibrary.simpleMessage("Email"),
         "emptyAccountFields":
             MessageLookupByLibrary.simpleMessage("Fill in all the fields!"),
@@ -68,7 +112,7 @@ class MessageLookup extends MessageLookupByLibrary {
             MessageLookupByLibrary.simpleMessage("Enter a city name"),
         "fahrenheit": MessageLookupByLibrary.simpleMessage("Fahrenheit"),
         "fahrenheitDegree": MessageLookupByLibrary.simpleMessage("°F"),
-        "feelsLike": m1,
+        "feelsLike": m11,
         "haveProblem": MessageLookupByLibrary.simpleMessage("OH, THE PROBLEM"),
         "hourWeatherIcon":
             MessageLookupByLibrary.simpleMessage("Hour weather icon"),
@@ -111,7 +155,7 @@ class MessageLookup extends MessageLookupByLibrary {
         "weatherForecast":
             MessageLookupByLibrary.simpleMessage("Weather forecast"),
         "wind": MessageLookupByLibrary.simpleMessage("Wind: "),
-        "xKm": m2,
-        "xMetersBySecond": m3
+        "xKm": m12,
+        "xMetersBySecond": m13
       };
 }

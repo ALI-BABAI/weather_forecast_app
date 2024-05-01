@@ -4,6 +4,8 @@ import 'package:weather_forecast_app/domain/models/city_model.dart';
 import 'package:weather_forecast_app/domain/models/weather_model.dart';
 import 'package:weather_forecast_app/domain/repository/weather_repository.dart';
 
+import '../../../../l10n/localization_without_context.dart';
+
 part 'location_event.dart';
 part 'location_state.dart';
 
@@ -35,9 +37,8 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         ),
       );
     } catch (e) {
-      debugPrint('${e.toString()}\nНе удалось загрузить данные о погоде');
-      // emit(ErrorState(
-      //     '${e.toString()}\nНе удалось загрузить данные о погоде'));
+      emit(ErrorSettingState(tr.ErrorCantGetWeatherInfo(e)));
+      add(LoadingSettingScreenEvent());
     }
   }
 
@@ -55,11 +56,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         ),
       );
     } catch (e) {
-      debugPrint('${e.toString()}\nНе удалось обновить данные о погоде');
-      emit(
-        ErrorSettingState(
-            'Не удалось обновить данные о погоде.\n${e.toString()}'),
-      );
+      emit(ErrorSettingState(tr.ErrorCantUpdateWeatherData(e)));
       add(LoadingSettingScreenEvent());
     }
   }
@@ -78,8 +75,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         ),
       );
     } catch (e) {
-      debugPrint('${e.toString()}\nНе удалось добавить город в избранное.');
-      emit(ErrorSettingState(e.toString()));
+      emit(ErrorSettingState(tr.ErrorAddingCityInFavourite(e)));
       add(LoadingSettingScreenEvent());
     }
   }
@@ -98,7 +94,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
         ),
       );
     } catch (e) {
-      debugPrint('${e.toString()}\nНе удалось удалить город из избранного');
+      emit(ErrorSettingState(tr.ErrorCantDeleteCityFromFavourite(e)));
       add(LoadingSettingScreenEvent());
     }
   }
@@ -111,8 +107,7 @@ class LocationBloc extends Bloc<LocationEvent, LocationState> {
       if (event.indexOld == event.indexNew) return;
       await repository.changeCityIndex(event.indexNew, event.indexOld);
     } catch (e) {
-      debugPrint('''${e.toString()}\n
-          Не удалось изменить положение города в списке избранных городов''');
+      emit(ErrorSettingState(tr.ErrorCantChangePozitionOnFavourite(e)));
       add(LoadingSettingScreenEvent());
     }
   }

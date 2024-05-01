@@ -63,5 +63,20 @@
   "logout": "Выйти",
   "emptyAccountFields": "Заполните все поля!",
   "LoginErrorAccountAlreadyExists": "Аккаунт с таким именем уже существует!",
-  "uploadingTheData": "Загружаем данные..."
+  "uploadingTheData": "Загружаем данные...",
+  "ErrorCantGetSavedCities": "Не удалось получить список сохранённых городов:\nError: {error}",
+  "ErrorCantGetWeatherInfo": "Не удалось получить информацию о погоде:\nError: {error}",
+  "ErrorCityAlreadyExistInFavourites": "Город уже в списке избранных",
+  "ErrorCityNotFound": "Не удалось найти добавляемый город.",
+  "ErrorAddingCityInFavourite": "Не удалось добавить город в список избранных.\nError: {error}",
+  "ErrorCantDeleteCityFromFavourite": "Не удалось удалить город из списка избранных.\nError: {error}",
+  "ErrorCantGetSavedLanguage": "Не удалось получить информацию по выбранному языку:\nError: {error}",
+  "ErrorCantGetTemperatureMeasurementUnit": "Не удалось получить единицу измерения температуры:\nError: {error}",
+  "ErrorOnSettingLanguage": "Ошибка при установке языка\nError: {error}",
+  "ErrorOnSettingTemperatureUnit": "Ошибка при установке единиц измерения температуры\nError: {error}",
+  "ErrorToMuchRequestAtDay": "Превышено максимальное количество запросов в день",
+  "ErrorInternetNotAvailable": "Не удалось получить информацию о погоде. Пожалуйста, проверьте наличие интернета",
+  "ErrorUnexpectedApiError": "Что то пошло не так...\nПожалуйста, попробуйте войти позже",
+  "ErrorCantUpdateWeatherData": "Не удалось обновить данные о погоде.\n.Error: {error}",
+  "ErrorCantChangePozitionOnFavourite": "Не удалось изменить позицию города в списке избранных\nError: {error}"
 }
