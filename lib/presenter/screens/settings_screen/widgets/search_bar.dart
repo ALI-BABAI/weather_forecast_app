@@ -46,15 +46,6 @@ class _SearchBarWidgetState extends State<SearchBarWidget> {
             suffixIcon: Row(
               mainAxisSize: MainAxisSize.min,
               children: [
-                // geopozition btn
-                TextButton(
-                  onPressed: () {},
-                  child: const Icon(
-                    Icons.add_location_alt_outlined,
-                    color: AppColors.orange,
-                    size: 30,
-                  ),
-                ),
                 // ADD btn
                 SizedBox(
                   height: 50,
