@@ -34,14 +34,12 @@
 
 
 ## Важная информация
-- аккаунт на сайте OpenWeatherMap некоммерческий, существует лимит по количеству запросов 1000 в день
-- может потребоваться использование VPN, чтобы получить доступ к API
-- поиск городов осуществлять латиницей
+- аккаунт на сайте OpenWeatherMap некоммерческий, существует лимит по количеству запросов (1000 в день)
+- для доступ к API может потребоваться использование VPN
+- поиск городов осуществляется на латинице.
 
 ## Ресурсы
-  - Design: 
-  За основу взято:
-  https://www.figma.com/file/NMcTzccp6H9rkTHc3kcx6c/Weather-App-Design-(Community)?type=design&node-id=0-1&mode=design&t=XNvtbLCEg6Vgr0g7-0
+  - Design: https://www.figma.com/file/NMcTzccp6H9rkTHc3kcx6c/Weather-App-Design-(Community)?type=design&node-id=0-1&mode=design&t=XNvtbLCEg6Vgr0g7-0
   
   Иконки и заставка приложения были созданы лично, с помощью Figma (и ∞ затраченного времени...)
   
