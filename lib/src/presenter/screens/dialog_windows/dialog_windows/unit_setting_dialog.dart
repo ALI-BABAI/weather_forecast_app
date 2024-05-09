@@ -27,8 +27,8 @@ class _UnitSettingDialogState extends State<UnitSettingDialog> {
 
   @override
   void initState() {
-    dropdownValue = widget.selectedValue;
     super.initState();
+    dropdownValue = widget.selectedValue;
   }
 
   @override

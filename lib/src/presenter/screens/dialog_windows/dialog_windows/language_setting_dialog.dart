@@ -26,8 +26,8 @@ class _LanguageSettingDialog extends State<LanguageSettingDialog> {
 
   @override
   void initState() {
-    dropdownValue = widget.selectedValue;
     super.initState();
+    dropdownValue = widget.selectedValue;
   }
 
   @override
